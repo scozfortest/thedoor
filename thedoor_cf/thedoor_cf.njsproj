@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0cf43fe7-fbf4-4a87-80a3-0cdd89f48384}</ProjectGuid>
+    <ProjectHome>
+    </ProjectHome>
+    <ProjectView>ShowAllFiles</ProjectView>
+    <StartupFile />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">16.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <Name>thedoor_cf</Name>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <ItemGroup>
+    <Content Include="firebase.json" />
+    <Content Include="firestore.indexes.json" />
+    <Content Include="package.json" />
+    <Content Include="functions\package-lock.json" />
+    <Content Include="functions\package.json" />
+    <Content Include="functions\.eslintrc.js" />
+    <Content Include="functions\Achievement.js" />
+    <Content Include="functions\Collection.js" />
+    <Content Include="functions\Crontab.js" />
+    <Content Include="functions\DailyReward.js" />
+    <Content Include="functions\Exchanges.js" />
+    <Content Include="functions\GetInvitationReward.js" />
+    <Content Include="functions\GetServerTime.js" />
+    <Content Include="functions\GetTradeLink.js" />
+    <Content Include="functions\GMTools.js" />
+    <Content Include="functions\HorseRacing.js" />
+    <Content Include="functions\index.js" />
+    <Content Include="functions\Mail.js" />
+    <Content Include="functions\MaJamPachinko.js" />
+    <Content Include="functions\NewsTicker.js" />
+    <Content Include="functions\PlayerSign.js" />
+    <Content Include="functions\Purchase.js" />
+    <Content Include="functions\Quest.js" />
+    <Content Include="functions\Role.js" />
+    <Content Include="functions\ScratchCard.js" />
+    <Content Include="functions\Shop.js" />
+    <Content Include="functions\Social.js" />
+    <Content Include="functions\Tools.js" />
+    <Content Include="functions\Trade.js" />
+    <Content Include="functions\VIP.js" />
+    <Content Include="public\404.html" />
+    <Content Include="public\index.html" />
+    <Content Include="functions\FirebaseTools\FirestoreManager.js" />
+    <Content Include="functions\GameData\AIPlayer.json" />
+    <Content Include="functions\GameData\DailyReward.json" />
+    <Content Include="functions\GameData\Emoji.json" />
+    <Content Include="functions\GameData\Hand.json" />
+    <Content Include="functions\GameData\Horse.json" />
+    <Content Include="functions\GameData\Icon.json" />
+    <Content Include="functions\GameData\ItemGroup.json" />
+    <Content Include="functions\GameData\PlayerLV.json" />
+    <Content Include="functions\GameData\Quest.json" />
+    <Content Include="functions\GameData\Role.json" />
+    <Content Include="functions\GameData\String.json" />
+    <Content Include="functions\GameData\Stuff.json" />
+    <Content Include="functions\GameData\Title.json" />
+    <Content Include="functions\GameData\VIP.json" />
+    <Content Include="functions\GameData\Voice.json" />
+    <Content Include="functions\GameData\WinType.json" />
+    <Content Include="functions\IAP\AppleAPI.js" />
+    <Content Include="functions\IAP\GoogleAPI.js" />
+    <Content Include="functions\Key\majampachinko-release-a8f6fc1db261.json" />
+    <Content Include="functions\LAFGA\ExchangesManager.js" />
+    <Content Include="functions\LAFGA\GameDataManager.js" />
+    <Content Include="functions\LAFGA\GameSetting.js" />
+    <Content Include="functions\LAFGA\Logger.js" />
+    <Content Include="functions\LAFGA\PlayerItemManager.js" />
+    <Content Include="functions\Scoz\Note.txt" />
+    <Content Include="functions\Scoz\常用指令.txt" />
+    <Content Include="functions\Scoz\ArrayTool.js" />
+    <Content Include="functions\Scoz\Crypto.js" />
+    <Content Include="functions\Scoz\MyTime.js" />
+    <Content Include="functions\Scoz\Postman.js" />
+    <Content Include="functions\Scoz\Probability.js" />
+    <Content Include="functions\Scoz\TextManager.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="functions" />
+    <Folder Include="functions\FirebaseTools" />
+    <Folder Include="functions\GameData" />
+    <Folder Include="functions\IAP" />
+    <Folder Include="functions\Key" />
+    <Folder Include="functions\LAFGA" />
+    <Folder Include="functions\Scoz" />
+    <Folder Include="LAFGA_CF" />
+    <Folder Include="public" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

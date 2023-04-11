@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "706175281052",
+    "project_id": "thedoor-dev",
+    "storage_bucket": "thedoor-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706175281052:android:40074b1983201df1dcca59",
+        "android_client_info": {
+          "package_name": "com.scoz.thedoordev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "706175281052-g4m9e1f59ajekrmevp3absuic3e51m9m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCEKKf6mFq9GUEpCMsQgWPbd9AlPuW7uA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "706175281052-g4m9e1f59ajekrmevp3absuic3e51m9m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

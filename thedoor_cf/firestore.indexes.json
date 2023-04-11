@@ -1,0 +1,33 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "GameLog-MaJamGameTrack",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "GameLog.Players",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "CreateTime",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "PlayerData-Player",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "State",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "CreateTime",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

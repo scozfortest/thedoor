@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - UICam
+  - EquipBubble
+  - PachikoShooterPosition
+  - MaJamPlayerViewContent
+  - MaJamLeftViewContent
+  - MaJamRightViewContent
+  - MaJamUpViewContent
+  - ChooseMeldSetContent
+  - MaJamMeldSetBackground3D
+  - DiscardSeaContent
+  - ParticleEffectSpawner
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Wall
+  - Claw
+  - Claw_DontCollide
+  - PopupUI
+  - 
+  - 
+  - 
+  - 
+  - MaJam3DCameraOthersCard
+  - MaJam3DCameraPlayerCard
+  - MaJam3DCameraDiscardSea
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2232109839
+    locked: 0
+  - name: Role
+    uniqueID: 3924465381
+    locked: 0
+  - name: Foreground
+    uniqueID: 1854364205
+    locked: 0
+  - name: UI
+    uniqueID: 2336237083
+    locked: 0

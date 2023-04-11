@@ -1,0 +1,174 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: CommonIcon
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: Android
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 29
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 1024
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    - serializedVersion: 3
+      m_BuildTarget: iPhone
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 48
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 8
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: b48bef1d043265042870f30377f75dad, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: f2c38580bb68fc3439c3f96a482c2d0d, type: 3}
+  - {fileID: 21300000, guid: 805475d0940b1404da3b6888253723d9, type: 3}
+  - {fileID: 21300000, guid: ec3842510f08f914c88a688c22a67dc6, type: 3}
+  - {fileID: 21300000, guid: bdbfe7b193acd8f498246419f8ea4602, type: 3}
+  - {fileID: 21300000, guid: 573077f1bf9f7c64fa1d297afc6c0544, type: 3}
+  - {fileID: 21300000, guid: 01904252a0535104fbca938be55c5896, type: 3}
+  - {fileID: 21300000, guid: cbcd0092fd58c0a4ca37d87735b2c900, type: 3}
+  - {fileID: 21300000, guid: f2d60933e707eaa48890ddab2406d10b, type: 3}
+  - {fileID: 21300000, guid: fa52a673c0658fa49859cd33daad767a, type: 3}
+  - {fileID: 21300000, guid: 2f7f1b833e8504443b6a6e0257936b65, type: 3}
+  - {fileID: 21300000, guid: 732a5a54c204f2248a12ebabf4cc6521, type: 3}
+  - {fileID: 21300000, guid: 14b6046426846534f94398936162efd1, type: 3}
+  - {fileID: 21300000, guid: 23b9c0e45ee1ffb4886efc1c25fe99c6, type: 3}
+  - {fileID: 21300000, guid: 2cec4015c736a494ab20d037574d7216, type: 3}
+  - {fileID: 21300000, guid: ea310bd5e587804489322163edec7235, type: 3}
+  - {fileID: 21300000, guid: bb290a26332fcc04986b069418e98231, type: 3}
+  - {fileID: 21300000, guid: 4c518bf624adf6e458c0c716fd548bdf, type: 3}
+  - {fileID: 21300000, guid: b0a267374e0515248b0528b07b02ff38, type: 3}
+  - {fileID: 21300000, guid: 948364d7c16283d45af0dd5dc367bee5, type: 3}
+  - {fileID: 21300000, guid: a0004708fc44ce84aa6db475fa46ad3f, type: 3}
+  - {fileID: 21300000, guid: 5d3129288ed60454eb9b77b41e9f32c9, type: 3}
+  - {fileID: 21300000, guid: 3d3f3e8874a05fc4db1ec33a1c71a9e4, type: 3}
+  - {fileID: 21300000, guid: ca7b7398d961ddf4e98e397485c12ab7, type: 3}
+  - {fileID: 21300000, guid: 33eb1ff8bff74e0438ef4a99a090df16, type: 3}
+  - {fileID: 21300000, guid: dadfcf29ba2611d4ca63ea105e59f3f8, type: 3}
+  - {fileID: 21300000, guid: 653e38397d681fc42aa8ba4889b8a0e3, type: 3}
+  - {fileID: 21300000, guid: f88baeba57fbf134db6900d8c0890dce, type: 3}
+  - {fileID: 21300000, guid: 0cdf1efa1e835f44184aa925d2bfd318, type: 3}
+  - {fileID: 21300000, guid: 1f10818ba584eb94a897db29fe0c1a96, type: 3}
+  - {fileID: 21300000, guid: 8930e98b0eef8a64b8cf211fa91977a0, type: 3}
+  - {fileID: 21300000, guid: deb62e0c92c86824f85ce18b96e6b152, type: 3}
+  - {fileID: 21300000, guid: 4c3fcf1c7b7439441aa84263bb3a6641, type: 3}
+  - {fileID: 21300000, guid: 7a672e3c69780fe46964fa4f16126049, type: 3}
+  - {fileID: 21300000, guid: 3e78156c70c3d14489e8e87f829543c4, type: 3}
+  - {fileID: 21300000, guid: c50fcd7c894c39f47af5e28280855279, type: 3}
+  - {fileID: 21300000, guid: 1c2d28dcb953ab149b907dad3c288b3c, type: 3}
+  - {fileID: 21300000, guid: fb31baec3977b434aaf6d9b1289617e2, type: 3}
+  - {fileID: 21300000, guid: 0f9eda1d45b1c1c459214cd66b6ef30e, type: 3}
+  - {fileID: 21300000, guid: 2b60065dc9be88f45a46fea1156da955, type: 3}
+  - {fileID: 21300000, guid: 492a2dbd8535ff24a8fac22789ab3883, type: 3}
+  - {fileID: 21300000, guid: 6c27e60e63bc5674baaf416a395f30a1, type: 3}
+  - {fileID: 21300000, guid: ec94812efc4faea42ad1b52f42d3afa5, type: 3}
+  - {fileID: 21300000, guid: 47a2a66e6a10e5949b51348376ce3863, type: 3}
+  - {fileID: 21300000, guid: 8cc292aef2fcf9a44aa04b13af0d8fe4, type: 3}
+  - {fileID: 21300000, guid: 5121ffceeac57d74f8320873fa39d2f3, type: 3}
+  - {fileID: 21300000, guid: 5583820f548677b4bb5968e06135a6b5, type: 3}
+  - {fileID: 21300000, guid: 89e5a35fbfc2d0740b3e341f53351205, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Point
+  - Achievement
+  - Collection
+  - VIPRoom
+  - Shop
+  - Setting
+  - IconFrame3
+  - Cancel
+  - IconFrameBot2
+  - Dot2OFF
+  - MiniGame
+  - shopNoText
+  - Dot2ON
+  - IconFrame
+  - MaJamPachinko
+  - treasureBox
+  - IconFrame2
+  - Activity
+  - redDot2
+  - TitleFrame_4
+  - Sthop
+  - Confirm
+  - Mail
+  - shockMark
+  - IconFrameBot1
+  - ScratchCard
+  - IconFrameBot3
+  - InvitationCode
+  - redDot
+  - dotON
+  - IconFrame1
+  - LVFrame
+  - Add
+  - TitleFrame_3
+  - Social
+  - Ball
+  - TitleIcon
+  - iconBottom
+  - Rest
+  - AD
+  - TitleFrame_2
+  - dotOff
+  - leaderboard
+  - lv
+  - CloseBtn1
+  - Gold
+  - TitleFrame_1
+  m_RenderDataMap: {}
+  m_Tag: CommonIcon
+  m_IsVariant: 0

@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "majampachinko-release",
+  "private_key_id": "a8f6fc1db261c56fd67aa0e383f747ce2881e5ec",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCSJDB/kqUcmR2/\ndvNEX+XUYEUWRgaDOLuCghVi0Pos5vWuLGCbFVsK4lcJt/sYHLarUGEVX8RRXSfI\nKt4YlhjBvdp4QpqscqxpW4DniVdSPBzqDjP2Ix8Ghdp/FyxfQCs7q+M26jFPK1NJ\nEskUY54PBE4uvlbGndb9J12C2MsvjN+xy5dab9js0KNkEDa2JUGT9wY+vXWiQdFp\nC07VytNRHuPeIo+CEMo4wTglJwJk6KFyt1cKUMz8K+JwGGezHbxZaDEWpaZwrJpp\nSUnuQEwH1WakALQpsluMXuUMVLdrYNlhaAIaJdkke7BKInXHKCLlMCW16Eq53haY\nM/fiaIFfAgMBAAECggEAFxkFhKGdW2aZ7IvfiW7XaO3UTYprd2xNOqSBE86wE85n\nMIxOsoQ5ZlV9aImoc9hUnhavWXellC8zMpsP4kvq2sg9J4/DWZPVoItNVYr//v0w\nRrqlnMv9Qy8pvbeLFFI/OF2uT5zL3ABJgr2nhAOgqi1F3B509vcLJpTaXewSOnqo\nx54NvkY041QpSiRmbeN8KfdyScQx3er2WyDOPrFsuCqXsaT/uGv8+NmhOANdBiAD\nPgF8geAgV9EzM2roUk2TueQcDyuBmdUUp2rRVxmRpQBVJ5kOTlbmTB67GniqJuuh\novWzlfrsnpF/5fvAcwqg9CKz958mJNtmneMX2WaYFQKBgQDLYnMMP3bPQepoZPVq\nWWeTGcf3pf0UsKhxIKfzH9F09zJPtlW0PLuSC1Dfdb1I56/DEC5seTt1iFPD7r0n\nGFB0sZxGkV2SvCzxIBzwaIghFQbHjO5I/8J/P9sFN0mfhyxgN1z0cdRr3hEM/1f/\nHZ8VR9xCNbFn0jMcYkKZeOZ36wKBgQC38rG3wtIKwywTXwWxt3mnG/40vzhxqiYU\nNEp+gmHDDKl+be6TMSw9pcfq4MEJczY09umnXuBGBp7GuUI26DxgVoz7KL1PHX2q\n/s2Q8oMXP8DKJzv9xC9nLMsBmZfvkCFt2+x3uH5gYeJVG3h+k3rGwTwC+r5N9PrU\n4EJ7JbmTXQKBgF9oDF4He11YJ3TXP0SnMe4QXvyuEd1dzXZcAk0LdP8wYpqABw4o\nmzi0NDjPC38iqBGSCqT57cmBrQGxgWvQfRVwp8V2tXV67n4iOVERSCJ0sZx0YOc/\niuaUdtKoj9HU4B02e1Vz/FipcEgvlADpzVF3RzyL4W+5bB55fZJu43YHAoGABgX6\nb8v/WL7fWJsJ8rHRV/mAr3V7ga1SpeK4dcALN3nYqv0qjMNVcYdWLojBiW+uXLmh\nGQvwSBq7ZEJ4upeMMpNi9m51FHwgu1KwpIhsZnx98aCrRDoCW1yKITlIUl3j2lcT\nPTBbYwiRgrvtjCeEI7H8JxTS2nalKAdX5fRsSTkCgYEAgiSWigcYZIJudXOSzfJT\nsNFqs5ki+rnYzemI8Ese1vGdCQVt3igbqjQKRcIhJR6A/Qq6dCfkwK67f6WH+vnB\nTlhjmwA9zjd5r6cOnP9yNkZof+44rXkfjNN4VADblTNQ9PZX0ZLgt9ggS7S6N+uo\ndZBdpU74AM1Nw/vCvPGKDXA=\n-----END PRIVATE KEY-----\n",
+  "client_email": "googleapi@majampachinko-release.iam.gserviceaccount.com",
+  "client_id": "104207446690288217128",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/googleapi%40majampachinko-release.iam.gserviceaccount.com"
+}

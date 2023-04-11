@@ -1,0 +1,5 @@
+{"BattleEffect":[
+	{	"ID":"1",	"Item":"1",	"Damage":"10~20"},
+	{	"ID":"2",	"Item":"1",	"Stun":"1~3"},
+	{	"ID":"3",	"Item":"2",	"Damage":"0~100"}
+]}

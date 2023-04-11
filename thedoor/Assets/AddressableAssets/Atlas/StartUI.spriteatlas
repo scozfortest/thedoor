@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: StartUI
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: Android
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 29
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    - serializedVersion: 3
+      m_BuildTarget: iPhone
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 48
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 8
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 32ef3206b8a68f64f89e525cfef7afb8, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 09432a007ff4a7b4892202e79eda9d03, type: 3}
+  - {fileID: 21300000, guid: 66ec92332ef30634795d3e2fe0e8d315, type: 3}
+  - {fileID: 21300000, guid: d3b123742c454464b8ae4fec04d2908f, type: 3}
+  - {fileID: 21300000, guid: d0980b997b518ea448fd771ad09bd8a0, type: 3}
+  - {fileID: 21300000, guid: 54e3fef99b24ed844803cfe28e2404c2, type: 3}
+  - {fileID: 21300000, guid: fed3060a3087b7346b65e802a313bf61, type: 3}
+  - {fileID: 21300000, guid: 30beb09b7dff5824b874ff2913bf91fb, type: 3}
+  - {fileID: 21300000, guid: 9d1b317d5069578438c3a51605332c03, type: 3}
+  - {fileID: 21300000, guid: 56e4ea5e511b22a4aaf770ba4bbee57e, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - google
+  - GrayButton
+  - tickBox
+  - blackBG
+  - loginBtn
+  - facebook
+  - apple
+  - line
+  - tick
+  m_RenderDataMap: {}
+  m_Tag: StartUI
+  m_IsVariant: 0

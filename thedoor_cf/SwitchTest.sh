@@ -1,0 +1,1 @@
+firebase use majampachinko-test1

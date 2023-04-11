@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: ScozBundleGroup
+  m_EditorClassIdentifier: 
+  m_GroupName: ScozBundleGroup
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 997baf0df36c6cf4fa89d504331ef113
+  m_SerializeEntries:
+  - m_GUID: 9cd1925f48bdfd5418cbe4112c70625a
+    m_Address: Assets/AddressableAssets/Animation
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefab
+  - m_GUID: f29e2e96a75df16449c2e57943f7ba66
+    m_Address: Assets/AddressableAssets/Prefab/CommonUI
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefab
+  - m_GUID: df03987b14b698347aed86d7ca06a541
+    m_Address: Assets/AddressableAssets/Json
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Json
+  - m_GUID: ecbade97c4b551b4f8c65a04bfedf7e1
+    m_Address: Assets/AddressableAssets/Atlas/Icon.spriteatlas
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Atlas
+  - m_GUID: 00261ce04987f1c44ac6aac5fe93caf3
+    m_Address: Assets/AddressableAssets/Audios/Voice
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Audio
+  - m_GUID: 876534f82631f18479762a54208cec88
+    m_Address: Assets/AddressableAssets/Audios/Sound
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Audio
+  - m_GUID: 2040250193966fa4e82e3ad0898dba59
+    m_Address: Assets/AddressableAssets/Atlas/StartUI.spriteatlas
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Atlas
+  - m_GUID: 05f3d70934d9fa14584e58b5be60ca72
+    m_Address: Assets/AddressableAssets/Atlas/CommonIcon.spriteatlas
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Atlas
+  - m_GUID: 21eb99ca657fdd642a0827ab0f5ab460
+    m_Address: Assets/AddressableAssets/Prefab/LobbyUI
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefab
+  - m_GUID: 5c4163594bd9ecc4d8c4c137f7caffeb
+    m_Address: Assets/AddressableAssets/Atlas/CommonUI.spriteatlas
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Atlas
+  - m_GUID: 62ed2072f26375940ba7d36674219a6f
+    m_Address: Assets/AddressableAssets/Particle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Particle
+  - m_GUID: 1c96eb20e1c47ce449e2319b3faadd73
+    m_Address: Assets/AddressableAssets/Materials
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefab
+  - m_GUID: aff438691f55b0141a31fe341351c54d
+    m_Address: Assets/AddressableAssets/Atlas/LoadingUI.spriteatlas
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Atlas
+  - m_GUID: bac730d47297d3a41b115475aa015d32
+    m_Address: Assets/AddressableAssets/Atlas/ItemGroup.spriteatlas
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Atlas
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 9bdcae1979219314780bb2d43aff9537, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: f76c087bac983df44a5d8ac9905dcfba, type: 2}
+    - {fileID: 11400000, guid: 7c13fd2a4b7ed8247b8ce4c971aa0ed2, type: 2}

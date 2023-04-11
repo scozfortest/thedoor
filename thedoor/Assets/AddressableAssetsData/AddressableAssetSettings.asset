@@ -1,0 +1,182 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468a46d0ae32c3544b7d98094e6448a9, type: 3}
+  m_Name: AddressableAssetSettings
+  m_EditorClassIdentifier: 
+  m_DefaultGroup: 997baf0df36c6cf4fa89d504331ef113
+  m_CachedHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_OptimizeCatalogSize: 0
+  m_BuildRemoteCatalog: 1
+  m_BundleLocalCatalog: 0
+  m_CatalogRequestsTimeout: 0
+  m_DisableCatalogUpdateOnStart: 0
+  m_IgnoreUnsupportedFilesInBuild: 0
+  m_UniqueBundleIds: 0
+  m_NonRecursiveBuilding: 1
+  m_CCDEnabled: 0
+  m_maxConcurrentWebRequests: 500
+  m_ContiguousBundles: 1
+  m_StripUnityVersionFromBundleBuild: 0
+  m_DisableVisibleSubAssetRepresentations: 0
+  m_ShaderBundleNaming: 0
+  m_ShaderBundleCustomNaming: 
+  m_MonoScriptBundleNaming: 0
+  m_MonoScriptBundleCustomNaming: 
+  m_RemoteCatalogBuildPath:
+    m_Id: 7f02617a818e6a24b8a5ab56ac9d0800
+  m_RemoteCatalogLoadPath:
+    m_Id: fac4865583e4b494e886968136c18c53
+  m_ContentStateBuildPath: Assets/AddressableAssetsData/Dev/
+  m_BuildAddressablesWithPlayerBuild: 2
+  m_overridePlayerVersion: '[Scoz.Func.VersionSetting.AppLargeVersion]'
+  m_GroupAssets:
+  - {fileID: 11400000, guid: 82ad2fd6c8047da46a9b989fb2415f72, type: 2}
+  - {fileID: 11400000, guid: 6b96cbc8f9f8b7e469265537e54e54b1, type: 2}
+  m_BuildSettings:
+    m_CompileScriptsInVirtualMode: 0
+    m_CleanupStreamingAssetsAfterBuilds: 1
+    m_LogResourceManagerExceptions: 1
+    m_BundleBuildPath: Temp/com.unity.addressables/AssetBundles
+  m_ProfileSettings:
+    m_Profiles:
+    - m_InheritedParent: 
+      m_Id: 417ff56f3868f43478fe685ad05b9b49
+      m_ProfileName: Default
+      m_Values:
+      - m_Id: 70ea08ac60df3f441b7936eafe13894b
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: edfad19e3dcc43d448f7d51b6aab5e1e
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: d9ec07991c7ba014cb1a6164355bc88a
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+      - m_Id: 7f02617a818e6a24b8a5ab56ac9d0800
+        m_Value: ServerData/[BuildTarget]
+      - m_Id: fac4865583e4b494e886968136c18c53
+        m_Value: http://localhost/[BuildTarget]
+    - m_InheritedParent: 
+      m_Id: 4889935da1a8e7848a979d775e99236f
+      m_ProfileName: GoogleCloud-Dev
+      m_Values:
+      - m_Id: 70ea08ac60df3f441b7936eafe13894b
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: edfad19e3dcc43d448f7d51b6aab5e1e
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: d9ec07991c7ba014cb1a6164355bc88a
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+      - m_Id: 7f02617a818e6a24b8a5ab56ac9d0800
+        m_Value: ServerData/[Scoz.Func.VersionSetting.AppLargeVersion]/[BuildTarget]
+      - m_Id: fac4865583e4b494e886968136c18c53
+        m_Value: https://storage.googleapis.com/majampachinko_bundle_develop/{Scoz.Func.VersionSetting.AppLargeVersion}/[BuildTarget]
+    - m_InheritedParent: 
+      m_Id: c90af163892d86848ba3b1fed1777d1b
+      m_ProfileName: GoogleCloud-Release
+      m_Values:
+      - m_Id: 70ea08ac60df3f441b7936eafe13894b
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: edfad19e3dcc43d448f7d51b6aab5e1e
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: d9ec07991c7ba014cb1a6164355bc88a
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+      - m_Id: 7f02617a818e6a24b8a5ab56ac9d0800
+        m_Value: ServerData/[Scoz.Func.VersionSetting.AppLargeVersion]/[BuildTarget]
+      - m_Id: fac4865583e4b494e886968136c18c53
+        m_Value: https://storage.googleapis.com/majampachinko_bundle_release/{Scoz.Func.VersionSetting.AppLargeVersion}/[BuildTarget]
+    - m_InheritedParent: 
+      m_Id: 6010759c1da1dbc499bbd2d989c710bc
+      m_ProfileName: GoogleCloud-Test
+      m_Values:
+      - m_Id: 70ea08ac60df3f441b7936eafe13894b
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: edfad19e3dcc43d448f7d51b6aab5e1e
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: d9ec07991c7ba014cb1a6164355bc88a
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+      - m_Id: 7f02617a818e6a24b8a5ab56ac9d0800
+        m_Value: ServerData/[Scoz.Func.VersionSetting.AppLargeVersion]/[BuildTarget]
+      - m_Id: fac4865583e4b494e886968136c18c53
+        m_Value: https://storage.googleapis.com/majampachinko_bundle_test/{Scoz.Func.VersionSetting.AppLargeVersion}/[BuildTarget]
+    m_ProfileEntryNames:
+    - m_Id: 70ea08ac60df3f441b7936eafe13894b
+      m_Name: BuildTarget
+      m_InlineUsage: 0
+    - m_Id: edfad19e3dcc43d448f7d51b6aab5e1e
+      m_Name: LocalBuildPath
+      m_InlineUsage: 0
+    - m_Id: d9ec07991c7ba014cb1a6164355bc88a
+      m_Name: LocalLoadPath
+      m_InlineUsage: 0
+    - m_Id: 7f02617a818e6a24b8a5ab56ac9d0800
+      m_Name: RemoteBuildPath
+      m_InlineUsage: 0
+    - m_Id: fac4865583e4b494e886968136c18c53
+      m_Name: RemoteLoadPath
+      m_InlineUsage: 0
+    m_ProfileVersion: 1
+  m_LabelTable:
+    m_LabelNames:
+    - Json
+    - Image
+    - Prefab
+    - Audio
+    - Atlas
+    - Particle
+    - MaJam
+    - ScriptableObject
+    - Role2001
+    - Role1004
+    - Role1002
+    - Role1011
+    - Role1008
+    - Role1007
+    - Role1009
+    - Role1003
+    - Role1006
+    - Role1005
+    - Role1010
+    - Role2007
+    - Role1001
+    - Role2008
+    - Role3001
+    - Role1201
+    - Role1101
+    - Role1107
+    - Role1108
+    - Role1102
+    - Role1105
+    - Role1110
+    - Role5003
+    - Role5004
+    - Role5006
+    - Role5009
+    - Role5011
+  m_SchemaTemplates: []
+  m_GroupTemplateObjects:
+  - {fileID: 11400000, guid: b52ca25ebe45b064584febea735e7172, type: 2}
+  m_InitializationObjects: []
+  m_CertificateHandlerType:
+    m_AssemblyName: 
+    m_ClassName: 
+  m_ActivePlayerDataBuilderIndex: 4
+  m_DataBuilders:
+  - {fileID: 11400000, guid: 8b72e70a56b17e943b4cbf4f07721cca, type: 2}
+  - {fileID: 11400000, guid: c5706a0bbc9f82c42a1028cd0152ad7b, type: 2}
+  - {fileID: 11400000, guid: 548a75d2e0da7bb4590762e93d195b60, type: 2}
+  - {fileID: 11400000, guid: 21cdaaf8b4a8ad649a75f8c71bf8df5e, type: 2}
+  - {fileID: 11400000, guid: 35e04f347998a614f95e976503552949, type: 2}
+  m_ActiveProfileId: 4889935da1a8e7848a979d775e99236f
+  m_HostingServicesManager:
+    m_HostingServiceInfos: []
+    m_Settings: {fileID: 11400000}
+    m_NextInstanceId: 0
+    m_RegisteredServiceTypeRefs: []

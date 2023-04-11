@@ -1,0 +1,20 @@
+{"Horse":[
+	{	"ID":"1",	"RefPrefab":"Horse001",	"Spd":"100",	"Vit":"100",	"Pow":"100",	"Spu":"100",	"Start":"3",	"HorseFootPitch":"Normal",	"HorseFoot":"BigRun",	"WinningRate":"100",	"WiningRateGroup":"1"},
+	{	"ID":"2",	"RefPrefab":"Horse002",	"Spd":"100",	"Vit":"100",	"Pow":"100",	"Spu":"100",	"Start":"3",	"HorseFootPitch":"Normal",	"HorseFoot":"Run",	"WinningRate":"95",	"WiningRateGroup":"1"},
+	{	"ID":"3",	"RefPrefab":"Horse003",	"Spd":"100",	"Vit":"100",	"Pow":"100",	"Spu":"100",	"Start":"3",	"HorseFootPitch":"Normal",	"HorseFoot":"Ahead",	"WinningRate":"92",	"WiningRateGroup":"1"},
+	{	"ID":"4",	"RefPrefab":"Horse004",	"Spd":"100",	"Vit":"100",	"Pow":"100",	"Spu":"100",	"Start":"3",	"HorseFootPitch":"Normal",	"HorseFoot":"FreeAhead",	"WinningRate":"86",	"WiningRateGroup":"2"},
+	{	"ID":"5",	"RefPrefab":"Horse005",	"Spd":"100",	"Vit":"100",	"Pow":"100",	"Spu":"100",	"Start":"3",	"HorseFootPitch":"Normal",	"HorseFoot":"MiddleBack",	"WinningRate":"82",	"WiningRateGroup":"2"},
+	{	"ID":"6",	"RefPrefab":"Horse006",	"Spd":"100",	"Vit":"100",	"Pow":"100",	"Spu":"100",	"Start":"3",	"HorseFootPitch":"Normal",	"HorseFoot":"FreeMiddleBack",	"WinningRate":"80",	"WiningRateGroup":"2"},
+	{	"ID":"7",	"RefPrefab":"Horse007",	"Spd":"100",	"Vit":"100",	"Pow":"100",	"Spu":"100",	"Start":"3",	"HorseFootPitch":"Normal",	"HorseFoot":"Chase",	"WinningRate":"75",	"WiningRateGroup":"3"},
+	{	"ID":"8",	"RefPrefab":"Horse008",	"Spd":"100",	"Vit":"100",	"Pow":"100",	"Spu":"100",	"Start":"3",	"HorseFootPitch":"Normal",	"HorseFoot":"Free",	"WinningRate":"70",	"WiningRateGroup":"3"},
+	{	"ID":"9",	"RefPrefab":"Horse009",	"Spd":"100",	"Vit":"100",	"Pow":"100",	"Spu":"100",	"Start":"3",	"HorseFootPitch":"Normal",	"HorseFoot":"BigRun",	"WinningRate":"60",	"WiningRateGroup":"3"},
+	{	"ID":"10",	"RefPrefab":"Horse010",	"Spd":"100",	"Vit":"100",	"Pow":"100",	"Spu":"100",	"Start":"3",	"HorseFootPitch":"Normal",	"HorseFoot":"Run",	"WinningRate":"55",	"WiningRateGroup":"4"},
+	{	"ID":"11",	"RefPrefab":"Horse011",	"Spd":"100",	"Vit":"100",	"Pow":"100",	"Spu":"100",	"Start":"3",	"HorseFootPitch":"Normal",	"HorseFoot":"Ahead",	"WinningRate":"54",	"WiningRateGroup":"4"},
+	{	"ID":"12",	"RefPrefab":"Horse012",	"Spd":"100",	"Vit":"100",	"Pow":"100",	"Spu":"100",	"Start":"3",	"HorseFootPitch":"Normal",	"HorseFoot":"FreeAhead",	"WinningRate":"50",	"WiningRateGroup":"4"},
+	{	"ID":"13",	"RefPrefab":"Horse013",	"Spd":"100",	"Vit":"100",	"Pow":"100",	"Spu":"100",	"Start":"3",	"HorseFootPitch":"Normal",	"HorseFoot":"MiddleBack",	"WinningRate":"40",	"WiningRateGroup":"5"},
+	{	"ID":"14",	"RefPrefab":"Horse014",	"Spd":"100",	"Vit":"100",	"Pow":"100",	"Spu":"100",	"Start":"3",	"HorseFootPitch":"Normal",	"HorseFoot":"FreeMiddleBack",	"WinningRate":"30",	"WiningRateGroup":"5"},
+	{	"ID":"15",	"RefPrefab":"Horse015",	"Spd":"100",	"Vit":"100",	"Pow":"100",	"Spu":"100",	"Start":"3",	"HorseFootPitch":"Normal",	"HorseFoot":"Chase",	"WinningRate":"25",	"WiningRateGroup":"5"},
+	{	"ID":"16",	"RefPrefab":"Horse016",	"Spd":"100",	"Vit":"100",	"Pow":"100",	"Spu":"100",	"Start":"3",	"HorseFootPitch":"Normal",	"HorseFoot":"Free",	"WinningRate":"20",	"WiningRateGroup":"6"},
+	{	"ID":"17",	"RefPrefab":"Horse017",	"Spd":"100",	"Vit":"100",	"Pow":"100",	"Spu":"100",	"Start":"3",	"HorseFootPitch":"Normal",	"HorseFoot":"Ahead",	"WinningRate":"18",	"WiningRateGroup":"6"},
+	{	"ID":"18",	"RefPrefab":"Horse018",	"Spd":"100",	"Vit":"100",	"Pow":"100",	"Spu":"100",	"Start":"3",	"HorseFootPitch":"Normal",	"HorseFoot":"FreeAhead",	"WinningRate":"15",	"WiningRateGroup":"6"}
+]}

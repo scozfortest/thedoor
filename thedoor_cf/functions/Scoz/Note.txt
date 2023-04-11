@@ -1,0 +1,30 @@
+移除陣列元素
+ function RemoveItem (array, item) {
+        if (array == null)
+            return;
+        const index = array.indexOf(item);
+        if (index > -1) {
+            array.splice(index, 1);
+        }
+        return array;
+    }
+
+let item1={
+	ItemType:"Stuff",
+  	ItemValue:1,
+}
+let item2={
+	ItemType:"Stuff",
+  	ItemValue:2,
+}
+
+
+
+let a=[item1,item2];
+//let b=a;--------->淺複製
+let b= a.map(a => Object.assign({}, a)); --------->深複製陣列參照+內容元素
+//let b=  Array.from(a);--------->淺複製陣列參照
+b[0]["ItemValue"]=3;
+RemoveItem(b,item2);
+console.log(a);
+console.log(b);

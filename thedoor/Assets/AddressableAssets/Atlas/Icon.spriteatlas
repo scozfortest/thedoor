@@ -1,0 +1,132 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Icon
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: Android
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 29
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    - serializedVersion: 3
+      m_BuildTarget: iPhone
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 48
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 8
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: b36395c86a92fe04497ec1adfa2ccbbf, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 04730170e9117b44797e5b3b2ad143a3, type: 3}
+  - {fileID: 21300000, guid: ac4f4b618c7680843a42d6cea1cf3cfd, type: 3}
+  - {fileID: 21300000, guid: 90c4ab71e049fc045acae5c2fb78d47f, type: 3}
+  - {fileID: 21300000, guid: 54705ba1142c19343a1c71983019fbf5, type: 3}
+  - {fileID: 21300000, guid: 1217a1b1ff35ab841810583c8f353cb6, type: 3}
+  - {fileID: 21300000, guid: a9822c4204d08084ab89d16b5487fb07, type: 3}
+  - {fileID: 21300000, guid: 762df5923ba035343b25e7ea4c46ebcb, type: 3}
+  - {fileID: 21300000, guid: 9cb26323f3caa1e419eebcedf83f2538, type: 3}
+  - {fileID: 21300000, guid: 91dcbf64bc763374e912403341cef16f, type: 3}
+  - {fileID: 21300000, guid: d728fe94fb90d6f4eb69f7b0da6bc4c7, type: 3}
+  - {fileID: 21300000, guid: 7af7e7659ed6af545bda17bf6d382a22, type: 3}
+  - {fileID: 21300000, guid: a9b137751b1a46940b872e4602dc0282, type: 3}
+  - {fileID: 21300000, guid: b7be9fb5dae15c446b7544b806b18782, type: 3}
+  - {fileID: 21300000, guid: a4ba48f541a7fc04d80dc36dd6bd0895, type: 3}
+  - {fileID: 21300000, guid: 8384004740f1d5f4fa26eba5ab8c7bed, type: 3}
+  - {fileID: 21300000, guid: 32791f7787c24ee47878b8b2a84a6cd1, type: 3}
+  - {fileID: 21300000, guid: 983e91f79c3dd3e459b30c8ee3b755c6, type: 3}
+  - {fileID: 21300000, guid: c02226f7699be814e84d780626f7eabf, type: 3}
+  - {fileID: 21300000, guid: c03bf3388a1161642b1bd69992ad63ac, type: 3}
+  - {fileID: 21300000, guid: 0772f1599054bac40a984d72beec6e89, type: 3}
+  - {fileID: 21300000, guid: e0f4da9940242b549a524eac3397f8d8, type: 3}
+  - {fileID: 21300000, guid: 8103121b45b1642488fb48e0644c9284, type: 3}
+  - {fileID: 21300000, guid: 1783550c387afa24d88160ac2e5ce9c8, type: 3}
+  - {fileID: 21300000, guid: c26df01c0d93b8343857ecec189a766c, type: 3}
+  - {fileID: 21300000, guid: c027512cb5e42f24c827c5bd003f59f1, type: 3}
+  - {fileID: 21300000, guid: 86d8d8ac2bf466d48be5635de542e7ef, type: 3}
+  - {fileID: 21300000, guid: 3e8e553dd9ce8bf48bc966265b4e559b, type: 3}
+  - {fileID: 21300000, guid: f89328ce243d734469d3c5871e0198c7, type: 3}
+  - {fileID: 21300000, guid: cd53750fb654eb841b19624008432da0, type: 3}
+  - {fileID: 21300000, guid: 97492c3fff3a74745826c6f1d9e2afda, type: 3}
+  - {fileID: 21300000, guid: ca88c59fbea1dc048a9e8816a5221532, type: 3}
+  - {fileID: 21300000, guid: e48928ff1c9b7ee4196474bc541eb839, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Icon29
+  - Icon18
+  - Icon22
+  - Icon14
+  - Icon12
+  - Icon34
+  - Icon17
+  - Icon35
+  - Icon19
+  - Icon26
+  - Icon38
+  - Icon27
+  - Icon32
+  - Icon41
+  - Icon20
+  - Icon25
+  - Icon11
+  - Icon16
+  - Icon23
+  - Icon36
+  - Icon1001
+  - Icon24
+  - Icon31
+  - Icon21
+  - Icon15
+  - Icon13
+  - Icon33
+  - Icon39
+  - Icon28
+  - Icon37
+  - Icon40
+  - Icon30
+  m_RenderDataMap: {}
+  m_Tag: Icon
+  m_IsVariant: 0
