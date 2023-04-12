@@ -22,7 +22,7 @@ namespace TheDoor.Main {
             if (_itemDatas == null || _itemDatas.Length == 0)
                 return null;
 
-            string colName = FirebaseManager.ColNames.GetValueOrDefault(ColEnum.Mail);
+            string colName = FirebaseManager.ColNames.GetValueOrDefault(ColEnum.Player);
             if (colName == null) {
                 DebugLogger.LogErrorFormat("ColNames Error ");
                 return null;

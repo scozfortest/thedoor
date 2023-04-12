@@ -253,13 +253,6 @@ namespace TheDoor.Main {
         }
 
 
-
-
-
-
-
-
-
         public void TriggerCurrencyNotEnoughEvent(Currency _currency) {
             //資源不夠跳事件
             switch (_currency) {
@@ -269,17 +262,8 @@ namespace TheDoor.Main {
                 case Currency.Point:
                     TriggerEventHandler.TriggerEventCheck(TriggerEventData.TriggerTiming.NotEnoughPoint);
                     break;
-                case Currency.Ball:
-                    TriggerEventHandler.TriggerEventCheck(TriggerEventData.TriggerTiming.NotEnoughBall);
-                    break;
             }
         }
-
-
-
-
-
-
 
 
 
@@ -299,7 +283,7 @@ namespace TheDoor.Main {
         /// 是否有未察看的Item，傳入Item類型(必須非獨立資料類道具)
         /// </summary>
         public bool GotAnyNewItem(NotUniqueItemTypes _type) {
-            var ownedDic = GamePlayer.Instance.GetOwneItemDic(_type);
+            var ownedDic = GetOwneItemDic(_type);
             if (ownedDic == null) return false;
             foreach (var id in ownedDic.Keys) {
                 if (id == 0) continue;//ID 0通常是特殊的道具 不用點(例如ID0的title就是不顯示)

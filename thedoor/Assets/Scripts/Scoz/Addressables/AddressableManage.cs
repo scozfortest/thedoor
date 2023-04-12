@@ -23,7 +23,6 @@ namespace Scoz.Func {
         [SerializeField] Image ProgressImg = null;
         [SerializeField] Text ProgressText = null;
         [SerializeField] GameObject DownloadGO = null;
-        [SerializeField] GameObject ReDownloadBtn;
         [SerializeField] GameObject BG;
         Coroutine CheckInternetCoroutine = null;
         Action FinishedAction = null;
@@ -158,7 +157,6 @@ namespace Scoz.Func {
             FinishedAction?.Invoke();
             MyScene scene = MyEnum.ParseEnum<MyScene>(SceneManager.GetActiveScene().name);
             ShowDownloadUI(false);
-            ReDownloadBtn.gameObject.SetActive(false);
             DebugLogger.Log("<color=#008080>[Addressables] LoadAsset-Finished</color>");
 
 

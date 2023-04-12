@@ -55,9 +55,11 @@ namespace Scoz.Func {
         [SerializeField] Text GameInfo_Content = null;
         [SerializeField] ContentSizeFitter GameInfo_ContentSizeFitter = null;
         void InitGameInfo() {
+            if (GameInfo_GO == null) return;
             GameInfo_GO.SetActive(false);
         }
         public static void ShowGameInfo(string _infoUIStringID) {
+            if (Instance.GameInfo_GO == null) return;
             string content = StringData.GetUIString(_infoUIStringID);
             Instance.GameInfo_Content.text = content;
             CoroutineJob.Instance.StartNewAction(() => { Instance.GameInfo_ContentSizeFitter.Update(); }, 0.01f);
@@ -70,9 +72,11 @@ namespace Scoz.Func {
         [HeaderAttribute("==============觸發事件彈窗==============")]
         [SerializeField] TriggerEventUI MyTriggerEventUI = null;
         void InitTriggerEventUI() {
+            if (MyTriggerEventUI == null) return;
             MyTriggerEventUI.SetActive(false);
         }
         public static void ShowTriggerEventUI(TriggerEvent _event, string _param, Action _confirmAC, Action _closeAC) {
+            if (Instance.MyTriggerEventUI == null) return;
             Instance.MyTriggerEventUI.ShowUI(_event, _param, _confirmAC, _closeAC);
         }
 

@@ -47,7 +47,7 @@ namespace Scoz.Func {
             }
             Icon = new int[0];
             try {
-                Icon = _setting.TryGetValue(NotUniqueItemTypes.Icon.ToString(), out value) ? (int[])value : new int[0];
+                Icon = _setting.TryGetValue(NotUniqueItemTypes.Supply.ToString(), out value) ? (int[])value : new int[0];
             } catch (Exception _ex) {
                 DebugLogger.LogError("LocoRedDotData>Icon錯誤: " + _ex);
             }

@@ -1,14 +1,13 @@
 using System;
 
 namespace TheDoor.Main {
-    public enum Force {
-        Player,
-        OtherPlayer,
+    public enum Target {
+        Myself,
+        Enemy,
     }
     public enum Currency {
         Gold,
         Point,
-        Ball,
     }
     public enum SaleState {
         OnSale,//上架中
@@ -64,10 +63,6 @@ namespace TheDoor.Main {
         DailyReward,//簽到簿
         ScratchCard,//刮刮卡
         InvitationCode,//邀請碼
-    }
-    public enum MiniGame {
-        HitTheDog,
-        StreetFighter,
     }
 
     /// <summary>

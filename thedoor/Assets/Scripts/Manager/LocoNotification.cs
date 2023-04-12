@@ -66,8 +66,8 @@ namespace TheDoor.Main {
             TimeSpan offsetFromNow = (time - DateTime.Now);
             time = DateTime.Now.AddSeconds(offsetFromNow.TotalSeconds);
             //DebugLogger.LogError("腳色ID=" + roleData.ID + "的推播 時間: " + time);
-            string title = roleData.NotificationTitle;
-            string content = roleData.NotificationContent;
+            string title = "title";
+            string content = "content";
 
             int id = SendNotification_Android(channelID, title, content, new Color32(255, 180, 0, 255), time);
             NotificationIDs.Add(id);

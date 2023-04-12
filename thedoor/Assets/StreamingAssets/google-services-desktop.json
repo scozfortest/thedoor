@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "706175281052",
-    "project_id": "thedoor-dev",
-    "storage_bucket": "thedoor-dev.appspot.com"
+    "project_number": "525954599735",
+    "project_id": "thedoor-develop",
+    "storage_bucket": "thedoor-develop.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:706175281052:android:40074b1983201df1dcca59",
+        "mobilesdk_app_id": "1:525954599735:android:302b8485d84a4b379228b2",
         "android_client_info": {
-          "package_name": "com.scoz.thedoordev"
+          "package_name": "com.among.thedoordevelop"
         }
       },
       "oauth_client": [
         {
-          "client_id": "706175281052-g4m9e1f59ajekrmevp3absuic3e51m9m.apps.googleusercontent.com",
+          "client_id": "525954599735-ulefarknn5l3s42jgv23n4sh4qjsvis8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCCEKKf6mFq9GUEpCMsQgWPbd9AlPuW7uA"
+          "current_key": "AIzaSyBZtlKrnDTmMB8P0UXoXUiYFDszFeFRo9c"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "706175281052-g4m9e1f59ajekrmevp3absuic3e51m9m.apps.googleusercontent.com",
+              "client_id": "525954599735-ulefarknn5l3s42jgv23n4sh4qjsvis8.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "525954599735-s09gig5f853u4iqp2rfj9hf7c4bc89h2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.among.thedoordevelop"
+              }
             }
           ]
         }

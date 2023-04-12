@@ -47,14 +47,15 @@ namespace Scoz.Func {
 
             //清空static字典
             GameSettingData.ClearStaticDic();
-            RolePlotData.ClearStaticDic();
+            ScriptData.ClearStaticDic();
+            SupplyEffectData.ClearStaticDic();
 
 
             MyJsonData.SetDataStringKey_Remote<GameSettingData>("GameSetting", SetDic);
             MyJsonData.SetData_Remote<SceneTransitionData>("SceneTransition", SetDic);
-            MyJsonData.SetData_Remote<IconData>("Icon", SetDic);
+            MyJsonData.SetData_Remote<SupplyData>("Supply", SetDic);
             MyJsonData.SetData_Remote<RoleData>("Role", SetDic);
-            MyJsonData.SetData_Remote<RolePlotData>("RolePlot", SetDic);
+            MyJsonData.SetDataStringKey_Remote<ScriptData>("Script", SetDic);
             MyJsonData.SetData_Remote<ItemGroupData>("ItemGroup", SetDic);
 
             //設定3秒會顯示尚未載入的JsonData

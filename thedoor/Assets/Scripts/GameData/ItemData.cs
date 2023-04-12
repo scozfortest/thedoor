@@ -13,12 +13,12 @@ namespace TheDoor.Main {
         Ball,
         ItemGroup,
         Role,
-        Icon,
+        Supply,
         //有新增新的類型也要追加
     }
     //非獨立資料類道具，記錄在PlayerData-Item裡的道具都屬於非獨立資料類道具
     public enum NotUniqueItemTypes {
-        Icon,
+        Supply,
     }
     public class ItemData {
         public ItemType Type { get; private set; }

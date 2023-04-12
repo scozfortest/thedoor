@@ -53,43 +53,6 @@ namespace TheDoor.Main {
         }
 
 
-        /// <summary>
-        /// 傳入X分鐘，取得X分內的跑馬燈資料
-        /// </summary>
-        public static void GetNewsTicker(int _lastMiniute, Action<List<Dictionary<string, object>>> _cb) {
-            string colName = ColNames.GetValueOrDefault(ColEnum.NewsTicker);
-            if (string.IsNullOrEmpty(colName)) {
-                DebugLogger.LogErrorFormat("ColNames尚未定義 {0}", ColEnum.NewsTicker);
-                return;
-            }
-            if (MyUser == null) {
-                _cb?.Invoke(null);
-                return;
-            }
-
-            CollectionReference colRef = Store.Collection(colName);
-            Timestamp lastMinuteTimestamp = Timestamp.FromDateTime(DateTime.Now.AddMinutes(-_lastMiniute));
-            Query query = colRef.WhereGreaterThanOrEqualTo(OwnedEnum.CreateTime.ToString(), lastMinuteTimestamp);
-            query.GetSnapshotAsync().ContinueWithOnMainThread(task => {
-                if (task.IsFaulted) {
-                    PopupUI.ShowClickCancel(StringData.GetUIString(string.Format("Firebase_UnexpectedError", colName)), null);
-                    DebugLogger.LogErrorFormat("Get GameDatas {0} Error: {1}", colName, task.Exception.ToString());
-                    return;
-                }
-                QuerySnapshot snapshot = task.Result;
-                if (snapshot.Count != 0) {
-                    List<Dictionary<string, object>> dataList = new List<Dictionary<string, object>>();
-                    foreach (DocumentSnapshot documentSnapshot in snapshot.Documents) {
-                        Dictionary<string, object> datas = documentSnapshot.ToDictionary();
-                        dataList.Add(datas);
-                    };
-                    _cb?.Invoke(dataList);
-                } else {
-                    _cb?.Invoke(null);
-                }
-            });
-        }
-
 
         /// <summary>
         /// (單筆)取得某個資料，傳入資料表名稱與文件UID

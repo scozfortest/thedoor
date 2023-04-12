@@ -33,7 +33,6 @@ namespace TheDoor.Main {
             CreateTime = _data.TryGetValue("CreateTime", out value) ? FirebaseManager.GetDateTimeFromFirebaseTimestamp(value) : default(DateTime);
             OwnedCurrency[Currency.Gold] = _data.TryGetValue("Gold", out value) ? Convert.ToInt64(value) : default(long);
             OwnedCurrency[Currency.Point] = _data.TryGetValue("Point", out value) ? Convert.ToInt64(value) : default(long);
-            OwnedCurrency[Currency.Ball] = _data.TryGetValue("Ball", out value) ? Convert.ToInt64(value) : default(long);
             //註冊方式
             MyAuthType = AuthType.NotSigninYet;
             string authTypeStr = _data.TryGetValue("AuthType", out value) ? Convert.ToString(value) : AuthType.NotSigninYet.ToString();

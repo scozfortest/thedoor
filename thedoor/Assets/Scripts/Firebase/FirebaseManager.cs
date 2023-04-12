@@ -86,26 +86,10 @@ namespace TheDoor.Main {
         public static Dictionary<ColEnum, string> ColNames { get; private set; } = new Dictionary<ColEnum, string>() {
             { ColEnum.GameSetting , "GameData-Setting"},
             { ColEnum.Player , "PlayerData-Player"},
-            { ColEnum.GiftCode , "GameData-GiftCode"},
-            { ColEnum.GiftCodeSetting , "GameData-GiftCodeSetting"},
-            { ColEnum.NewsTicker , "GameData-NewsTicker"},
+            { ColEnum.Item , "PlayerData-Item"},
             { ColEnum.Shop , "GameData-Shop"},
             { ColEnum.Purchase , "GameData-Purchase"},
-            { ColEnum.Mail , "PlayerData-Mail"},
-            { ColEnum.Item , "PlayerData-Item"},
-            { ColEnum.Friendship , "PlayerData-Friendship"},
             { ColEnum.History , "PlayerData-History"},
-            { ColEnum.FriendRequest , "PlayerData-FriendRequest"},
-            { ColEnum.Activity , "GameData-Activity"},
-            { ColEnum.ADImg , "GameData-ADImg"},
-            //{ ColEnum.MaJamRoom , "GameData-MaJamRoom"},
-            //{ ColEnum.Role , "PlayerData-Role"},
-            //{ ColEnum.RoleCall , "PlayerData-RoleCall"},
-            //{ ColEnum.MaJamMatchingRoom , "PlayerData-MaJamMatchingRoom"},
-            //{ ColEnum.MaJamMatchingInvite , "PlayerData-MaJamMatchingInvite"},
-            //{ ColEnum.LeaderBoard , "GameData-LeaderBoard"},
-            //{ ColEnum.PlayingRoom , "GameData-PlayingRoom"},
-            //{ ColEnum.ScratchCard , "GameData-ScratchCard"},
 
 
             //※有新增類型也要考慮PerPlayerOwnedOneDocCols是否要新增
@@ -116,7 +100,6 @@ namespace TheDoor.Main {
         public static HashSet<string> PerPlayerOwnedOneDocCols = new HashSet<string>{
         "Player",//玩家資料
         "Item",//道具
-        "Friendship",//好友
         "History",//紀錄
         };
         /// <summary>
@@ -240,10 +223,7 @@ namespace TheDoor.Main {
         static void SetFinishedLoadDatas(ColEnum _colName, List<Dictionary<string, object>> _datas) {
             DebugLogger.LogFormat("<color=#9b791d>[Firebase] {0} 讀取完成</color>", _colName);
             try {
-                switch (_colName) {
-                    case ColEnum.RoleCall:
-                        break;
-                }
+
                 MyLoadingProgress.FinishProgress(_colName.ToString());
             } catch (Exception _e) {
                 DebugLogger.LogError(_e);

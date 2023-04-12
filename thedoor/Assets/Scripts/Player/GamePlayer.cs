@@ -12,14 +12,6 @@ namespace TheDoor.Main {
         public MainPlayerData Data { get; private set; }
         Dictionary<ColEnum, IDictionary> OwnedDatas = new Dictionary<ColEnum, IDictionary>();
         /// <summary>
-        /// 取得好友資料
-        /// </summary>
-        public OwnedFriendshipData MyFriendData {
-            get {
-                return GetOwnedData<OwnedFriendshipData>(ColEnum.Friendship);
-            }
-        }
-        /// <summary>
         /// 取得歷史資料
         /// </summary>
         public OwnedHistoryData MyHistoryData {
@@ -53,11 +45,6 @@ namespace TheDoor.Main {
 
             SetMainPlayerData(_data);
 
-            //初始化好友資料
-            Dictionary<string, object> friendshipData = new Dictionary<string, object>();
-            friendshipData.Add("UID", Data.UID);
-            friendshipData.Add("FriendUIDs", null);
-            SetOwnedData<OwnedFriendshipData>(ColEnum.Friendship, friendshipData);
         }
 
         public void SetMainPlayerData(Dictionary<string, object> _data) {

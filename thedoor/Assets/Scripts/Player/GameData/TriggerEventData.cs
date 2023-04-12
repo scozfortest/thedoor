@@ -122,11 +122,6 @@ namespace TheDoor.Main {
                         if (GamePlayer.Instance.Data.GetCurrency(Currency.Point) >= belowPoint)
                             return false;
                         break;
-                    case ConditionType.BallBelow:
-                        long belowBall = Convert.ToInt64(Conditions[i].Value);
-                        if (GamePlayer.Instance.Data.GetCurrency(Currency.Ball) >= belowBall)
-                            return false;
-                        break;
                     case ConditionType.Probability:
                         float probability = (float)Convert.ToDouble(Conditions[i].Value);
                         if (!Probability.GetResult(probability))

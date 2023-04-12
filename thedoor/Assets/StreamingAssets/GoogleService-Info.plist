@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>706175281052-qlf1ap87ut4k6pnfj5lngllal9fokons.apps.googleusercontent.com</string>
+	<string>525954599735-s09gig5f853u4iqp2rfj9hf7c4bc89h2.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.706175281052-qlf1ap87ut4k6pnfj5lngllal9fokons</string>
+	<string>com.googleusercontent.apps.525954599735-s09gig5f853u4iqp2rfj9hf7c4bc89h2</string>
 	<key>API_KEY</key>
-	<string>AIzaSyA_xWQzKa0NlcWzshR1MXmBQfHUFYwx5vk</string>
+	<string>AIzaSyCSeXW_8Feg58SoMw2ViF1tCO18qYHpfHQ</string>
 	<key>GCM_SENDER_ID</key>
-	<string>706175281052</string>
+	<string>525954599735</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.scoz.thedoordev</string>
+	<string>com.among.thedoordevelop</string>
 	<key>PROJECT_ID</key>
-	<string>thedoor-dev</string>
+	<string>thedoor-develop</string>
 	<key>STORAGE_BUCKET</key>
-	<string>thedoor-dev.appspot.com</string>
+	<string>thedoor-develop.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:706175281052:ios:f353c272eae9a388dcca59</string>
+	<string>1:525954599735:ios:988e6395580995309228b2</string>
 </dict>
 </plist>
