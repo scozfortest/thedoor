@@ -1,18 +1,7 @@
 //Json
 const ItemGroupJson = require('../GameData/ItemGroup.json');
-const HandJson = require('../GameData/Hand.json');
-const IconJson = require('../GameData/Icon.json');
-const PlayerLVJson = require('../GameData/PlayerLV.json');
-const RoleJson = require('../GameData/Role.json');
-const StuffJson = require('../GameData/Stuff.json');
-const EmojiJson = require('../GameData/Emoji.json');
-const TitleJson = require('../GameData/Title.json');
-const VoiceJson = require('../GameData/Voice.json');
-const AIPlayerJson = require('../GameData/AIPlayer.json');
-const VIPJson = require('../GameData/VIP.json');
-const DailyRewardJson = require('../GameData/DailyReward.json');
 const StringJson = require('../GameData/String.json');
-const QuestJson = require('../GameData/Quest.json');
+
 
 //自訂方法
 const GameSetting = require('./GameSetting.js');
@@ -135,7 +124,6 @@ module.exports = {
                 break;
             case "RandomGold"://獲得範圍內隨機金幣數
             case "RandomPoint"://獲得範圍內隨機點數
-            case "RandomBall"://獲得範圍內隨機小鋼珠數
                 let rangeStrs = GetTypeValueRangeStrs(itemGroupJsonData["TypeValue"]);
                 let randomValue = Probability.GetRandIntBetween(Number(rangeStrs[0]), Number(rangeStrs[1]));
                 let currency = itemGroupType.replace('Random', '');
@@ -144,9 +132,6 @@ module.exports = {
                     ItemValue: randomValue,
                 }];
                 break;
-            case "RandomEmoji"://隨機獲得任一ID的表情貼圖，TypeValue填入亂數的品質、填入0代表不分品質
-            case "RandomHand"://隨機獲得任一ID的瞇牌手，TypeValue填入亂數的品質、填入0代表不分品質
-            case "RandomVoice"://隨機獲得任一ID的通用語音，TypeValue填入亂數的品質、填入0代表不分品質
             case "RandomIcon"://隨機獲得任一ID的頭像，TypeValue填入亂數的品質、填入0代表不分品質
                 let rank = Number(itemGroupJsonData["TypeValue"]);
                 let randomItemType = itemGroupType.replace('Random', '');
@@ -176,89 +161,6 @@ module.exports = {
                         ItemValue: Number(randomItemID),
                     }];
                 }
-                break;
-            case "TenDrawSet"://十抽固定品項獎勵，只能填10個品項，十抽抽出來固定獲得這10個道具
-                if (itemDatas.length != 10) {
-                    itemDatas = [];
-                    let Logger = require('./Logger.js');
-                    let logStr = "ItemGroup表的TenDrawSet數量不為10個";
-                    Logger.CFLog(logStr, GameSetting.LogTypes.Error);
-                    console.log(logStr);
-                    return;
-                }
-                break;
-            case "ScratchCard"://隨機獲得1個且排除玩家已經擁有的不能重複的道具
-                itemDatas = ArrayTool.GetArrayDictWhichDontContainKey(itemDatas, "ItemWeight");//如果是Random類型的寶箱，要把品項中沒填權重的移除
-                let newGainItems = Array.from(itemDatas);//深複製陣列
-
-                let playerItemDocData = await FirestoreManager.GetDocData(GameSetting.PlayerDataCols.Item, playerUID);//取得玩家擁有的道具清單
-                let ownedUniqueItemDatas = {};//玩家擁有的獨立類道具id清單
-                for (let itemData of itemDatas) {
-                    if (itemData["ItemType"] == "ItemGroup") {
-                        continue;
-                    }
-
-                    if (itemData["ItemType"] in GameSetting.CurrencyTypes) {//資源類道具重複沒關係，所以不處理
-                    } else if (itemData["ItemType"] in GameSetting.UniqueItemTypes) {//獨立資料類道具
-
-
-                        //取得玩家擁有的獨立類道具ID清單
-                        if (!(itemData["ItemType"] in ownedUniqueItemDatas)) {
-                            ownedUniqueItemDatas[itemData["ItemType"]] = [];
-                            let ownedUniqueItemDocs = await FirestoreManager.GetDocs_Where(GameSetting.PlayerDataCols[itemData["ItemType"]], "OwnerUID", playerUID);
-                            if (ownedUniqueItemDocs != null) {
-                                for (let doc of ownedUniqueItemDocs) {
-                                    ownedUniqueItemDatas[itemData["ItemType"]].push(doc.data()["ID"]);
-                                }
-                            }
-                        }
-
-                        if (ownedUniqueItemDatas[itemData["ItemType"]].includes(itemData["ItemValue"])) {//如果已經有此道具就替換道具
-                            ArrayTool.RemoveItem(newGainItems, itemData);//移除被取代的道具
-                        } else {
-                            ownedUniqueItemDatas[itemData["ItemType"]].push(itemData["ItemValue"]);//如果本來沒此道具就設定玩家已經擁有此道具了
-                        }
-
-                    } else {//非獨立資料類
-
-                        let needReplaceDuplicatedItem = true;
-                        if (playerItemDocData == null) {
-                            playerItemDocData = {};
-                            needReplaceDuplicatedItem = false;//玩家本來就沒有道具資料就不替換道具
-                        }
-                        if (!(itemData["ItemType"] in playerItemDocData)) {
-                            playerItemDocData[itemData["ItemType"]] = {};
-                            needReplaceDuplicatedItem = false;//玩家本來就沒有道具資料就不替換道具
-                        }
-
-
-                        if (!(itemData["ItemValue"] in playerItemDocData[itemData["ItemType"]])) {
-                            needReplaceDuplicatedItem = false;//玩家本來就沒有道具資料就不替換道具
-                        }
-                        //判斷是否為Stuff道具且是否可堆疊，是可堆疊道具就代表能重複獲得，因此不替換道具
-                        if (needReplaceDuplicatedItem) {
-                            if (itemData["ItemType"] == GameSetting.ItemTypes.Stuff) {
-                                let stuffJsonData = this.GetData(GameSetting.GameJsonNames.Stuff, itemData["ItemValue"]);
-                                let stackable = false;
-                                if ("Stackable" in stuffJsonData)
-                                    stackable = TextManager.ToBoolean(stuffJsonData["Stackable"]);
-                                if (stackable)
-                                    needReplaceDuplicatedItem = false;//可堆疊道具就不替換道具
-                            }
-                        }
-
-                        if (needReplaceDuplicatedItem) {
-                            ArrayTool.RemoveItem(newGainItems, itemData);//移除被取代的道具
-
-                        } else {
-                            playerItemDocData[itemData["ItemType"]][itemData["ItemValue"]] = 1;//玩家擁有的此道具數量設為1
-                        }
-                    }
-                }
-
-                if (newGainItems.length == 0)
-                    return [];
-                itemDatas = Probability.GetItemsByWeights(newGainItems, "ItemWeight", 1);//取得隨機數量商品
                 break;
             default:
                 itemDatas = [];
@@ -325,42 +227,6 @@ function GetJson(jsonName) {
     switch (jsonName) {
         case GameSetting.GameJsonNames.ItemGroup://寶箱表
             jsonData = ItemGroupJson.ItemGroup;
-            break;
-        case GameSetting.GameJsonNames.Role://腳色表
-            jsonData = RoleJson.Role;
-            break;
-        case GameSetting.GameJsonNames.Hand://瞇牌手表
-            jsonData = HandJson.Hand;
-            break;
-        case GameSetting.GameJsonNames.Icon://頭貼表
-            jsonData = IconJson.Icon;
-            break;
-        case GameSetting.GameJsonNames.Emoji://頭貼表
-            jsonData = EmojiJson.Emoji;
-            break;
-        case GameSetting.GameJsonNames.Stuff://物品表
-            jsonData = StuffJson.Stuff;
-            break;
-        case GameSetting.GameJsonNames.Title://稱號表
-            jsonData = TitleJson.Title;
-            break;
-        case GameSetting.GameJsonNames.VIP://VIP表
-            jsonData = VIPJson.VIP;
-            break;
-        case GameSetting.GameJsonNames.Voice://通用語音表
-            jsonData = VoiceJson.Voice;
-            break;
-        case GameSetting.GameJsonNames.AIPlayer://AI玩家表
-            jsonData = AIPlayerJson.AIPlayer;
-            break;
-        case GameSetting.GameJsonNames.DailyReward://簽到簿
-            jsonData = DailyRewardJson.DailyReward;
-            break;
-        case GameSetting.GameJsonNames.PlayerLv://生涯獎勵表
-            jsonData = PlayerLVJson.PlayerLV;
-            break;
-        case GameSetting.GameJsonNames.Quest://任務表
-            jsonData = QuestJson.Quest;
             break;
         default:
             console.log("尚未定義Json表: " + jsonName);

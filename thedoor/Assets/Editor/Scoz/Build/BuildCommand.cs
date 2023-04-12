@@ -13,7 +13,7 @@ using UnityEditor.SceneManagement;
 namespace Scoz.Editor {
     public class BuildCommand {
 
-        private static string[] BuildScenes = { "Assets/Scenes/StartScene.unity", "Assets/Scenes/LobbyScene.unity", "Assets/Scenes/MaJamScene.unity" };
+        private static string[] BuildScenes = { "Assets/Scenes/StartScene.unity", "Assets/Scenes/LobbyScene.unity" };
         private static string ANDROID_MANIFEST_PATH = "Assets/Plugins/Android/AndroidManifest.xml";
         static object owner = new System.Object();
 
@@ -111,7 +111,7 @@ namespace Scoz.Editor {
             PlayerSettings.bundleVersion = version;
             EditorCoroutine editorCoroutine = EditorCoroutineUtility.StartCoroutine(BuildAssetBundleAsync(envVersion, Close), owner);
         }
-        [MenuItem("MaJamPachinko/ForTest/BuildBundleWithArg_Test")]
+        [MenuItem("Scoz/ForTest/BuildBundleWithArg_Test")]
         public static void BuildBundleWithArg_Test() {
             EnvVersion envVersion = EnvVersion.Dev;
 #if Dev
@@ -152,7 +152,7 @@ namespace Scoz.Editor {
             PlayerSettings.bundleVersion = version;
             EditorCoroutine editorCoroutine = EditorCoroutineUtility.StartCoroutine(UpdateAssetBundleAsync(envVersion, Close), owner);
         }
-        [MenuItem("MaJamPachinko/ForTest/UpdateBundleWithArg_Test")]
+        [MenuItem("Scoz/ForTest/UpdateBundleWithArg_Test")]
         public static void UpdateBundleWithArg_Test() {
             EnvVersion envVersion = EnvVersion.Dev;
 #if Dev
@@ -250,7 +250,7 @@ namespace Scoz.Editor {
             EditorCoroutineUtility.StartCoroutine(BuildAabAsync(envVersion, outputFileName, Close), owner);
         }
 
-        [MenuItem("MaJamPachinko/ForTest/BuildAAB_Test")]
+        [MenuItem("Scoz/ForTest/BuildAAB_Test")]
         public static void BuildAAB_Test() {
             string[] args = System.Environment.GetCommandLineArgs();
             EnvVersion envVersion = EnvVersion.Dev;
@@ -258,7 +258,7 @@ namespace Scoz.Editor {
             string versionCode = "1";
             string keyaliasPass = "amongus";
             string keystorePass = "amongus";
-            string outputFileName = "../../MaJamPachinko.aab";
+            string outputFileName = "../../TheDoor.aab";
             Debug.LogFormat("輸出AAB位置: {0}", outputFileName);
             PlayerSettings.bundleVersion = version;
             PlayerSettings.Android.bundleVersionCode = int.Parse(versionCode);
@@ -266,28 +266,6 @@ namespace Scoz.Editor {
             PlayerSettings.keystorePass = keystorePass;
             EditorCoroutineUtility.StartCoroutine(BuildAabAsync(envVersion, outputFileName, null), owner);
         }
-        /*
-        [MenuItem("MaJamPachinko/ForTest/SetPlayerSettingsVersion_Test")]
-        public static void SetPlayerSettingsVersion_Test() {
-            string[] args = System.Environment.GetCommandLineArgs();
-            string version = "";
-            string versionCode = "";
-            for (int i = 0; i < args.Length; i++) {
-                Debug.Log("ARG " + i + ": " + args[i]);
-                switch (args[i]) {
-                    case "-buildVersion":
-                        version = args[i + 1];
-                        break;
-                    case "-buildVersionCode":
-                        versionCode = args[i + 1];
-                        break;
-                }
-            }
-            PlayerSettings.bundleVersion = version;
-            PlayerSettings.Android.bundleVersionCode = int.Parse(versionCode);
-            Close();
-        }
-        */
         private static void Close() {
             EditorApplication.Exit(0);
         }
@@ -381,7 +359,7 @@ namespace Scoz.Editor {
                 Debug.LogError("BuildXcode發生錯誤: " + _e);
             }
         }
-        [MenuItem("MaJamPachinko/ForTest/BuildXcode_Test")]
+        [MenuItem("Scoz/ForTest/BuildXcode_Test")]
         public static void BuildXcode_Test() {
             EnvVersion envVersion = EnvVersion.Dev;
 #if Dev

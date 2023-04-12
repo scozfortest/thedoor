@@ -22,19 +22,19 @@ namespace Scoz.Editor {
             { EnvVersion.Test, "majampachinko_bundle_test"},
             { EnvVersion.Release, "majampachinko_bundle_release"},
         };
-        [MenuItem("MaJamPachinko/UploadBundle/Dev")]
+        [MenuItem("Scoz/UploadBundle/Dev")]
         public static void UploadBundleToDev() {
             bool isYes = EditorUtility.DisplayDialog("上傳資源包", string.Format(DIALOG_MESSAGE, "Dev", VersionSetting.AppLargeVersion), "好!", "噗好><");
             if (isYes)
                 UploadGoogleCloud(EnvVersion.Dev);
         }
-        [MenuItem("MaJamPachinko/UploadBundle/Test")]
+        [MenuItem("Scoz/UploadBundle/Test")]
         public static void UploadBundleToTest() {
             bool isYes = EditorUtility.DisplayDialog("上傳資源包", string.Format(DIALOG_MESSAGE, "Test", VersionSetting.AppLargeVersion), "好!", "噗好><");
             if (isYes)
                 UploadGoogleCloud(EnvVersion.Test);
         }
-        [MenuItem("MaJamPachinko/UploadBundle/Release")]
+        [MenuItem("Scoz/UploadBundle/Release")]
         public static void UploadBundleToRelease() {
             bool isYes = EditorUtility.DisplayDialog("上傳資源包", string.Format(DIALOG_MESSAGE, "Release", VersionSetting.AppLargeVersion), "好!", "噗好><");
             if (isYes)

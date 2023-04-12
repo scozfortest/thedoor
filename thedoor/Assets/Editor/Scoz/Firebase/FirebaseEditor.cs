@@ -8,7 +8,7 @@ using System.IO;
 using Firebase;
 
 public class FirebaseEditor : MonoBehaviour {
-    [MenuItem("MaJamPachinko/Signout Firebase")]
+    [MenuItem("Scoz/Signout Firebase")]
     public static void SignoutFirebaseAuth() {
 
         EnvVersion envVersion = EnvVersion.Dev;

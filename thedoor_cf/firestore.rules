@@ -13,70 +13,22 @@ service cloud.firestore {
     match /GameData-Purchase/{document} {
       allow read : if request.auth != null;
     }  
-    match /GameData-MaJamRoom/{document} {
-      allow read : if request.auth != null;
-    }  
-    match /GameData-PlayingRoom/{document} {
-      allow read : if request.auth != null;
-    }  
-    match /GameData-NewsTicker/{document} {
+    match /PlayerData-Apply/{document} {
       allow read : if request.auth != null;
     }
-    match /GameData-Activity/{document} {
-      allow read : if request.auth != null;
-    }  
-    match /GameData-LeaderBoard/{document} {
-      allow read : if request.auth != null;
-    }  
-    match /GameData-ScratchCard/{document} {
-      allow read : if request.auth != null;
-    }
-    match /PlayerData-Stuff/{document} {
-      allow read : if request.auth != null;
-    }
-    match /PlayerData-Mail/{document} {
-      allow read : if request.auth != null;
-    }
-     match /PlayerData-Role/{document} {
-      allow read : if request.auth != null;
-    }
-     match /PlayerData-RoleCall/{document} {
+    match /PlayerData-Role/{document} {
       allow read : if request.auth != null;
     }
      match /PlayerData-Item/{document} {
       allow read : if request.auth != null;
     }
-    match /PlayerData-Friendship/{document} {
-      allow read : if request.auth != null;
-    } 
     match /PlayerData-Player/{document} {
       allow read : if request.auth != null;
       allow update: if request.auth != null && 
       HasOnlyKeys(['Name']);
     }
-    match /PlayerData-MaJamMatchingRoom/{document} {
-      allow read : if request.auth != null;
-    }  
-    match /PlayerData-MaJamMatchingInvite/{document} {
-      allow read : if request.auth != null;
-    }  
-        match /PlayerData-FriendRequest/{document} {
-      allow read : if request.auth != null;
-    }  
      match /PlayerData-History/{document} {
       allow read : if request.auth != null;
     }
-     match /TradeData-RoomList/{document} {
-      allow read;
-    }
-    match /GameData-GiftCode/{document} {
-      allow read : if request.auth != null;
-    }  
-    match /GameData-GiftCodeSetting/{document} {
-      allow read : if request.auth != null;
-    }  
-    match /GameData-ADImg/{document} {
-      allow read : if request.auth != null;
-    }  
   }
 }

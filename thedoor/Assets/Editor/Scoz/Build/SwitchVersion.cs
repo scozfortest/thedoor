@@ -57,7 +57,7 @@ namespace Scoz.Editor {
 
 
 
-        [MenuItem("MaJamPachinko/SwitchVersion/Dev")]
+        [MenuItem("Scoz/SwitchVersion/Dev")]
         public static void SwitchToDev() {
             bool isYes = EditorUtility.DisplayDialog("切換環境版本", "切換版本至 " + EnvVersion.Dev.ToString(), "好!", "噗好><");
             if (isYes) {
@@ -73,7 +73,7 @@ namespace Scoz.Editor {
 
             }
         }
-        [MenuItem("MaJamPachinko/SwitchVersion/Test")]
+        [MenuItem("Scoz/SwitchVersion/Test")]
         public static void SwitchToTest() {
             bool isYes = EditorUtility.DisplayDialog("切換版本", "切換版本至 " + EnvVersion.Test.ToString(), "好!", "噗好><");
             if (isYes) {
@@ -88,7 +88,7 @@ namespace Scoz.Editor {
                 });
             }
         }
-        [MenuItem("MaJamPachinko/SwitchVersion/Release")]
+        [MenuItem("Scoz/SwitchVersion/Release")]
         public static void SwitchToRelease() {
             bool isYes = EditorUtility.DisplayDialog("切換版本", "切換版本至 " + EnvVersion.Release.ToString(), "好!", "噗好><");
             if (isYes) {

@@ -1,0 +1,9 @@
+{"Action":[
+	{	"ID":"11",	"MonsterID":"1",	"Probability":"0.5",	"Target1":"Enemy",	"EffectType1":"Health",	"EffectValue1":"-20",	"Target2":"Enemy",	"EffectType2":"Health",	"EffectValue2":"-20"},
+	{	"ID":"12",	"MonsterID":"1",	"Probability":"0.3",	"Target1":"Enemy",	"EffectType1":"Health",	"EffectValue1":"-10",	"Target2":"Enemy",	"EffectType2":"Stun",	"EffectValue2":"-10"},
+	{	"ID":"21",	"MonsterID":"2",	"Target1":"Enemy",	"EffectType1":"Health",	"EffectValue1":"-20"},
+	{	"ID":"31",	"MonsterID":"3",	"Target1":"Enemy",	"EffectType1":"Health",	"EffectValue1":"-20"},
+	{	"ID":"41",	"MonsterID":"4",	"Target1":"Enemy",	"EffectType1":"Health",	"EffectValue1":"-20"},
+	{	"ID":"51",	"MonsterID":"5",	"Target1":"Enemy",	"EffectType1":"Health",	"EffectValue1":"-20"},
+	{	"ID":"61",	"MonsterID":"6",	"Target1":"Enemy",	"EffectType1":"Health",	"EffectValue1":"-20"}
+]}
