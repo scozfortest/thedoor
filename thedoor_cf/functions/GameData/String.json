@@ -184,6 +184,16 @@
 	{	"ID":"UI_ProtectionPolicy_Test",	"TW_TW":"https://officialwebsite-test.majampachinko.com/ProtectionPolicy",	"CH_CH":"https://officialwebsite-test.majampachinko.com/ProtectionPolicy",	"EN_EN":"https://officialwebsite-test.majampachinko.com/ProtectionPolicy",	"JP_JP":"https://officialwebsite-test.majampachinko.com/ProtectionPolicy"},
 	{	"ID":"UI_ProtectionPolicy_Release",	"TW_TW":"https://officialwebsite.majampachinko.com/ProtectionPolicy",	"CH_CH":"https://officialwebsite.majampachinko.com/ProtectionPolicy",	"EN_EN":"https://officialwebsite.majampachinko.com/ProtectionPolicy",	"JP_JP":"https://officialwebsite.majampachinko.com/ProtectionPolicy"},
 	{	"ID":"UI_GuidingCantCloseRoom",	"TW_TW":"導引中無法離開遊戲配對"},
+	{	"ID":"Script_1",	"Title_TW":"witch",	"Content_TW":"門後是一間光線微弱的暗室，你聽到房間深處傳來微小的悶哼聲，走過去一看\n發現一位奄奄一息的男性坐在地上，滿身是血，非常虛弱且似乎無法動彈，當你更靠近時\n對方眼珠看向你並激烈的發出含糊的聲音，似乎無法正常說話，但他一直看向旁邊的桌子，可以感覺得出來對方想傳達某些事情",	"Title_CH":"witch",	"Content_CH":"門後是一間光線微弱的暗室，你聽到房間深處傳來微小的悶哼聲，走過去一看\n發現一位奄奄一息的男性坐在地上，滿身是血，非常虛弱且似乎無法動彈，當你更靠近時\n對方眼珠看向你並激烈的發出含糊的聲音，似乎無法正常說話，但他一直看向旁邊的桌子，可以感覺得出來對方想傳達某些事情",	"Title_EN":"witch",	"Content_EN":"門後是一間光線微弱的暗室，你聽到房間深處傳來微小的悶哼聲，走過去一看\n發現一位奄奄一息的男性坐在地上，滿身是血，非常虛弱且似乎無法動彈，當你更靠近時\n對方眼珠看向你並激烈的發出含糊的聲音，似乎無法正常說話，但他一直看向旁邊的桌子，可以感覺得出來對方想傳達某些事情",	"Title_JP":"witch",	"Content_JP":"門後是一間光線微弱的暗室，你聽到房間深處傳來微小的悶哼聲，走過去一看\n發現一位奄奄一息的男性坐在地上，滿身是血，非常虛弱且似乎無法動彈，當你更靠近時\n對方眼珠看向你並激烈的發出含糊的聲音，似乎無法正常說話，但他一直看向旁邊的桌子，可以感覺得出來對方想傳達某些事情"},
+	{	"ID":"Script_1a",	"Content_TW":"調查桌面",	"Content_CH":"調查桌面",	"Content_EN":"調查桌面",	"Content_JP":"調查桌面"},
+	{	"ID":"Script_1b",	"Content_TW":"調查房間",	"Content_CH":"調查房間",	"Content_EN":"調查房間",	"Content_JP":"調查房間"},
+	{	"ID":"Script_1c",	"Content_TW":"離開房間尋找下一道門",	"Content_CH":"離開房間尋找下一道門",	"Content_EN":"離開房間尋找下一道門",	"Content_JP":"離開房間尋找下一道門"},
+	{	"ID":"Script_1a_1",	"Content_TW":"你在桌上發現一張剪著人形的紙片，紙片上有奇怪的血跡符號，且在頭頂的部分綁著一搓頭髮",	"Content_CH":"你在桌上發現一張剪著人形的紙片，紙片上有奇怪的血跡符號，且在頭頂的部分綁著一搓頭髮",	"Content_EN":"你在桌上發現一張剪著人形的紙片，紙片上有奇怪的血跡符號，且在頭頂的部分綁著一搓頭髮",	"Content_JP":"你在桌上發現一張剪著人形的紙片，紙片上有奇怪的血跡符號，且在頭頂的部分綁著一搓頭髮"},
+	{	"ID":"Script_1a_1a",	"Content_TW":"撕掉紙片",	"Content_CH":"撕掉紙片",	"Content_EN":"撕掉紙片",	"Content_JP":"撕掉紙片"},
+	{	"ID":"Script_1a_1b",	"Content_TW":"移除紙片上的頭髮",	"Content_CH":"移除紙片上的頭髮",	"Content_EN":"移除紙片上的頭髮",	"Content_JP":"移除紙片上的頭髮"},
+	{	"ID":"Script_1a_1a_1",	"Content_TW":"當你撕掉紙片，你聽到一陣男性尖叫聲，對方身體折成兩半並濺出大量鮮血慘死在血泊中，此時你的後方發出女性的奸笑聲\n聲音來源的暗處角落走出一位臉上布滿鐵絲相貌可怕的女性，似乎站在那裡很久了，說著:「哎呀又壞掉一個了，但每次看都覺得有趣，你會負責對吧」",	"Content_CH":"當你撕掉紙片，你聽到一陣男性尖叫聲，對方身體折成兩半並濺出大量鮮血慘死在血泊中，此時你的後方發出女性的奸笑聲\n聲音來源的暗處角落走出一位臉上布滿鐵絲相貌可怕的女性，似乎站在那裡很久了，說著:「哎呀又壞掉一個了，但每次看都覺得有趣，你會負責對吧」",	"Content_EN":"當你撕掉紙片，你聽到一陣男性尖叫聲，對方身體折成兩半並濺出大量鮮血慘死在血泊中，此時你的後方發出女性的奸笑聲\n聲音來源的暗處角落走出一位臉上布滿鐵絲相貌可怕的女性，似乎站在那裡很久了，說著:「哎呀又壞掉一個了，但每次看都覺得有趣，你會負責對吧」",	"Content_JP":"當你撕掉紙片，你聽到一陣男性尖叫聲，對方身體折成兩半並濺出大量鮮血慘死在血泊中，此時你的後方發出女性的奸笑聲\n聲音來源的暗處角落走出一位臉上布滿鐵絲相貌可怕的女性，似乎站在那裡很久了，說著:「哎呀又壞掉一個了，但每次看都覺得有趣，你會負責對吧」"},
+	{	"ID":"Script_1a_1a_2",	"Content_TW":"當你移除紙片上的頭髮，你聽到一陣男性尖叫聲，對方頭髮與頭分離並濺出大量鮮血慘死在血泊中，此時你的後方發出女性的奸笑聲\n聲音來源的暗處角落走出一位臉上布滿鐵絲相貌可怕的女性，似乎站在那裡很久了，說著:「哎呀又壞掉一個了，但每次看都覺得有趣，你會負責對吧」",	"Content_CH":"當你移除紙片上的頭髮，你聽到一陣男性尖叫聲，對方頭髮與頭分離並濺出大量鮮血慘死在血泊中，此時你的後方發出女性的奸笑聲\n聲音來源的暗處角落走出一位臉上布滿鐵絲相貌可怕的女性，似乎站在那裡很久了，說著:「哎呀又壞掉一個了，但每次看都覺得有趣，你會負責對吧」",	"Content_EN":"當你移除紙片上的頭髮，你聽到一陣男性尖叫聲，對方頭髮與頭分離並濺出大量鮮血慘死在血泊中，此時你的後方發出女性的奸笑聲\n聲音來源的暗處角落走出一位臉上布滿鐵絲相貌可怕的女性，似乎站在那裡很久了，說著:「哎呀又壞掉一個了，但每次看都覺得有趣，你會負責對吧」",	"Content_JP":"當你移除紙片上的頭髮，你聽到一陣男性尖叫聲，對方頭髮與頭分離並濺出大量鮮血慘死在血泊中，此時你的後方發出女性的奸笑聲\n聲音來源的暗處角落走出一位臉上布滿鐵絲相貌可怕的女性，似乎站在那裡很久了，說著:「哎呀又壞掉一個了，但每次看都覺得有趣，你會負責對吧」"},
+	{	"ID":"Script_1b_1",	"Content_TW":"你調查房間時，靠近牆角陰影處，你更仔細的一看發現陰暗處站著一位臉上布滿鐵絲相貌可怕的女性，似乎站在那裏許久了，你警覺的往後跳，對方走出來並說：「哎呀 被發現了 他一個人很寂寞 你願意陪他留在這裡嗎?」",	"Content_CH":"你調查房間時，靠近牆角陰影處，你更仔細的一看發現陰暗處站著一位臉上布滿鐵絲相貌可怕的女性，似乎站在那裏許久了，你警覺的往後跳，對方走出來並說：「哎呀 被發現了 他一個人很寂寞 你願意陪他留在這裡嗎?」",	"Content_EN":"你調查房間時，靠近牆角陰影處，你更仔細的一看發現陰暗處站著一位臉上布滿鐵絲相貌可怕的女性，似乎站在那裏許久了，你警覺的往後跳，對方走出來並說：「哎呀 被發現了 他一個人很寂寞 你願意陪他留在這裡嗎?」",	"Content_JP":"你調查房間時，靠近牆角陰影處，你更仔細的一看發現陰暗處站著一位臉上布滿鐵絲相貌可怕的女性，似乎站在那裏許久了，你警覺的往後跳，對方走出來並說：「哎呀 被發現了 他一個人很寂寞 你願意陪他留在這裡嗎?」"},
 	{	"ID":"Role_1",	"Name_TW":"研究生",	"Description_TW":"研究生",	"Name_CH":"研究生",	"Description_CH":"研究生",	"Name_EN":"研究生",	"Description_EN":"研究生",	"Name_JP":"研究生",	"Description_JP":"研究生"},
 	{	"ID":"Role_2",	"Name_TW":"小女孩",	"Description_TW":"小女孩",	"Name_CH":"小女孩",	"Description_CH":"小女孩",	"Name_EN":"小女孩",	"Description_EN":"小女孩",	"Name_JP":"小女孩",	"Description_JP":"小女孩"},
 	{	"ID":"Supply_1",	"Name_TW":"厚重教科書",	"Description_TW":"最大理智增加10",	"Name_CH":"厚重教科書",	"Description_CH":"最大理智增加10",	"Name_EN":"厚重教科書",	"Description_EN":"最大理智增加10",	"Name_JP":"厚重教科書",	"Description_JP":"最大理智增加10"},
@@ -203,5 +213,6 @@
 	{	"ID":"ItemGroup_102",	"Name_TW":"Rank2-其他"},
 	{	"ID":"ItemGroup_103",	"Name_TW":"Rank3-其他"},
 	{	"ID":"ItemGroup_104",	"Name_TW":"Rank4-其他"},
-	{	"ID":"ItemGroup_105",	"Name_TW":"Rank5-其他"}
+	{	"ID":"ItemGroup_105",	"Name_TW":"Rank5-其他"},
+	{	"ID":"SceneTransition_1",	"Description_TW":"開始遊戲"}
 ]}

@@ -13,7 +13,7 @@ using UnityEditor.SceneManagement;
 namespace Scoz.Editor {
     public class BuildCommand {
 
-        private static string[] BuildScenes = { "Assets/Scenes/StartScene.unity", "Assets/Scenes/LobbyScene.unity" };
+        private static string[] BuildScenes = { "Assets/Scenes/StartScene.unity", "Assets/Scenes/LobbyScene.unity", "Assets/Scenes/AdventrueScene.unity" };
         private static string ANDROID_MANIFEST_PATH = "Assets/Plugins/Android/AndroidManifest.xml";
         static object owner = new System.Object();
 

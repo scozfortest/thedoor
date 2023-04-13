@@ -3,7 +3,7 @@ namespace Scoz.Func {
     public enum MyScene {
         StartScene,//開始場景
         LobbyScene,//大廳場景
-        MaJamScene,//麻將遊戲場景
+        AdventureScene,//麻將遊戲場景
         //這裡有追加Scene，若是正式版需要Build的話，BuildCommand.cs中的BuildScenes清單也要一併追加，Jenkins自動包檔才會包到
     }
     public enum EnvVersion {

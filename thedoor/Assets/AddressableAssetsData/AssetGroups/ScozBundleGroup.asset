@@ -87,6 +87,10 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Atlas
+  - m_GUID: cb917bf4e6a75334683f7886b70422a7
+    m_Address: Assets/AddressableAssets/Prefab/AdventureUI/AdventureUI.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9bdcae1979219314780bb2d43aff9537, type: 2}
   m_SchemaSet:

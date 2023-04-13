@@ -20,7 +20,7 @@ namespace TheDoor.Main {
         Daily,//每日
     }
 
-    public enum UIs {
+    public enum LobbyUIs {
         Lobby,//大廳
         Activity,//活動
         Mail,//信箱
@@ -33,6 +33,10 @@ namespace TheDoor.Main {
         Rest,//休息站
         Call,//休息站-來電
         ScratchCard,//刮刮卡
+    }
+    public enum AdventureUIs {
+        Default,//預設介面
+        Test,
     }
     public enum LinkUIType {
         None,//無

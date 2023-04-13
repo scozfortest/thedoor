@@ -13,7 +13,7 @@ namespace TheDoor.Main {
 
         public string Content {
             get {
-                string str = StringData.GetString_static(DataName + "_" + ID, "Conversation");
+                string str = StringData.GetString_static(DataName + "_" + ID, "Content");
                 //str = StringReplacer.GetReplacedStr(StringReplacer.StringReplaceType.TalkerName, str);
                 return str;
             }
@@ -104,7 +104,7 @@ namespace TheDoor.Main {
             if (NextIDs == null || NextIDs.Count == 0)
                 return null;
             if (_index >= NextIDs.Count) {
-                DebugLogger.LogErrorFormat("GetNextRolePlot下一句對話傳入的索引超出範圍");
+                DebugLogger.LogErrorFormat("GetNextScript下一句對話傳入的索引超出範圍");
                 return null;
             }
             string nextID = NextIDs[_index];
