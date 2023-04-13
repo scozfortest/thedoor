@@ -10,7 +10,6 @@ namespace TheDoor.Main {
     public enum ItemType {
         Gold,
         Point,
-        Ball,
         ItemGroup,
         Role,
         Supply,
@@ -29,7 +28,6 @@ namespace TheDoor.Main {
                 switch (Type) {
                     case ItemType.Gold:
                     case ItemType.Point:
-                    case ItemType.Ball:
                         name = string.Format("{0}{1}", Value, StringData.GetUIString(Type.ToString()));
                         break;
                     default:

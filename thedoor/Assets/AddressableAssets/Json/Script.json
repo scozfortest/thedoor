@@ -1,12 +1,20 @@
 {"Script":[
 	{	"ID":"1",	"Title":"witch",	"Exclusive":"True",	"NextIDs":"1a/1b/1c",	"Requirement1":"Supply",	"RequireValue1":"1"},
-	{	"ID":"1a",	"NextIDs":"1_2"},
-	{	"ID":"1b",	"Requirement1":"Supply",	"RequireValue1":"1"},
-	{	"ID":"1c",	"End":"NextDoor"},
+	{	"ID":"1a",	"NextIDs":"1a_1"},
+	{	"ID":"1b",	"NextIDs":"1b_1",	"Requirement1":"Supply",	"RequireValue1":"1"},
+	{	"ID":"1c",	"End":"NextScript"},
 	{	"ID":"1a_1",	"NextIDs":"1a_1a/1a_1b"},
 	{	"ID":"1a_1a",	"NextIDs":"1a_1a_1"},
 	{	"ID":"1a_1b",	"NextIDs":"1a_1a_2"},
 	{	"ID":"1a_1a_1",	"End":"Battle"},
 	{	"ID":"1a_1a_2",	"End":"Battle"},
-	{	"ID":"1b_1",	"End":"Battle"}
+	{	"ID":"1b_1",	"End":"Battle"},
+	{	"ID":"11",	"Title":"bloodline",	"NextIDs":"11a/"},
+	{	"ID":"11a",	"NextIDs":"11a_1"},
+	{	"ID":"11a_1",	"NextIDs":"11a_1a/11a_1b/11a_1c"},
+	{	"ID":"11a_1a",	"NextIDs":"11a_1a_1"},
+	{	"ID":"11a_1b",	"NextIDs":"11a_1b_1"},
+	{	"ID":"11a_1c",	"End":"NextScript"},
+	{	"ID":"11a_1a_1",	"End":"NextScript",	"EffectIDs":"1"},
+	{	"ID":"11a_1b_1",	"End":"NextScript",	"EffectIDs":"2",	"ItemType1":"Supply",	"ItemValue1":"11"}
 ]}

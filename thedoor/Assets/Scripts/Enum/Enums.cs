@@ -36,7 +36,7 @@ namespace TheDoor.Main {
     }
     public enum AdventureUIs {
         Default,//預設介面
-        Test,
+        Battle,
     }
     public enum LinkUIType {
         None,//無

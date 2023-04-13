@@ -32,7 +32,6 @@ namespace TheDoor.Main {
             switch (_data.Type) {
                 case ItemType.Gold:
                 case ItemType.Point:
-                case ItemType.Ball:
                     NameGO.SetActive(true);
                     AddressablesLoader.GetSpriteAtlas("CommonIcon", atlas => {
                         ItemImg.sprite = atlas.GetSprite(_data.Type.ToString());
@@ -43,9 +42,6 @@ namespace TheDoor.Main {
                         if (_data.Type == ItemType.Gold) {
                             FrameImg.sprite = atlas.GetSprite("IconFrame1");
                             BottomImg.sprite = atlas.GetSprite("IconFrameBot1");
-                        } else if (_data.Type == ItemType.Ball) {
-                            FrameImg.sprite = atlas.GetSprite("IconFrame2");
-                            BottomImg.sprite = atlas.GetSprite("IconFrameBot2");
                         } else {
                             FrameImg.sprite = atlas.GetSprite("IconFrame3");
                             BottomImg.sprite = atlas.GetSprite("IconFrameBot3");
@@ -84,7 +80,6 @@ namespace TheDoor.Main {
             switch (_data.Type) {
                 case ItemType.Gold:
                 case ItemType.Point:
-                case ItemType.Ball:
                     TypeText.text = string.Format("{0}x{1}", StringData.GetUIString(_data.Type.ToString()), _data.Value.ToString());
                     break;
                 default:

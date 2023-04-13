@@ -1,0 +1,4 @@
+{"ScriptEffect":[
+	{	"ID":"1",	"EffectType1":"Sanity",	"EffectValue1":"-10"},
+	{	"ID":"2",	"EffectType1":"Health",	"EffectValue1":"-10"}
+]}
