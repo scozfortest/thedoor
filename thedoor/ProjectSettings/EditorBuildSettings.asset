@@ -12,10 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/LobbyScene.unity
     guid: b1c9a2f7b088874468efa661c9ae8a8f
   - enabled: 1
-    path: Assets/Scenes/MaJamScene.unity
-    guid: 793c468b354237d43a035c0fccf92a38
-  - enabled: 0
-    path: Assets/Scenes/BluetoothTestScene.unity
-    guid: baf625375a5268740b8e32259cd23733
+    path: Assets/Scenes/AdventureScene.unity
+    guid: fe32a75fec49de94f8fc5b0c01bf2032
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 6de2f3167eb082048b039b934a999267, type: 2}

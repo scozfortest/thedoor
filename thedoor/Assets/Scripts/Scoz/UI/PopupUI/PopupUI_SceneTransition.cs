@@ -32,9 +32,9 @@ namespace Scoz.Func {
                 go.transform.SetParent(Instance.SceneTransitionParent);
                 go.transform.localPosition = prefab.transform.localPosition;
                 go.transform.localScale = prefab.transform.localScale;
-                //RectTransform rect = go.GetComponent<RectTransform>();
-                //rect.offsetMin = Vector2.zero;//Left、Bottom
-                //rect.offsetMax = Vector2.zero;//Right、Top
+                RectTransform rect = go.GetComponent<RectTransform>();
+                rect.offsetMin = Vector2.zero;//Left、Bottom
+                rect.offsetMax = Vector2.zero;//Right、Top
                 go.transform.SetAsLastSibling();
                 Instance.MySceneTransition = go.GetComponent<SceneTransition>();
                 Instance.MySceneTransition.gameObject.SetActive(true);
