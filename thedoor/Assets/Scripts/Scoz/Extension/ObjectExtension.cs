@@ -13,7 +13,7 @@ namespace Scoz.Func
         {
             if (_data == null)
             {
-                DebugLogger.LogError("Jsondata¨∞null§£•i¬‡¨∞Dicitonary");
+                WriteLog.LogError("JsondataÁÇ∫null‰∏çÂèØËΩâÁÇ∫Dicitonary");
                 return null;
             }
             Dictionary<string, object> dic = new Dictionary<string, object>();
@@ -27,7 +27,7 @@ namespace Scoz.Func
         {
             if (Enum.TryParse(_obj.ToString(), out T t))
                 return t;
-            DebugLogger.LogErrorFormat("∂«§J¶r¶Í:{0} µL™k¬‡¨∞ {1} Enum", _obj.ToString(), typeof(T));
+            WriteLog.LogErrorFormat("ÂÇ≥ÂÖ•Â≠ó‰∏≤:{0} ÁÑ°Ê≥ïËΩâÁÇ∫ {1} Enum", _obj.ToString(), typeof(T));
             return default(T);
         }
         public static float ToFloat(this object _obj)

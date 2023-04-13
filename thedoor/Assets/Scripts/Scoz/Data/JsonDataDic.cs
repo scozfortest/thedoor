@@ -74,7 +74,7 @@ namespace Scoz.Func {
         static void ShowUnLoadedJsondata() {
             List<string> notFinishedKeys = MyLoadingProgress.GetNotFinishedKeys();
             for (int i = 0; i < notFinishedKeys.Count; i++)
-                DebugLogger.LogErrorFormat("{0}Json尚未載入", notFinishedKeys[i]);
+                WriteLog.LogErrorFormat("{0}Json尚未載入", notFinishedKeys[i]);
         }
         /// <summary>
         /// 取得T類型的JsonData Dic
@@ -85,7 +85,7 @@ namespace Scoz.Func {
             } else {
                 string log = string.Format("{0}表不存IntKeyJsonDic中", _name);
                 PopupUI.ShowClickCancel(log, null);
-                DebugLogger.LogErrorFormat(log);
+                WriteLog.LogErrorFormat(log);
                 return null;
             }
         }
@@ -98,7 +98,7 @@ namespace Scoz.Func {
             } else {
                 string log = string.Format("{0}表不存StrKeyJsonDic中", _name);
                 PopupUI.ShowClickCancel(log, null);
-                DebugLogger.LogErrorFormat(log);
+                WriteLog.LogErrorFormat(log);
                 return null;
             }
         }
@@ -115,7 +115,7 @@ namespace Scoz.Func {
                 if (showErrorMsg) {
                     PopupUI.ShowClickCancel(log, null);
                 }
-                DebugLogger.LogErrorFormat(log);
+                WriteLog.LogErrorFormat(log);
                 return null;
             }
         }
@@ -130,7 +130,7 @@ namespace Scoz.Func {
             else {
                 string log = string.Format("{0}表不存在ID:{1}的資料", _name, _id);
                 PopupUI.ShowClickCancel(log, null);
-                DebugLogger.LogErrorFormat(log);
+                WriteLog.LogErrorFormat(log);
                 return null;
             }
         }
@@ -143,7 +143,7 @@ namespace Scoz.Func {
             } else {
                 string log = string.Format("{0}表不存ItemJsonDic中", _itemType);
                 PopupUI.ShowClickCancel(log, null);
-                DebugLogger.LogErrorFormat(log);
+                WriteLog.LogErrorFormat(log);
                 return null;
             }
         }
@@ -157,12 +157,12 @@ namespace Scoz.Func {
                     return iItemJsonData;
                 string log = string.Format("{0}表的資料不為IItemJsonData", _itemType);
                 PopupUI.ShowClickCancel(log, null);
-                DebugLogger.LogErrorFormat("{0}表的資料不為IItemJsonData", _itemType);
+                WriteLog.LogErrorFormat("{0}表的資料不為IItemJsonData", _itemType);
                 return null;
             } else {
                 string log = string.Format("{0}表不存在ID:{1}的資料", _itemType, _id);
                 PopupUI.ShowClickCancel(log, null);
-                DebugLogger.LogErrorFormat(log);
+                WriteLog.LogErrorFormat(log);
                 return null;
             }
         }

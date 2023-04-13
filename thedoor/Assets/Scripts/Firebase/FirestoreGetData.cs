@@ -13,7 +13,7 @@ namespace TheDoor.Main {
             MyAuth.SignInAnonymouslyAsync().ContinueWithOnMainThread(task => {
                 if (task.IsFaulted) {
                     PopupUI_Local.ShowClickCancel(StringData.GetUIString(string.Format("Firebase_UnexpectedError", "AnonymousSignup")), null);
-                    DebugLogger.LogError("Anonymous Signup Error:" + task.Exception.ToString());
+                    WriteLog.LogError("Anonymous Signup Error:" + task.Exception.ToString());
                     return;
                 }
                 _cb?.Invoke();
@@ -26,7 +26,7 @@ namespace TheDoor.Main {
         public static void GetGameSettingDatas(ColEnum _col, Action<ColEnum, List<Dictionary<string, object>>> _cb) {
             string colName = ColNames.GetValueOrDefault(_col);
             if (string.IsNullOrEmpty(colName)) {
-                DebugLogger.LogErrorFormat("ColNames尚未定義 {0}", _col);
+                WriteLog.LogErrorFormat("ColNames尚未定義 {0}", _col);
                 return;
             }
 
@@ -35,7 +35,7 @@ namespace TheDoor.Main {
             query.GetSnapshotAsync().ContinueWithOnMainThread(task => {
                 if (task.IsFaulted) {
                     PopupUI.ShowClickCancel(StringData.GetUIString(string.Format("Firebase_UnexpectedError", colName)), null);
-                    DebugLogger.LogErrorFormat("GetGameSettingDatas {0} Error: {1}", colName, task.Exception.ToString());
+                    WriteLog.LogErrorFormat("GetGameSettingDatas {0} Error: {1}", colName, task.Exception.ToString());
                     return;
                 }
                 QuerySnapshot snapshot = task.Result;
@@ -60,7 +60,7 @@ namespace TheDoor.Main {
         public static void GetDataByDocID(ColEnum _col, string _uid, Action<ColEnum, Dictionary<string, object>> _cb) {
             string colName = ColNames.GetValueOrDefault(_col);
             if (string.IsNullOrEmpty(colName)) {
-                DebugLogger.LogErrorFormat("ColNames尚未定義 {0}", _col);
+                WriteLog.LogErrorFormat("ColNames尚未定義 {0}", _col);
                 return;
             }
 
@@ -68,7 +68,7 @@ namespace TheDoor.Main {
             docRef.GetSnapshotAsync().ContinueWithOnMainThread(task => {
                 if (task.IsFaulted) {
                     PopupUI.ShowClickCancel(StringData.GetUIString(string.Format("Firebase_UnexpectedError", colName)), null);
-                    DebugLogger.LogErrorFormat("Get Personal Data {0} Error: {1}", colName, task.Exception.ToString());
+                    WriteLog.LogErrorFormat("Get Personal Data {0} Error: {1}", colName, task.Exception.ToString());
                     return;
                 }
                 DocumentSnapshot snapshot = task.Result;
@@ -89,7 +89,7 @@ namespace TheDoor.Main {
         public static void GetPersonalDatas(ColEnum _col, string _playerUID, Action<ColEnum, List<Dictionary<string, object>>> _cb) {
             string colName = ColNames.GetValueOrDefault(_col);
             if (colName == null) {
-                DebugLogger.LogErrorFormat("ColNames Error ");
+                WriteLog.LogErrorFormat("ColNames Error ");
                 return;
             }
             if (MyUser == null) {
@@ -101,7 +101,7 @@ namespace TheDoor.Main {
             query.GetSnapshotAsync().ContinueWithOnMainThread(task => {
                 if (task.IsFaulted) {
                     PopupUI.ShowClickCancel(StringData.GetUIString(string.Format("Firebase_UnexpectedError", colName)), null);
-                    DebugLogger.LogErrorFormat("Get Personal Datas {0} Error: {1}", colName, task.Exception.ToString());
+                    WriteLog.LogErrorFormat("Get Personal Datas {0} Error: {1}", colName, task.Exception.ToString());
                     return;
                 }
                 QuerySnapshot snapshot = task.Result;
@@ -123,7 +123,7 @@ namespace TheDoor.Main {
         public static void GetMultipleDatas(ColEnum _col, List<string> _playerUIDs, Action<ColEnum, List<Dictionary<string, object>>> _cb) {
             string colName = ColNames.GetValueOrDefault(_col);
             if (colName == null) {
-                DebugLogger.LogErrorFormat("ColNames Error ");
+                WriteLog.LogErrorFormat("ColNames Error ");
                 return;
             }
             if (MyUser == null) {
@@ -136,7 +136,7 @@ namespace TheDoor.Main {
             query.GetSnapshotAsync().ContinueWithOnMainThread(task => {
                 if (task.IsFaulted) {
                     PopupUI.ShowClickCancel(StringData.GetUIString(string.Format("Firebase_UnexpectedError", colName)), null);
-                    DebugLogger.LogErrorFormat("Get Personal Datas {0} Error: {1}", colName, task.Exception.ToString());
+                    WriteLog.LogErrorFormat("Get Personal Datas {0} Error: {1}", colName, task.Exception.ToString());
                     return;
                 }
                 QuerySnapshot snapshot = task.Result;
@@ -158,13 +158,13 @@ namespace TheDoor.Main {
         /// </summary>
         public static void UpdatePersonalData(ColEnum _col, string _playerUID, Dictionary<string, object> _data, Action<bool> _cb) {
             if (_data == null) {
-                DebugLogger.LogErrorFormat("Data is null ");
+                WriteLog.LogErrorFormat("Data is null ");
                 return;
             }
 
             string colName = ColNames.GetValueOrDefault(_col);
             if (string.IsNullOrEmpty(colName)) {
-                DebugLogger.LogErrorFormat("ColNames尚未定義 {0}", _col);
+                WriteLog.LogErrorFormat("ColNames尚未定義 {0}", _col);
                 return;
             }
 
@@ -172,7 +172,7 @@ namespace TheDoor.Main {
             docRef.UpdateAsync(_data).ContinueWithOnMainThread(task => {
                 if (task.IsFaulted) {
                     PopupUI.ShowClickCancel(StringData.GetUIString(string.Format("Firebase_UnexpectedError", colName)), null);
-                    DebugLogger.LogErrorFormat("Get Update Personal Data {0} Error: {1}", colName, task.Exception.ToString());
+                    WriteLog.LogErrorFormat("Get Update Personal Data {0} Error: {1}", colName, task.Exception.ToString());
                     return;
                 }
                 _cb?.Invoke(true);
@@ -185,7 +185,7 @@ namespace TheDoor.Main {
         public static void GetDatas(ColEnum _col, Action<ColEnum, List<Dictionary<string, object>>> _cb) {
             string colName = ColNames.GetValueOrDefault(_col);
             if (string.IsNullOrEmpty(colName)) {
-                DebugLogger.LogErrorFormat("ColNames尚未定義 {0}", _col);
+                WriteLog.LogErrorFormat("ColNames尚未定義 {0}", _col);
                 return;
             }
 
@@ -195,7 +195,7 @@ namespace TheDoor.Main {
             query.GetSnapshotAsync().ContinueWithOnMainThread(task => {
                 if (task.IsFaulted) {
                     PopupUI.ShowClickCancel(StringData.GetUIString(string.Format("Firebase_UnexpectedError", colName)), null);
-                    DebugLogger.LogErrorFormat("Get Personal Datas {0} Error: {1}", colName, task.Exception.ToString());
+                    WriteLog.LogErrorFormat("Get Personal Datas {0} Error: {1}", colName, task.Exception.ToString());
                     return;
                 }
                 QuerySnapshot snapshot = task.Result;
@@ -217,7 +217,7 @@ namespace TheDoor.Main {
         public static void GetDatas_WhereIn(ColEnum _col, string _fieldName, object _value, Action<ColEnum, List<Dictionary<string, object>>> _cb) {
             string colName = ColNames.GetValueOrDefault(_col);
             if (string.IsNullOrEmpty(colName)) {
-                DebugLogger.LogErrorFormat("ColNames尚未定義 {0}", _col);
+                WriteLog.LogErrorFormat("ColNames尚未定義 {0}", _col);
                 return;
             }
 
@@ -227,7 +227,7 @@ namespace TheDoor.Main {
             query.GetSnapshotAsync().ContinueWithOnMainThread(task => {
                 if (task.IsFaulted) {
                     PopupUI.ShowClickCancel(StringData.GetUIString(string.Format("Firebase_UnexpectedError", colName)), null);
-                    DebugLogger.LogErrorFormat("Get Personal Datas {0} Error: {1}", colName, task.Exception.ToString());
+                    WriteLog.LogErrorFormat("Get Personal Datas {0} Error: {1}", colName, task.Exception.ToString());
                     return;
                 }
                 QuerySnapshot snapshot = task.Result;
@@ -252,7 +252,7 @@ namespace TheDoor.Main {
         public static void GetDatas_WhereOperation(ColEnum _col, string _fieldName, Operation _operation, object _value, Action<ColEnum, List<Dictionary<string, object>>> _cb) {
             string colName = ColNames.GetValueOrDefault(_col);
             if (string.IsNullOrEmpty(colName)) {
-                DebugLogger.LogErrorFormat("ColNames尚未定義 {0}", _col);
+                WriteLog.LogErrorFormat("ColNames尚未定義 {0}", _col);
                 return;
             }
 
@@ -275,7 +275,7 @@ namespace TheDoor.Main {
                     break;
             }
             if (query == null) {
-                DebugLogger.LogErrorFormat("Query錯誤");
+                WriteLog.LogErrorFormat("Query錯誤");
                 return;
             }
 
@@ -283,7 +283,7 @@ namespace TheDoor.Main {
             query.GetSnapshotAsync().ContinueWithOnMainThread(task => {
                 if (task.IsFaulted) {
                     PopupUI.ShowClickCancel(StringData.GetUIString(string.Format("Firebase_UnexpectedError", colName)), null);
-                    DebugLogger.LogErrorFormat("Get Personal Datas {0} Error: {1}", colName, task.Exception.ToString());
+                    WriteLog.LogErrorFormat("Get Personal Datas {0} Error: {1}", colName, task.Exception.ToString());
                     return;
                 }
                 QuerySnapshot snapshot = task.Result;
@@ -307,7 +307,7 @@ namespace TheDoor.Main {
         public static void GetDatas_SortLimit(ColEnum _col, string _fieldName, OrderType _orderType, int _limit, Action<ColEnum, List<Dictionary<string, object>>> _cb) {
             string colName = ColNames.GetValueOrDefault(_col);
             if (string.IsNullOrEmpty(colName)) {
-                DebugLogger.LogErrorFormat("ColNames尚未定義 {0}", _col);
+                WriteLog.LogErrorFormat("ColNames尚未定義 {0}", _col);
                 return;
             }
             Query query = null;
@@ -320,14 +320,14 @@ namespace TheDoor.Main {
                     break;
             }
             if (query == null) {
-                DebugLogger.LogErrorFormat("Query錯誤");
+                WriteLog.LogErrorFormat("Query錯誤");
                 return;
             }
 
             query.GetSnapshotAsync().ContinueWithOnMainThread(task => {
                 if (task.IsFaulted) {
                     PopupUI.ShowClickCancel(StringData.GetUIString(string.Format("Firebase_UnexpectedError", colName)), null);
-                    DebugLogger.LogErrorFormat("Get Personal Datas {0} Error: {1}", colName, task.Exception.ToString());
+                    WriteLog.LogErrorFormat("Get Personal Datas {0} Error: {1}", colName, task.Exception.ToString());
                     return;
                 }
                 QuerySnapshot snapshot = task.Result;

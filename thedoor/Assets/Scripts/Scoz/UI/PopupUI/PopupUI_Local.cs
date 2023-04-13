@@ -50,7 +50,7 @@ namespace Scoz.Func {
             InitClickCamcel();
             InitConfirmCancel();
             DontDestroyOnLoad(gameObject);
-            DebugLogger.Log("初始化PopupUI_Local");
+            WriteLog.Log("初始化PopupUI_Local");
         }
 
 

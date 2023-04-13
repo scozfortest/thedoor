@@ -1,4 +1,4 @@
-﻿/*
+/*
  *	Singleton
  *
  *	Any script inherits from this class become singleton
@@ -104,12 +104,12 @@ public abstract class MonoSingletonC<T> : BaseMonoSingleton<T> where T : MonoSin
 			if(_inst == null){
 				MethodInfo mInfo = typeof(T).GetMethod("CreateInst", BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static);
 				if(mInfo == null){
-					DebugLogger.LogError("無法取得 " + typeof(T).Name + " 單例物件建立的建立方法：CreateInst()");
+					WriteLog.LogError("無法取得 " + typeof(T).Name + " 單例物件建立的建立方法：CreateInst()");
 					return null;
 				}
 				T newInst = mInfo.Invoke(null, null) as T;
 				if(_inst == null){
-					DebugLogger.LogError("自動建立 " + typeof(T).Name + " 單例物件失敗！");
+					WriteLog.LogError("自動建立 " + typeof(T).Name + " 單例物件失敗！");
 					return null;
 				}
 				setInst(newInst);
@@ -201,7 +201,7 @@ public abstract class BaseMonoSingleton : CacheGobjTranComponent
 	protected virtual void OnApplicationQuit()
 	{
 		if(!isApplicationQuit) { 
-			DebugLogger.Log("----------------結束運行----------------");
+			WriteLog.Log("----------------結束運行----------------");
 		}
 		isApplicationQuit = true;
 	}

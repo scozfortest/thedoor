@@ -44,7 +44,7 @@ public class WebViewManager : MonoSingletonA<WebViewManager> {
     public UniWebView CurrentUniWebView { get { return UniWebView; } }
 
     private void Start() {
-        
+
     }
 
     /// <summary>
@@ -93,8 +93,8 @@ public class WebViewManager : MonoSingletonA<WebViewManager> {
     public void ShowWebview(BackendURLType backendURLType, Rect rect, RectTransform parentRectTransform, string param1 = null, string param2 = null) {
         // WebView 要在父元件Activate狀態下才能載入
         if (CurrentUniWebView == null) {
-            DebugLogger.Log($"Width={Screen.width}, Height={Screen.height}, ResW={Screen.currentResolution.width}, ResH={Screen.currentResolution.height}, dpi={Screen.dpi}");
-            
+            WriteLog.Log($"Width={Screen.width}, Height={Screen.height}, ResW={Screen.currentResolution.width}, ResH={Screen.currentResolution.height}, dpi={Screen.dpi}");
+
             string backendAddress = FirestoreGameSetting.GetStrData(GameDataDocEnum.BackendURL, BackendURLType.BackendAddress.ToString());
             string backendURL = FirestoreGameSetting.GetStrData(GameDataDocEnum.BackendURL, backendURLType.ToString());
             if (!string.IsNullOrEmpty(backendURL)) {
@@ -118,7 +118,7 @@ public class WebViewManager : MonoSingletonA<WebViewManager> {
                 // 依據寬度跟DPI的不同比例 以1080(width)/450(dpi) = 2.4f當成基準值
                 if (Screen.dpi != 0) {
                     int textZoomSize = (int)(((Screen.width / Screen.dpi) / 2.4f) * 100);
-                    DebugLogger.Log($"textZoomSize={textZoomSize}");
+                    WriteLog.Log($"textZoomSize={textZoomSize}");
                     if (textZoomSize > 100) {
                         textZoomSize = 100;
                     }
@@ -143,16 +143,16 @@ public class WebViewManager : MonoSingletonA<WebViewManager> {
     /// <param name="onWebViewReceiveMessage">收到網頁訊息後呼叫</param>
     public void ShowWebview(string url, Rect rect, bool fullscreen = true, bool useToolbar = true, RectTransform parentRectTransform = null, Action<int> onWebViewPageFinished = null, Action<bool> onWebViewShouldClose = null, Action<UniWebViewMessage> onWebViewReceiveMessage = null) {
         if (IsLoadingWebView) {
-            DebugLogger.Log($"[WebViewManager][ShowWebview] IsLoadingWebView={IsLoadingWebView}");
+            WriteLog.Log($"[WebViewManager][ShowWebview] IsLoadingWebView={IsLoadingWebView}");
             return;
         }
 
         if (UniWebView != null) {
             RemoveWebView();
-        }        
+        }
 
-        DebugLogger.Log($"[WebViewManager][ShowWebview] url={url}");
-                  
+        WriteLog.Log($"[WebViewManager][ShowWebview] url={url}");
+
         UniWebViewObj = new GameObject("UniWebView");
         if (parentRectTransform != null) {
             UniWebViewObj.transform.SetParent(parentRectTransform.gameObject.transform);
@@ -196,7 +196,7 @@ public class WebViewManager : MonoSingletonA<WebViewManager> {
     /// <param name="webView"></param>
     /// <param name="statusCode"></param>
     /// <param name="url"></param>
-    private void OnPageFinished (UniWebView webView, int statusCode, string url) {
+    private void OnPageFinished(UniWebView webView, int statusCode, string url) {
         OnWebViewPageFinished?.Invoke(statusCode);
         IsLoadingWebView = false;
     }
@@ -223,7 +223,7 @@ public class WebViewManager : MonoSingletonA<WebViewManager> {
         }
         OnWebViewPageFinished = null;
         OnWebViewShouldClose = null;
-        OnWebViewReceiveMessage = null;        
+        OnWebViewReceiveMessage = null;
         UniWebView = null;
         IsLoadingWebView = false;
     }

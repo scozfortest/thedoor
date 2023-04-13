@@ -12,7 +12,7 @@ namespace Scoz.Func
     {
         public static MyDownloader Instance;
         static DateTime LastCallDownloadTime;
-        static double MinInterval = 0.2f;//³Ìµu©I¥s¤U¸üªº¶¡¹j®É¶¡(¬í)
+        static double MinInterval = 0.2f;//æœ€çŸ­å‘¼å«ä¸‹è¼‰çš„é–“éš”æ™‚é–“(ç§’)
         private void Start()
         {
             Instance = this;
@@ -20,7 +20,7 @@ namespace Scoz.Func
         public static void GetSpriteFromUrl_Coroutine(string _url, Action<Sprite> _cb)
         {
             if (Instance == null)
-                DebugLogger.LogError("MyDownload©|¥¼ªì©l¤Æ");
+                WriteLog.LogError("MyDownloadå°šæœªåˆå§‹åŒ–");
             Instance.StartCoroutine(Instance.DownloadCoroutine(_url, _cb));
         }
         public IEnumerator DownloadCoroutine(string _url, Action<Sprite> _cb)
@@ -41,7 +41,7 @@ namespace Scoz.Func
                 request.downloadHandler = new DownloadHandlerTexture();
                 yield return request.SendWebRequest();
                 if (request.result == UnityWebRequest.Result.ConnectionError)
-                    DebugLogger.LogError(request.error);
+                    WriteLog.LogError(request.error);
                 else
                 {                    
                     byte[] result = request.downloadHandler.data;

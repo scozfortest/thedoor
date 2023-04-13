@@ -341,7 +341,7 @@ namespace Scoz.Func {
                     CurPlayAudio.loop = _loop;
                     _cb?.Invoke(audio.name);
                 } else {
-                    DebugLogger.LogWarning("不存在的音檔:" + _path);
+                    WriteLog.LogWarning("不存在的音檔:" + _path);
                     return;
                 }
             });
@@ -351,7 +351,7 @@ namespace Scoz.Func {
             if (!IsInit)
                 return;
             if (_clip == null) {
-                DebugLogger.LogWarning("不存在的音檔");
+                WriteLog.LogWarning("不存在的音檔");
                 return;
             }
             MyAudioType type = _type;
@@ -366,7 +366,7 @@ namespace Scoz.Func {
             if (!IsInit)
                 return;
             if (_clip == null) {
-                DebugLogger.LogWarning("不存在的音檔");
+                WriteLog.LogWarning("不存在的音檔");
                 return;
             }
             MyAudioType type = _type;
@@ -380,7 +380,7 @@ namespace Scoz.Func {
             if (!IsInit)
                 return null;
             if (_clip == null) {
-                DebugLogger.LogWarning("不存在的音檔");
+                WriteLog.LogWarning("不存在的音檔");
                 return null;
             }
             switch (_type) {

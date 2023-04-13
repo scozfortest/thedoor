@@ -12,7 +12,7 @@ public class UnityAnalyst : MonoBehaviour
     public static void SendEnterGame()
     {
         if (ShowLog)
-            DebugLogger.Log("Analysis-SendEnterGame");
+            WriteLog.Log("Analysis-SendEnterGame");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("EnterGame");
@@ -20,7 +20,7 @@ public class UnityAnalyst : MonoBehaviour
     public static void SendStartGame()
     {
         if (ShowLog)
-            DebugLogger.Log("Analysis-SendStartGame");
+            WriteLog.Log("Analysis-SendStartGame");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("StartGame");
@@ -28,7 +28,7 @@ public class UnityAnalyst : MonoBehaviour
     public static void SendStartChallenge()
     {
         if (ShowLog)
-            DebugLogger.Log("Analysis-SendStartChallenge");
+            WriteLog.Log("Analysis-SendStartChallenge");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("SendStartChallenge");
@@ -36,7 +36,7 @@ public class UnityAnalyst : MonoBehaviour
     public static void SendLeaveRoom()
     {
         if (ShowLog)
-            DebugLogger.Log("Analysis-SendLeaveRoom");
+            WriteLog.Log("Analysis-SendLeaveRoom");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("LeaveRoom");
@@ -44,7 +44,7 @@ public class UnityAnalyst : MonoBehaviour
     public static void SendDisconnected()
     {
         if (ShowLog)
-            DebugLogger.Log("Analysis-Disconnected");
+            WriteLog.Log("Analysis-Disconnected");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("Disconnected");
@@ -52,7 +52,7 @@ public class UnityAnalyst : MonoBehaviour
     public static void SendWatchTutorial()
     {
         if (ShowLog)
-            DebugLogger.Log("Analysis-SendWatchTutorial");
+            WriteLog.Log("Analysis-SendWatchTutorial");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("WatchTutorial");
@@ -60,7 +60,7 @@ public class UnityAnalyst : MonoBehaviour
     public static void SendChangeLanguage(Language _language)
     {
         if (ShowLog)
-            DebugLogger.Log("Analysis-SendChangeLanguage");
+            WriteLog.Log("Analysis-SendChangeLanguage");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("ChangeLanguage", new Dictionary<string, object>
@@ -71,7 +71,7 @@ public class UnityAnalyst : MonoBehaviour
     public static void SendPlayerLogin(string _name)
     {
         if (ShowLog)
-            DebugLogger.Log("Analysis-SendPlayerLogin");
+            WriteLog.Log("Analysis-SendPlayerLogin");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("PlayerLogin", new Dictionary<string, object>
@@ -82,7 +82,7 @@ public class UnityAnalyst : MonoBehaviour
     public static void SendClickFullScreen()
     {
         if (ShowLog)
-            DebugLogger.Log("Analysis-SendClickFullScreen");
+            WriteLog.Log("Analysis-SendClickFullScreen");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("ClickFullScreen");
@@ -90,7 +90,7 @@ public class UnityAnalyst : MonoBehaviour
     public static void SendMatchResult(int _level, int _kill, int _star, int _survivalTime)
     {
         if (ShowLog)
-            DebugLogger.Log("Analysis-SendMatchResult");
+            WriteLog.Log("Analysis-SendMatchResult");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("MatchResult", new Dictionary<string, object>
@@ -104,7 +104,7 @@ public class UnityAnalyst : MonoBehaviour
     public static void SendPurchaseRevive(string _buyer, int _kreds)
     {
         if (ShowLog)
-            DebugLogger.Log("Analysis-SendPurchaseRevive");
+            WriteLog.Log("Analysis-SendPurchaseRevive");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("Purchase-Revive", new Dictionary<string, object>
@@ -116,7 +116,7 @@ public class UnityAnalyst : MonoBehaviour
     public static void SendPurchasePremium(string _buyer, int _kreds)
     {
         if (ShowLog)
-            DebugLogger.Log("Analysis-SendPurchasePremium");
+            WriteLog.Log("Analysis-SendPurchasePremium");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("Purchase-Premium", new Dictionary<string, object>
@@ -128,7 +128,7 @@ public class UnityAnalyst : MonoBehaviour
     public static void SendPurchaseStarItem(string _buyer, int _itemID, int _stars)
     {
         if (ShowLog)
-            DebugLogger.Log("Analysis-SendPurchaseStarItem");
+            WriteLog.Log("Analysis-SendPurchaseStarItem");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("Purchase-StarItem", new Dictionary<string, object>
@@ -141,7 +141,7 @@ public class UnityAnalyst : MonoBehaviour
     public static void SendPurchaseKredItem(string _buyer, int _itemID, int _kreds)
     {
         if (ShowLog)
-            DebugLogger.Log("Analysis-SendPurchaseKredItem");
+            WriteLog.Log("Analysis-SendPurchaseKredItem");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("Purchase-KredItem", new Dictionary<string, object>
@@ -154,7 +154,7 @@ public class UnityAnalyst : MonoBehaviour
     public static void SendPurchaseStarClamor(string _buyer, int _clamorID, int _stars)
     {
         if (ShowLog)
-            DebugLogger.Log("Analysis-SendPurchaseStarClamor");
+            WriteLog.Log("Analysis-SendPurchaseStarClamor");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("Purchase-StarClamor", new Dictionary<string, object>
@@ -167,7 +167,7 @@ public class UnityAnalyst : MonoBehaviour
     public static void SendPurchaseKredClamor(string _buyer, int _clamorID, int _kreds)
     {
         if (ShowLog)
-            DebugLogger.Log("Analysis-SendPurchaseKredClamor");
+            WriteLog.Log("Analysis-SendPurchaseKredClamor");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("Purchase-KredClamor", new Dictionary<string, object>
@@ -180,7 +180,7 @@ public class UnityAnalyst : MonoBehaviour
     public static void SendRegion(string _region, int _ping)
     {
         if (ShowLog)
-            DebugLogger.Log("Analysis-SendRegion");
+            WriteLog.Log("Analysis-SendRegion");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("Region", new Dictionary<string, object>
@@ -189,7 +189,7 @@ public class UnityAnalyst : MonoBehaviour
             { "ping(ms)", _ping },
         });
     }
-    /*∞µ§£®Ï°A¶]¨∞∫Ù≠∂•i•H´ˆX√ˆ≥¨∫Ù≠∂°A©“•H§£•iØ‡™æπD™±Æa™±¶h§[
+    /*ÂÅö‰∏çÂà∞ÔºåÂõ†ÁÇ∫Á∂≤È†ÅÂèØ‰ª•ÊåâXÈóúÈñâÁ∂≤È†ÅÔºåÊâÄ‰ª•‰∏çÂèØËÉΩÁü•ÈÅìÁé©ÂÆ∂Áé©Â§ö‰πÖ
     public static void SendPlayInfo(double _playTime, int _playTimes, int _kill, int _die, int _gainStar, int _saveClamorTimes)
     {
         DebugLogger.Log("Analysis-SendPlayInfo");

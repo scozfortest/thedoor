@@ -25,7 +25,7 @@ namespace Scoz.Func {
 
             public Typer(int _typerID, Text _text, string _str, float _speed, Action _onFinishCB) {
                 if (_text == null) {
-                    DebugLogger.LogError("傳入Text為null");
+                    WriteLog.LogError("傳入Text為null");
                     return;
                 }
                 if (string.IsNullOrEmpty(_str)) {
@@ -97,11 +97,11 @@ namespace Scoz.Func {
 
         public static int StartTyping(Text _text, string _str, float _speed = DefaultSpeed, Action _cb = null) {
             if (Instance == null) {
-                DebugLogger.LogError("傳入Text為null");
+                WriteLog.LogError("傳入Text為null");
                 return -1;
             }
             if (_text == null) {
-                DebugLogger.LogError("尚未初始化TextTypeEffector");
+                WriteLog.LogError("尚未初始化TextTypeEffector");
                 return -1;
             }
             int typerID = MaxTyperID;

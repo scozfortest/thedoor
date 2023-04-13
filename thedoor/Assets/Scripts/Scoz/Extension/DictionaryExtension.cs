@@ -15,7 +15,7 @@ namespace Scoz.Func {
                 }
                 order++;
             }
-            DebugLogger.LogError("Key Not in Dictionary");
+            WriteLog.LogError("Key Not in Dictionary");
             return order;
         }
 

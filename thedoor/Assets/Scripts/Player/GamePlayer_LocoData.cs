@@ -53,9 +53,9 @@ namespace TheDoor.Main {
         }
         public void SavePlayerSettingToLoco() {
             string str = GetPlayerSettingJsonStr();
-            DebugLogger.LogFormat("<color=Orange>{0}</color>", str);
+            WriteLog.LogFormat("<color=Orange>{0}</color>", str);
             PlayerPrefs.SetString(LocoData.PlayerSetting.ToString(), str);
-            DebugLogger.LogFormat("<color=Orange>{0}</color>", "Save PlayerSetting To Loco");
+            WriteLog.LogFormat("<color=Orange>{0}</color>", "Save PlayerSetting To Loco");
         }
 
 
@@ -138,9 +138,9 @@ namespace TheDoor.Main {
         }
         public void SaveRedDotToLoco() {
             string str = GetRedDotJsonStr();
-            DebugLogger.LogFormat("<color=Orange>{0}</color>", str);
+            WriteLog.LogFormat("<color=Orange>{0}</color>", str);
             PlayerPrefs.SetString(LocoData.RedDot.ToString(), str);
-            DebugLogger.LogFormat("<color=Orange>{0}</color>", "Save PlayerSetting To Loco");
+            WriteLog.LogFormat("<color=Orange>{0}</color>", "Save PlayerSetting To Loco");
         }
     }
 }

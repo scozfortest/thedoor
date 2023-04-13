@@ -19,7 +19,7 @@ namespace Scoz.Func {
 
         public static GameDictionary CreateNewInstance() {
             if (Instance != null) {
-                DebugLogger.LogError("GameDictionary之前已經被建立了");
+                WriteLog.LogError("GameDictionary之前已經被建立了");
             } else {
                 GameObject prefab = Resources.Load<GameObject>("Prefabs/Common/GameDictionary");
                 GameObject go = Instantiate(prefab);

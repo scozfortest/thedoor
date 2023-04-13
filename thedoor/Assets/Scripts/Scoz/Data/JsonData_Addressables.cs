@@ -24,17 +24,17 @@ namespace Scoz.Func {
                     data.GetDataFromJson(items[i], _dataName);
                     int id = 0;
                     if (!int.TryParse(items[i]["ID"].ToString(), out id)) {
-                        DebugLogger.LogErrorFormat("Wrong ID Format DataName:{0}.json ID:{1} 也許使用SetDataStringKey_Remote而不是SetData_Remote", _dataName, items[i]["ID"].ToString());
+                        WriteLog.LogErrorFormat("Wrong ID Format DataName:{0}.json ID:{1} 也許使用SetDataStringKey_Remote而不是SetData_Remote", _dataName, items[i]["ID"].ToString());
                         continue;
                     }
                     if (!dic.ContainsKey(id))
                         dic.Add(id, data);
                     else
-                        DebugLogger.LogError(string.Format("{0}表有重複的ID {1}", _dataName, id));
+                        WriteLog.LogError(string.Format("{0}表有重複的ID {1}", _dataName, id));
                 }
                 Addressables.Release(handle);
                 if (ShowLoadTime) {
-                    DebugLogger.LogFormat("<color=#398000>[Json] {0}.json載入完成</color>", _dataName);
+                    WriteLog.LogFormat("<color=#398000>[Json] {0}.json載入完成</color>", _dataName);
                 }
                 _cb?.Invoke(_dataName, dic);
             };
@@ -56,12 +56,12 @@ namespace Scoz.Func {
                     if (!dic.ContainsKey(id))
                         dic.Add(id, data);
                     else
-                        DebugLogger.LogError(string.Format("{0}表有重複的ID {1}", _dataName, id));
+                        WriteLog.LogError(string.Format("{0}表有重複的ID {1}", _dataName, id));
 
                 }
                 Addressables.Release(handle);
                 if (ShowLoadTime) {
-                    DebugLogger.LogFormat("<color=#398000>[Json] {0}.json載入完成</color>", _dataName);
+                    WriteLog.LogFormat("<color=#398000>[Json] {0}.json載入完成</color>", _dataName);
                 }
                 _cb?.Invoke(_dataName, dic);
 

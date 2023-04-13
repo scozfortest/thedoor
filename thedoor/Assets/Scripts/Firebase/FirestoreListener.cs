@@ -59,7 +59,7 @@ namespace TheDoor.Main {
         /// </summary>
         public static void RegisterListener_OwnedData(ColEnum _col, string _playerUID) {
             if (string.IsNullOrEmpty(_playerUID)) {
-                DebugLogger.LogError("RegisterListener_OwnedData傳入的PlayerUID為null或空值");
+                WriteLog.LogError("RegisterListener_OwnedData傳入的PlayerUID為null或空值");
                 return;
             }
             //已經註冊過此資料偵聽就不處理
@@ -72,7 +72,7 @@ namespace TheDoor.Main {
             ListenerRegistration listener = null;
             string colName = ColNames.GetValueOrDefault(_col);
             if (string.IsNullOrEmpty(colName)) {
-                DebugLogger.LogErrorFormat("ColNames尚未定義 {0}", _col);
+                WriteLog.LogErrorFormat("ColNames尚未定義 {0}", _col);
                 return;
             }
             if (PerPlayerOwnedOneDocCols.Contains(_col.ToString())) {//一個玩家只會擁有一個doc類型的偵聽跑這裡(例如PlayerData-Player，PlayerData-Item集合中玩家只會擁有一個 Doc)
@@ -108,7 +108,7 @@ namespace TheDoor.Main {
                 dic.Add(_playerUID, listener);
                 ListeningPlayerOwnedDataList.Add(_col.ToString(), dic);
             }
-            DebugLogger.LogFormat("<color=#9b791d>[Firebase] 註冊偵聽: {0} > {1} </color>", colName, _playerUID);
+            WriteLog.LogFormat("<color=#9b791d>[Firebase] 註冊偵聽: {0} > {1} </color>", colName, _playerUID);
         }
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace TheDoor.Main {
                     GamePlayer.Instance.SetOwnedData<OwnedHistoryData>(ColEnum.History, _data);//更新資料
                     break;
                 default:
-                    DebugLogger.LogErrorFormat("SetReturnOwnedData未加入處理偵聽 {0} 類型的回傳方法", _col);
+                    WriteLog.LogErrorFormat("SetReturnOwnedData未加入處理偵聽 {0} 類型的回傳方法", _col);
                     break;
             }
         }
@@ -185,7 +185,7 @@ namespace TheDoor.Main {
                 if (!ListeningGameSettingList.ContainsKey(docNames[i]))
                     ListeningGameSettingList.Add(docNames[i], listener);
             }
-            DebugLogger.LogFormat("<color=#9b791d>[Firebase] 註冊GameSetting偵聽: {0}</color>", registerDocNameStr);
+            WriteLog.LogFormat("<color=#9b791d>[Firebase] 註冊GameSetting偵聽: {0}</color>", registerDocNameStr);
         }
 
 
@@ -208,7 +208,7 @@ namespace TheDoor.Main {
                 }
             });
 
-            DebugLogger.LogFormat("<color=#9b791d>[Firebase] 註冊偵聽: {0} </color>", colName);
+            WriteLog.LogFormat("<color=#9b791d>[Firebase] 註冊偵聽: {0} </color>", colName);
         }
 
 
@@ -241,7 +241,7 @@ namespace TheDoor.Main {
                 }
             });
 
-            DebugLogger.LogFormat("<color=#9b791d>[Firebase] 註冊偵聽: {0} </color>", colName);
+            WriteLog.LogFormat("<color=#9b791d>[Firebase] 註冊偵聽: {0} </color>", colName);
         }
 
 

@@ -49,7 +49,7 @@ namespace TheDoor.Main {
 
         public void SetMainPlayerData(Dictionary<string, object> _data) {
             if (Data == null) {
-                DebugLogger.LogError("尚未初始化MainPlayerData");
+                WriteLog.LogError("尚未初始化MainPlayerData");
                 return;
             }
             Data.SetData(_data);
@@ -73,7 +73,7 @@ namespace TheDoor.Main {
                 } else
                     OwnedDatas[_colName][uid] = ownedData;
             } catch (Exception _e) {
-                DebugLogger.LogError("SetOwnedData錯誤: " + _e);
+                WriteLog.LogError("SetOwnedData錯誤: " + _e);
             }
 
         }
@@ -108,10 +108,10 @@ namespace TheDoor.Main {
                         //DebugLogger.LogErrorFormat("新增{0}資料UID:{1} ID:{2}", _type, uid, data["ID"]);
                         OwnedDatas[_colName].Add(uid, ownedData);
                     } else
-                        DebugLogger.LogErrorFormat("{0}資料有重複的UID:" + uid);
+                        WriteLog.LogErrorFormat("{0}資料有重複的UID:" + uid);
                 }
             } catch (Exception _e) {
-                DebugLogger.LogError("SetOwnedDatas錯誤: " + _e);
+                WriteLog.LogError("SetOwnedDatas錯誤: " + _e);
             }
         }
 

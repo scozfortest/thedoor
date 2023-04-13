@@ -25,7 +25,7 @@ namespace TheDoor.Main {
 
         public virtual void SetData(Dictionary<string, object> _data) {
             if (_data == null) {
-                DebugLogger.LogErrorFormat("設定PlayerData時傳入資料為Null");
+                WriteLog.LogErrorFormat("設定PlayerData時傳入資料為Null");
                 return;
             }
             object value;

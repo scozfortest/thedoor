@@ -43,9 +43,9 @@ namespace Scoz.Func {
             try {
                 values = Array.ConvertAll(_text.Split(_char), a => int.Parse(a));
                 if (values.Length != 2)
-                    DebugLogger.LogErrorFormat("Parse {0} to Vector2 失敗", _text);
+                    WriteLog.LogErrorFormat("Parse {0} to Vector2 失敗", _text);
             } catch {
-                DebugLogger.LogErrorFormat("Parse {0} to Vector2 失敗", _text);
+                WriteLog.LogErrorFormat("Parse {0} to Vector2 失敗", _text);
             }
             Int2D int2D = new Int2D(values[0], values[1]);
             return int2D;
@@ -55,9 +55,9 @@ namespace Scoz.Func {
             try {
                 values = Array.ConvertAll(_text.Split(_char), a => float.Parse(a));
                 if (values.Length != 3)
-                    DebugLogger.LogErrorFormat("Parse {0} to Vector3 失敗", _text);
+                    WriteLog.LogErrorFormat("Parse {0} to Vector3 失敗", _text);
             } catch {
-                DebugLogger.LogErrorFormat("Parse {0} to Vector3 失敗", _text);
+                WriteLog.LogErrorFormat("Parse {0} to Vector3 失敗", _text);
                 return Vector3.zero;
             }
             Vector3 vector3 = new Vector3(values[0], values[1], values[2]);
@@ -224,7 +224,7 @@ namespace Scoz.Func {
                     case '\u007F': sb.Append("<DEL>"); break;
                     default:
                         if (c > '\u007F') {
-                            DebugLogger.LogErrorFormat("{0} 為非可轉成ASCII的Char (in ASCII, any octet in the range 0x80-0xFF doesn't have a character glyph associated with it)", c);
+                            WriteLog.LogErrorFormat("{0} 為非可轉成ASCII的Char (in ASCII, any octet in the range 0x80-0xFF doesn't have a character glyph associated with it)", c);
                             sb.AppendFormat(@"\u{0:X4}", (ushort)c); // in ASCII, any octet in the range 0x80-0xFF doesn't have a character glyph associated with it
                         } else {
                             sb.Append(c);

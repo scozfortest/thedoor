@@ -1,4 +1,4 @@
-﻿
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,7 +68,7 @@ namespace Scoz.Func
                     if (_num2 == 0)
                     {
                         result = 0;
-                        DebugLogger.LogWarning("不可除以0");
+                        WriteLog.LogWarning("不可除以0");
                     }
                     else
                         result = _num1 / _num2;
@@ -178,7 +178,7 @@ namespace Scoz.Func
         {
             if (_r == 1)
             {
-                DebugLogger.LogError("r不能等於1");
+                WriteLog.LogError("r不能等於1");
                 return 0;
             }
             float s = _a * ((1 - Mathf.Pow(_r, _n)) / (1 - _r));

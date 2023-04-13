@@ -69,14 +69,14 @@ namespace TheDoor.Main {
 #endif
 
             if (FirebaseManager.MyUser == null) {//玩家尚未登入
-                DebugLogger.Log("玩家尚未登入");
+                WriteLog.Log("玩家尚未登入");
                 MyStartUI.ShowUI(StartUI.Condietion.NotLogin);
             } else {//玩家已經登入，就開始載入Firestore上的資料(LoadDatas)
 
                 //是否第一次執行遊戲，第一次執行遊戲後會自動進大廳，之後透過從大廳的設定中點回到主介面就不會又自動進大廳了
                 if (FirstTimeLaunchGame) {
                     FirebaseManager.LoadDatas(() => {
-                        DebugLogger.LogFormat("玩家 {0} 已經登入", FirebaseManager.MyUser.UserId);
+                        WriteLog.LogFormat("玩家 {0} 已經登入", FirebaseManager.MyUser.UserId);
                         StartManager.Instance.SetVersionText();//顯示下方文字
 #if APPSFLYER
                         // 設定玩家UID

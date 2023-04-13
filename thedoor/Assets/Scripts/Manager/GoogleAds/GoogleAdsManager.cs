@@ -124,7 +124,7 @@ public class GoogleAdsManager : MonoSingletonA<GoogleAdsManager> {
         InitializeSuccess = false;
         MobileAds.Initialize(initStatus => {
             IsShowAds = false;
-            DebugLogger.Log("[Google AdMob] Initialize Success!");
+            WriteLog.Log("[Google AdMob] Initialize Success!");
             InitializeSuccess = true;
             // 先準備一個影片
             CreateAndLoadRewardedAd();
@@ -180,7 +180,7 @@ public class GoogleAdsManager : MonoSingletonA<GoogleAdsManager> {
     /// <param name="sender"></param>
     /// <param name="args"></param>
     public void HandleRewardedAdLoaded(object sender, EventArgs args) {
-        DebugLogger.Log("HandleRewardedAdLoaded event received");
+        WriteLog.Log("HandleRewardedAdLoaded event received");
 
         GoogleAdReadyToShow = true;
 
@@ -197,7 +197,7 @@ public class GoogleAdsManager : MonoSingletonA<GoogleAdsManager> {
     /// <param name="sender"></param>
     /// <param name="args"></param>
     public void HandleRewardedAdFailedToLoad(object sender, AdFailedToLoadEventArgs args) {
-        DebugLogger.Log($"HandleRewardedAdFailedToLoad event received with message: {args.LoadAdError.GetMessage()}");
+        WriteLog.Log($"HandleRewardedAdFailedToLoad event received with message: {args.LoadAdError.GetMessage()}");
         if (IsShowAds) {
             AfterFailToWatchAD();
         }
@@ -214,7 +214,7 @@ public class GoogleAdsManager : MonoSingletonA<GoogleAdsManager> {
     /// <param name="sender"></param>
     /// <param name="args"></param>
     public void HandleRewardedAdOpening(object sender, EventArgs args) {
-        DebugLogger.Log("HandleRewardedAdOpening event received");
+        WriteLog.Log("HandleRewardedAdOpening event received");
     }
 
     /// <summary>
@@ -223,7 +223,7 @@ public class GoogleAdsManager : MonoSingletonA<GoogleAdsManager> {
     /// <param name="sender"></param>
     /// <param name="args"></param>
     public void HandleRewardedAdFailedToShow(object sender, AdErrorEventArgs args) {
-        DebugLogger.Log($"HandleRewardedAdFailedToShow event received with message: { args.AdError.GetMessage()}");
+        WriteLog.Log($"HandleRewardedAdFailedToShow event received with message: { args.AdError.GetMessage()}");
         if (IsShowAds) {
             AfterFailToWatchAD();
         }
@@ -241,7 +241,7 @@ public class GoogleAdsManager : MonoSingletonA<GoogleAdsManager> {
     /// <param name="sender"></param>
     /// <param name="args"></param>
     public void HandleRewardedAdClosed(object sender, EventArgs args) {
-        DebugLogger.Log("HandleRewardedAdClosed event received");
+        WriteLog.Log("HandleRewardedAdClosed event received");
         OnShowGoogleAds?.Invoke(true, AdsResultMessage.GoogleAdsWatchSuccess);
 
         OnShowGoogleAds = null;
@@ -260,16 +260,16 @@ public class GoogleAdsManager : MonoSingletonA<GoogleAdsManager> {
     public void HandleUserEarnedReward(object sender, Reward args) {
         string type = args.Type;
         double amount = args.Amount;
-        DebugLogger.Log($"HandleRewardedAdRewarded event received for {amount.ToString()} {type}");
+        WriteLog.Log($"HandleRewardedAdRewarded event received for {amount.ToString()} {type}");
     }
 
     /// <summary>
     /// 玩家選擇看廣告 在廣告載入完成後 可以呼叫 用來顯示出廣告
     /// </summary>
     private void UserChoseToWatchAd() {
-        DebugLogger.Log($"[GoogleAdsManager] UserChoseToWatchAd");
+        WriteLog.Log($"[GoogleAdsManager] UserChoseToWatchAd");
         if (RewardedAd.IsLoaded()) {
-            DebugLogger.Log($"[GoogleAdsManager] UserChoseToWatchAd RewardedAd IsLoaded And Will Show!");
+            WriteLog.Log($"[GoogleAdsManager] UserChoseToWatchAd RewardedAd IsLoaded And Will Show!");
             RewardedAd.Show();
             //ActionAfterUserWatchAdSuccess();
         } else {
@@ -283,13 +283,13 @@ public class GoogleAdsManager : MonoSingletonA<GoogleAdsManager> {
     private void AfterFailToWatchAD() {
         // Google看廣告失敗 改嘗試看Unity Ads  
         bool unityAdsEnable = FirestoreGameSetting.GetBoolData(GameDataDocEnum.ADReward, "UnityAdsEnable");
-        DebugLogger.Log($"[GoogleAdsManager] unityAdsEnable={unityAdsEnable}");
+        WriteLog.Log($"[GoogleAdsManager] unityAdsEnable={unityAdsEnable}");
         if (unityAdsEnable) {
 #if UNITY_ADS
             UnityAdsManager.Inst.ShowUnityAd((isWatchAdSucces, adsResultMessage) => {
                 // 看廣告成功
                 if (isWatchAdSucces) {
-                    DebugLogger.Log($"[GoogleAdsManager] 看UnityAds影片成功");
+                    WriteLog.Log($"[GoogleAdsManager] 看UnityAds影片成功");
                     OnShowGoogleAds?.Invoke(true, AdsResultMessage.UnityAdsWatchSuccess);
                     ActionAfterUserWatchAdSuccess();
                     OnShowGoogleAds = null;
@@ -309,13 +309,13 @@ public class GoogleAdsManager : MonoSingletonA<GoogleAdsManager> {
     private void CheckFacebookAdCanShow() {
         // Google看廣告失敗 改嘗試看Unity Ads
         bool facebookAdsEnable = FirestoreGameSetting.GetBoolData(GameDataDocEnum.ADReward, "FacebookAdsEnable");
-        DebugLogger.Log($"[GoogleAdsManager] CheckFacebookAdCanShow facebookAdsEnable={facebookAdsEnable}");
+        WriteLog.Log($"[GoogleAdsManager] CheckFacebookAdCanShow facebookAdsEnable={facebookAdsEnable}");
         if (facebookAdsEnable) {
 #if FACEBOOK_ADS
             FacebookAdsManager.Inst.ShowFacebookAd((isWatchAdSucces, adsResultMessage) => {
                 // 看廣告成功
                 if (isWatchAdSucces) {
-                    DebugLogger.Log($"[FacebookAdsManager] 看FacebookAds影片成功");
+                    WriteLog.Log($"[FacebookAdsManager] 看FacebookAds影片成功");
                     OnShowGoogleAds?.Invoke(true, AdsResultMessage.FacebookAdsWatchSuccess);
                     ActionAfterUserWatchAdSuccess();
                     OnShowGoogleAds = null;
@@ -335,7 +335,7 @@ public class GoogleAdsManager : MonoSingletonA<GoogleAdsManager> {
     private void CheckStartIoAdCanShow() {
         // Facebook看廣告失敗 改嘗試看StartIo Ads
         bool startIoAdsEnable = FirestoreGameSetting.GetBoolData(GameDataDocEnum.ADReward, "StartIoAdsEnable");
-        DebugLogger.Log($"[GoogleAdsManager] CheckStartIoAdCanShow startIoAdsEnable={startIoAdsEnable}");
+        WriteLog.Log($"[GoogleAdsManager] CheckStartIoAdCanShow startIoAdsEnable={startIoAdsEnable}");
         if (startIoAdsEnable) {
 #if STARTIO_ADS
             StartIoAdsManager.Inst.ShowStartIoAd((isWatchAdSucces, adsResultMessage) => {
@@ -361,7 +361,7 @@ public class GoogleAdsManager : MonoSingletonA<GoogleAdsManager> {
     /// 在上一個廣告關閉後 可以先載入下一個廣告
     /// </summary>
     public void CreateAndLoadRewardedAd() {
-        DebugLogger.Log("CreateAndLoadRewardedAd Start");
+        WriteLog.Log("CreateAndLoadRewardedAd Start");
         // RewardedAd是屬於一次性的物件 看完一次就沒有作用了 必須重建
         RewardedAd = new RewardedAd(AdUnitId);
 
@@ -384,7 +384,7 @@ public class GoogleAdsManager : MonoSingletonA<GoogleAdsManager> {
         RewardedAd.LoadAd(request);
 
         IsLoadNext = true;
-        DebugLogger.Log("CreateAndLoadRewardedAd Done");
+        WriteLog.Log("CreateAndLoadRewardedAd Done");
     }
 
     private void ActionAfterUserWatchAdSuccess() {
@@ -400,12 +400,12 @@ public class GoogleAdsManager : MonoSingletonA<GoogleAdsManager> {
     private void CheckDontShowAd() {
         // 直接給獎
         bool dontShowAD = FirestoreGameSetting.GetBoolData(GameDataDocEnum.ADReward, "DontShowAD");
-        DebugLogger.Log($"[GoogleAdsManager] dontShowAD={dontShowAD}");
+        WriteLog.Log($"[GoogleAdsManager] dontShowAD={dontShowAD}");
         if (dontShowAD) {
-            DebugLogger.Log($"[GoogleAdsManager] 直接給獎");
+            WriteLog.Log($"[GoogleAdsManager] 直接給獎");
             OnShowGoogleAds?.Invoke(true, AdsResultMessage.DontShowAdSuccess);
         } else { // 最後真的失敗了 
-            DebugLogger.Log($"[GoogleAdsManager] 直接給獎失敗");
+            WriteLog.Log($"[GoogleAdsManager] 直接給獎失敗");
             OnShowGoogleAds?.Invoke(false, AdsResultMessage.DontShowAdFail);
         }
         OnShowGoogleAds = null;

@@ -94,7 +94,7 @@ namespace TheDoor.Main {
 
 
 
-            DebugLogger.Log($"IAPManager Start PurchaseItem ID={purchaseData.UID}");
+            WriteLog.Log($"IAPManager Start PurchaseItem ID={purchaseData.UID}");
             OnPurchaseItemCallBack = _cb;
 #if UNITY_IAP
             PopupUI.ShowLoading(StringData.GetUIString("Loading"), 60);
@@ -118,7 +118,7 @@ namespace TheDoor.Main {
         /// <param name="receiptString">訂單內容</param>
         /// <param name="successCallBack">完成驗證後的回呼要通知IAPManager商品已經驗證成功可以完成購買這個項目</param>
         private void OnPurchaseSuccess(string productUID, string shopUID, IPurchaseReceipt receipt, string receiptString, Action<string> successCallBack) {
-            DebugLogger.Log($"購買商品訂單成立 商店商品Id={shopUID}, 平台商品Id={productUID} 準備驗證");
+            WriteLog.Log($"購買商品訂單成立 商店商品Id={shopUID}, 平台商品Id={productUID} 準備驗證");
             FirebaseManager.Purchase(shopUID, receiptString, dataObj => {
                 OnPurchaseItemCallBack?.Invoke(dataObj);
                 successCallBack?.Invoke(productUID);
@@ -135,7 +135,7 @@ namespace TheDoor.Main {
         /// </summary>
         /// <param name="shopUID">失敗的商城商品訂單Id</param>
         private void OnPurchaseFail(string shopUID) {
-            DebugLogger.Log("購買商品訂單失敗 productID=" + shopUID);
+            WriteLog.Log("購買商品訂單失敗 productID=" + shopUID);
             OnPurchaseItemCallBack?.Invoke(null);
             PopupUI.HideLoading();
         }

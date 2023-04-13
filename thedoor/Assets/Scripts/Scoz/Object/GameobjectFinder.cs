@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -246,7 +246,7 @@ namespace Scoz.Func
             {
                 for(int i=0;i< _exceptParentNames.Length;i++)
                 {
-                    DebugLogger.Log(child.transform.parent.name + ":" + _exceptParentNames[i]);
+                    WriteLog.Log(child.transform.parent.name + ":" + _exceptParentNames[i]);
                     if (child.transform.parent.name != _exceptParentNames[i])
                         list.Add(child);
                 }

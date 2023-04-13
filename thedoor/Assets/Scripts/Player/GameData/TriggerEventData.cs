@@ -179,7 +179,7 @@ namespace TheDoor.Main {
                             return false;
                         break;
                     default:
-                        DebugLogger.LogError("尚未加入enum的條件類型: " + Conditions[i].Type);
+                        WriteLog.LogError("尚未加入enum的條件類型: " + Conditions[i].Type);
                         return false;
                 }
             }

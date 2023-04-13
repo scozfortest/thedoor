@@ -37,7 +37,7 @@ namespace TheDoor.Main {
         /// </summary>
         public static void AddReplaceStrs(StringReplaceType _type, string _key, string _replacedStr) {
             if (ReplaceStrs != null) {
-                DebugLogger.LogError("StringReplacer尚未初始化");
+                WriteLog.LogError("StringReplacer尚未初始化");
                 return;
             }
             if (ReplaceStrs.ContainsKey(_type) && ReplaceStrs[_type] != null)
@@ -48,7 +48,7 @@ namespace TheDoor.Main {
         }
         public static void RemoveReplaceStr(StringReplaceType _type, string _key) {
             if (ReplaceStrs != null) {
-                DebugLogger.LogError("StringReplacer尚未初始化");
+                WriteLog.LogError("StringReplacer尚未初始化");
                 return;
             }
             ReplaceStrs[_type].Remove(_key);
@@ -58,7 +58,7 @@ namespace TheDoor.Main {
         /// </summary>
         public static void AddReplaceStrActions(StringReplaceType _type, string _key, RefStringAction _refStringAction) {
             if (ReplaceStrActions != null) {
-                DebugLogger.LogError("StringReplacer尚未初始化");
+                WriteLog.LogError("StringReplacer尚未初始化");
                 return;
             }
             if (ReplaceStrActions.ContainsKey(_type) && ReplaceStrActions[_type] != null)
@@ -69,7 +69,7 @@ namespace TheDoor.Main {
         }
         public static void RemoveReplaceStrAction(StringReplaceType _type, string _key) {
             if (ReplaceStrActions != null) {
-                DebugLogger.LogError("StringReplacer尚未初始化");
+                WriteLog.LogError("StringReplacer尚未初始化");
                 return;
             }
             ReplaceStrActions[_type].Remove(_key);
@@ -80,7 +80,7 @@ namespace TheDoor.Main {
         static void SameReplacedKeyCheck(StringReplaceType _type) {
             foreach (string key in ReplaceStrActions[_type].Keys) {
                 if (ReplaceStrs[_type].ContainsKey(key)) {
-                    DebugLogger.LogErrorFormat("StringReplacer Type:{0} Key{1}重複", _type, key);
+                    WriteLog.LogErrorFormat("StringReplacer Type:{0} Key{1}重複", _type, key);
                 }
             }
         }

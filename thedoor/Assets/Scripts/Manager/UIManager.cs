@@ -24,7 +24,7 @@ namespace TheDoor.Main {
                     Application.OpenURL(_value);
                     break;
                 default:
-                    DebugLogger.LogError("尚未定義的LinkType: " + _type);
+                    WriteLog.LogError("尚未定義的LinkType: " + _type);
                     break;
             }
         }

@@ -124,7 +124,7 @@ namespace TheDoor.Main {
                     });
                     break;
                 default:
-                    DebugLogger.LogError("尚未定義的CanPlayGameState類型: " + state);
+                    WriteLog.LogError("尚未定義的CanPlayGameState類型: " + state);
                     break;
             }
         }
@@ -178,7 +178,7 @@ namespace TheDoor.Main {
                     });
                     break;
                 default:
-                    DebugLogger.LogError("尚未定義的CanPlayGameState類型: " + state);
+                    WriteLog.LogError("尚未定義的CanPlayGameState類型: " + state);
                     break;
             }
         }

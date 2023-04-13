@@ -23,14 +23,14 @@ namespace Scoz.Func {
             Addressables.LoadAssetAsync<GameObject>(ItemAsset).Completed += handle => {
                 ItemPrefab = handle.Result.GetComponent<T>();
                 if (ItemPrefab == null)
-                    DebugLogger.LogErrorFormat("取不到Component: {0} ", typeof(T).Name);
+                    WriteLog.LogErrorFormat("取不到Component: {0} ", typeof(T).Name);
                 LoadItemFinished = true;
                 _cb?.Invoke();
             };
         }
         public T Spawn() {
             if (ItemPrefab == null) {
-                DebugLogger.LogError("ItemPrefab載入失敗");
+                WriteLog.LogError("ItemPrefab載入失敗");
                 return default(T);
             }
             T item = Instantiate(ItemPrefab);

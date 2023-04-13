@@ -24,7 +24,7 @@ namespace Scoz.Func {
                     return i;
                 }
             }
-            DebugLogger.LogWarning("權重取得器錯誤");
+            WriteLog.LogWarning("權重取得器錯誤");
             return _weigthList.Count - 1;
         }
         /// <summary>
@@ -32,7 +32,7 @@ namespace Scoz.Func {
         /// </summary>
         public static int WeightIndexGetter(int[] _ids, int[] _weigths) {
             if (_ids.Length != _weigths.Length) {
-                DebugLogger.Log("傳入計算器的ID陣列與權重陣列不一致");
+                WriteLog.Log("傳入計算器的ID陣列與權重陣列不一致");
                 return 0;
             }
             int index = 0;
@@ -55,7 +55,7 @@ namespace Scoz.Func {
         /// </summary>
         public static int WeightIDGetter(int[] _ids, int[] _weigths) {
             if (_ids.Length != _weigths.Length) {
-                DebugLogger.Log("傳入計算器的ID陣列與權重陣列不一致");
+                WriteLog.Log("傳入計算器的ID陣列與權重陣列不一致");
                 return 0;
             }
             int index = 0;
@@ -130,13 +130,13 @@ namespace Scoz.Func {
         }
         public static List<T> GetRandNoDuplicatedTFromTList<T>(List<T> _itemList, int _count) {
             if (_itemList == null && _itemList.Count == 0) {
-                DebugLogger.LogError("傳入List錯誤");
+                WriteLog.LogError("傳入List錯誤");
                 return null;
             }
 
 
             if (_count > _itemList.Count) {
-                DebugLogger.LogError("取的數量不可小於List");
+                WriteLog.LogError("取的數量不可小於List");
                 return null;
             } else if (_count == _itemList.Count) {
                 return _itemList;

@@ -46,20 +46,20 @@ namespace Scoz.Editor {
             if (GOOGLE_PROJECT_DIC.TryGetValue(_envVersion, out string id)) {
                 googleProjectID = id;
             } else {
-                DebugLogger.LogError("Can't find google project id with " + _envVersion + " version.");
+                WriteLog.LogError("Can't find google project id with " + _envVersion + " version.");
                 return;
             }
             string storagePath = "";
             if (GOOGLE_STORAGE_PATH_DIC.TryGetValue(_envVersion, out string path)) {
                 storagePath = path;
             } else {
-                DebugLogger.LogError("Can't find google project id with " + _envVersion + " version.");
+                WriteLog.LogError("Can't find google project id with " + _envVersion + " version.");
                 return;
             }
 
             // start the child process
             Process process = new Process();
-            DebugLogger.LogFormat("ProjectID: {0}  StoragePath: {1}  BundleVersion: {2}", googleProjectID, storagePath, VersionSetting.AppLargeVersion);
+            WriteLog.LogFormat("ProjectID: {0}  StoragePath: {1}  BundleVersion: {2}", googleProjectID, storagePath, VersionSetting.AppLargeVersion);
 #if UNITY_EDITOR_WIN
             // redirect the output stream of the child process.
             process.StartInfo.UseShellExecute = false;
@@ -87,7 +87,7 @@ namespace Scoz.Editor {
             int exitCode = -1;
             //string output = null;
 
-            DebugLogger.Log("Start Upload.");
+            WriteLog.Log("Start Upload.");
             try {
                 process.Start();
 
@@ -100,7 +100,7 @@ namespace Scoz.Editor {
                 //DebugLogger.Log(output);
                 process.WaitForExit();
             } catch (Exception e) {
-                DebugLogger.LogError("Run error" + e.ToString()); // or throw new Exception
+                WriteLog.LogError("Run error" + e.ToString()); // or throw new Exception
             } finally {
                 exitCode = process.ExitCode;
 
@@ -108,10 +108,10 @@ namespace Scoz.Editor {
                 process = null;
             }
             if (exitCode != 0) {
-                DebugLogger.LogError("Upload Failed." + exitCode);
+                WriteLog.LogError("Upload Failed." + exitCode);
                 EditorUtility.DisplayDialog("上傳資源包", "失敗", "哭阿", "");
             } else {
-                DebugLogger.Log("Upload Success." + exitCode);
+                WriteLog.Log("Upload Success." + exitCode);
                 EditorUtility.DisplayDialog("上傳資源包", "成功", "嘻嘻", "");
             }
         }

@@ -22,10 +22,10 @@ namespace TheDoor.Main {
                 .ContinueWithOnMainThread((Task<StorageMetadata> task) => {
                     if (task.IsFaulted || task.IsCanceled) {
                         PopupUI.ShowClickCancel(StringData.GetUIString("ErrorNetworkError"), null);
-                        DebugLogger.Log(task.Exception.ToString());
+                        WriteLog.Log(task.Exception.ToString());
                         // Uh-oh, an error occurred!
                     } else {
-                        DebugLogger.Log("UploadFile Success");
+                        WriteLog.Log("UploadFile Success");
                         // Metadata contains file metadata such as size, content-type, and download URL.
                         //StorageMetadata metadata = task.Result;
                         //string md5Hash = metadata.Md5Hash;
@@ -46,7 +46,7 @@ namespace TheDoor.Main {
                 cloudRef.GetBytesAsync(maxAllowedSize).ContinueWithOnMainThread(task => {
                     if (task.IsFaulted || task.IsCanceled) {
                         if (_showErrorl)
-                            DebugLogger.LogWarningFormat("取不到Firebase資料:{0}", _path);
+                            WriteLog.LogWarningFormat("取不到Firebase資料:{0}", _path);
                         _cb?.Invoke(null);
                     } else {
                         byte[] fileContents = task.Result;
@@ -55,7 +55,7 @@ namespace TheDoor.Main {
                 });
             } catch (Exception _e) {
                 _cb?.Invoke(null);
-                DebugLogger.LogError(_e);
+                WriteLog.LogError(_e);
             }
 
 

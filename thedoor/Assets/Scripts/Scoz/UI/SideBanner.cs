@@ -14,7 +14,7 @@ namespace Scoz.Func {
 
         public static SideBanner CreateNewInstance() {
             if (Instance != null) {
-                DebugLogger.LogError("GameDictionary之前已經被建立了");
+                WriteLog.LogError("GameDictionary之前已經被建立了");
             } else {
                 GameObject prefab = Resources.Load<GameObject>("Prefabs/Common/SideBanner");
                 GameObject go = Instantiate(prefab);

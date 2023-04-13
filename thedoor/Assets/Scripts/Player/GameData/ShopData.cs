@@ -43,7 +43,7 @@ namespace TheDoor.Main {
                 object value;
                 UID = _data.TryGetValue("UID", out value) ? Convert.ToString(value) : default(string);
                 if (UID == null || UID == "") {
-                    DebugLogger.LogErrorFormat("商城品項的UID錯誤 UID:" + UID);
+                    WriteLog.LogErrorFormat("商城品項的UID錯誤 UID:" + UID);
                     IsLegalData = false;
                     return;
                 }
@@ -60,7 +60,7 @@ namespace TheDoor.Main {
                 if (MyEnum.TryParseEnum(itemTypeStr, out itemType))
                     MyItemData = new ItemData(itemType, itemValue);
                 else {//有錯誤資料時視為無效資料
-                    DebugLogger.LogErrorFormat("商城品項的ItemType錯誤 UID:" + UID);
+                    WriteLog.LogErrorFormat("商城品項的ItemType錯誤 UID:" + UID);
                     IsLegalData = false;
                     return;
                 }
@@ -87,7 +87,7 @@ namespace TheDoor.Main {
                 if (MyEnum.TryParseEnum(saleStateStr, out saleState))
                     MySaleState = saleState;
                 else {//有錯誤資料時視為無效資料
-                    DebugLogger.LogErrorFormat("商城品項的SaleState錯誤 UID:" + UID);
+                    WriteLog.LogErrorFormat("商城品項的SaleState錯誤 UID:" + UID);
                     IsLegalData = false;
                     return;
                 }
@@ -103,7 +103,7 @@ namespace TheDoor.Main {
                         if (BuyLimit <= 0)//限購數量<=0就當沒有限購
                             MyBuyLimitType = BuyLimitType.None;
                     } else {//有錯誤資料時視為無效資料
-                        DebugLogger.LogErrorFormat("商城品項的BuyLimitType錯誤 UID:" + UID);
+                        WriteLog.LogErrorFormat("商城品項的BuyLimitType錯誤 UID:" + UID);
                         IsLegalData = false;
                         return;
                     }
@@ -115,9 +115,9 @@ namespace TheDoor.Main {
                 }
                 IsLegalData = true;
             } catch (Exception _e) {//有錯誤資料時視為無效資料
-                DebugLogger.LogErrorFormat("商城品項資料錯誤 UID:" + UID);
+                WriteLog.LogErrorFormat("商城品項資料錯誤 UID:" + UID);
                 IsLegalData = false;
-                DebugLogger.LogError(_e);
+                WriteLog.LogError(_e);
             }
         }
         Dictionary<Currency, long> GetPrice(Dictionary<string, object> _priceData) {

@@ -17,7 +17,7 @@ public sealed class ContentSizeSum : MonoBehaviour
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(Rects[i]);
             height += Rects[i].sizeDelta.y;
-            DebugLogger.Log(Rects[i].name+ "="+Rects[i].sizeDelta.y);
+            WriteLog.Log(Rects[i].name+ "="+Rects[i].sizeDelta.y);
         }
         RectTransform rt = gameObject.GetComponent<RectTransform>();
         rt.sizeDelta = new Vector2(rt.sizeDelta.x, height);

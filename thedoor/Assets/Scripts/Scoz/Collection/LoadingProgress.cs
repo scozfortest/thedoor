@@ -31,18 +31,18 @@ namespace Scoz.Func {
         /// </summary>
         public void AddLoadingProgress(params string[] _loadingKeys) {
             if (IsFinished) {
-                DebugLogger.LogError("LoadingProgress 已經完成 無法再新增Loading項目");
+                WriteLog.LogError("LoadingProgress 已經完成 無法再新增Loading項目");
                 return;
             }
             for (int i = 0; i < _loadingKeys.Length; i++) {
                 if (string.IsNullOrEmpty(_loadingKeys[i])) {
-                    DebugLogger.LogErrorFormat("要加入的Key為空: {0}", _loadingKeys[i]);
+                    WriteLog.LogErrorFormat("要加入的Key為空: {0}", _loadingKeys[i]);
                     continue;
                 }
                 if (!Progress.ContainsKey(_loadingKeys[i]))
                     Progress.Add(_loadingKeys[i], false);
                 else
-                    DebugLogger.LogError("嘗試新增重複的LoadingKey:" + _loadingKeys[i]);
+                    WriteLog.LogError("嘗試新增重複的LoadingKey:" + _loadingKeys[i]);
             }
         }
         /// <summary>

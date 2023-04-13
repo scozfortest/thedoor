@@ -28,11 +28,11 @@ public class FirebaseEditor : MonoBehaviour {
         var firebaseApp = FirebaseApp.GetInstance(envVersion.ToString());
         var auth = FirebaseAuth.GetAuth(firebaseApp);
         if (auth.CurrentUser != null) {
-            DebugLogger.Log("Signout Firebase Auth:" + auth.CurrentUser.UserId);
-            DebugLogger.Log("PlayerPrefs.DeleteAll");
+            WriteLog.Log("Signout Firebase Auth:" + auth.CurrentUser.UserId);
+            WriteLog.Log("PlayerPrefs.DeleteAll");
             auth.SignOut();
         } else
-            DebugLogger.Log("Already Signout");
+            WriteLog.Log("Already Signout");
         PlayerPrefs.DeleteAll();//刪除Firebase也一併清除本機資料，頭像才不會記錄
     }
 }

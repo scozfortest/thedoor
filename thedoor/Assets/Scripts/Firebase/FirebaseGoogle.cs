@@ -45,12 +45,12 @@ namespace TheDoor.Main {
                             Debug.Log("Get Valid credential");
                             SignInWithCredential(credential, _cb);
                         } else {
-                            DebugLogger.LogError("Google credential is not valid");
+                            WriteLog.LogError("Google credential is not valid");
                             _cb?.Invoke(false);
                         }
                     }
                 } catch (Exception _e) {
-                    DebugLogger.LogError("SignInWithGoogle Error:" + _e);
+                    WriteLog.LogError("SignInWithGoogle Error:" + _e);
                 }
             });
         }

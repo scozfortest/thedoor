@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,7 +34,7 @@ namespace Scoz.Func
                 }
             }
             else
-                DebugLogger.LogWarning("傳入要比較的參數為null或數量為0");
+                WriteLog.LogWarning("傳入要比較的參數為null或數量為0");
             return true;
         }
         /// <summary>
@@ -50,7 +50,7 @@ namespace Scoz.Func
                 }
             }
             else
-                DebugLogger.LogWarning("傳入要比較的參數為null或數量為0");
+                WriteLog.LogWarning("傳入要比較的參數為null或數量為0");
             return true;
         }
         /// <summary>

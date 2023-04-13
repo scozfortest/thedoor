@@ -72,7 +72,7 @@ namespace Scoz.Func {
 
 
             if (Instance != null) {
-                DebugLogger.Log("GameManager之前已經被建立了");
+                WriteLog.Log("GameManager之前已經被建立了");
             } else {
                 GameObject prefab = Resources.Load<GameObject>("Prefabs/Common/GameManager");
                 GameObject go = Instantiate(prefab);
@@ -86,7 +86,7 @@ namespace Scoz.Func {
         public void SetTime(DateTime _serverTime) {
             LastServerTime = _serverTime;
             LastClientTime = DateTime.Now;
-            DebugLogger.Log("Get Server Time: " + LastServerTime);
+            WriteLog.Log("Get Server Time: " + LastServerTime);
         }
 
         public void Init() {

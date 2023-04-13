@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Scoz.Func;
 
 #if UNITY_EDITOR
@@ -28,7 +28,7 @@ public class LabelOverride : PropertyAttribute
                 }
                 else
                 {
-                    DebugLogger.LogWarningFormat(
+                    WriteLog.LogWarningFormat(
                         "{0}(\"{1}\") doesn't support arrays ",
                         typeof(LabelOverride).Name,
                         propertyAttribute.label
@@ -36,7 +36,7 @@ public class LabelOverride : PropertyAttribute
                 }
                 EditorGUI.PropertyField(position, property, label);
             }
-            catch (System.Exception ex) { DebugLogger.LogException(ex); }
+            catch (System.Exception ex) { WriteLog.LogException(ex); }
         }
 
         bool IsItBloodyArrayTho(SerializedProperty property)

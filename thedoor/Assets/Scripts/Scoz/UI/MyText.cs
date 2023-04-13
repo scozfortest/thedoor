@@ -58,7 +58,7 @@ namespace Scoz.Func {
                     if (MyTextList[i].isActiveAndEnabled)
                         MyTextList[i].RefreshText();
                 } catch (Exception _e) {
-                    DebugLogger.LogError(_e);
+                    WriteLog.LogError(_e);
                 }
             }
         }
@@ -68,7 +68,7 @@ namespace Scoz.Func {
                 try {
                     MyFuncList[i]?.Invoke();
                 } catch (Exception _e) {
-                    DebugLogger.LogWarning("MyText.RefreshFuncs警告: " + _e);
+                    WriteLog.LogWarning("MyText.RefreshFuncs警告: " + _e);
                 }
             }
         }

@@ -58,7 +58,7 @@ public class UnityAdsManager : MonoSingletonA<UnityAdsManager>, IUnityAdsInitial
         }
 
         IsInit = true;
-        DebugLogger.Log("[Unity Ads開始初始化] InitializeAds");
+        WriteLog.Log("[Unity Ads開始初始化] InitializeAds");
         GameId = (Application.platform == RuntimePlatform.IPhonePlayer)
             ? IOSGameId
             : AndroidGameId;
@@ -79,7 +79,7 @@ public class UnityAdsManager : MonoSingletonA<UnityAdsManager>, IUnityAdsInitial
     }
 
     public void OnInitializationComplete() {
-        DebugLogger.Log("[Unity Ads初始化完成] Unity Ads initialization complete.");
+        WriteLog.Log("[Unity Ads初始化完成] Unity Ads initialization complete.");
         InitializeSuccess = true;
 
         // 先預載一個AD
@@ -87,7 +87,7 @@ public class UnityAdsManager : MonoSingletonA<UnityAdsManager>, IUnityAdsInitial
     }
 
     public void OnInitializationFailed(UnityAdsInitializationError error, string message) {
-        DebugLogger.Log($"[Unity Ads初始化失敗] Unity Ads Initialization Failed: {error.ToString()} - {message}");
+        WriteLog.Log($"[Unity Ads初始化失敗] Unity Ads Initialization Failed: {error.ToString()} - {message}");
         InitializeSuccess = false;
     }
 
@@ -96,7 +96,7 @@ public class UnityAdsManager : MonoSingletonA<UnityAdsManager>, IUnityAdsInitial
     /// </summary>    
     public void LoadAd() { // Load content to the Ad Unit:
         // IMPORTANT! Only load content AFTER initialization (in this example, initialization is handled in a different script).
-        DebugLogger.Log("[Unity Ads讀取廣告單元] Loading Ad: " + AdUnitId);
+        WriteLog.Log("[Unity Ads讀取廣告單元] Loading Ad: " + AdUnitId);
         Advertisement.Load(AdUnitId, this);
     }
 
@@ -105,19 +105,19 @@ public class UnityAdsManager : MonoSingletonA<UnityAdsManager>, IUnityAdsInitial
     /// </summary>    
     public void ShowUnityAd(Action<bool, AdsResultMessage> onShowUnityAdsCallBack) { // Show the loaded content in the Ad Unit:
         // Note that if the ad content wasn't previously loaded, this method will fail
-        DebugLogger.Log("[Unity Ads顯示廣告單元] Showing Ad: " + AdUnitId);
+        WriteLog.Log("[Unity Ads顯示廣告單元] Showing Ad: " + AdUnitId);
         OnShowUnityAds = onShowUnityAdsCallBack;
 
         if (!InitializeSuccess) {
             onShowUnityAdsCallBack?.Invoke(false, AdsResultMessage.UnityAds_Not_Initialize);
-            DebugLogger.Log("[Unity Ads顯示廣告單元] UnityAds_Not_Initialize Showing Ad: " + AdUnitId);
+            WriteLog.Log("[Unity Ads顯示廣告單元] UnityAds_Not_Initialize Showing Ad: " + AdUnitId);
             OnShowUnityAds = null;
             return;
         }
 
         if (!UnityAdReadyToShow) {
             onShowUnityAdsCallBack?.Invoke(false, AdsResultMessage.UnityAds_NotReady);
-            DebugLogger.Log("[Unity Ads顯示廣告單元] UnityAds_NotReady Showing Ad: " + AdUnitId);
+            WriteLog.Log("[Unity Ads顯示廣告單元] UnityAds_NotReady Showing Ad: " + AdUnitId);
             OnShowUnityAds = null;
             // 沒有廣告可看 重新再載一次新的廣告試試看
             if (Advertisement.isInitialized) {
@@ -128,7 +128,7 @@ public class UnityAdsManager : MonoSingletonA<UnityAdsManager>, IUnityAdsInitial
 
         if (IsShowAds) {
             onShowUnityAdsCallBack?.Invoke(false, AdsResultMessage.Ads_AlreadyShowing);
-            DebugLogger.Log("[Unity Ads顯示廣告單元] Ads_AlreadyShowing Showing Ad: " + AdUnitId);
+            WriteLog.Log("[Unity Ads顯示廣告單元] Ads_AlreadyShowing Showing Ad: " + AdUnitId);
             OnShowUnityAds = null;
             return;
         }
@@ -141,7 +141,7 @@ public class UnityAdsManager : MonoSingletonA<UnityAdsManager>, IUnityAdsInitial
 
     // Implement Load Listener and Show Listener interface methods: 
     public void OnUnityAdsAdLoaded(string adUnitId) {
-        DebugLogger.Log($"[Unity Ads載入廣告單元成功] adUnitId={adUnitId}");
+        WriteLog.Log($"[Unity Ads載入廣告單元成功] adUnitId={adUnitId}");
         // Optionally execute code if the Ad Unit successfully loads content.
         // 載入成功 表示可以看了
         if (adUnitId.Equals(AdUnitId)) {
@@ -150,14 +150,14 @@ public class UnityAdsManager : MonoSingletonA<UnityAdsManager>, IUnityAdsInitial
     }
 
     public void OnUnityAdsFailedToLoad(string adUnitId, UnityAdsLoadError error, string message) {
-        DebugLogger.Log($"[Unity Ads載入廣告單元失敗] Error loading Ad Unit: {adUnitId} - {error.ToString()} - {message}");
+        WriteLog.Log($"[Unity Ads載入廣告單元失敗] Error loading Ad Unit: {adUnitId} - {error.ToString()} - {message}");
         // Optionally execute code if the Ad Unit fails to load, such as attempting to try again.
         OnShowUnityAds?.Invoke(false, AdsResultMessage.UnityAdLoad_Fail);
         UnityAdReadyToShow = false;
     }
 
     public void OnUnityAdsShowFailure(string adUnitId, UnityAdsShowError error, string message) {
-        DebugLogger.Log($"[Unity Ads顯示廣告單元失敗] Error showing Ad Unit {adUnitId}: {error.ToString()} - {message}");
+        WriteLog.Log($"[Unity Ads顯示廣告單元失敗] Error showing Ad Unit {adUnitId}: {error.ToString()} - {message}");
         // Optionally execute code if the Ad Unit fails to show, such as loading another ad.
         OnShowUnityAds?.Invoke(false, AdsResultMessage.UnityAdShow_Fail);
         IsShowAds = false;
@@ -171,7 +171,7 @@ public class UnityAdsManager : MonoSingletonA<UnityAdsManager>, IUnityAdsInitial
 
     public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState) {
         if (adUnitId.Equals(AdUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED)) {
-            DebugLogger.Log("Unity Ads Rewarded Ad Completed");
+            WriteLog.Log("Unity Ads Rewarded Ad Completed");
             // 給獎勵
             OnShowUnityAds?.Invoke(true, AdsResultMessage.UnityAdsWatchSuccess);
 

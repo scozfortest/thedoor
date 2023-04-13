@@ -197,7 +197,7 @@ namespace TheDoor.Main {
             if (MyEnum.TryParseEnum(_authentication, out thirdPartType))
                 thirdPartType = MyEnum.ParseEnum<ThirdPartLink>(_authentication);
             else {
-                DebugLogger.LogError("SettingUI按鈕傳入錯誤的綁定平台文字");
+                WriteLog.LogError("SettingUI按鈕傳入錯誤的綁定平台文字");
                 return;
             }
 

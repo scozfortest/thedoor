@@ -115,21 +115,21 @@ namespace TheDoor.Main {
             }
             FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task => {
                 var dependencyStatus = task.Result;
-                DebugLogger.Log("<color=#9b791d>[Firebase]DependencyStatus: " + dependencyStatus + "</color>");
+                WriteLog.Log("<color=#9b791d>[Firebase]DependencyStatus: " + dependencyStatus + "</color>");
                 if (dependencyStatus == DependencyStatus.Available) {
 #if UNITY_EDITOR
                     InitFirebaseAppByJson();//讀取google-services.json來設定Firebase專案
 #endif
                     if (Debugger.Instance != null)//將目前版本顯示在除錯UI上
                         Debugger.Instance.UpdateFirebaseEnvVersionText();
-                    DebugLogger.LogFormat("<color=#ff833f>[Firebase] <<<<<<<<<<<<<<<<專案ID: {0}>>>>>>>>>>>>>>>> </color>", MyFirebaseApp.Options.ProjectId);
+                    WriteLog.LogFormat("<color=#ff833f>[Firebase] <<<<<<<<<<<<<<<<專案ID: {0}>>>>>>>>>>>>>>>> </color>", MyFirebaseApp.Options.ProjectId);
                     DeviceManager.AddOnApplicationQuitAction(StopAllListener);
                     _action?.Invoke(true);
                     IsInit = true;
                 } else {
                     _action?.Invoke(false);
                     PopupUI_Local.ShowClickCancel("Could not resolve all Firebase dependencies", () => { Application.Quit(); });
-                    DebugLogger.LogErrorFormat("<color=#9b791d>[Firebase]Could not resolve all Firebase dependencies: {0}", dependencyStatus + "</color>");
+                    WriteLog.LogErrorFormat("<color=#9b791d>[Firebase]Could not resolve all Firebase dependencies: {0}", dependencyStatus + "</color>");
                     // Firebase Unity SDK is not safe to use here.
                 }
             });
@@ -160,7 +160,7 @@ namespace TheDoor.Main {
             MyLoadingProgress.AddLoadingProgress(
                 ColEnum.Player.ToString()
                 );
-            DebugLogger.Log("<color=#9b791d>[Firebase] 登入方式為[" + MyUser.ProviderId + "] 開始載入Firebase資料</color>");
+            WriteLog.Log("<color=#9b791d>[Firebase] 登入方式為[" + MyUser.ProviderId + "] 開始載入Firebase資料</color>");
             //更新玩家正使用三方登入的清單
             UpdateAccountType();
             //取Server時間
@@ -190,7 +190,7 @@ namespace TheDoor.Main {
         /// 取Firebase單筆資料回傳
         /// </summary>
         static void SetFinishedLoadData(ColEnum _colName, Dictionary<string, object> _data) {
-            DebugLogger.LogFormat("<color=#9b791d>[Firebase] {0} 讀取完成</color>", _colName);
+            WriteLog.LogFormat("<color=#9b791d>[Firebase] {0} 讀取完成</color>", _colName);
             try {
                 switch (_colName) {
                     case ColEnum.Player:
@@ -213,7 +213,7 @@ namespace TheDoor.Main {
                 }
                 MyLoadingProgress.FinishProgress(_colName.ToString());
             } catch (Exception _e) {
-                DebugLogger.LogError(_e);
+                WriteLog.LogError(_e);
             }
         }
 
@@ -221,12 +221,12 @@ namespace TheDoor.Main {
         /// 取Firebase多筆資料回傳
         /// </summary>
         static void SetFinishedLoadDatas(ColEnum _colName, List<Dictionary<string, object>> _datas) {
-            DebugLogger.LogFormat("<color=#9b791d>[Firebase] {0} 讀取完成</color>", _colName);
+            WriteLog.LogFormat("<color=#9b791d>[Firebase] {0} 讀取完成</color>", _colName);
             try {
 
                 MyLoadingProgress.FinishProgress(_colName.ToString());
             } catch (Exception _e) {
-                DebugLogger.LogError(_e);
+                WriteLog.LogError(_e);
             }
         }
         /// <summary>
@@ -242,14 +242,14 @@ namespace TheDoor.Main {
                     DateTime dateTime = TextManager.GetDateTimeFormScozTimeStr(_obj.ToString());
                     return dateTime;
                 } catch { }
-                DebugLogger.LogError("Firebase時間戳轉換失敗:" + _e);
+                WriteLog.LogError("Firebase時間戳轉換失敗:" + _e);
                 return new DateTime();
             }
         }
 
         public static IEnumerator Logout(Action _cb) {
             if (MyUser == null) {
-                DebugLogger.Log("尚未登入所以不需要登出");
+                WriteLog.Log("尚未登入所以不需要登出");
             } else {
                 new GamePlayer();//產生一個新玩家
                 //PlayerPrefs.DeleteAll();//刪除Firebase也一併清除本機資料

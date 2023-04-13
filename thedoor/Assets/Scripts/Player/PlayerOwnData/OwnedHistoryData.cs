@@ -49,7 +49,7 @@ namespace TheDoor.Main {
                     }
                 }
             } catch (Exception _ex) {
-                DebugLogger.LogError("OwnedHistoryData已購買的限量商品UID清單資料錯誤: " + _ex);
+                WriteLog.LogError("OwnedHistoryData已購買的限量商品UID清單資料錯誤: " + _ex);
             }
 
             //已購買的每日限量商品UID清單
@@ -62,7 +62,7 @@ namespace TheDoor.Main {
                     }
                 }
             } catch (Exception _ex) {
-                DebugLogger.LogError("OwnedHistoryData已購買的每日限量商品UID清單資料錯誤: " + _ex);
+                WriteLog.LogError("OwnedHistoryData已購買的每日限量商品UID清單資料錯誤: " + _ex);
             }
 
             //已購買的限量儲值UID清單
@@ -75,7 +75,7 @@ namespace TheDoor.Main {
                     }
                 }
             } catch (Exception _ex) {
-                DebugLogger.LogError("OwnedHistoryData已購買的限量儲值UID清單資料錯誤: " + _ex);
+                WriteLog.LogError("OwnedHistoryData已購買的限量儲值UID清單資料錯誤: " + _ex);
             }
 
             //已購買的每日限量儲值UID清單
@@ -88,7 +88,7 @@ namespace TheDoor.Main {
                     }
                 }
             } catch (Exception _ex) {
-                DebugLogger.LogError("OwnedHistoryData已購買的每日限量儲值UID清單資料錯誤: " + _ex);
+                WriteLog.LogError("OwnedHistoryData已購買的每日限量儲值UID清單資料錯誤: " + _ex);
             }
 
 
@@ -111,7 +111,7 @@ namespace TheDoor.Main {
                 }
 
             } catch (Exception _ex) {
-                DebugLogger.LogError("OwnedHistoryData成就資料錯誤: " + _ex);
+                WriteLog.LogError("OwnedHistoryData成就資料錯誤: " + _ex);
             }
 
             // 最後購買內購的紀錄商城商品UID

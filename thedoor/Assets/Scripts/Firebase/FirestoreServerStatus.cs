@@ -18,7 +18,7 @@ namespace TheDoor.Main
                 if (task.IsFaulted)
                 {
                     PopupUI.ShowClickCancel(StringData.GetUIString("ErrorNetworkError"), null);
-                    DebugLogger.LogError("Error:" + task.Exception.ToString());
+                    WriteLog.LogError("Error:" + task.Exception.ToString());
                     _cb?.Invoke(null);
                     return;
                 }

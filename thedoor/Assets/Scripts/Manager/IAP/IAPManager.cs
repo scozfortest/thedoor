@@ -135,9 +135,9 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
             if (!InitUnityGameServicesSuccess) {
                 var options = new InitializationOptions()
                 .SetEnvironmentName(environment);
-                DebugLogger.LogWarning("Initalize UnityServices");
+                WriteLog.LogWarning("Initalize UnityServices");
                 await UnityServices.InitializeAsync(options);
-                DebugLogger.LogWarning("Initalize End UnityServices");
+                WriteLog.LogWarning("Initalize End UnityServices");
                 InitUnityGameServicesSuccess = true;
 
                 // IAP還沒初始化完成
@@ -150,7 +150,7 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
 
         } catch (Exception exception) {
             // An error occurred during initialization.
-            DebugLogger.LogError($"InitUnityGameServicesSuccess Fail!!! exception={exception}");
+            WriteLog.LogError($"InitUnityGameServicesSuccess Fail!!! exception={exception}");
         }
     }
 
@@ -158,7 +158,7 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
     /// This will be called when Unity IAP has finished initialising.
     /// </summary>
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions) {
-        DebugLogger.LogWarning("[IAP OnInitialized] Init Shop IAP");
+        WriteLog.LogWarning("[IAP OnInitialized] Init Shop IAP");
 
         StoreController = controller;
         AppleExtensions = extensions.GetExtension<IAppleExtensions>();
@@ -173,10 +173,10 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
         Dictionary<string, string> introductory_info_dict = AppleExtensions.GetIntroductoryPriceDictionary();
 #endif
 
-        DebugLogger.Log("[IAP OnInitialized] IAP Available items:");
+        WriteLog.Log("[IAP OnInitialized] IAP Available items:");
         foreach (var item in controller.products.all) {
             if (item.availableToPurchase) {
-                DebugLogger.Log(string.Join(" - ",
+                WriteLog.Log(string.Join(" - ",
                     new[]
                     {
                         item.metadata.localizedTitle,
@@ -290,10 +290,10 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
         //    DebugLogger.Log("沒有請求");
         //    return PurchaseProcessingResult.Complete;
         //}
-        DebugLogger.Log("請求 = " + e.purchasedProduct.hasReceipt);
-        DebugLogger.Log("支付過 呼叫驗證");
-        DebugLogger.Log("Purchase OK: " + e.purchasedProduct.definition.id);
-        DebugLogger.Log("Receipt: " + e.purchasedProduct.receipt);
+        WriteLog.Log("請求 = " + e.purchasedProduct.hasReceipt);
+        WriteLog.Log("支付過 呼叫驗證");
+        WriteLog.Log("Purchase OK: " + e.purchasedProduct.definition.id);
+        WriteLog.Log("Receipt: " + e.purchasedProduct.receipt);
 
         LastTransationID = e.purchasedProduct.transactionID;
         LastReceipt = e.purchasedProduct.receipt;
@@ -378,33 +378,33 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
         if (IsCurrentStoreSupportedByValidator()) {
             try {
                 if (e.purchasedProduct != null && e.purchasedProduct.definition != null) {
-                    DebugLogger.Log($"productID={e.purchasedProduct.definition.id}");
-                    DebugLogger.Log($"transactionID={e.purchasedProduct.transactionID}");
+                    WriteLog.Log($"productID={e.purchasedProduct.definition.id}");
+                    WriteLog.Log($"transactionID={e.purchasedProduct.transactionID}");
                 }
 
                 string receipt = string.Empty;
                 if (IsGooglePlayStoreSelected) {
                     receipt = e.purchasedProduct.receipt;
-                    DebugLogger.Log($"Google receipt={e.purchasedProduct.receipt}");
+                    WriteLog.Log($"Google receipt={e.purchasedProduct.receipt}");
                 } else if (IsAppleAppStoreSelected) {
                     AppleReceipt appleReceipt = JsonUtility.FromJson<AppleReceipt>(e.purchasedProduct.receipt);
-                    DebugLogger.Log($"Apple Payload={appleReceipt.Payload}");
+                    WriteLog.Log($"Apple Payload={appleReceipt.Payload}");
                     //receipt = appleReceipt.Payload;
                     // 給Server驗整張訂單
                     receipt = e.purchasedProduct.receipt;
-                    DebugLogger.Log($"Apple Receipt={receipt}");
+                    WriteLog.Log($"Apple Receipt={receipt}");
                 }
 
                 // For improved security, consider comparing the signed
                 // IPurchaseReceipt.productId, IPurchaseReceipt.transactionID, and other data
                 // embedded in the signed receipt objects to the data which the game is using
                 // to make this purchase.
-                DebugLogger.Log("開始驗證訂單 發送物品");
+                WriteLog.Log("開始驗證訂單 發送物品");
                 OnPurchaseItemSuccess?.Invoke(e.purchasedProduct.definition.id, ShopUID, null, receipt, ConfirmPendingPurchase);
                 OnPurchaseItemSuccess = null;
 
             } catch (IAPSecurityException ex) {
-                DebugLogger.LogError("Invalid receipt, not unlocking content. " + ex);
+                WriteLog.LogError("Invalid receipt, not unlocking content. " + ex);
                 OnPurchaseItemFail?.Invoke(ShopUID);
                 OnPurchaseItemFail = null;
                 return PurchaseProcessingResult.Complete;
@@ -413,10 +413,10 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
 #if UNITY_EDITOR
         else {
             if (OnPurchaseItemSuccess != null) {
-                DebugLogger.Log("EDITOR 訂單完成");
+                WriteLog.Log("EDITOR 訂單完成");
                 OnPurchaseItemSuccess(e.purchasedProduct.definition.id, ShopUID, null, string.Empty, null);
-                DebugLogger.Log("Purchase Success!");
-                DebugLogger.Log("LastTransationID=" + LastTransationID);
+                WriteLog.Log("Purchase Success!");
+                WriteLog.Log("LastTransationID=" + LastTransationID);
                 OnPurchaseItemSuccess = null;
             }
         }
@@ -442,8 +442,8 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
 
 #if DELAY_CONFIRMATION
         //等Serve清單驗證
-        DebugLogger.Log(string.Format("IAP Pending {0}", e.purchasedProduct.definition.id));
-        DebugLogger.Log("Receipt: " + e.purchasedProduct.receipt);
+        WriteLog.Log(string.Format("IAP Pending {0}", e.purchasedProduct.definition.id));
+        WriteLog.Log("Receipt: " + e.purchasedProduct.receipt);
         AddPendingProducts(e.purchasedProduct);
         GamePlayer.Instance.MyHistoryData.SetBougthShopUID(ShopUID);
         return PurchaseProcessingResult.Pending;
@@ -462,7 +462,7 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
     /// <param name="p">商品</param>
     private void AddPendingProducts(Product p) {
         if (PendingProducts.ContainsKey(p.definition.id)) {
-            DebugLogger.Log("AddPendingProducts Same IAP ID :" + p.definition.id);
+            WriteLog.Log("AddPendingProducts Same IAP ID :" + p.definition.id);
             return;
         }
         PendingProducts.Add(p.definition.id, p);
@@ -474,9 +474,9 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
     private void Log_PendingProducts() {
         if (PendingProducts == null || PendingProducts.Count < 1)
             return;
-        DebugLogger.Log("Log Pending Products");
+        WriteLog.Log("Log Pending Products");
         foreach (var item in PendingProducts) {
-            DebugLogger.Log($"id: {item.Value.definition.id}\nstore-specific id: {item.Value.definition.storeSpecificId}\ntype: {item.Value.definition.type.ToString()}\n");
+            WriteLog.Log($"id: {item.Value.definition.id}\nstore-specific id: {item.Value.definition.storeSpecificId}\ntype: {item.Value.definition.type.ToString()}\n");
         }
     }
 
@@ -484,7 +484,7 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
     public void ConfirmPendingPurchase(string id) {
         Product product = StoreController.products.WithID(id);
         if (product != null && product.availableToPurchase) {
-            DebugLogger.Log("購買物品發送成功 完成訂單 ID=" + id);
+            WriteLog.Log("購買物品發送成功 完成訂單 ID=" + id);
             StoreController.ConfirmPendingPurchase(product);
             PurchaseInProgress = false;
             ShopUID = string.Empty;
@@ -512,18 +512,18 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
     /// <param name="item">商品</param>
     /// <param name="r">失敗原因</param>
     public void OnPurchaseFailed(Product item, PurchaseFailureReason r) {
-        DebugLogger.Log("Purchase failed: " + item.definition.id);
-        DebugLogger.Log(r.ToString());
+        WriteLog.Log("Purchase failed: " + item.definition.id);
+        WriteLog.Log(r.ToString());
 
         // Detailed debugging information
-        DebugLogger.Log($"Store specific error code: {TransactionHistoryExtensions.GetLastStoreSpecificPurchaseErrorCode()}");
+        WriteLog.Log($"Store specific error code: {TransactionHistoryExtensions.GetLastStoreSpecificPurchaseErrorCode()}");
         if (TransactionHistoryExtensions.GetLastPurchaseFailureDescription() != null) {
-            DebugLogger.Log($"Purchase failure description message: {TransactionHistoryExtensions.GetLastPurchaseFailureDescription().message}");
+            WriteLog.Log($"Purchase failure description message: {TransactionHistoryExtensions.GetLastPurchaseFailureDescription().message}");
         }
 
         PurchaseInProgress = false;
 
-        DebugLogger.Log($"購買商品失敗 未完成訂單 商城商品UID={ShopUID}, 商品ID:{item.definition.id} 訂單編號:{item.transactionID}");
+        WriteLog.Log($"購買商品失敗 未完成訂單 商城商品UID={ShopUID}, 商品ID:{item.definition.id} 訂單編號:{item.transactionID}");
         if (OnPurchaseItemFail != null) {
             OnPurchaseItemFail(ShopUID);
             OnPurchaseItemFail = null;
@@ -537,37 +537,37 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
     /// will attempt initialization until it becomes available.
     /// </summary>
     public void OnInitializeFailed(InitializationFailureReason error) {
-        DebugLogger.Log("IAPManager failed to initialize!");
+        WriteLog.Log("IAPManager failed to initialize!");
         switch (error) {
             case InitializationFailureReason.AppNotKnown:
-                DebugLogger.LogError("您的應用是否正確上傳到相關的發布商控制台?");
+                WriteLog.LogError("您的應用是否正確上傳到相關的發布商控制台?");
                 break;
             case InitializationFailureReason.PurchasingUnavailable:
                 // Ask the user if billing is disabled in device settings.
-                DebugLogger.Log("手機關閉內購功能!");
+                WriteLog.Log("手機關閉內購功能!");
                 break;
             case InitializationFailureReason.NoProductsAvailable:
                 // Developer configuration error; check product metadata.
-                DebugLogger.Log("沒有內購商品可購買!");
+                WriteLog.Log("沒有內購商品可購買!");
                 break;
         }
     }
 
     public void Initialize() {
         if (IsInit) {
-            DebugLogger.LogWarning("[IAP Initialize] Is Arleady Initalize");
+            WriteLog.LogWarning("[IAP Initialize] Is Arleady Initalize");
             return;
         }
 
         // 等待GameServices初始化完成先
         if (!InitUnityGameServicesSuccess) {
-            DebugLogger.LogWarning("[IAP Initialize] InitUnityGameServicesSuccess = false");
+            WriteLog.LogWarning("[IAP Initialize] InitUnityGameServicesSuccess = false");
             return;
         }
 
         IsInit = true;
 
-        DebugLogger.LogWarning("[IAP Initialize] Start Initialize()");
+        WriteLog.LogWarning("[IAP Initialize] Start Initialize()");
 
         var module = StandardPurchasingModule.Instance();
 
@@ -582,7 +582,7 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
         IsAppleAppStoreSelected = (StandardPurchasingModule.Instance().appStore == AppStore.AppleAppStore) ||
                                   (StandardPurchasingModule.Instance().appStore == AppStore.MacAppStore);
 
-        DebugLogger.Log($"[IAP Initialize] IsGooglePlayStoreSelected={IsGooglePlayStoreSelected}, IsAppleAppStoreSelected={IsAppleAppStoreSelected}");
+        WriteLog.Log($"[IAP Initialize] IsGooglePlayStoreSelected={IsGooglePlayStoreSelected}, IsAppleAppStoreSelected={IsAppleAppStoreSelected}");
 
         // Define our products.
         // Either use the Unity IAP Catalog, or manually use the ConfigurationBuilder.AddProduct API.
@@ -593,7 +593,7 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
         // iOS stores.
         // So on the Mac App store our products have different identifiers,
         // and we tell Unity IAP this by using the IDs class.
-        DebugLogger.LogWarning("[IAP Initialize] IAP Create Purchase Products");
+        WriteLog.LogWarning("[IAP Initialize] IAP Create Purchase Products");
         List<PurchaseData> purchaseDatas = GameData.GetPurchaseDatas(PurchaseData.Tag.All);
         List<string> productIds = new List<string>();
         //建商品表單
@@ -629,9 +629,9 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
 
         // Now we're ready to initialize Unity IAP.
         //Start init
-        DebugLogger.LogWarning($"[IAP Initialize] UnityPurchasing Initialize Start");
+        WriteLog.LogWarning($"[IAP Initialize] UnityPurchasing Initialize Start");
         UnityPurchasing.Initialize(this, builder);
-        DebugLogger.LogWarning($"[IAP Initialize] UnityPurchasing Initialize Done");
+        WriteLog.LogWarning($"[IAP Initialize] UnityPurchasing Initialize Done");
 
     }
 
@@ -639,8 +639,8 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
     /// This will be called after a call to IAppleExtensions.RestoreTransactions().
     /// </summary>
     public void OnTransactionsRestored(bool success) {
-        DebugLogger.Log("物品恢復");
-        DebugLogger.Log("Transactions restored.");
+        WriteLog.Log("物品恢復");
+        WriteLog.Log("Transactions restored.");
     }
 
     /// <summary>
@@ -654,7 +654,7 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
     /// </summary>
     /// <param name="item">Item.</param>
     public void OnDeferred(Product item) {
-        DebugLogger.Log("Purchase deferred: " + item.definition.id);
+        WriteLog.Log("Purchase deferred: " + item.definition.id);
     }
 
 #if INTERCEPT_PROMOTIONAL_PURCHASES
@@ -686,24 +686,24 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
     public bool PurchaseItem(string productID, string shopUID, Action<string, string, IPurchaseReceipt, string, Action<string>> _successCallBack, Action<string> _failCallBack) {
 
         if (PurchaseInProgress == true) {
-            DebugLogger.Log("Please wait, purchase in progress");
+            WriteLog.Log("Please wait, purchase in progress");
             return true;
         }
 
         if (StoreController == null) {
-            DebugLogger.LogError("Purchasing is not initialized");
+            WriteLog.LogError("Purchasing is not initialized");
             return false;
         }
 
         if (StoreController.products.WithID(productID) == null) {
-            DebugLogger.LogError("No product has id " + productID);
+            WriteLog.LogError("No product has id " + productID);
             return false;
         }
 
         OnPurchaseItemSuccess = _successCallBack;
         OnPurchaseItemFail = _failCallBack;
         ShopUID = shopUID;
-        DebugLogger.Log("Buy produce :" + productID);
+        WriteLog.Log("Buy produce :" + productID);
         // Don't need to draw our UI whilst a purchase is in progress.
         // This is not a requirement for IAP Applications but makes the demo
         // scene tidier whilst the fake purchase dialog is showing.
@@ -722,7 +722,7 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
     /// 恢復已購買商品 (例如移除重新安裝 非消耗性的商品必須還給玩家 所以必須提供使用者一個Restore的按鍵)
     /// </summary>
     public void RestoreTransactions() {
-        DebugLogger.Log("數據恢復");
+        WriteLog.Log("數據恢復");
         if (IsGooglePlayStoreSelected) {
             GooglePlayStoreExtensions.RestoreTransactions(OnTransactionsRestored);
         } else if (IsAppleAppStoreSelected) {
@@ -736,7 +736,7 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
     private void LogProductDefinitions() {
         var products = StoreController.products.all;
         foreach (var product in products) {
-            DebugLogger.Log(string.Format("id: {0}\nstore-specific id: {1}\ntype: {2}\nenabled: {3}\n", product.definition.id, product.definition.storeSpecificId, product.definition.type.ToString(), product.definition.enabled ? "enabled" : "disabled"));
+            WriteLog.Log(string.Format("id: {0}\nstore-specific id: {1}\ntype: {2}\nenabled: {3}\n", product.definition.id, product.definition.storeSpecificId, product.definition.type.ToString(), product.definition.enabled ? "enabled" : "disabled"));
         }
     }
 

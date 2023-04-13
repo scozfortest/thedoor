@@ -35,7 +35,7 @@ namespace TheDoor.Main {
                 string failStr = cbData.TryGetValue("Data", out value) ? value.ToString() : null;
                 _failCB?.Invoke(failStr);
             } else {
-                DebugLogger.LogError("Cloud Function回傳的類型錯誤:" + resultType);
+                WriteLog.LogError("Cloud Function回傳的類型錯誤:" + resultType);
             }
         }
 
@@ -48,7 +48,7 @@ namespace TheDoor.Main {
             function.CallAsync(null).ContinueWithOnMainThread(task => {
                 try {
                     if (task.IsFaulted) {
-                        DebugLogger.LogError("Error:" + task.Exception.ToString());
+                        WriteLog.LogError("Error:" + task.Exception.ToString());
                         _cb?.Invoke(DateTime.Now);
                         return;
                     } else {
@@ -58,7 +58,7 @@ namespace TheDoor.Main {
                         }, null);
                     }
                 } catch (Exception _e) {
-                    DebugLogger.LogError(_e);
+                    WriteLog.LogError(_e);
                     _cb?.Invoke(default(DateTime));
                 }
             });
@@ -72,11 +72,11 @@ namespace TheDoor.Main {
             function.CallAsync(null).ContinueWithOnMainThread(task => {
                 try {
                     if (task.IsFaulted) {
-                        DebugLogger.LogError("Error:" + task.Exception.ToString());
+                        WriteLog.LogError("Error:" + task.Exception.ToString());
                         return;
                     }
                 } catch (Exception _e) {
-                    DebugLogger.LogError(_e);
+                    WriteLog.LogError(_e);
                 }
             });
         }
@@ -89,11 +89,11 @@ namespace TheDoor.Main {
             function.CallAsync(null).ContinueWithOnMainThread(task => {
                 try {
                     if (task.IsFaulted) {
-                        DebugLogger.LogError("Error:" + task.Exception.ToString());
+                        WriteLog.LogError("Error:" + task.Exception.ToString());
                         return;
                     }
                 } catch (Exception _e) {
-                    DebugLogger.LogError(_e);
+                    WriteLog.LogError(_e);
                 }
             });
         }
@@ -109,13 +109,13 @@ namespace TheDoor.Main {
             function.CallAsync(data).ContinueWithOnMainThread(task => {
                 try {
                     if (task.IsFaulted) {
-                        DebugLogger.LogError("Error:" + task.Exception.ToString());
+                        WriteLog.LogError("Error:" + task.Exception.ToString());
                         return;
                     } else {
                         _cb?.Invoke();
                     }
                 } catch (Exception _e) {
-                    DebugLogger.LogError(_e);
+                    WriteLog.LogError(_e);
                 }
             });
         }
@@ -137,7 +137,7 @@ namespace TheDoor.Main {
                 try {
                     if (task.IsFaulted) {
                         _cb?.Invoke("UnknownError");
-                        DebugLogger.LogError("Error:" + task.Exception.ToString());
+                        WriteLog.LogError("Error:" + task.Exception.ToString());
                         PopupUI_Local.ShowClickCancel(string.Format(StringData.GetUIString("Firebase_UnexpectedError"), funcName), null);
                         return;
                     } else {
@@ -153,7 +153,7 @@ namespace TheDoor.Main {
                     }
                 } catch (Exception _e) {
                     _cb?.Invoke(null);
-                    DebugLogger.LogError(_e);
+                    WriteLog.LogError(_e);
                     PopupUI_Local.ShowClickCancel(string.Format(StringData.GetUIString("Firebase_UnexpectedError"), funcName), null);
                 }
             });
@@ -172,7 +172,7 @@ namespace TheDoor.Main {
                 try {
                     if (task.IsFaulted) {
                         _cb?.Invoke("UnknownError");
-                        DebugLogger.LogError("Error:" + task.Exception.ToString());
+                        WriteLog.LogError("Error:" + task.Exception.ToString());
                         PopupUI_Local.ShowClickCancel(string.Format(StringData.GetUIString("Firebase_UnexpectedError"), funcName), null);
                         return;
                     } else {
@@ -188,7 +188,7 @@ namespace TheDoor.Main {
                     }
                 } catch (Exception _e) {
                     _cb?.Invoke(null);
-                    DebugLogger.LogError(_e);
+                    WriteLog.LogError(_e);
                     PopupUI_Local.ShowClickCancel(string.Format(StringData.GetUIString("Firebase_UnexpectedError"), funcName), null);
                 }
             });
@@ -205,11 +205,11 @@ namespace TheDoor.Main {
             function.CallAsync(null).ContinueWithOnMainThread(task => {
                 try {
                     if (task.IsFaulted) {
-                        DebugLogger.LogError("Error:" + task.Exception.ToString());
+                        WriteLog.LogError("Error:" + task.Exception.ToString());
                         return;
                     }
                 } catch (Exception _e) {
-                    DebugLogger.LogError(_e);
+                    WriteLog.LogError(_e);
                 }
             });
         }
@@ -225,7 +225,7 @@ namespace TheDoor.Main {
             function.CallAsync(data).ContinueWithOnMainThread(task => {
                 try {
                     if (task.IsFaulted) {
-                        DebugLogger.LogError("Error:" + task.Exception.ToString());
+                        WriteLog.LogError("Error:" + task.Exception.ToString());
                         PopupUI_Local.ShowClickCancel(string.Format(StringData.GetUIString("Firebase_UnexpectedError"), funcName), null);
                         return;
                     } else {
@@ -243,7 +243,7 @@ namespace TheDoor.Main {
                         }
                     }
                 } catch (Exception _e) {
-                    DebugLogger.LogError(_e);
+                    WriteLog.LogError(_e);
                     PopupUI_Local.ShowClickCancel(string.Format(StringData.GetUIString("Firebase_UnexpectedError"), funcName), null);
                 }
             });
@@ -263,7 +263,7 @@ namespace TheDoor.Main {
                 try {
                     if (task.IsFaulted) {
                         _cb?.Invoke(null);
-                        DebugLogger.LogError("Error:" + task.Exception.ToString());
+                        WriteLog.LogError("Error:" + task.Exception.ToString());
                         PopupUI.ShowClickCancel(string.Format(StringData.GetUIString("Firebase_UnexpectedError"), funcName), null);
                         return;
                     } else {
@@ -277,7 +277,7 @@ namespace TheDoor.Main {
                     }
                 } catch (Exception _e) {
                     _cb?.Invoke(null);
-                    DebugLogger.LogError(_e);
+                    WriteLog.LogError(_e);
                     PopupUI.ShowClickCancel(string.Format(StringData.GetUIString("Firebase_UnexpectedError"), funcName), null);
                 }
             });
@@ -298,7 +298,7 @@ namespace TheDoor.Main {
                 try {
                     if (task.IsFaulted) {
                         _cb?.Invoke(null);
-                        DebugLogger.LogError("Error:" + task.Exception.ToString());
+                        WriteLog.LogError("Error:" + task.Exception.ToString());
                         PopupUI.ShowClickCancel(string.Format(StringData.GetUIString("Firebase_UnexpectedError"), funcName), null);
                         return;
                     } else {
@@ -312,7 +312,7 @@ namespace TheDoor.Main {
                     }
                 } catch (Exception _e) {
                     _cb?.Invoke(null);
-                    DebugLogger.LogError(_e);
+                    WriteLog.LogError(_e);
                     PopupUI.ShowClickCancel(string.Format(StringData.GetUIString("Firebase_UnexpectedError"), funcName), null);
                 }
             });
@@ -332,7 +332,7 @@ namespace TheDoor.Main {
                 try {
                     if (task.IsFaulted) {
                         _cb?.Invoke(false);
-                        DebugLogger.LogError("Error:" + task.Exception.ToString());
+                        WriteLog.LogError("Error:" + task.Exception.ToString());
                         PopupUI.ShowClickCancel(string.Format(StringData.GetUIString("Firebase_UnexpectedError"), funcName), null);
                         return;
                     } else {
@@ -340,7 +340,7 @@ namespace TheDoor.Main {
                     }
                 } catch (Exception _e) {
                     _cb?.Invoke(false);
-                    DebugLogger.LogError(_e);
+                    WriteLog.LogError(_e);
                     PopupUI.ShowClickCancel(string.Format(StringData.GetUIString("Firebase_UnexpectedError"), funcName), null);
                 }
             });
@@ -358,13 +358,13 @@ namespace TheDoor.Main {
             function.CallAsync(data).ContinueWithOnMainThread(task => {
                 try {
                     if (task.IsFaulted) {
-                        DebugLogger.LogError("Error:" + task.Exception.ToString());
+                        WriteLog.LogError("Error:" + task.Exception.ToString());
                         PopupUI.ShowClickCancel(string.Format(StringData.GetUIString("Firebase_UnexpectedError"), funcName), null);
                         return;
                     } else {
                     }
                 } catch (Exception _e) {
-                    DebugLogger.LogError(_e);
+                    WriteLog.LogError(_e);
                     PopupUI.ShowClickCancel(string.Format(StringData.GetUIString("Firebase_UnexpectedError"), funcName), null);
                 }
             });

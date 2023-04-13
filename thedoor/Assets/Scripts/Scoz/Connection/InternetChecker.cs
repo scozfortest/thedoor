@@ -19,7 +19,7 @@ namespace Scoz.Func {
             get {
                 if (Application.internetReachability == 0) //Not reachable at all
                 {
-                    DebugLogger.LogError("No internet connection");
+                    WriteLog.LogError("No internet connection");
                     return false;
                 }
                 return true;

@@ -17,14 +17,14 @@ namespace Scoz.Func {
                     StringData data = new StringData(items[i], _dataName);
                     string name = GetValue<string>(items[i]["ID"].ToString());
                     if (dic.ContainsKey(name)) {
-                        DebugLogger.LogWarning(string.Format("{0}的主屬性名稱重複", _dataName));
+                        WriteLog.LogWarning(string.Format("{0}的主屬性名稱重複", _dataName));
                         break;
                     }
                     dic.Add(name, data);
                 }
                 Addressables.Release(handle);
                 if (ShowLoadTime) {
-                    DebugLogger.LogFormat("<color=#398000>[Json] {0}.json載入完成</color>", _dataName);
+                    WriteLog.LogFormat("<color=#398000>[Json] {0}.json載入完成</color>", _dataName);
                 }
                 _cb?.Invoke(dic);
             };

@@ -14,7 +14,7 @@ namespace TheDoor.Main {
                 try {
                     if (task == null) {
                         PopupUI.ShowClickCancel("SignInWithCredential task i s null", null);
-                        DebugLogger.LogError("SignInWithCredential task i s null");
+                        WriteLog.LogError("SignInWithCredential task i s null");
                         _cb?.Invoke(false);
                         return;
                     }
@@ -27,7 +27,7 @@ namespace TheDoor.Main {
                     }
                     if (task.IsFaulted) {
                         try {
-                            DebugLogger.LogError("SignInWithCredentialAsync encountered a error " + task.Exception);
+                            WriteLog.LogError("SignInWithCredentialAsync encountered a error " + task.Exception);
                             if (showError)
                                 DisplayError((task.Exception.InnerException as FirebaseException).ErrorCode);
                         } finally {
@@ -38,7 +38,7 @@ namespace TheDoor.Main {
                     Debug.LogFormat("User signed in successfully: {0} ({1})", MyUser.DisplayName, MyUser.UserId);
                     _cb?.Invoke(true);
                 } catch (Exception _e) {
-                    DebugLogger.LogError("SignInWithCredential Error:" + _e);
+                    WriteLog.LogError("SignInWithCredential Error:" + _e);
                 }
 
             });
@@ -65,7 +65,7 @@ namespace TheDoor.Main {
                 }
                 if (task.IsFaulted) {
                     try {
-                        DebugLogger.LogError("LinkWithCredentialAsync encountered an error: " + task.Exception);
+                        WriteLog.LogError("LinkWithCredentialAsync encountered an error: " + task.Exception);
                         if (showError) {
                             DisplayError((task.Exception.InnerException as FirebaseException).ErrorCode);
                         }
@@ -97,7 +97,7 @@ namespace TheDoor.Main {
                 }
                 if (task.IsFaulted) {
                     try {
-                        DebugLogger.LogError("LinkWithCredentialAsync encountered an error: " + task.Exception);
+                        WriteLog.LogError("LinkWithCredentialAsync encountered an error: " + task.Exception);
                         if (showError) {
                             DisplayError((task.Exception.InnerException as FirebaseException).ErrorCode);
                         }

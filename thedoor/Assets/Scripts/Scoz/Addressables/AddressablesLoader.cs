@@ -45,7 +45,7 @@ namespace Scoz.Func {
         public static void GetPrefabByRef(AssetReference _ref, Action<GameObject, AsyncOperationHandle> _cb, Action _notExistCB = null) {
             if (!_ref.RuntimeKeyIsValid()) {
 #if UNITY_EDITOR
-                DebugLogger.LogError("不合法的Prefab AssetReference:" + _ref.editorAsset.name);
+                WriteLog.LogError("不合法的Prefab AssetReference:" + _ref.editorAsset.name);
 #endif
                 return;
             }
@@ -58,17 +58,17 @@ namespace Scoz.Func {
                                     _cb?.Invoke(handle.Result, handle);
                                     break;
                                 default:
-                                    DebugLogger.LogErrorFormat("載入失敗: " + _ref);
+                                    WriteLog.LogErrorFormat("載入失敗: " + _ref);
                                     _notExistCB?.Invoke();
                                     break;
                             }
                         };
                     } else {
-                        DebugLogger.LogErrorFormat("找不到Prefab: " + _ref);
+                        WriteLog.LogErrorFormat("找不到Prefab: " + _ref);
                         _notExistCB?.Invoke();
                     }
                 } else {
-                    DebugLogger.LogErrorFormat("找不到Prefab:" + _ref);
+                    WriteLog.LogErrorFormat("找不到Prefab:" + _ref);
                     _notExistCB?.Invoke();
                 }
             };
@@ -215,11 +215,11 @@ namespace Scoz.Func {
                             }
                         };
                     } else {
-                        DebugLogger.LogErrorFormat("找不到Texture: " + _path);
+                        WriteLog.LogErrorFormat("找不到Texture: " + _path);
                         _notExistCB?.Invoke();
                     }
                 } else {
-                    DebugLogger.LogErrorFormat("找不到Texture:" + _path);
+                    WriteLog.LogErrorFormat("找不到Texture:" + _path);
                     _notExistCB?.Invoke();
                 }
             };
@@ -244,11 +244,11 @@ namespace Scoz.Func {
                             }
                         };
                     } else {
-                        DebugLogger.LogErrorFormat("找不到Texture: " + _path);
+                        WriteLog.LogErrorFormat("找不到Texture: " + _path);
                         _notExistCB?.Invoke();
                     }
                 } else {
-                    DebugLogger.LogErrorFormat("找不到Texture:" + _path);
+                    WriteLog.LogErrorFormat("找不到Texture:" + _path);
                     _notExistCB?.Invoke();
                 }
             };
@@ -273,11 +273,11 @@ namespace Scoz.Func {
                             }
                         };
                     } else {
-                        DebugLogger.LogErrorFormat("找不到Prefab: " + _path);
+                        WriteLog.LogErrorFormat("找不到Prefab: " + _path);
                         _notExistCB?.Invoke();
                     }
                 } else {
-                    DebugLogger.LogErrorFormat("找不到Prefab:" + _path);
+                    WriteLog.LogErrorFormat("找不到Prefab:" + _path);
                     _notExistCB?.Invoke();
                 }
             };

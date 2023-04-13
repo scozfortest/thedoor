@@ -29,7 +29,7 @@ namespace TheDoor.Main {
                 FirebaseManager.Init(success => {
                     if (success) {
                         if (FirebaseManager.MyUser == null)//還沒在StartScene註冊帳戶就直接從其他Scene登入會報錯誤(通常還沒註冊帳戶就不會有玩家資料直接進遊戲會有問題)
-                            DebugLogger.LogError("尚未註冊Firebase帳戶");
+                            WriteLog.LogError("尚未註冊Firebase帳戶");
 
                         //讀取Firestore資料
                         FirebaseManager.LoadDatas(() => {
@@ -78,7 +78,7 @@ namespace TheDoor.Main {
             DateTime now = DateTime.Now;
             //初始化UI
             Addressables.LoadAssetAsync<GameObject>(AdventureUIAsset).Completed += handle => {
-                DebugLogger.LogFormat("載入AdventureUI花費: {0}秒", (DateTime.Now - now).TotalSeconds);
+                WriteLog.LogFormat("載入AdventureUI花費: {0}秒", (DateTime.Now - now).TotalSeconds);
                 HandleList.Add(handle);
                 GameObject go = Instantiate(handle.Result);
                 go.transform.SetParent(MyCanvas.transform);

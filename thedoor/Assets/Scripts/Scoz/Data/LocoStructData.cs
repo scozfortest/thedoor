@@ -43,13 +43,13 @@ namespace Scoz.Func {
             try {
                 RedDot_ShopDataUIDs = _setting.TryGetValue("RedDot_ShopDataUIDs", out value) ? (string[])value : new string[0];
             } catch (Exception _ex) {
-                DebugLogger.LogError("LocoRedDotData>RedDot_ShopDataUIDs錯誤: " + _ex);
+                WriteLog.LogError("LocoRedDotData>RedDot_ShopDataUIDs錯誤: " + _ex);
             }
             Icon = new int[0];
             try {
                 Icon = _setting.TryGetValue(NotUniqueItemTypes.Supply.ToString(), out value) ? (int[])value : new int[0];
             } catch (Exception _ex) {
-                DebugLogger.LogError("LocoRedDotData>Icon錯誤: " + _ex);
+                WriteLog.LogError("LocoRedDotData>Icon錯誤: " + _ex);
             }
         }
     }

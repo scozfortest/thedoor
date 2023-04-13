@@ -51,7 +51,7 @@ namespace TheDoor.Main {
                     Dictionary<string, object> triggerEventDic = DictionaryExtension.ConvertToStringKeyDic(objs[i] as IDictionary);
                     TriggerEvents.Add(new TriggerEventData(triggerEventDic));
                 } catch (Exception _ex) {
-                    DebugLogger.LogError("GameData-Setting>TriggerEvent資料錯誤: " + _ex);
+                    WriteLog.LogError("GameData-Setting>TriggerEvent資料錯誤: " + _ex);
                 }
             }
             if (TriggerEvents != null || TriggerEvents.Count != 0)
@@ -74,7 +74,7 @@ namespace TheDoor.Main {
 
         public static bool GetBoolData(GameDataDocEnum _docName, string _key) {
             if (!Datas.ContainsKey(_docName)) {
-                DebugLogger.LogErrorFormat("GameData-Setting無此Doc名稱: {0}", _docName);
+                WriteLog.LogErrorFormat("GameData-Setting無此Doc名稱: {0}", _docName);
                 return false;
             }
             object value;
@@ -83,7 +83,7 @@ namespace TheDoor.Main {
         }
         public static string GetStrData(GameDataDocEnum _docName, string _key) {
             if (!Datas.ContainsKey(_docName)) {
-                DebugLogger.LogErrorFormat("GameData-Setting無此Doc名稱: {0}", _docName);
+                WriteLog.LogErrorFormat("GameData-Setting無此Doc名稱: {0}", _docName);
                 return "";
             }
             object value;
@@ -92,7 +92,7 @@ namespace TheDoor.Main {
         }
         public static int GetIntData(GameDataDocEnum _docName, string _key) {
             if (!Datas.ContainsKey(_docName)) {
-                DebugLogger.LogErrorFormat("GameData-Setting無此Doc名稱: {0}", _docName);
+                WriteLog.LogErrorFormat("GameData-Setting無此Doc名稱: {0}", _docName);
                 return default(int);
             }
             object value;
@@ -101,7 +101,7 @@ namespace TheDoor.Main {
         }
         public static float GetFloatData(GameDataDocEnum _docName, string _key) {
             if (!Datas.ContainsKey(_docName)) {
-                DebugLogger.LogErrorFormat("GameData-Setting無此Doc名稱: {0}", _docName);
+                WriteLog.LogErrorFormat("GameData-Setting無此Doc名稱: {0}", _docName);
                 return default(float);
             }
             object value;
@@ -110,7 +110,7 @@ namespace TheDoor.Main {
         }
         public static DateTime GetDateTime(GameDataDocEnum _docName, string _key) {
             if (!Datas.ContainsKey(_docName)) {
-                DebugLogger.LogErrorFormat("GameData-Setting無此Doc名稱: {0}", _docName);
+                WriteLog.LogErrorFormat("GameData-Setting無此Doc名稱: {0}", _docName);
                 return default(DateTime);
             }
             object value;
@@ -119,7 +119,7 @@ namespace TheDoor.Main {
         }
         public static List<string> GetStrs(GameDataDocEnum _docName, string _key) {
             if (!Datas.ContainsKey(_docName)) {
-                DebugLogger.LogErrorFormat("GameData-Setting無此Doc名稱: {0}", _docName);
+                WriteLog.LogErrorFormat("GameData-Setting無此Doc名稱: {0}", _docName);
                 return null;
             }
             object value;
@@ -130,7 +130,7 @@ namespace TheDoor.Main {
         }
         public static List<int> GetInts(GameDataDocEnum _docName, string _key) {
             if (!Datas.ContainsKey(_docName)) {
-                DebugLogger.LogErrorFormat("GameData-Setting無此Doc名稱: {0}", _docName);
+                WriteLog.LogErrorFormat("GameData-Setting無此Doc名稱: {0}", _docName);
                 return null;
             }
             object value;
@@ -141,7 +141,7 @@ namespace TheDoor.Main {
         }
         public static List<float> GetFloats(GameDataDocEnum _docName, string _key) {
             if (!Datas.ContainsKey(_docName)) {
-                DebugLogger.LogErrorFormat("GameData-Setting無此Doc名稱: {0}", _docName);
+                WriteLog.LogErrorFormat("GameData-Setting無此Doc名稱: {0}", _docName);
                 return null;
             }
             object value;
@@ -152,7 +152,7 @@ namespace TheDoor.Main {
         }
         public static Dictionary<string, object> GetDicData(GameDataDocEnum _docName) {
             if (!Datas.ContainsKey(_docName)) {
-                DebugLogger.LogErrorFormat("GameData-Setting無此Doc名稱: {0}", _docName);
+                WriteLog.LogErrorFormat("GameData-Setting無此Doc名稱: {0}", _docName);
                 return null;
             }
             return Datas[_docName];

@@ -41,7 +41,7 @@ namespace TheDoor.Main {
                 FB.LogOut();
             FB.LogInWithReadPermissions(permissions: FB_PERMISSIONS, callback: (ILoginResult result) => {
                 if (result == null) {
-                    DebugLogger.LogError("LogInWithReadPermissions result is null");
+                    WriteLog.LogError("LogInWithReadPermissions result is null");
                     PopupUI.ShowClickCancel("LogInWithReadPermissions result is null", null);
                     _cb?.Invoke(false);
                     return;
@@ -49,19 +49,19 @@ namespace TheDoor.Main {
                 // Some platforms return the empty string instead of null.
                 if (!string.IsNullOrEmpty(result.Error)) {
                     PopupUI.ShowClickCancel(result.Error, null);
-                    DebugLogger.LogError(result.Error);
+                    WriteLog.LogError(result.Error);
                     _cb?.Invoke(false);
                 } else if (result.Cancelled) {
                     PopupUI.ShowClickCancel("Login cancel", null);
-                    DebugLogger.LogError(result.Cancelled);
+                    WriteLog.LogError(result.Cancelled);
                     _cb?.Invoke(false);
                 } else if (!string.IsNullOrEmpty(result.RawResult)) {
-                    DebugLogger.Log("Start Get FB Credential: " + result.RawResult);
+                    WriteLog.Log("Start Get FB Credential: " + result.RawResult);
                     Firebase.Auth.Credential credential = Firebase.Auth.FacebookAuthProvider.GetCredential(result.AccessToken.TokenString);
                     if (credential.IsValid())
                         SignInWithCredential(credential, _cb);
                     else {
-                        DebugLogger.LogError("Facebook credential is not valid");
+                        WriteLog.LogError("Facebook credential is not valid");
                         _cb?.Invoke(false);
                     }
                 } else {
@@ -88,7 +88,7 @@ namespace TheDoor.Main {
                 // Some platforms return the empty string instead of null.
                 if (!string.IsNullOrEmpty(result.Error)) {
                     PopupUI.ShowClickCancel(StringData.GetUIString("ThridPartLinkError"), null);
-                    DebugLogger.LogError(result.Error);
+                    WriteLog.LogError(result.Error);
                     _cb?.Invoke(false);
                 } else if (result.Cancelled) {
                     PopupUI.ShowClickCancel(StringData.GetUIString("ThridPartLinkError"), null);

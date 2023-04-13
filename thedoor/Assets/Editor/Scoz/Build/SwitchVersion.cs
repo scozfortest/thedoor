@@ -63,10 +63,10 @@ namespace Scoz.Editor {
             if (isYes) {
                 RunSwitchVersion(EnvVersion.Dev, result => {
                     if (result) {
-                        DebugLogger.Log(string.Format("<color=#8cff3f>SwitchTo {0} Done</color>", EnvVersion.Dev));
+                        WriteLog.Log(string.Format("<color=#8cff3f>SwitchTo {0} Done</color>", EnvVersion.Dev));
                         //EditorUtility.DisplayDialog("切換版本", string.Format("<color=#8cff3f>SwitchTo {0} Done</color>", EnvVersion.Dev), "嘻嘻");
                     } else {
-                        DebugLogger.Log(string.Format("<color=#ff3f3f>SwitchTo {0} Error</color>", EnvVersion.Dev));
+                        WriteLog.Log(string.Format("<color=#ff3f3f>SwitchTo {0} Error</color>", EnvVersion.Dev));
                         //EditorUtility.DisplayDialog("切換版本", string.Format("<color=#ff3f3f>SwitchTo {0} Error</color>", EnvVersion.Dev), "哭阿");
                     }
                 });
@@ -79,10 +79,10 @@ namespace Scoz.Editor {
             if (isYes) {
                 RunSwitchVersion(EnvVersion.Test, result => {
                     if (result) {
-                        DebugLogger.Log(string.Format("<color=#8cff3f>SwitchTo {0} Done</color>", EnvVersion.Test));
+                        WriteLog.Log(string.Format("<color=#8cff3f>SwitchTo {0} Done</color>", EnvVersion.Test));
                         //EditorUtility.DisplayDialog("切換版本", string.Format("<color=#8cff3f>SwitchTo {0} Done</color>", EnvVersion.Dev), "嘻嘻");
                     } else {
-                        DebugLogger.Log(string.Format("<color=#ff3f3f>SwitchTo {0} Error</color>", EnvVersion.Test));
+                        WriteLog.Log(string.Format("<color=#ff3f3f>SwitchTo {0} Error</color>", EnvVersion.Test));
                         //EditorUtility.DisplayDialog("切換版本", string.Format("<color=#ff3f3f>SwitchTo {0} Error</color>", EnvVersion.Dev), "哭阿");
                     }
                 });
@@ -94,10 +94,10 @@ namespace Scoz.Editor {
             if (isYes) {
                 RunSwitchVersion(EnvVersion.Release, result => {
                     if (result) {
-                        DebugLogger.Log(string.Format("<color=#8cff3f>SwitchTo {0} Done</color>", EnvVersion.Release));
+                        WriteLog.Log(string.Format("<color=#8cff3f>SwitchTo {0} Done</color>", EnvVersion.Release));
                         //EditorUtility.DisplayDialog("切換版本", string.Format("<color=#8cff3f>SwitchTo {0} Done</color>", EnvVersion.Dev), "嘻嘻");
                     } else {
-                        DebugLogger.Log(string.Format("<color=#ff3f3f>SwitchTo {0} Error</color>", EnvVersion.Release));
+                        WriteLog.Log(string.Format("<color=#ff3f3f>SwitchTo {0} Error</color>", EnvVersion.Release));
                         //EditorUtility.DisplayDialog("切換版本", string.Format("<color=#ff3f3f>SwitchTo {0} Error</color>", EnvVersion.Dev), "哭阿");
                     }
                 });
@@ -119,7 +119,7 @@ namespace Scoz.Editor {
                 Facebook.Unity.Settings.FacebookSettings.SelectedAppIndex = appIndex;
                 EditorUtility.SetDirty(Facebook.Unity.Settings.FacebookSettings.Instance);
             } else {
-                DebugLogger.LogError("FacebookSettings error.");
+                WriteLog.LogError("FacebookSettings error.");
                 _cb?.Invoke(false);
             }
             //PUN設定
@@ -128,7 +128,7 @@ namespace Scoz.Editor {
                 //Photon.Pun.PhotonNetwork.PhotonServerSettings.AppSettings.AppIdRealtime = punAppID;
                 //EditorUtility.SetDirty(Photon.Pun.PhotonNetwork.PhotonServerSettings);
             } else {
-                DebugLogger.LogError("PUN APP ID error.");
+                WriteLog.LogError("PUN APP ID error.");
                 _cb?.Invoke(false);
             }
 
@@ -148,12 +148,12 @@ namespace Scoz.Editor {
                     string remoteLoadPath = @"https://storage.googleapis.com/" + UploadBundle.GOOGLE_STORAGE_PATH_DIC[_version] + @"/{Scoz.Func.VersionSetting.AppLargeVersion}/[BuildTarget]";
                     settings.profileSettings.SetValue(prfileID, "RemoteLoadPath", remoteLoadPath);
                 } else {
-                    DebugLogger.LogError("Addressable prfile setting error.");
+                    WriteLog.LogError("Addressable prfile setting error.");
                     _cb?.Invoke(false);
 
                 }
             } else {
-                DebugLogger.LogError("Addressable prfile setting error.");
+                WriteLog.LogError("Addressable prfile setting error.");
                 _cb?.Invoke(false);
             }
             //修改Keystore

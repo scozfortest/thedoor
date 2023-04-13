@@ -253,10 +253,10 @@ namespace TheDoor.Main {
         /// 檢查是否需要初始化玩家帳戶，如果傳入的data是null代表該玩家此登入類型沒有帳號，需要初始化
         /// </summary>
         void CheckIfNeedInitializePlayerData(AuthType _authType, Dictionary<string, object> _data) {
-            DebugLogger.Log("<color=#9b791d>[Firebase]Firebase User:  " + FirebaseManager.MyUser.UserId + " login with " + FirebaseManager.MyUser.ProviderId + "</color>");
+            WriteLog.Log("<color=#9b791d>[Firebase]Firebase User:  " + FirebaseManager.MyUser.UserId + " login with " + FirebaseManager.MyUser.ProviderId + "</color>");
             ShowUI(Condietion.HideAll);
             if (_data == null) {//沒有帳號資料代表該玩家此登入類型沒有帳號，需要跑初始化帳號資料後(InitAC)才取玩家資料(LoadDatas)
-                DebugLogger.Log("<color=#9b791d>[Firebase]尚無此玩家資料，開始初始化Firebase玩家資料" + "</color>");
+                WriteLog.Log("<color=#9b791d>[Firebase]尚無此玩家資料，開始初始化Firebase玩家資料" + "</color>");
                 FirebaseManager.SignUp(_authType, data => {//初始化玩家帳號完成後跑這裡
                     FirebaseManager.LoadDatas(() => {
                         StartManager.Instance.SetVersionText();//顯示下方文字
@@ -264,7 +264,7 @@ namespace TheDoor.Main {
                     });
                 });
             } else {//已經有帳號資料，可以直接取玩家資料(LoadDatas)
-                DebugLogger.Log("<color=#9b791d>[Firebase]開始取得Firebase玩家資料" + "</color>");
+                WriteLog.Log("<color=#9b791d>[Firebase]開始取得Firebase玩家資料" + "</color>");
                 FirebaseManager.LoadDatas(() => {
                     StartManager.Instance.SetVersionText();//顯示下方文字
                     StartDownloadingAssetAndGoNextScene();
@@ -327,7 +327,7 @@ namespace TheDoor.Main {
                 string backendAddress = dic[BackendURLType.BackendAddress.ToString()].ToString();
                 string userContractURL = dic[BackendURLType.UserContractURL.ToString()].ToString();
                 string showUrl = string.Concat(backendAddress, userContractURL);
-                DebugLogger.Log($"[OnTermsOfUseClick] showUrl={showUrl}");
+                WriteLog.Log($"[OnTermsOfUseClick] showUrl={showUrl}");
                 Rect rect = new Rect(0, 0, Screen.width, Screen.height);
                 WebViewManager.Inst.ShowWebview(showUrl, rect);
             });
@@ -343,7 +343,7 @@ namespace TheDoor.Main {
                 string backendAddress = dic[BackendURLType.BackendAddress.ToString()].ToString();
                 string protectionPolicyURL = dic[BackendURLType.ProtectionPolicyURL.ToString()].ToString();
                 string showUrl = string.Concat(backendAddress, protectionPolicyURL);
-                DebugLogger.Log($"[OnProtectionPolicyClick] showUrl={showUrl}");
+                WriteLog.Log($"[OnProtectionPolicyClick] showUrl={showUrl}");
                 Rect rect = new Rect(0, 0, Screen.width, Screen.height);
                 WebViewManager.Inst.ShowWebview(showUrl, rect);
             });
@@ -364,7 +364,7 @@ namespace TheDoor.Main {
                 string uid = FirebaseManager.MyUser?.UserId ?? "";
                 string addUserURL = string.Format(customerServiceURL, version, uid);
                 string showURL = string.Concat(backendAddress, addUserURL);
-                DebugLogger.Log($"[OnQuestReportButtonClick] showURL = {showURL}, version={version}, uid={uid}");
+                WriteLog.Log($"[OnQuestReportButtonClick] showURL = {showURL}, version={version}, uid={uid}");
                 Rect rect = new Rect(0, 0, Screen.width, Screen.height);
                 WebViewManager.Inst.ShowWebview(showURL, rect);
             });

@@ -29,12 +29,12 @@ namespace Scoz.Func {
                 if (!_dic.ContainsKey(id))
                     _dic.Add(id, data as T);
                 else
-                    DebugLogger.LogError(string.Format("{0}表有重複的ID {1}", _dataName, id));
+                    WriteLog.LogError(string.Format("{0}表有重複的ID {1}", _dataName, id));
             }
             DateTime endTime = DateTime.Now;
             if (ShowLoadTime) {
                 TimeSpan spendTime = new TimeSpan(endTime.Ticks - startTime.Ticks);
-                DebugLogger.LogFormat("<color=#008080>Load {0}.json:{1}s</color>", _dataName, spendTime.TotalSeconds);
+                WriteLog.LogFormat("<color=#008080>Load {0}.json:{1}s</color>", _dataName, spendTime.TotalSeconds);
             }
         }
 
@@ -53,12 +53,12 @@ namespace Scoz.Func {
                 if (!_dic.ContainsKey(id))
                     _dic.Add(id, data as T);
                 else
-                    DebugLogger.LogError(string.Format("{0}表有重複的ID {1}", _dataName, id));
+                    WriteLog.LogError(string.Format("{0}表有重複的ID {1}", _dataName, id));
             }
             DateTime endTime = DateTime.Now;
             if (ShowLoadTime) {
                 TimeSpan spendTime = new TimeSpan(endTime.Ticks - startTime.Ticks);
-                DebugLogger.LogFormat("<color=#008080>Load {0}.json:{1}s</color>", _dataName, spendTime.TotalSeconds);
+                WriteLog.LogFormat("<color=#008080>Load {0}.json:{1}s</color>", _dataName, spendTime.TotalSeconds);
             }
         }
 
@@ -77,7 +77,7 @@ namespace Scoz.Func {
                 if (!dic.ContainsKey(id))
                     dic.Add(id, data);
                 else
-                    DebugLogger.LogError(string.Format("{0}表有重複的ID {1}", _dataName, id));
+                    WriteLog.LogError(string.Format("{0}表有重複的ID {1}", _dataName, id));
             }
             return dic;
         }
@@ -98,7 +98,7 @@ namespace Scoz.Func {
             DateTime endTime = DateTime.Now;
             if (ShowLoadTime) {
                 TimeSpan spendTime = new TimeSpan(endTime.Ticks - startTime.Ticks);
-                DebugLogger.LogFormat("<color=#008080>Load {0}.json:{1}s</color>", _dataName, spendTime.TotalSeconds);
+                WriteLog.LogFormat("<color=#008080>Load {0}.json:{1}s</color>", _dataName, spendTime.TotalSeconds);
             }
         }
         /// <summary>
@@ -116,7 +116,7 @@ namespace Scoz.Func {
             DateTime endTime = DateTime.Now;
             if (ShowLoadTime) {
                 TimeSpan spendTime = new TimeSpan(endTime.Ticks - startTime.Ticks);
-                DebugLogger.LogFormat("<color=#008080>Load {0}.json:{1}s</color>", _dataName, spendTime.TotalSeconds);
+                WriteLog.LogFormat("<color=#008080>Load {0}.json:{1}s</color>", _dataName, spendTime.TotalSeconds);
             }
         }
 

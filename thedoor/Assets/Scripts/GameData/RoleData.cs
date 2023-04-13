@@ -87,7 +87,7 @@ namespace TheDoor.Main {
                         ExclusiveScripts = item[key].ToString().Split(',').ToList();
                         break;
                     default:
-                        DebugLogger.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));
+                        WriteLog.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));
                         break;
                 }
             }

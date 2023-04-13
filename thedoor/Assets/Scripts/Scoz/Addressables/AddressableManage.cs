@@ -53,22 +53,22 @@ namespace Scoz.Func {
             //Addressables.ClearResourceLocators();
             //AssetBundle.UnloadAllAssetBundles(true);
             if (Caching.ClearCache()) {
-                DebugLogger.Log("Successfully cleaned the cache");
+                WriteLog.Log("Successfully cleaned the cache");
                 _cb?.Invoke();
             } else {
-                DebugLogger.Log("Cache is being used");
+                WriteLog.Log("Cache is being used");
                 _cb?.Invoke();
             }
 
             //ProgressImg.fillAmount = 0;
             //顯示載入進度文字
             ProgressText.text = StringData.GetUIString("ReDownload");
-            DebugLogger.Log("重新載入中....................");
+            WriteLog.Log("重新載入中....................");
         }
         Coroutine Downloader;
         public void StartLoadAsset(Action _action) {
             BG.SetActive(false);
-            DebugLogger.Log("<color=#008080>[Addressables] LoadAsset-Start</color>");
+            WriteLog.Log("<color=#008080>[Addressables] LoadAsset-Start</color>");
             Keys.RemoveAll(a => a == "");
             PopupUI_Local.ShowLoading(StringData.GetUIString("AddressableLoading"));
             FinishedAction = _action;
@@ -107,7 +107,7 @@ namespace Scoz.Func {
             AsyncOperationHandle<long> getDownloadSize = Addressables.GetDownloadSizeAsync(Keys);
             yield return getDownloadSize;
             long totalSize = getDownloadSize.Result;
-            DebugLogger.LogFormat("<color=#008080>[Addressables] LoadAsset-TotalSize={0}</color>", MyMath.BytesToMB(totalSize).ToString("0.00"));
+            WriteLog.LogFormat("<color=#008080>[Addressables] LoadAsset-TotalSize={0}</color>", MyMath.BytesToMB(totalSize).ToString("0.00"));
 
             //已經抓到資料就取消Coroutine
             if (CheckInternetCoroutine != null)
@@ -157,16 +157,16 @@ namespace Scoz.Func {
             FinishedAction?.Invoke();
             MyScene scene = MyEnum.ParseEnum<MyScene>(SceneManager.GetActiveScene().name);
             ShowDownloadUI(false);
-            DebugLogger.Log("<color=#008080>[Addressables] LoadAsset-Finished</color>");
+            WriteLog.Log("<color=#008080>[Addressables] LoadAsset-Finished</color>");
 
 
         }
         public static void PreLoadToMemory(Action _ac = null) {
             DateTime now = DateTime.Now;
-            DebugLogger.LogErrorFormat("開始下載MaJam資源圖");
+            WriteLog.LogErrorFormat("開始下載MaJam資源圖");
             //初始化UI
             Addressables.LoadAssetsAsync<Texture>("MaJam", null).Completed += handle => {
-                DebugLogger.LogErrorFormat("載入MaJam花費: {0}秒", (DateTime.Now - now).TotalSeconds);
+                WriteLog.LogErrorFormat("載入MaJam花費: {0}秒", (DateTime.Now - now).TotalSeconds);
                 _ac?.Invoke();
             };
         }
@@ -252,7 +252,7 @@ namespace Scoz.Func {
 
 
             long totalSize = getDownloadSize.Result;
-            DebugLogger.Log("Download TotalSize=" + totalSize);
+            WriteLog.Log("Download TotalSize=" + totalSize);
             if (totalSize > 0) {//有要下載跳訊息
                 string downloadStr = string.Format(StringData.GetUIString("StartDownloadAsset"), MyMath.BytesToMB(totalSize).ToString("0.00"));
                 //顯示下載條

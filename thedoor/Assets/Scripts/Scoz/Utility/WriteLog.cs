@@ -3,7 +3,7 @@ using System.Diagnostics;
 using UnityEngine;
 
 namespace Scoz.Func {
-	public static class DebugLogger {
+	public static class WriteLog {
 
 #if UNITY_EDITOR
 

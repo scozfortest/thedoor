@@ -20,7 +20,7 @@ namespace TheDoor.Main {
 
 
         public static IEnumerator Post(string _url, string _bodyJson, Action<object> _cb = null) {
-            DebugLogger.Log("SendPost");
+            WriteLog.Log("SendPost");
             //string url = "https://asia-east1-lanlansbizarre-dev.cloudfunctions.net/AddData";
             //string jsonString = "{\"Col\":\"Dev\"}";
             var request = new UnityWebRequest(_url, "POST");
@@ -30,8 +30,8 @@ namespace TheDoor.Main {
             request.SetRequestHeader("Content-Type", "application/json");
             yield return request.SendWebRequest();
             _cb?.Invoke(request.result);
-            DebugLogger.Log("Status Code: " + request.responseCode);
-            DebugLogger.Log("Result:" + request.result);
+            WriteLog.Log("Status Code: " + request.responseCode);
+            WriteLog.Log("Result:" + request.result);
         }
     }
 }

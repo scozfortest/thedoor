@@ -18,7 +18,7 @@ namespace Scoz.Func
             }
             catch (Exception _e)
             {
-                DebugLogger.LogError(_e);
+                WriteLog.LogError(_e);
             }
 
             //DebugLogger.Log(_bytes.Length / 1024 + "Kb was saved as: " + _fullPath);
@@ -60,7 +60,7 @@ namespace Scoz.Func
         public static void DeleteFIle(string _path)
         {
             string filePath = string.Format("{0}/{1}", Application.persistentDataPath, _path);
-            DebugLogger.Log("移除檔案:" + filePath);
+            WriteLog.Log("移除檔案:" + filePath);
             System.IO.File.Delete(filePath);
         }
         public static byte[] LoadBytes(string _path)
@@ -82,7 +82,7 @@ namespace Scoz.Func
             }
             catch
             {
-                DebugLogger.LogError("讀取Image失敗:" + _path);
+                WriteLog.LogError("讀取Image失敗:" + _path);
                 return null;
             }
             return Sprite.Create(t, new Rect(0, 0, t.width, t.height), new Vector2(0.5f, 0.5f));
@@ -98,7 +98,7 @@ namespace Scoz.Func
             }
             catch
             {
-                DebugLogger.LogError("讀取Image失敗:" + _path);
+                WriteLog.LogError("讀取Image失敗:" + _path);
                 return null;
             }
             return t;
@@ -126,7 +126,7 @@ namespace Scoz.Func
             catch (Exception _e)
             {
                 string ErrorMessages = "File Write Error\n" + _e.Message;
-                DebugLogger.LogError(ErrorMessages);
+                WriteLog.LogError(ErrorMessages);
             }
         }
     }

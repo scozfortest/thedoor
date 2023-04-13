@@ -62,7 +62,7 @@ namespace Scoz.Func {
         }
         public static Debugger CreateNewInstance() {
             if (Instance != null) {
-                DebugLogger.Log("Debugger之前已經被建立了");
+                WriteLog.Log("Debugger之前已經被建立了");
             } else {
                 GameObject prefab = Resources.Load<GameObject>("Prefabs/Common/Debugger");
                 GameObject go = Instantiate(prefab);

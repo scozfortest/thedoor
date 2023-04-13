@@ -10,7 +10,7 @@ namespace Scoz.Func {
             if (Enum.TryParse(_value, out T t)) {
                 return t;
             }
-            DebugLogger.LogErrorFormat("傳入字串:{0} 無法轉為 {1} Enum", _value, typeof(T));
+            WriteLog.LogErrorFormat("傳入字串:{0} 無法轉為 {1} Enum", _value, typeof(T));
             return default(T);
         }
         public static bool TryParseEnum<T>(string _value, out T _t) where T : struct {
@@ -19,7 +19,7 @@ namespace Scoz.Func {
                 return true;
             }
             _t = default(T);
-            DebugLogger.LogErrorFormat("傳入字串:{0} 無法轉為 {1} Enum", _value, typeof(T));
+            WriteLog.LogErrorFormat("傳入字串:{0} 無法轉為 {1} Enum", _value, typeof(T));
             return false;
         }
         public static bool IsTypeOfEnum<T>(string _value) where T : struct {

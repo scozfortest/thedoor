@@ -62,13 +62,13 @@ namespace Scoz.Func {
             Permission.RequestUserPermissions(needPermissions.ToArray(), callbacks);
         }
         void OnPermissionDenied(string _cbStr) {
-            DebugLogger.LogError("OnPermissionDenied: " + _cbStr);
+            WriteLog.LogError("OnPermissionDenied: " + _cbStr);
         }
         void OnPermissionGranted(string _cbStr) {
-            DebugLogger.LogError("OnPermissionGranted: " + _cbStr);
+            WriteLog.LogError("OnPermissionGranted: " + _cbStr);
         }
         void OnPermissionDeniedAndDontAskAgain(string _cbStr) {
-            DebugLogger.LogError("OnPermissionDeniedAndDontAskAgain: " + _cbStr);
+            WriteLog.LogError("OnPermissionDeniedAndDontAskAgain: " + _cbStr);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Scoz.Func
                     return i;
                 }
             }
-            DebugLogger.LogError("¶Ç¤Jªºitem¤£¦Alist¤¤");
+            WriteLog.LogError("å‚³å…¥çš„itemä¸å†listä¸­");
             return 0;
         }
     }

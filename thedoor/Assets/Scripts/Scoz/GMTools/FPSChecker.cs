@@ -38,7 +38,7 @@ namespace Scoz.Func {
         }
         public static float GetFPS() {
             if (Instance == null) {
-                DebugLogger.LogError("尚未初始化FPSChecker");
+                WriteLog.LogError("尚未初始化FPSChecker");
                 return 0;
             }
             return Instance.LastFrameRate;

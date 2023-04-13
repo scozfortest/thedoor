@@ -14,13 +14,13 @@ namespace TheDoor.Main {
             FirebaseUser user = MyAuth.CurrentUser;
             user.TokenAsync(true).ContinueWithOnMainThread(task => {
                 if (task.IsCanceled) {
-                    DebugLogger.LogError("TokenAsync was canceled.");
+                    WriteLog.LogError("TokenAsync was canceled.");
                     _cb?.Invoke(null);
                     return;
                 }
 
                 if (task.IsFaulted) {
-                    DebugLogger.LogError("TokenAsync encountered an error: " + task.Exception);
+                    WriteLog.LogError("TokenAsync encountered an error: " + task.Exception);
                     _cb?.Invoke(null);
                     return;
                 }

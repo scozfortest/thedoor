@@ -39,7 +39,7 @@ namespace Scoz.Func {
                             AudioPlayer.SetVoiceVolume(float.Parse(item[key].ToString()));
                             break;
                         default:
-                            DebugLogger.LogWarning(string.Format("LocoSettingData有不明屬性:{0}", key));
+                            WriteLog.LogWarning(string.Format("LocoSettingData有不明屬性:{0}", key));
                             break;
                     }
                 }
@@ -58,9 +58,9 @@ namespace Scoz.Func {
         }
         public void SaveSettingToLoco() {
             string str = GetSettingJsonStr();
-            DebugLogger.LogFormat("<color=Orange>{0}</color>", str);
+            WriteLog.LogFormat("<color=Orange>{0}</color>", str);
             PlayerPrefs.SetString(LocoData.Setting.ToString(), str);
-            DebugLogger.LogFormat("<color=Orange>{0}</color>", "Save Setting To Loco");
+            WriteLog.LogFormat("<color=Orange>{0}</color>", "Save Setting To Loco");
         }
         public void SetLanguage(Language _value) {
             if (_value != UsingLanguage) {

@@ -33,7 +33,7 @@ namespace Scoz.Func {
                                 language = Language.JP;
                                 break;
                             default:
-                                DebugLogger.LogWarning(string.Format("{0}表有不明屬性:{1}", StringType, key));
+                                WriteLog.LogWarning(string.Format("{0}表有不明屬性:{1}", StringType, key));
                                 break;
                         }
                         if (!StringDic.ContainsKey(language))
@@ -45,7 +45,7 @@ namespace Scoz.Func {
                     }
                 }
             } catch (Exception ex) {
-                DebugLogger.LogException(ex);
+                WriteLog.LogException(ex);
             }
         }
 
@@ -62,7 +62,7 @@ namespace Scoz.Func {
                 StringData data = new StringData(items[i], _dataName);
                 string name = items[i]["ID"].ToString();
                 if (dic.ContainsKey(name)) {
-                    DebugLogger.LogError(string.Format("{0}的名稱{1}已重複", _dataName, name));
+                    WriteLog.LogError(string.Format("{0}的名稱{1}已重複", _dataName, name));
                     break;
                 }
                 dic.Add(name, data);
@@ -70,7 +70,7 @@ namespace Scoz.Func {
             DateTime endTime = DateTime.Now;
             if (ShowLoadTime) {
                 TimeSpan spendTime = new TimeSpan(endTime.Ticks - startTime.Ticks);
-                DebugLogger.LogFormat("<color=#c3377b>讀取本機 {0}.json  讀取時間:{1}s</color>", _dataName, spendTime.TotalSeconds);
+                WriteLog.LogFormat("<color=#c3377b>讀取本機 {0}.json  讀取時間:{1}s</color>", _dataName, spendTime.TotalSeconds);
             }
             return dic;
         }
@@ -87,7 +87,7 @@ namespace Scoz.Func {
                 StringData data = new StringData(items[i], _dataName);
                 int id = int.Parse(items[i]["ID"].ToString());
                 if (dic.ContainsKey(id)) {
-                    DebugLogger.LogWarning(string.Format("{0}的主屬性名稱重複", _dataName));
+                    WriteLog.LogWarning(string.Format("{0}的主屬性名稱重複", _dataName));
                     break;
                 }
                 dic.Add(id, data);
@@ -95,7 +95,7 @@ namespace Scoz.Func {
             DateTime endTime = DateTime.Now;
             if (ShowLoadTime) {
                 TimeSpan spendTime = new TimeSpan(endTime.Ticks - startTime.Ticks);
-                DebugLogger.LogFormat("<color=#c3377b>Load {0}.json:{1}s</color>", _dataName, spendTime.TotalSeconds);
+                WriteLog.LogFormat("<color=#c3377b>Load {0}.json:{1}s</color>", _dataName, spendTime.TotalSeconds);
             }
             return dic;
         }
@@ -105,7 +105,7 @@ namespace Scoz.Func {
         }
         public string GetString(string _column, Language _language) {
             if (!StringDic.ContainsKey(_language)) {
-                DebugLogger.LogWarning("無此語系文字:" + _language);
+                WriteLog.LogWarning("無此語系文字:" + _language);
                 return "Undifined";
             }
             return GetString(_column);
@@ -114,7 +114,7 @@ namespace Scoz.Func {
             if (StringDic.Count == 0)
                 return "";
             if (!StringDic[GamePlayer.Instance.UsingLanguage].ContainsKey(_column)) {
-                DebugLogger.LogWarning("無此欄位名稱:" + _column);
+                WriteLog.LogWarning("無此欄位名稱:" + _column);
                 return "Undifined";
             }
             return StringDic[GamePlayer.Instance.UsingLanguage][_column];
@@ -125,7 +125,7 @@ namespace Scoz.Func {
             if (GameDictionary.StringDic.ContainsKey(_id))
                 return GameDictionary.StringDic[_id].GetString(_column);
             else {
-                DebugLogger.LogWarning("不存在的文字字典索引:" + _id);
+                WriteLog.LogWarning("不存在的文字字典索引:" + _id);
                 return "Undifined";
             }
         }

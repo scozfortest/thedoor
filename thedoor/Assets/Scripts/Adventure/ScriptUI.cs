@@ -75,7 +75,7 @@ namespace TheDoor.Main {
                 case "NextDoor":
                     return true;
                 default:
-                    DebugLogger.LogErrorFormat("尚未定義的Script EndType {0}", CurScriptData.EndType);
+                    WriteLog.LogErrorFormat("尚未定義的Script EndType {0}", CurScriptData.EndType);
                     return false;
             }
         }

@@ -24,7 +24,7 @@ namespace TheDoor.Main {
 
             string colName = FirebaseManager.ColNames.GetValueOrDefault(ColEnum.Player);
             if (colName == null) {
-                DebugLogger.LogErrorFormat("ColNames Error ");
+                WriteLog.LogErrorFormat("ColNames Error ");
                 return null;
             }
 
@@ -43,7 +43,7 @@ namespace TheDoor.Main {
             data.Add("Items", itemDatas);
             datas.Add(data);
             postJson.Add("Datas", datas);
-            DebugLogger.LogError(postJson);
+            WriteLog.LogError(postJson);
             PostData postData = new PostData(AddDatasURL, postJson.ToString());
             return postData;
         }

@@ -31,7 +31,7 @@ namespace TheDoor.Main {
                         Weight = int.Parse(item[key].ToString());
                         break;
                     default:
-                        DebugLogger.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));
+                        WriteLog.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));
                         break;
                 }
             }

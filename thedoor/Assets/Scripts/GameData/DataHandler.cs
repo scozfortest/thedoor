@@ -35,8 +35,8 @@ namespace TheDoor.Main {
                 else
                     dic.Add("ReplaceGainItems", null);
             } catch (Exception _e) {
-                DebugLogger.LogError("ConvertDataObjToReturnItemDic時發生錯誤");
-                DebugLogger.LogError(_e);
+                WriteLog.LogError("ConvertDataObjToReturnItemDic時發生錯誤");
+                WriteLog.LogError(_e);
             }
 
 

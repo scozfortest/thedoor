@@ -408,7 +408,7 @@ namespace Scoz.Func {
                 Instance.MySettingUI.Init();
                 Instance.MySettingUI.SetActive(false);
                 _ac?.Invoke();
-            }, () => { DebugLogger.LogError("載入GameSettingUIAsset失敗"); });
+            }, () => { WriteLog.LogError("載入GameSettingUIAsset失敗"); });
         }
         public static void CallSettingUI() {
             if (!Instance)

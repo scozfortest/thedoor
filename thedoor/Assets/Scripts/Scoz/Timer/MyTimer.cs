@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +24,7 @@ namespace Scoz.Func
             StartRunTimer = _startRunTimer;
             Loop = _loop;
             if (CircleTime == 0)
-                DebugLogger.LogWarning(string.Format("{0}'s CircleTime of MyTimer is 0", _timeOutCB.Method.Name));
+                WriteLog.LogWarning(string.Format("{0}'s CircleTime of MyTimer is 0", _timeOutCB.Method.Name));
         }
         public MyTimer(float _circleTime, Action _timeOutCB, Action _runTimeFunc, bool _startRunTimer, bool _loop)
         {
@@ -36,7 +36,7 @@ namespace Scoz.Func
             StartRunTimer = _startRunTimer;
             Loop = _loop;
             if (CircleTime == 0)
-                DebugLogger.LogWarning(string.Format("{0}'s CircleTime of MyTimer is 0", _timeOutCB.Method.Name));
+                WriteLog.LogWarning(string.Format("{0}'s CircleTime of MyTimer is 0", _timeOutCB.Method.Name));
         }
         /// <summary>
         /// 重置LoopTimes並重新倒數

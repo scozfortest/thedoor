@@ -42,7 +42,7 @@ namespace TheDoor.Main {
                 }
             }
 
-            DebugLogger.Log("下載圖片");
+            WriteLog.Log("下載圖片");
             FirebaseManager.DownloadFile(_path, bytes => {
                 if (bytes != null) {
                     IOManager.SaveBytes(bytes, _path);
@@ -50,7 +50,7 @@ namespace TheDoor.Main {
                     LocalSpriteDic.Add(_path, s);
                     _cb?.Invoke(s);
                 } else {
-                    DebugLogger.LogErrorFormat("載不到圖片:{0}", _path);
+                    WriteLog.LogErrorFormat("載不到圖片:{0}", _path);
                 }
             });
         }

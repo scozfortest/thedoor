@@ -58,7 +58,7 @@ public class FacebookAdsManager : MonoSingletonA<FacebookAdsManager> {
         }
 
         IsInit = true;
-        DebugLogger.Log("[Facebook Ads開始初始化] Initialize");
+        WriteLog.Log("[Facebook Ads開始初始化] Initialize");
 #if !UNITY_EDITOR
         AudienceNetworkAds.Initialize();
         LoadRewardedVideo();
@@ -92,27 +92,27 @@ public class FacebookAdsManager : MonoSingletonA<FacebookAdsManager> {
     }
 
     public void RewardedVideoAdDidLoad() {
-        DebugLogger.Log("[Facebook Ads讀取廣告單元] RewardedVideo ad loaded.");
+        WriteLog.Log("[Facebook Ads讀取廣告單元] RewardedVideo ad loaded.");
         FacebookAdReadyToShow = true;
     }
 
 
     public void RewardedVideoAdDidFailWithError(string error) {
-        DebugLogger.Log("[Facebook Ads讀取廣告失敗] RewardedVideo ad failed to load with error: " + error);
+        WriteLog.Log("[Facebook Ads讀取廣告失敗] RewardedVideo ad failed to load with error: " + error);
         OnShowFacebookAds?.Invoke(false, AdsResultMessage.FacebookAdLoad_Fail);
         FacebookAdReadyToShow = false;
     }
 
     public void RewardedVideoAdWillLogImpression() {
-        DebugLogger.Log("[Facebook Ads顯示廣告單元] RewardedVideo ad logged impression.");
+        WriteLog.Log("[Facebook Ads顯示廣告單元] RewardedVideo ad logged impression.");
     }
 
     public void RewardedVideoAdDidClick() {
-        DebugLogger.Log("[Facebook Ads廣告單元被點擊] RewardedVideo ad clicked.");
+        WriteLog.Log("[Facebook Ads廣告單元被點擊] RewardedVideo ad clicked.");
     }
 
     public void RewardedVideoAdDidClose() {
-        DebugLogger.Log("[Facebook Ads廣告單元關閉] Rewarded video ad did close.");
+        WriteLog.Log("[Facebook Ads廣告單元關閉] Rewarded video ad did close.");
         if (RewardedVideoAd != null) {
             RewardedVideoAd.Dispose();
         }
@@ -130,19 +130,19 @@ public class FacebookAdsManager : MonoSingletonA<FacebookAdsManager> {
     /// </summary>    
     public void ShowFacebookAd(Action<bool, AdsResultMessage> onShowFacebookAdsCallBack) { // Show the loaded content in the Ad Unit:
         // Note that if the ad content wasn't previously loaded, this method will fail
-        DebugLogger.Log("[Facebook Ads顯示廣告單元] Showing Ad: ");
+        WriteLog.Log("[Facebook Ads顯示廣告單元] Showing Ad: ");
         OnShowFacebookAds = onShowFacebookAdsCallBack;
 
         if (!InitializeSuccess) {
             onShowFacebookAdsCallBack?.Invoke(false, AdsResultMessage.FacebookAds_Not_Initialize);
-            DebugLogger.Log("[Facebook Ads顯示廣告單元] FacebookAds_Not_Initialize");
+            WriteLog.Log("[Facebook Ads顯示廣告單元] FacebookAds_Not_Initialize");
             OnShowFacebookAds = null;
             return;
         }
 
         if (!FacebookAdReadyToShow) {
             onShowFacebookAdsCallBack?.Invoke(false, AdsResultMessage.FacebookAds_NotReady);
-            DebugLogger.Log("[Facebook Ads顯示廣告單元] FacebookAds_NotReady");
+            WriteLog.Log("[Facebook Ads顯示廣告單元] FacebookAds_NotReady");
             OnShowFacebookAds = null;
             // 沒有廣告可看 重新再載一次新的廣告試試看
             if (RewardedVideoAd == null || !(RewardedVideoAd != null && RewardedVideoAd.IsValid())) {
@@ -153,7 +153,7 @@ public class FacebookAdsManager : MonoSingletonA<FacebookAdsManager> {
 
         if (IsShowAds) {
             onShowFacebookAdsCallBack?.Invoke(false, AdsResultMessage.Ads_AlreadyShowing);
-            DebugLogger.Log("[Facebook Ads顯示廣告單元] Ads_AlreadyShowing");
+            WriteLog.Log("[Facebook Ads顯示廣告單元] Ads_AlreadyShowing");
             OnShowFacebookAds = null;
             return;
         }

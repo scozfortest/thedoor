@@ -40,7 +40,7 @@ namespace Scoz.Func {
                 Instance.MySceneTransition.gameObject.SetActive(true);
                 Instance.MySceneTransition.InitTransition();
                 Instance.OnSceneTransitionAssetLoadFinishedAC?.Invoke();
-            }, () => { DebugLogger.LogError("載入SceneTransitionAsset失敗"); });
+            }, () => { WriteLog.LogError("載入SceneTransitionAsset失敗"); });
         }
         public static void InitSceneTransitionProgress(params string[] _keys) {
             if (Instance == null)

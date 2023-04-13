@@ -34,7 +34,7 @@ namespace Scoz.Func
             TriggerTimes = 0;
             if (CircleTime == 0)
             {
-                DebugLogger.LogWarning(string.Format("{0}'s CircleTime of MyTimer is 0", _timeOutFunc.Method.Name));
+                WriteLog.LogWarning(string.Format("{0}'s CircleTime of MyTimer is 0", _timeOutFunc.Method.Name));
             }
         }
         public PreciseTimer(float _circleTime, float _durationTime, MyDelegate _timeOutFunc, MyDelegate _runTimeFunc, bool _startRunTimer, bool _loop)
@@ -49,7 +49,7 @@ namespace Scoz.Func
             Loop = _loop;
             TriggerTimes = 0;
             if (CircleTime == 0)
-                DebugLogger.LogWarning("CircleTime of MyTimer is 0");
+                WriteLog.LogWarning("CircleTime of MyTimer is 0");
         }
         public PreciseTimer(float _circleTime, float _durationTime, MyParameterDelegate _timeOutFunc, MyDelegate _runTimeFunc, bool _startRunTimer, bool _loop, object _obj)
         {
@@ -65,7 +65,7 @@ namespace Scoz.Func
             TriggerTimes = 0;
             if (CircleTime == 0)
             {
-                DebugLogger.LogWarning(string.Format("{0}'s CircleTime of MyTimer is 0", _timeOutFunc.Method.Name));
+                WriteLog.LogWarning(string.Format("{0}'s CircleTime of MyTimer is 0", _timeOutFunc.Method.Name));
             }
         }
         public PreciseTimer(float _circleTime, float _durationTime, MyParameterDelegate _timeOutFunc, bool _startRunTimer, bool _loop, object _obj)
@@ -81,7 +81,7 @@ namespace Scoz.Func
             TriggerTimes = 0;
             if (CircleTime == 0)
             {
-                DebugLogger.LogWarning(string.Format("{0}'s CircleTime of MyTimer is 0", _timeOutFunc.Method.Name));
+                WriteLog.LogWarning(string.Format("{0}'s CircleTime of MyTimer is 0", _timeOutFunc.Method.Name));
             }
         }
         public void RestartCountDown()

@@ -29,7 +29,7 @@ namespace TheDoor.Main {
                 FirebaseManager.Init(success => {
                     if (success) {
                         if (FirebaseManager.MyUser == null)//還沒在StartScene註冊帳戶就直接從其他Scene登入會報錯誤(通常還沒註冊帳戶就不會有玩家資料直接進遊戲會有問題)
-                            DebugLogger.LogError("尚未註冊Firebase帳戶");
+                            WriteLog.LogError("尚未註冊Firebase帳戶");
 
                         //讀取Firestore資料
                         FirebaseManager.LoadDatas(() => {
@@ -78,7 +78,7 @@ namespace TheDoor.Main {
             DateTime now = DateTime.Now;
             //初始化UI
             Addressables.LoadAssetAsync<GameObject>(LobbyUIAsset).Completed += handle => {
-                DebugLogger.LogFormat("載入LobbyUI花費: {0}秒", (DateTime.Now - now).TotalSeconds);
+                WriteLog.LogFormat("載入LobbyUI花費: {0}秒", (DateTime.Now - now).TotalSeconds);
                 HandleList.Add(handle);
                 GameObject go = Instantiate(handle.Result);
                 go.transform.SetParent(MyCanvas.transform);
@@ -103,7 +103,7 @@ namespace TheDoor.Main {
         /// <param name="receiptString">訂單內容</param>
         /// <param name="successCallBack">完成驗證後的回呼要通知IAPManager商品已經驗證成功可以完成購買這個項目</param>
         private void OnPurchaseSuccess(string productUID, string shopUID, IPurchaseReceipt receipt, string receiptString, Action<string> successCallBack) {
-            DebugLogger.Log($"購買商品訂單成立 商城商品Id={shopUID}, 平台商品ID={productUID} 準備驗證");
+            WriteLog.Log($"購買商品訂單成立 商城商品Id={shopUID}, 平台商品ID={productUID} 準備驗證");
             FirebaseManager.Purchase(shopUID, receiptString, dataObj => {
                 if (dataObj.ToString() == "used token") {
                     successCallBack?.Invoke(productUID);
@@ -121,7 +121,7 @@ namespace TheDoor.Main {
         /// </summary>
         /// <param name="productID">失敗的訂單Id</param>
         private void OnPurchaseFail(string productID) {
-            DebugLogger.Log("購買商品訂單失敗 productID=" + productID);
+            WriteLog.Log("購買商品訂單失敗 productID=" + productID);
         }
         #endregion
     }

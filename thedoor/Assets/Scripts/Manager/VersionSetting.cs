@@ -19,7 +19,7 @@ namespace Scoz.Func {
             string[] v1Numbers = _v1.Split('.');
             string[] v2Numbers = _v2.Split('.');
             if (v1Numbers.Length != v2Numbers.Length)
-                DebugLogger.LogError("Compare Version Error:  not the same version length.");
+                WriteLog.LogError("Compare Version Error:  not the same version length.");
 
             try {
                 for (int i = 0; i < v1Numbers.Length; i++) {
@@ -33,7 +33,7 @@ namespace Scoz.Func {
                         return 1;
                 }
             } catch (Exception _e) {
-                DebugLogger.LogError("Compare Version Error: " + _e);
+                WriteLog.LogError("Compare Version Error: " + _e);
             }
             return 0;
         }
