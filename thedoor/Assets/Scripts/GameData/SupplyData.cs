@@ -26,6 +26,7 @@ namespace TheDoor.Main {
         }
         public ItemType MyItemType { get; } = ItemType.Supply;
         public string Ref { get; private set; }
+        public string[] Tags { get; private set; }
         public int Rank { get; private set; }
         public int ExtendHP { get; private set; }
         public int ExtendSanP { get; private set; }
@@ -45,6 +46,9 @@ namespace TheDoor.Main {
                         break;
                     case "Ref":
                         Ref = item[key].ToString();
+                        break;
+                    case "Tags":
+                        Tags = item[key].ToString().Split(',');
                         break;
                     case "Rank":
                         Rank = int.Parse(item[key].ToString());
@@ -99,6 +103,10 @@ namespace TheDoor.Main {
 
         public List<SupplyEffectData> GetSupplyEffects() {
             return SupplyEffectData.GetSupplyEffectDatas(ID);
+        }
+        public bool BelongToTag(string _tag) {
+            if (Tags == null) return false;
+            return Tags.Contains(_tag);
         }
 
     }

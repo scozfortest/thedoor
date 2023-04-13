@@ -13,7 +13,7 @@
 	{	"ID":"11a",	"NextIDs":"11a_1"},
 	{	"ID":"11a_1",	"NextIDs":"11a_1a/11a_1b/11a_1c"},
 	{	"ID":"11a_1a",	"NextIDs":"11a_1a_1"},
-	{	"ID":"11a_1b",	"NextIDs":"11a_1b_1"},
+	{	"ID":"11a_1b",	"NextIDs":"11a_1b_1",	"Requirement1":"UseSupplyTag",	"RequireValue1":"Sharp"},
 	{	"ID":"11a_1c",	"End":"NextScript"},
 	{	"ID":"11a_1a_1",	"End":"NextScript",	"EffectIDs":"1"},
 	{	"ID":"11a_1b_1",	"End":"NextScript",	"EffectIDs":"2",	"ItemType1":"Supply",	"ItemValue1":"11"}
