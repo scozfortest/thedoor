@@ -55,7 +55,7 @@ namespace TheDoor.Main {
                             } else if (key.Contains("EffectValue")) {
                                 tmpTEffectValueStr = item[key].ToString();
                             } else if (key.Contains("EffectValue")) {
-                                TargetEffectData tmpTEffectData = new TargetEffectData(tmpTEffectType, tmpTEffectValueStr, float.Parse(item[key].ToString()));
+                                TargetEffectData tmpTEffectData = new TargetEffectData(MyTarget, tmpTEffectType, tmpTEffectValueStr, float.Parse(item[key].ToString()));
                                 MyEffects.Add(tmpTEffectData);
                             }
                         } catch (Exception _e) {

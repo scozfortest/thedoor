@@ -1,5 +1,5 @@
 {"SupplyEffect":[
-	{	"ID":"11",	"SupplyID":"1",	"Target":"Enemy",	"EffectType1":"Health",	"EffectValue1":"-20",	"EffectType2":"Stun",	"EffectValue2":"2",	"EffectProbability2":"0.5"},
+	{	"ID":"11",	"SupplyID":"1",	"Target":"Enemy",	"EffectType1":"Health",	"EffectValue1":"-20",	"EffectType2":"Stun",	"EffectValue2":"2",	"EffectProb2":"0.5"},
 	{	"ID":"21",	"SupplyID":"2",	"Target":"Enemy",	"EffectType1":"Health",	"EffectValue1":"-10~-100",	"EffectType2":"Bleed",	"EffectValue2":"5"},
 	{	"ID":"22",	"SupplyID":"2",	"Target":"Myself",	"EffectType1":"Sanity",	"EffectValue1":"-1"}
 ]}

@@ -9,6 +9,8 @@ namespace Scoz.Func {
 
         [SerializeField]
         List<Font> SysFonts = null;
+        [SerializeField]
+        List<TMPro.TMP_FontAsset> SysFontAssets = null;
 
 
         public static GameDictionary Instance;
@@ -39,6 +41,14 @@ namespace Scoz.Func {
                     return Instance.SysFonts[index];
             }
             return Resources.GetBuiltinResource<Font>("Arial.ttf");
+        }
+        public static TMPro.TMP_FontAsset GetUsingLanguageFontAsset() {
+            if (Instance != null) {
+                int index = (int)MyPlayer.Instance.UsingLanguage;
+                if (index < Instance.SysFonts.Count && Instance.SysFonts[index] != null)
+                    return Instance.SysFontAssets[index];
+            }
+            return null;
         }
 
         /// <summary>

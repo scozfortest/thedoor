@@ -27,8 +27,8 @@ namespace TheDoor.Main {
                                 tmpTEffectType = MyEnum.ParseEnum<TargetEffectType>(item[key].ToString());
                             } else if (key.Contains("EffectValue")) {
                                 tmpTEffectValueStr = item[key].ToString();
-                            } else if (key.Contains("EffectValue")) {
-                                TargetEffectData tmpTEffectData = new TargetEffectData(tmpTEffectType, tmpTEffectValueStr, float.Parse(item[key].ToString()));
+                            } else if (key.Contains("EffectProb")) {
+                                TargetEffectData tmpTEffectData = new TargetEffectData(Target.Myself, tmpTEffectType, tmpTEffectValueStr, float.Parse(item[key].ToString()));
                                 MyEffects.Add(tmpTEffectData);
                             }
                         } catch (Exception _e) {

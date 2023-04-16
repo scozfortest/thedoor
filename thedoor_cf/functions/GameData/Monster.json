@@ -1,8 +1,8 @@
 {"Monster":[
-	{	"ID":"1",	"Rank":"1",	"Ref":"monster1",	"Health":"100",	"HeadDmg":"1",	"HeadProbability":"0.6",	"BodyDmg":"0.8",	"BodyProbability":"0.9",	"LimbsDmg":"0.6",	"LimbsProbability":"1"},
-	{	"ID":"2",	"Rank":"1",	"Ref":"monster2",	"Health":"100",	"HeadDmg":"1.1",	"HeadProbability":"0.5",	"BodyDmg":"0.8",	"BodyProbability":"0.8",	"LimbsDmg":"0.7",	"LimbsProbability":"1"},
-	{	"ID":"3",	"Rank":"1",	"Ref":"monster3",	"Health":"100",	"HeadDmg":"1",	"HeadProbability":"0.7",	"BodyDmg":"0.8",	"BodyProbability":"0.8",	"LimbsDmg":"0.6",	"LimbsProbability":"1"},
-	{	"ID":"4",	"Rank":"1",	"Ref":"monster4",	"Health":"100",	"HeadDmg":"1",	"HeadProbability":"0.5",	"BodyDmg":"0.9",	"BodyProbability":"0.9",	"LimbsDmg":"0.6",	"LimbsProbability":"1"},
-	{	"ID":"5",	"Rank":"1",	"Ref":"monster5",	"Health":"100",	"BodyDmg":"1",	"BodyProbability":"0.6"},
-	{	"ID":"6",	"Rank":"1",	"Ref":"monster6",	"Health":"100",	"HeadDmg":"1.8",	"HeadProbability":"0.4",	"BodyDmg":"0.2",	"BodyProbability":"1",	"LimbsDmg":"0.7",	"LimbsProbability":"0.8"}
+	{	"ID":"1",	"Rank":"1",	"Ref":"monster1",	"Health":"100",	"Weakness":"Sharp",	"HeadDmg":"1",	"HeadProb":"0.6",	"BodyDmg":"0.8",	"BodyProb":"0.9",	"LimbsDmg":"0.6",	"LimbsProb":"1"},
+	{	"ID":"2",	"Rank":"1",	"Ref":"monster2",	"Health":"100",	"Weakness":"Heavy",	"HeadDmg":"1.1",	"HeadProb":"0.5",	"BodyDmg":"0.8",	"BodyProb":"0.8",	"LimbsDmg":"0.7",	"LimbsProb":"1"},
+	{	"ID":"3",	"Rank":"1",	"Ref":"monster3",	"Health":"100",	"HeadDmg":"1",	"HeadProb":"0.7",	"BodyDmg":"0.8",	"BodyProb":"0.8",	"LimbsDmg":"0.6",	"LimbsProb":"1"},
+	{	"ID":"4",	"Rank":"1",	"Ref":"monster4",	"Health":"100",	"HeadDmg":"1",	"HeadProb":"0.5",	"BodyDmg":"0.9",	"BodyProb":"0.9",	"LimbsDmg":"0.6",	"LimbsProb":"1"},
+	{	"ID":"5",	"Rank":"1",	"Ref":"monster5",	"Health":"100",	"BodyDmg":"1",	"BodyProb":"0.6"},
+	{	"ID":"6",	"Rank":"1",	"Ref":"monster6",	"Health":"100",	"HeadDmg":"1.8",	"HeadProb":"0.4",	"BodyDmg":"0.2",	"BodyProb":"1",	"LimbsDmg":"0.7",	"LimbsProb":"0.8"}
 ]}

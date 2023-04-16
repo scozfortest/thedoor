@@ -49,18 +49,23 @@ namespace Scoz.Func {
             GameSettingData.ClearStaticDic();
             ScriptData.ClearStaticDic();
             SupplyEffectData.ClearStaticDic();
+            MonsterActionData.ClearStaticDic();
+            RolePlotData.ClearStaticDic();
 
 
             MyJsonData.SetDataStringKey_Remote<GameSettingData>("GameSetting", SetDic);
             MyJsonData.SetData_Remote<SceneTransitionData>("SceneTransition", SetDic);
             MyJsonData.SetData_Remote<SupplyData>("Supply", SetDic);
             MyJsonData.SetData_Remote<SupplyEffectData>("SupplyEffect", SetDic);
+            MyJsonData.SetData_Remote<MonsterData>("Monster", SetDic);
+            MyJsonData.SetData_Remote<MonsterActionData>("MonsterAction", SetDic);
             MyJsonData.SetData_Remote<RoleData>("Role", SetDic);
+            MyJsonData.SetData_Remote<RolePlotData>("RolePlot", SetDic);
             MyJsonData.SetDataStringKey_Remote<ScriptData>("Script", SetDic);
             MyJsonData.SetData_Remote<ScriptEffectData>("ScriptEffect", SetDic);
             MyJsonData.SetData_Remote<ItemGroupData>("ItemGroup", SetDic);
 
-            //設定3秒會顯示尚未載入的JsonData
+            //設定X秒會顯示尚未載入的JsonData
             CoroutineJob.Instance.StartNewAction(ShowUnLoadedJsondata, 5);
 
         }

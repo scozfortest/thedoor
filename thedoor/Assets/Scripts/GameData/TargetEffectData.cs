@@ -15,6 +15,7 @@ namespace TheDoor.Main {
     }
     public class TargetEffectData {
 
+        public Target MyTarget { get; private set; }
         public TargetEffectType EffectType { get; private set; }
         string value;
         public float Value {
@@ -24,7 +25,15 @@ namespace TheDoor.Main {
         }
         public float Probability { get; private set; }
 
-        public TargetEffectData(TargetEffectType _type, string _value, float _probability) {
+        /// <summary>
+        /// 設定目標效果資料
+        /// </summary>
+        /// <param name="_target">目標類型</param>
+        /// <param name="_type">效果類型</param>
+        /// <param name="_value">效果參數</param>
+        /// <param name="_probability">觸發機率</param>
+        public TargetEffectData(Target _target, TargetEffectType _type, string _value, float _probability) {
+            MyTarget = _target;
             EffectType = _type;
             value = _value;
             Probability = _probability;
