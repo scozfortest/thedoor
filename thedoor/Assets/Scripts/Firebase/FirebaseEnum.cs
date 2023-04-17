@@ -13,6 +13,8 @@ namespace TheDoor.Main {
         Player,//玩家資料
         Item,//玩家道具
         History,//玩家紀錄
+        Role,//玩家腳色
+        Supply,//腳色道具
         Shop,//商城
         Purchase,//儲值商城
     }

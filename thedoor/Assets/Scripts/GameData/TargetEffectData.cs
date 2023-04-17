@@ -7,8 +7,8 @@ using LitJson;
 
 namespace TheDoor.Main {
     public enum TargetEffectType {
-        Health,//  恢復生命
-        Sanity,//  恢復理智
+        HP,//  生命
+        SanP,//  理智
         Stun,//    造成暈眩
         Bleed,//   造成流血
         Flee,//    逃離戰鬥

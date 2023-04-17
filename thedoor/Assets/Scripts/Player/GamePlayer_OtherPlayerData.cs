@@ -110,7 +110,7 @@ namespace TheDoor.Main {
         /// </summary>
         public void GetOtherHistoryData(string _playerUID, bool _getNewest, Action<OwnedHistoryData> _cb) {
             if (_playerUID == Data.UID) {//自己的資料有偵聽所以直接取就可以
-                var history = GetOwnedDataByUID<OwnedHistoryData>(ColEnum.History, Data.UID);
+                var history = GetOwnedData<OwnedHistoryData>(ColEnum.History, Data.UID);
                 _cb?.Invoke(history);
                 return;
             } else if (OtherHistoryDatas.ContainsKey(_playerUID) && _getNewest == false) {

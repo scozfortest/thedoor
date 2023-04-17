@@ -31,7 +31,7 @@ namespace TheDoor.Main {
         protected override void GetDataFromJson(JsonData _item, string _dataName) {
             DataName = _dataName;
             JsonData item = _item;
-            TargetEffectType tmpTEffectType = TargetEffectType.Health;
+            TargetEffectType tmpTEffectType = TargetEffectType.HP;
             string tmpTEffectValueStr = "";
             MyEffects.Clear();
             foreach (string key in item.Keys) {

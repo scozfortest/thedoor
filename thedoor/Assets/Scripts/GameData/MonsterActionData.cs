@@ -22,7 +22,7 @@ namespace TheDoor.Main {
             DataName = _dataName;
             JsonData item = _item;
             Target tmpTarget = Target.Enemy;
-            TargetEffectType tmpTEffectType = TargetEffectType.Health;
+            TargetEffectType tmpTEffectType = TargetEffectType.HP;
             string tmpTEffectValueStr = "";
             MyEffects.Clear();
             foreach (string key in item.Keys) {

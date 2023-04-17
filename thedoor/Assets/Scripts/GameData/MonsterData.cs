@@ -23,7 +23,7 @@ namespace TheDoor.Main {
         public string Ref { get; private set; }
         public string[] Weakness { get; private set; }
 
-        public int Health { get; private set; }
+        public int HP { get; private set; }
         public float HeadDmg { get; private set; }
         public float HeadProb { get; private set; }
         public float BodyDmg { get; private set; }
@@ -50,8 +50,8 @@ namespace TheDoor.Main {
                     case "Weakness":
                         Weakness = item[key].ToString().Split(',');
                         break;
-                    case "Health":
-                        Health = int.Parse(item[key].ToString());
+                    case "HP":
+                        HP = int.Parse(item[key].ToString());
                         break;
                     case "HeadDmg":
                         HeadDmg = float.Parse(item[key].ToString());

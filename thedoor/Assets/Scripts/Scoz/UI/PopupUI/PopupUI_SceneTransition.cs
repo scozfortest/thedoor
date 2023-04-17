@@ -17,16 +17,16 @@ namespace Scoz.Func {
         [SerializeField] Transform SceneTransitionParent;
         SceneTransition MySceneTransition = null;
         Action OnSceneTransitionAssetLoadFinishedAC;//載完Asset後要執行的Action
-        bool IsLoadingAsse = false;
+        static bool IsLoadingSceneTransitionAsset = false;//是否載入UI中
 
         void InitSceneTransition() {
-            if (IsLoadingAsse)
+            if (IsLoadingSceneTransitionAsset)
                 return;
-            IsLoadingAsse = true;
+            IsLoadingSceneTransitionAsset = true;
             PopupUI.ShowLoading(StringData.GetUIString("Loading"));
             //初始化UI
             AddressablesLoader.GetPrefabByRef(Instance.SceneTransitionAsset, (prefab, handle) => {
-                IsLoadingAsse = false;
+                IsLoadingSceneTransitionAsset = false;
                 PopupUI.HideLoading();
                 GameObject go = Instantiate(prefab);
                 go.transform.SetParent(Instance.SceneTransitionParent);

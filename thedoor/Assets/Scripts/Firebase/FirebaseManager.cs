@@ -86,6 +86,8 @@ namespace TheDoor.Main {
         public static Dictionary<ColEnum, string> ColNames { get; private set; } = new Dictionary<ColEnum, string>() {
             { ColEnum.GameSetting , "GameData-Setting"},
             { ColEnum.Player , "PlayerData-Player"},
+            { ColEnum.Role , "PlayerData-Role"},
+            { ColEnum.Supply , "PlayerData-Supply"},
             { ColEnum.Item , "PlayerData-Item"},
             { ColEnum.Shop , "GameData-Shop"},
             { ColEnum.Purchase , "GameData-Purchase"},
@@ -207,6 +209,8 @@ namespace TheDoor.Main {
                         RegisterListener_OwnedData(ColEnum.Player, GamePlayer.Instance.Data.UID);//註冊偵聽-玩家資料
                         RegisterListener_OwnedData(ColEnum.Item, GamePlayer.Instance.Data.UID);//註冊偵聽-玩家非獨立資料類道具
                         RegisterListener_OwnedData(ColEnum.History, GamePlayer.Instance.Data.UID);//註冊偵聽-玩家紀錄
+                        RegisterListener_OwnedData(ColEnum.Role, GamePlayer.Instance.Data.UID);//註冊偵聽-玩家腳色
+                        RegisterListener_OwnedData(ColEnum.Supply, GamePlayer.Instance.Data.UID);//註冊偵聽-腳色道具
                         InitNotification();//初始化Firebase推播
 
                         break;

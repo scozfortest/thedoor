@@ -8,9 +8,7 @@ using System;
 namespace TheDoor.Main {
     public class OwnedRoleData : OwnedData {
         public int RoleID { get; private set; }
-        public int MaxHP { get; private set; }
         public int CurHP { get; private set; }
-        public int MaxSanP { get; private set; }
         public int CurSanP { get; private set; }
 
         public OwnedRoleData(Dictionary<string, object> _data)
@@ -20,9 +18,7 @@ namespace TheDoor.Main {
             base.SetData(_data);
             object value;
             RoleID = _data.TryGetValue("RoleID", out value) ? Convert.ToInt32(value) : default(int);
-            MaxHP = _data.TryGetValue("MaxHP", out value) ? Convert.ToInt32(value) : default(int);
             CurHP = _data.TryGetValue("CurHP", out value) ? Convert.ToInt32(value) : default(int);
-            MaxSanP = _data.TryGetValue("MaxSanP", out value) ? Convert.ToInt32(value) : default(int);
             CurSanP = _data.TryGetValue("CurSanP", out value) ? Convert.ToInt32(value) : default(int);
         }
 

@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fabce2ba81e5394d8650f650f481164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MyCreateRoleUI: {fileID: 7099347520172718609}
 --- !u!1 &4555682802284962458
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,7 +414,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7500236976667498175
 RectTransform:
   m_ObjectHideFlags: 0

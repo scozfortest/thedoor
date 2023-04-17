@@ -9,8 +9,8 @@ namespace TheDoor.Main {
 
         public string UID { get; protected set; }//玩家UID
         public DateTime CreateTime { get; private set; }//註冊時間
-
         Dictionary<Currency, long> OwnedCurrency = new Dictionary<Currency, long>();//玩家擁有貨幣
+
 
         public AuthType MyAuthType { get; private set; } = AuthType.Guest;//玩家登入類型，參考AuthType列舉
 

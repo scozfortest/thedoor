@@ -10,6 +10,7 @@ namespace TheDoor.Main {
     public abstract class OwnedData {
         public string UID { get; private set; }
         public string OwnerUID { get; private set; }
+        public int SupplyID { get; private set; }
         public DateTime CreateTime { get; private set; }
 
         public OwnedData(Dictionary<string, object> _data) {
@@ -19,6 +20,7 @@ namespace TheDoor.Main {
             object value;
             UID = _data.TryGetValue(OwnedEnum.UID.ToString(), out value) ? Convert.ToString(value) : default(string);
             OwnerUID = _data.TryGetValue(OwnedEnum.OwnerUID.ToString(), out value) ? Convert.ToString(value) : default(string);
+            SupplyID = _data.TryGetValue("SupplyID", out value) ? Convert.ToInt32(value) : default(int);
             CreateTime = _data.TryGetValue(OwnedEnum.CreateTime.ToString(), out value) ? FirebaseManager.GetDateTimeFromFirebaseTimestamp(value) : default(DateTime);
         }
     }

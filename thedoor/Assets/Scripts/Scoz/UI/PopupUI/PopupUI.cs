@@ -32,11 +32,12 @@ namespace Scoz.Func {
             InitConfirmCancel();
             InitInput();
             InitScreenEffect();
-
+            InitRoleInfoUI();
 
         }
         void Start() {
             SceneManager.sceneLoaded += OnLevelFinishedLoading;
+
         }
 
         void OnDestroy() {
@@ -421,7 +422,50 @@ namespace Scoz.Func {
                     Instance.MySettingUI.SetActive(true);
                 });
             }
+        }
 
+
+
+        [HeaderAttribute("==============RoleInfoUI==============")]
+        //進遊戲不先初始化，等到要用時才初始化UI
+        [SerializeField] AssetReference RoleInfoUIAsset;
+        [SerializeField] Transform RoleInfoUIParent;
+        RoleInfoUI MyRoleInfoUI = null;
+        static bool IsLoadingRoleInfoAsset = false;//是否載入UI中
+
+        static void InitRoleInfoUI(Action _ac = null) {
+            if (IsLoadingRoleInfoAsset)
+                return;
+            IsLoadingRoleInfoAsset = true;
+            //初始化UI
+            AddressablesLoader.GetPrefabByRef(Instance.RoleInfoUIAsset, (prefab, handle) => {
+                IsLoadingRoleInfoAsset = false;
+                GameObject go = Instantiate(prefab);
+                go.transform.SetParent(Instance.RoleInfoUIParent);
+                RectTransform rect = go.GetComponent<RectTransform>();
+                go.transform.localPosition = prefab.transform.localPosition;
+                go.transform.localScale = prefab.transform.localScale;
+                rect.offsetMin = Vector2.zero;//Left、Bottom
+                rect.offsetMax = Vector2.zero;//Right、Top
+                go.transform.SetAsLastSibling();
+                Instance.MyRoleInfoUI = go.GetComponent<RoleInfoUI>();
+                Instance.MyRoleInfoUI.gameObject.SetActive(true);
+                Instance.MyRoleInfoUI.Init();
+                Instance.MyRoleInfoUI.SetActive(false);
+                _ac?.Invoke();
+            }, () => { WriteLog.LogError("載入RoleInfoUIAsset失敗"); });
+        }
+        public static void ShowRoleInfoUI(OwnedRoleData _ownedData) {
+            if (Instance == null) return;
+            if (Instance.MyRoleInfoUI != null) {
+                Instance.MyRoleInfoUI.ShowUI(_ownedData);
+            } else {
+                PopupUI.ShowLoading(StringData.GetUIString("Loading"));
+                InitRoleInfoUI(() => {
+                    PopupUI.HideLoading();
+                    Instance.MyRoleInfoUI.ShowUI(_ownedData);
+                });
+            }
         }
 
 

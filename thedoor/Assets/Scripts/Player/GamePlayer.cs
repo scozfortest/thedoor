@@ -16,7 +16,7 @@ namespace TheDoor.Main {
         /// </summary>
         public OwnedHistoryData MyHistoryData {
             get {
-                return GetOwnedData<OwnedHistoryData>(ColEnum.History);
+                return GetOwnedData<OwnedHistoryData>(ColEnum.History, Data.UID);
             }
         }
         /// <summary>
@@ -24,7 +24,7 @@ namespace TheDoor.Main {
         /// </summary>
         public OwnedItemData MyItemData {
             get {
-                return GetOwnedData<OwnedItemData>(ColEnum.Item);
+                return GetOwnedData<OwnedItemData>(ColEnum.Item, Data.UID);
             }
         }
         //登入後會先存裝置UID到DB，存好後AlreadSetDeviceUID會設為true，所以之後從DB取到的裝置的UID應該都跟目前的裝置一致，若不一致代表是有其他裝置登入同個帳號
@@ -116,15 +116,9 @@ namespace TheDoor.Main {
         }
 
         /// <summary>
-        /// 傳入資料類型與UID，取得玩家擁有的資料
+        /// 傳入資料類型與UID，取得玩家自己擁有的資料
         /// </summary>
-        public T GetOwnedData<T>(ColEnum _colName) where T : OwnedData {
-            return GetOwnedDataByUID<T>(_colName, Data.UID);
-        }
-        /// <summary>
-        /// 傳入資料類型，取得玩家自己擁有的資料
-        /// </summary>
-        public T GetOwnedDataByUID<T>(ColEnum _colName, string _uid) where T : OwnedData {
+        public T GetOwnedData<T>(ColEnum _colName, string _uid) where T : OwnedData {
             if (!OwnedDatas.ContainsKey(_colName))
                 return null;
             if (OwnedDatas[_colName] == null)

@@ -22,8 +22,8 @@ namespace TheDoor.Main {
 
         public string Ref { get; set; }
         public int Rank { get; private set; }
-        public int Health { get; private set; }
-        public int Sanity { get; private set; }
+        public int HP { get; private set; }
+        public int SanP { get; private set; }
         public TalentData Talent { get; private set; }
         public RequireData Require { get; private set; }
         public List<int> RandomItems = new List<int>();
@@ -46,11 +46,11 @@ namespace TheDoor.Main {
                     case "Rank":
                         Rank = int.Parse(item[key].ToString());
                         break;
-                    case "Health":
-                        Health = int.Parse(item[key].ToString());
+                    case "HP":
+                        HP = int.Parse(item[key].ToString());
                         break;
-                    case "Sanity":
-                        Sanity = int.Parse(item[key].ToString());
+                    case "SanP":
+                        SanP = int.Parse(item[key].ToString());
                         break;
                     case "Talent":
                         tmpTalentStr = item[key].ToString();

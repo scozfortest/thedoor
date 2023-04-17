@@ -32,6 +32,7 @@ namespace TheDoor.Main {
             AppleLoginGO.SetActive(true);
 #endif
 
+            
         }
 
         public enum Condietion {

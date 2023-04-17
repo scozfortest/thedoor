@@ -15,7 +15,7 @@ namespace Scoz.Func {
 
 
             if (Input.GetKeyDown(KeyCode.Q)) {
-
+                PopupUI.ShowRoleInfoUI(GamePlayer.Instance.Data.CurRole);
             } else if (Input.GetKeyDown(KeyCode.W)) {
 
             } else if (Input.GetKeyDown(KeyCode.E)) {

@@ -89,16 +89,9 @@ namespace TheDoor.Main {
                 }
             });
         }
-        public static void GetIconSprite(int _id, Action<Sprite> _ac) {
 
-            var data = GameDictionary.GetJsonData<SupplyData>(DataName, _id);
-            if (data == null) {
-                _ac?.Invoke(null);
-                return;
-            }
-            data.GetIconSprite(sprite => {
-                _ac?.Invoke(sprite);
-            });
+        public static SupplyData GetData(int _id) {
+            return GameDictionary.GetJsonData<SupplyData>("Supply", _id);
         }
 
         public List<SupplyEffectData> GetSupplyEffects() {

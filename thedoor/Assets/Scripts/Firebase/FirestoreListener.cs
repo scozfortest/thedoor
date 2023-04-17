@@ -144,13 +144,17 @@ namespace TheDoor.Main {
         /// </summary>
         public static void SetReturnOwnedDatas(ColEnum _col, List<Dictionary<string, object>> _datas) {
             bool inLobby = SceneManager.GetActiveScene().name == MyScene.LobbyScene.ToString();//是否在大廳
-            //switch (_col) {
-            //    case ColEnum.Player:
-            //        break;
-            //    default:
-            //        DebugLogger.LogErrorFormat("SetReturnOwnedData未加入處理偵聽 {0} 類型的回傳方法", _col);
-            //        break;
-            //}
+            switch (_col) {
+                case ColEnum.Role:
+                    GamePlayer.Instance.SetOwnedDatas<OwnedRoleData>(ColEnum.Role, _datas);
+                    break;
+                case ColEnum.Supply:
+                    GamePlayer.Instance.SetOwnedDatas<OwnedSupplyData>(ColEnum.Supply, _datas);
+                    break;
+                default:
+                    WriteLog.LogErrorFormat("SetReturnOwnedData未加入處理偵聽 {0} 類型的回傳方法", _col);
+                    break;
+            }
         }
 
         /// <summary>

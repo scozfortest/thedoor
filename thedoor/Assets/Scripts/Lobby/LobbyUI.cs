@@ -32,7 +32,7 @@ namespace TheDoor.Main {
             base.Init();
             MyCreateRoleUI.Init();
             SwitchUI(AdventureUIs.Default);
-            MyCreateRoleUI.SetRole(1);
+            //MyCreateRoleUI.SetRole(1);
         }
 
         public void SwitchUI(AdventureUIs _ui, Action _cb = null) {

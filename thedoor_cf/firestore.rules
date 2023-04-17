@@ -19,6 +19,9 @@ service cloud.firestore {
     match /PlayerData-Role/{document} {
       allow read : if request.auth != null;
     }
+    match /PlayerData-Supply/{document} {
+      allow read : if request.auth != null;
+    }
      match /PlayerData-Item/{document} {
       allow read : if request.auth != null;
     }

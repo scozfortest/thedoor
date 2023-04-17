@@ -60,7 +60,7 @@ namespace Scoz.Func {
             SupplyData.DataName = "Supply";
             MyJsonData.SetData_Remote<SupplyData>(SupplyData.DataName, SetDic);
             SupplyEffectData.DataName = "SupplyEffect";
-            MyJsonData.SetData_Remote<SupplyEffectData>(SupplyData.DataName, SetDic);
+            MyJsonData.SetData_Remote<SupplyEffectData>(SupplyEffectData.DataName, SetDic);
             MonsterData.DataName = "Monster";
             MyJsonData.SetData_Remote<MonsterData>(MonsterData.DataName, SetDic);
             MonsterActionData.DataName = "MonsterAction";
