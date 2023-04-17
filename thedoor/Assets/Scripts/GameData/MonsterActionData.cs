@@ -7,7 +7,7 @@ using LitJson;
 
 namespace TheDoor.Main {
     public class MonsterActionData : MyJsonData {
-        public static string DataName { get; private set; }
+        public static string DataName { get; set; }
         public int MonsterID { get; private set; }
         public float Probability { get; private set; }
 

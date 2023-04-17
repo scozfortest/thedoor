@@ -1,4 +1,5 @@
 {"Role":[
-	{	"ID":"1",	"Rank":"1",	"Ref":"role1",	"Health":"100",	"Sanity":"60",	"Talent":"Investigation",	"TalentValue":"3",	"Items":"1"},
-	{	"ID":"2",	"Rank":"1",	"Ref":"role2",	"Health":"100",	"Sanity":"60",	"Talent":"HideAndSeek",	"TalentValue":"2",	"Requirement":"Gold",	"Requirement":"100"}
+	{	"ID":"1",	"Rank":"1",	"Ref":"role1",	"Health":"100",	"Sanity":"60",	"Skill":"Investigation",	"Items":"1"},
+	{	"ID":"2",	"Rank":"1",	"Ref":"role2",	"Health":"100",	"Sanity":"60",	"Skill":"CombatInstinct",	"Requirement":"Gold",	"RequireValue":"100"},
+	{	"ID":"3",	"Rank":"1",	"Ref":"role3",	"Health":"100",	"Sanity":"60",	"Skill":"HideAndSeek",	"Requirement":"Gold",	"RequireValue":"100"}
 ]}

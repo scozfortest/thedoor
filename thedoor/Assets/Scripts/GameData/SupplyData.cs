@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace TheDoor.Main {
     public class SupplyData : MyJsonData, IItemJsonData {
-        public static string DataName { get; private set; }
+        public static string DataName { get; set; }
         public string Name {
             get {
                 return StringData.GetString_static(DataName + "_" + ID, "Name");
@@ -25,7 +25,7 @@ namespace TheDoor.Main {
             }
         }
         public ItemType MyItemType { get; } = ItemType.Supply;
-        public string Ref { get; private set; }
+        public string Ref { get; set; }
         public string[] Tags { get; private set; }
         public int Rank { get; private set; }
         public int ExtendHP { get; private set; }

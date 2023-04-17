@@ -7,22 +7,15 @@ using System;
 using System.Linq;
 
 namespace TheDoor.Main {
-    public class ItemGroupData : MyJsonData, IItemJsonData {
-        public static string DataName { get; private set; }
+    public class ItemGroupData : MyJsonData {
+        public static string DataName { get; set; }
 
         public string Name {
             get {
                 return StringData.GetString_static(DataName + "_" + ID, "Name");
             }
         }
-
-        public string TypeName {
-            get {
-                return StringData.GetUIString("Item_" + DataName);
-            }
-        }
-        public ItemType MyItemType { get; } = ItemType.ItemGroup;
-        public string Ref { get; private set; }
+        public string Ref { get; set; }
         public int Rank { get; private set; }
         public List<ItemData> ItemDatas = new List<ItemData>();
         protected override void GetDataFromJson(JsonData _item, string _dataName) {
@@ -61,14 +54,6 @@ namespace TheDoor.Main {
         }
         public static ItemGroupData GetData(int _id) {
             return GameDictionary.GetJsonData<ItemGroupData>(DataName, _id);
-        }
-        public void GetIconSprite(Action<Sprite> _ac) {
-            AddressablesLoader.GetSpriteAtlas(DataName, atlas => {
-                if (atlas != null) {
-                    Sprite sprite = atlas.GetSprite(Ref);
-                    _ac?.Invoke(sprite);
-                }
-            });
         }
     }
 

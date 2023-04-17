@@ -7,8 +7,8 @@ using System;
 using System.Linq;
 
 namespace TheDoor.Main {
-    public class RoleData : MyJsonData, IItemJsonData {
-        public static string DataName { get; private set; }
+    public class RoleData : MyJsonData {
+        public static string DataName { get; set; }
         public string Name {
             get {
                 return StringData.GetString_static(DataName + "_" + ID, "Name");
@@ -19,15 +19,8 @@ namespace TheDoor.Main {
                 return StringData.GetString_static(DataName + "_" + ID, "Description");
             }
         }
-        public string TypeName {
-            get {
-                return StringData.GetUIString("Item_" + DataName);
-            }
-        }
-        public ItemType MyItemType { get; } = ItemType.Role;
 
-
-        public string Ref { get; private set; }
+        public string Ref { get; set; }
         public int Rank { get; private set; }
         public int Health { get; private set; }
         public int Sanity { get; private set; }
@@ -91,30 +84,6 @@ namespace TheDoor.Main {
                         break;
                 }
             }
-        }
-
-
-        /// <summary>
-        /// 取得腳色Icon
-        /// </summary>
-        public static void GetIconSprite(int _id, Action<Sprite> _ac) {
-            RoleData data = GetData(_id);
-            if (data == null)
-                _ac?.Invoke(null);
-            data.GetIconSprite(_ac);
-        }
-        /// <summary>
-        /// 取得腳色Icon
-        /// </summary>
-        public void GetIconSprite(Action<Sprite> _ac) {
-            if (string.IsNullOrEmpty(Ref))
-                _ac?.Invoke(null);
-            AddressablesLoader.GetSpriteAtlas(DataName + "Icon", atlas => {
-                if (atlas != null) {
-                    Sprite sprite = atlas.GetSprite(Ref);
-                    _ac?.Invoke(sprite);
-                }
-            });
         }
 
         public static RoleData GetData(int _id) {

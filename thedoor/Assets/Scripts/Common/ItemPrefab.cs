@@ -55,11 +55,10 @@ namespace TheDoor.Main {
                         BottomImg.sprite = atlas.GetSprite(string.Format("IconFrameBot{0}", data.Rank));
                     });
                     NameGO.SetActive(false);
-                    data.GetIconSprite(sprite => {
+                    AssetGet.GetIconFromAtlas(data.MyItemType.ToString(), data.Ref, sprite => {
                         ItemImg.sprite = sprite;
                         ItemImg.SetNativeSize();
                     });
-
                     break;
             }
         }

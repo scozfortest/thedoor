@@ -7,7 +7,7 @@ using LitJson;
 
 namespace TheDoor.Main {
     public class ScriptEffectData : MyJsonData {
-        public static string DataName { get; private set; }
+        public static string DataName { get; set; }
         public List<TargetEffectData> MyEffects = new List<TargetEffectData>();
 
         protected override void GetDataFromJson(JsonData _item, string _dataName) {

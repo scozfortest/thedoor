@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace TheDoor.Main {
     public class SceneTransitionData : MyJsonData {
-        public static string DataName { get; private set; }
+        public static string DataName { get; set; }
         public string Description {
             get {
                 return StringData.GetString_static(DataName + "_" + ID, "Description");

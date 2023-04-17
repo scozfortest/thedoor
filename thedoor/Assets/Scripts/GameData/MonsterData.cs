@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace TheDoor.Main {
     public class MonsterData : MyJsonData {
-        public static string DataName { get; private set; }
+        public static string DataName { get; set; }
         public string Name {
             get {
                 return StringData.GetString_static(DataName + "_" + ID, "Name");

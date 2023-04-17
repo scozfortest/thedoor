@@ -12,10 +12,10 @@ namespace TheDoor.Main {
     public interface IItemJsonData {
         public int ID { get; set; }
         public string Name { get; }//此道具的中文名稱(會抓String表)
-        public string TypeName { get; }//該類道具抽卡後獲得時顯示的類型中文名稱(會抓String表)
-        public ItemType MyItemType { get; }//不會有貨幣(Gold,Point...)與寶箱(ItemGroup)
+        public string Ref { get; set; }//參考名稱
+        public string TypeName { get; }//該類道具的類型名稱(會抓String表)
+        public ItemType MyItemType { get; }//該類道具的類型 不會有貨幣(Gold,Point...)與寶箱(ItemGroup)
         public int Rank { get; }//此道具的品階
-        public void GetIconSprite(Action<Sprite> _ac);//取得此道具ICON
     }
 
 }

@@ -53,17 +53,30 @@ namespace Scoz.Func {
             RolePlotData.ClearStaticDic();
 
 
-            MyJsonData.SetDataStringKey_Remote<GameSettingData>("GameSetting", SetDic);
-            MyJsonData.SetData_Remote<SceneTransitionData>("SceneTransition", SetDic);
-            MyJsonData.SetData_Remote<SupplyData>("Supply", SetDic);
-            MyJsonData.SetData_Remote<SupplyEffectData>("SupplyEffect", SetDic);
-            MyJsonData.SetData_Remote<MonsterData>("Monster", SetDic);
-            MyJsonData.SetData_Remote<MonsterActionData>("MonsterAction", SetDic);
-            MyJsonData.SetData_Remote<RoleData>("Role", SetDic);
-            MyJsonData.SetData_Remote<RolePlotData>("RolePlot", SetDic);
-            MyJsonData.SetDataStringKey_Remote<ScriptData>("Script", SetDic);
-            MyJsonData.SetData_Remote<ScriptEffectData>("ScriptEffect", SetDic);
-            MyJsonData.SetData_Remote<ItemGroupData>("ItemGroup", SetDic);
+            GameSettingData.DataName = "GameSetting";
+            MyJsonData.SetDataStringKey_Remote<GameSettingData>(GameSettingData.DataName, SetDic);
+            SceneTransitionData.DataName = "SceneTransition";
+            MyJsonData.SetData_Remote<SceneTransitionData>(SceneTransitionData.DataName, SetDic);
+            SupplyData.DataName = "Supply";
+            MyJsonData.SetData_Remote<SupplyData>(SupplyData.DataName, SetDic);
+            SupplyEffectData.DataName = "SupplyEffect";
+            MyJsonData.SetData_Remote<SupplyEffectData>(SupplyData.DataName, SetDic);
+            MonsterData.DataName = "Monster";
+            MyJsonData.SetData_Remote<MonsterData>(MonsterData.DataName, SetDic);
+            MonsterActionData.DataName = "MonsterAction";
+            MyJsonData.SetData_Remote<MonsterActionData>(MonsterActionData.DataName, SetDic);
+            RoleData.DataName = "Role";
+            MyJsonData.SetData_Remote<RoleData>(RoleData.DataName, SetDic);
+            RolePlotData.DataName = "RolePlot";
+            MyJsonData.SetData_Remote<RolePlotData>(RolePlotData.DataName, SetDic);
+            ScriptData.DataName = "Script";
+            MyJsonData.SetDataStringKey_Remote<ScriptData>(ScriptData.DataName, SetDic);
+            ScriptEffectData.DataName = "ScriptEffect";
+            MyJsonData.SetData_Remote<ScriptEffectData>(ScriptEffectData.DataName, SetDic);
+            ItemGroupData.DataName = "ItemGroup";
+            MyJsonData.SetData_Remote<ItemGroupData>(ItemGroupData.DataName, SetDic);
+
+
 
             //設定X秒會顯示尚未載入的JsonData
             CoroutineJob.Instance.StartNewAction(ShowUnLoadedJsondata, 5);

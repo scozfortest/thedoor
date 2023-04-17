@@ -9,7 +9,7 @@ using System.Linq;
 namespace TheDoor.Main {
     public class ScriptData : MyJsonData {
         public new string ID { get; private set; }
-        public static string DataName { get; private set; }
+        public static string DataName { get; set; }
         public string Title { get; private set; }
         public string Content {
             get {

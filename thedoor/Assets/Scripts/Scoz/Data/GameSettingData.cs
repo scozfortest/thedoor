@@ -6,7 +6,7 @@ using LitJson;
 
 namespace Scoz.Func {
     public class GameSettingData : MyJsonData {
-        public static string DataName { get; private set; }
+        public static string DataName { get; set; }
         public new string ID;
         //一般
         static Dictionary<GameSetting, string> SettingDic = new Dictionary<GameSetting, string>();
