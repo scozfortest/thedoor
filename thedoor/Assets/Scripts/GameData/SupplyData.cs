@@ -33,7 +33,7 @@ namespace TheDoor.Main {
         public bool UseInBattle { get; private set; }
         public bool UseInRest { get; private set; }
         public int Usage { get; private set; }
-        public int TimeSpend { get; private set; }
+        public int Time { get; private set; }
 
 
         protected override void GetDataFromJson(JsonData _item, string _dataName) {
@@ -68,8 +68,8 @@ namespace TheDoor.Main {
                     case "Usage":
                         Usage = int.Parse(item[key].ToString());
                         break;
-                    case "TimeSpend":
-                        TimeSpend = int.Parse(item[key].ToString());
+                    case "Time":
+                        Time = int.Parse(item[key].ToString());
                         break;
                     default:
                         WriteLog.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));

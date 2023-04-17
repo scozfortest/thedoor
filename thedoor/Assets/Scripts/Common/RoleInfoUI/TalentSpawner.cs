@@ -12,7 +12,7 @@ namespace TheDoor.Main {
             base.Init();
         }
 
-        public void SpawnItems(List<SkillData> _skillDatas) {
+        public void SpawnItems(List<TalentData> _skillDatas) {
             if (!LoadItemFinished) {
                 WriteLog.LogError("TalentPrefab尚未載入完成");
                 return;

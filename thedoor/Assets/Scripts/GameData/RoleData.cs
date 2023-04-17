@@ -24,7 +24,12 @@ namespace TheDoor.Main {
         public int Rank { get; private set; }
         public int HP { get; private set; }
         public int SanP { get; private set; }
-        public TalentData Talent { get; private set; }
+        string TalentStr;
+        TalentData MyTalentData {
+            get {
+                return TalentData.GetData(TalentStr);
+            }
+        }
         public RequireData Require { get; private set; }
         public List<int> RandomItems = new List<int>();
         public List<int> Items = new List<int>();
@@ -33,7 +38,6 @@ namespace TheDoor.Main {
         protected override void GetDataFromJson(JsonData _item, string _dataName) {
             DataName = _dataName;
             JsonData item = _item;
-            string tmpTalentStr = "";
             string tmpRequireStr = "";
             foreach (string key in item.Keys) {
                 switch (key) {
@@ -53,13 +57,7 @@ namespace TheDoor.Main {
                         SanP = int.Parse(item[key].ToString());
                         break;
                     case "Talent":
-                        tmpTalentStr = item[key].ToString();
-                        break;
-                    case "TalentValue":
-                        if (!string.IsNullOrEmpty(tmpTalentStr)) {
-                            TalentType talentType = MyEnum.ParseEnum<TalentType>(tmpTalentStr);
-                            Talent = new TalentData(talentType, item[key].ToString());
-                        }
+                        TalentStr = item[key].ToString();
                         break;
                     case "Requirement":
                         tmpRequireStr = item[key].ToString();

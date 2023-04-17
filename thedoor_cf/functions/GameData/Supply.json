@@ -1,4 +1,4 @@
 {"Supply":[
-	{	"ID":"1",	"Rank":"1",	"Ref":"supply1",	"ExtendHP":"10",	"ExtendSanP":"10",	"UseInBattle":"True",	"TimeSpend":"1"},
-	{	"ID":"2",	"Rank":"1",	"Ref":"supply2",	"UseInRest":"True",	"Usage":"7",	"TimeSpend":"1"}
+	{	"ID":"1",	"Rank":"1",	"Ref":"supply1",	"Tags":"Heavy,Lighting",	"ExtendHP":"10",	"ExtendSanP":"10",	"UseInBattle":"True",	"UseInRest":"False",	"Usage":"1",	"Time":"1"},
+	{	"ID":"2",	"Rank":"1",	"Ref":"supply2",	"Tags":"Heavy,Food",	"UseInRest":"True",	"Usage":"7",	"Time":"1"}
 ]}

@@ -69,6 +69,8 @@ namespace Scoz.Func {
             MyJsonData.SetData_Remote<RoleData>(RoleData.DataName, SetDic);
             RolePlotData.DataName = "RolePlot";
             MyJsonData.SetData_Remote<RolePlotData>(RolePlotData.DataName, SetDic);
+            RoleData.DataName = "Talent";
+            MyJsonData.SetData_Remote<TalentData>(TalentData.DataName, SetDic);
             ScriptData.DataName = "Script";
             MyJsonData.SetDataStringKey_Remote<ScriptData>(ScriptData.DataName, SetDic);
             ScriptEffectData.DataName = "ScriptEffect";

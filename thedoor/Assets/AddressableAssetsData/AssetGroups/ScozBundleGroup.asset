@@ -32,11 +32,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Json
-  - m_GUID: ecbade97c4b551b4f8c65a04bfedf7e1
-    m_Address: Assets/AddressableAssets/Atlas/Icon.spriteatlas
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Atlas
   - m_GUID: 00261ce04987f1c44ac6aac5fe93caf3
     m_Address: Assets/AddressableAssets/Audios/Voice
     m_ReadOnly: 0
@@ -93,6 +88,14 @@ MonoBehaviour:
     m_SerializedLabels: []
   - m_GUID: 222cb66cba3db1d43b5d8d15cc8cf570
     m_Address: Assets/AddressableAssets/Prefab/AdventureUI/BattleUI.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 625ff94c57409b64dbae11656e0ab6ca
+    m_Address: Assets/AddressableAssets/Image
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ccfdc2cc44821df4a8a0cb689bd3e61a
+    m_Address: Assets/AddressableAssets/Audios/Music
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

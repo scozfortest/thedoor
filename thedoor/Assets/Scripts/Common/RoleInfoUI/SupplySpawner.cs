@@ -26,7 +26,7 @@ namespace TheDoor.Main {
                         ItemList[i].gameObject.SetActive(true);
                     } else {
                         var item = Spawn();
-                        item.SetData(null);
+                        item.SetData(_ownedDatas[i]);
                     }
                     ItemList[i].transform.SetParent(ParentTrans);
                 }

@@ -26,6 +26,9 @@ namespace TheDoor.Main {
 
         public override void Init() {
             base.Init();
+            MySupplySpawner.Init();
+            MyEffectSpawner.Init();
+            MySupplySpawner.Init();
         }
         public void ShowUI(OwnedRoleData _ownedData) {
             OwnedData = _ownedData;
@@ -45,7 +48,9 @@ namespace TheDoor.Main {
 
         public void RefreshSupply() {
             List<OwnedSupplyData> supplyDatas = GamePlayer.Instance.GetOwnedDatas<OwnedSupplyData>(ColEnum.Supply);
-            MySupplySpawner.SpawnItems(supplyDatas);
+            MySupplySpawner.LoadItemAsset(() => {
+                MySupplySpawner.SpawnItems(supplyDatas);
+            });
         }
         public void RefreshTalent() {
 

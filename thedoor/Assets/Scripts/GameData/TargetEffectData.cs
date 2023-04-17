@@ -17,25 +17,21 @@ namespace TheDoor.Main {
 
         public Target MyTarget { get; private set; }
         public TargetEffectType EffectType { get; private set; }
-        string value;
-        public float Value {
-            get {
-                return 1;
-            }
-        }
         public float Probability { get; private set; }
+        float[] Values;
 
         /// <summary>
         /// 設定目標效果資料
         /// </summary>
         /// <param name="_target">目標類型</param>
         /// <param name="_type">效果類型</param>
-        /// <param name="_value">效果參數</param>
         /// <param name="_probability">觸發機率</param>
-        public TargetEffectData(Target _target, TargetEffectType _type, string _value, float _probability) {
+        /// <param name="_values">效果參數陣列</param>
+        public TargetEffectData(Target _target, TargetEffectType _type, float _probability, params float[] _values) {
             MyTarget = _target;
             EffectType = _type;
-            value = _value;
+            if (_values != null && _values.Length > 0)
+                Values = _values;
             Probability = _probability;
         }
     }

@@ -32,7 +32,7 @@ namespace TheDoor.Main {
             DataName = _dataName;
             JsonData item = _item;
             TargetEffectType tmpTEffectType = TargetEffectType.HP;
-            string tmpTEffectValueStr = "";
+            List<float> tmpTEffectValues = new List<float>();
             MyEffects.Clear();
             foreach (string key in item.Keys) {
                 switch (key) {
@@ -53,9 +53,9 @@ namespace TheDoor.Main {
                             if (key.Contains("EffectType")) {
                                 tmpTEffectType = MyEnum.ParseEnum<TargetEffectType>(item[key].ToString());
                             } else if (key.Contains("EffectValue")) {
-                                tmpTEffectValueStr = item[key].ToString();
+                                tmpTEffectValues.Add(int.Parse(item[key].ToString()));
                             } else if (key.Contains("EffectValue")) {
-                                TargetEffectData tmpTEffectData = new TargetEffectData(MyTarget, tmpTEffectType, tmpTEffectValueStr, float.Parse(item[key].ToString()));
+                                TargetEffectData tmpTEffectData = new TargetEffectData(MyTarget, tmpTEffectType, float.Parse(item[key].ToString()), tmpTEffectValues.ToArray());
                                 MyEffects.Add(tmpTEffectData);
                             }
                         } catch (Exception _e) {

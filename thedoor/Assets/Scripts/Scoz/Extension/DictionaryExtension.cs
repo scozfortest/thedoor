@@ -33,6 +33,13 @@ namespace Scoz.Func {
                 resultDic.Add(key.ToString(), _oldDic[key]);
             return resultDic;
         }
+        public static Dictionary<string, object> ConvertToStringKeyDic(object _oldDic) {
+            if (_oldDic == null)
+                return null;
+            IDictionary dic = _oldDic as IDictionary;
+            if (dic != null) return ConvertToStringKeyDic(dic);
+            return null;
+        }
         public static Dictionary<int, int> ConvertToIntKeyValueDic(IDictionary _oldDic) {
             if (_oldDic == null)
                 return null;

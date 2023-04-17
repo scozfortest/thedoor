@@ -24,8 +24,8 @@ namespace TheDoor.Main {
         public void Refresh() {
             var data = SupplyData.GetData(OwnedData.SupplyID);
             Description.text = data.Description;
-            Usage.text = data.Usage.ToString();
-            Time.text = data.TimeSpend.ToString();
+            Usage.text = OwnedData.Usage.ToString();
+            Time.text = data.Time.ToString();
             AssetGet.GetIconFromAtlas(SupplyData.DataName, data.Ref, sprite => {
                 Icon.sprite = sprite;
             });
