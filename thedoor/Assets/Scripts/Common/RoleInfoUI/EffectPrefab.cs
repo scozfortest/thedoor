@@ -10,16 +10,16 @@ namespace TheDoor.Main {
         [SerializeField] Image Icon;
 
 
-        TalentData MyData;
+        TargetEffectData MyData;
 
         public bool IsActive { get; set; }
 
-        public void SetData(TalentData _data) {
+        public void SetData(TargetEffectData _data) {
             MyData = _data;
             Refresh();
         }
         public void Refresh() {
-            AssetGet.GetIconFromAtlas(TalentData.DataName, MyData.Ref, sprite => {
+            AssetGet.GetIconFromAtlas("Effect", MyData.EffectType.ToString(), sprite => {
                 Icon.sprite = sprite;
             });
         }

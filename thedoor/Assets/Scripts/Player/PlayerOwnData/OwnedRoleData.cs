@@ -37,5 +37,28 @@ namespace TheDoor.Main {
             }
         }
 
+
+        public List<TalentData> GetTalentDatas() {
+            if (Talents == null || Talents.Count == 0) return null;
+            List<TalentData> talents = new List<TalentData>();
+            for (int i = 0; i < Talents.Count; i++) {
+                var talentData = TalentData.GetData(Talents[i]);
+                if (talentData != null) {
+                    talents.Add(talentData);
+                }
+            }
+            if (talents.Count == 0) return null;
+            return talents;
+        }
+        public List<TargetEffectData> GetEffectDatas() {
+            if (Effects == null || Effects.Count == 0) return null;
+            List<TargetEffectData> effects = new List<TargetEffectData>();
+            foreach (var effectType in Effects.Keys) {
+                var effectData = new TargetEffectData(Target.Myself, effectType, 1, Effects[effectType].ToArray());
+                effects.Add(effectData);
+            }
+            return effects;
+        }
+
     }
 }

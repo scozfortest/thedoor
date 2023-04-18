@@ -20,6 +20,7 @@ namespace TheDoor.Main {
             Refresh();
         }
         public void Refresh() {
+            Description.text = MyData.Description;
             AssetGet.GetIconFromAtlas(TalentData.DataName, MyData.Ref, sprite => {
                 Icon.sprite = sprite;
             });

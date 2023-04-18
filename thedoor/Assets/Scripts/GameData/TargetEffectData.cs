@@ -20,6 +20,7 @@ namespace TheDoor.Main {
         public float Probability { get; private set; }
         float[] Values;
 
+
         /// <summary>
         /// 設定目標效果資料
         /// </summary>
@@ -33,6 +34,23 @@ namespace TheDoor.Main {
             if (_values != null && _values.Length > 0)
                 Values = _values;
             Probability = _probability;
+        }
+        public string Description {
+            get {
+                string description = "";
+                switch (EffectType) {
+                    case TargetEffectType.Bleed:
+                        description = string.Format(StringData.GetUIString(EffectType.ToString()), Values[0]);
+                        break;
+                    case TargetEffectType.Stun:
+                        description = string.Format(StringData.GetUIString(EffectType.ToString()), Values[0]);
+                        break;
+                    default:
+                        description = StringData.GetUIString(EffectType.ToString());
+                        break;
+                }
+                return description;
+            }
         }
     }
 }

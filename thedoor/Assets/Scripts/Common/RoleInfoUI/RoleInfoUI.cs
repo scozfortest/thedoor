@@ -20,7 +20,7 @@ namespace TheDoor.Main {
         [SerializeField] SupplySpawner MySupplySpawner;
 
 
-        OwnedRoleData OwnedData;
+        OwnedRoleData OwnedRoleData;
         RoleData MyRoleData;
 
 
@@ -31,16 +31,18 @@ namespace TheDoor.Main {
             MySupplySpawner.Init();
         }
         public void ShowUI(OwnedRoleData _ownedData) {
-            OwnedData = _ownedData;
-            MyRoleData = RoleData.GetData(OwnedData.RoleID);
+            OwnedRoleData = _ownedData;
+            MyRoleData = RoleData.GetData(OwnedRoleData.RoleID);
             RefreshUI();
             RefreshSupply();
+            RefreshTalent();
+            RefreshEffect();
             SetActive(true);
         }
         public override void RefreshUI() {
             base.RefreshUI();
-            HPText.text = string.Format("HP:{0}/{1}", OwnedData.CurHP, MyRoleData.HP);
-            SanPText.text = string.Format("SanP:{0}/{1}", OwnedData.CurSanP, MyRoleData.SanP);
+            HPText.text = string.Format("HP:{0}/{1}", OwnedRoleData.CurHP, MyRoleData.HP);
+            SanPText.text = string.Format("SanP:{0}/{1}", OwnedRoleData.CurSanP, MyRoleData.SanP);
             AssetGet.GetImg(RoleData.DataName, MyRoleData.Ref, sprite => {
                 RoleImg.sprite = sprite;
             });
@@ -53,10 +55,16 @@ namespace TheDoor.Main {
             });
         }
         public void RefreshTalent() {
-
+            List<TalentData> talentDatas = OwnedRoleData.GetTalentDatas();
+            MyTalentSpawner.LoadItemAsset(() => {
+                MyTalentSpawner.SpawnItems(talentDatas);
+            });
         }
         public void RefreshEffect() {
-
+            List<TargetEffectData> effectDatas = OwnedRoleData.GetEffectDatas();
+            MyEffectSpawner.LoadItemAsset(() => {
+                MyEffectSpawner.SpawnItems(effectDatas);
+            });
         }
 
     }

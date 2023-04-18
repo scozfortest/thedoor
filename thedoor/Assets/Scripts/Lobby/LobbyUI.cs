@@ -11,6 +11,7 @@ namespace TheDoor.Main {
 
     public class LobbyUI : BaseUI {
 
+
         public LobbyUIs CurUI { get; private set; } = LobbyUIs.Lobby;
         public BaseUI LastPopupUI { get; private set; }//紀錄上次的彈出介面(切介面時要關閉上次的彈出介面)
 
@@ -19,6 +20,7 @@ namespace TheDoor.Main {
 
         //進遊戲就要初始化的UI放這裡(會增加場景切換時的讀取時間)
         [SerializeField] CreateRoleUI MyCreateRoleUI;
+        [SerializeField] LobbyMenuUI MyLobbyMenuUI;
 
 
         ////進遊戲不先初始化，等到要用時才初始化的UI放這裡
@@ -43,11 +45,13 @@ namespace TheDoor.Main {
 
             switch (_ui) {
                 case AdventureUIs.Default://本來在其他介面時，可以傳入Default來關閉彈出介面並顯示回預設介面
-                    MyCreateRoleUI.SetActive(true);
-                    //MyBattleUI?.SetActive(false);
+                    MyCreateRoleUI.SetActive(false);
+                    MyLobbyMenuUI.SetActive(true);
+                    MyLobbyMenuUI.RefreshUI();
                     _cb?.Invoke();
-                    LastPopupUI = MyCreateRoleUI;
+                    LastPopupUI = MyLobbyMenuUI;
                     break;
+
                     //case AdventureUIs.Battle:
                     //    MyCreateRoleUI.SetActive(false);
                     //    MyBattleUI?.SetActive(true);
@@ -90,10 +94,6 @@ namespace TheDoor.Main {
         //}
 
 
-        public void GoAdventure() {
-            PopupUI.InitSceneTransitionProgress(1, "AdventureUILoaded");
-            PopupUI.CallTransition(MyScene.AdventureScene);
-        }
 
     }
 }

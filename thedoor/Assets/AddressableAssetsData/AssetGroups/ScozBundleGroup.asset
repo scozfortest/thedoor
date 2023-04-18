@@ -98,6 +98,22 @@ MonoBehaviour:
     m_Address: Assets/AddressableAssets/Audios/Music
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 067d680956dbb564a89b10fc86c49e8d
+    m_Address: Assets/AddressableAssets/Atlas/SupplyIcon.spriteatlas
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: db6fec762284aea4dbad62b06d2ce08e
+    m_Address: Assets/AddressableAssets/Atlas/EffectIcon.spriteatlas
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 369cf59c73ee70445a5879b153978c19
+    m_Address: Assets/AddressableAssets/Atlas/TalentIcon.spriteatlas
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 80853e0047f059342a5f81b6b9dcc75f
+    m_Address: Assets/AddressableAssets/Atlas/ScriptUI.spriteatlas
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9bdcae1979219314780bb2d43aff9537, type: 2}
   m_SchemaSet:

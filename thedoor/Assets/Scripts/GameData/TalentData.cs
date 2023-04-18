@@ -7,7 +7,7 @@ using LitJson;
 
 namespace TheDoor.Main {
     public class TalentData : MyJsonData {
-        public static string DataName { get; private set; }
+        public static string DataName { get; set; }
         public new string ID { get; private set; }
         public string Name {
             get {
