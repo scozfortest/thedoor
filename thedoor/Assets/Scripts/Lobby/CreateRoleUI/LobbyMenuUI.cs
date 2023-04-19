@@ -31,9 +31,13 @@ namespace TheDoor.Main {
             } else {
 
                 //腳色圖
-                AssetGet.GetImg("Role", GamePlayer.Instance.Data.CurRole.RoleID.ToString(), sprite => {
-                    RoleImg.sprite = sprite;
-                });
+                var roleData = RoleData.GetData(GamePlayer.Instance.Data.CurRole.RoleID);
+                if (roleData != null) {
+                    AssetGet.GetImg("Role", GamePlayer.Instance.Data.CurRole.RoleID.ToString(), sprite => {
+                        RoleImg.sprite = sprite;
+                    });
+                }
+
                 //背景圖
                 AssetGet.GetImg("LobbyBG", "lobbybg" + GamePlayer.Instance.Data.CurRole.RoleID, sprite => {
                     BG.sprite = sprite;
@@ -58,7 +62,16 @@ namespace TheDoor.Main {
         /// 創腳
         /// </summary>
         public void CreateRole() {
-
+            PopupUI.ShowLoading(string.Format("Loading"));
+            FirebaseManager.CreateRole(0, cbData => {//創腳
+                string roleUID = cbData["RoleUID"].ToString();
+                FirebaseManager.GetDataByDocID(ColEnum.Role, roleUID, (col, data) => {//取DB上最新的腳色資料
+                    GamePlayer.Instance.SetOwnedData<OwnedRoleData>(col, data);
+                    GamePlayer.Instance.Data.SetCurRole_Loco(roleUID);
+                    PopupUI.HideLoading();
+                    LobbyUI.GetInstance<LobbyUI>()?.SwitchUI(LobbyUIs.CreateRole);
+                });
+            });
         }
         /// <summary>
         /// 刪除腳色

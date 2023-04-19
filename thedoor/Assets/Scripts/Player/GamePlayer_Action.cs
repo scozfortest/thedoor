@@ -11,6 +11,7 @@ namespace TheDoor.Main {
 
     public partial class GamePlayer : MyPlayer {
 
+
         /// <summary>
         /// 商城購買，花費遊戲中貨幣的購買跑這裡，購買失敗_cb會回傳null
         /// </summary>

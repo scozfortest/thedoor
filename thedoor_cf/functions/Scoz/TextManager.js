@@ -20,5 +20,17 @@ var methods = {
         number = Math.floor(number)
         return number;
     },
+    SplitToNum: function (str, char) {
+        return str
+            .split(char)
+            .map(Number)
+            .filter(value => !isNaN(value));
+    },
+    SplitToInts: function (str, char) {
+        return str
+            .split(',')
+            .map(Number)
+            .filter(value => !isNaN(value) && Number.isInteger(value));
+    },
 }
 module.exports = methods;

@@ -15,16 +15,19 @@ namespace TheDoor.Main {
         [SerializeField] Image Img;
         [SerializeField] TextMeshProUGUI Content;
 
+        OwnedRoleData MyOwnedRoleData;
         RoleData MyRoleData;
         RolePlotData CurRolePlotData;
         int CurPlotIndex;
 
 
-        public void SetRole(int _id) {
-            MyRoleData = RoleData.GetData(_id);
+        public void ShowUI(OwnedRoleData _ownedData) {
+            MyRoleData = RoleData.GetData(_ownedData.RoleID);
             CurPlotIndex = 0;
             CurRolePlotData = RolePlotData.GetData(MyRoleData.ID, CurPlotIndex);
+            if (CurRolePlotData == null) OnRolePlotEnd();
             RefreshUI();
+            SetActive(true);
         }
         public override void RefreshUI() {
             base.RefreshUI();
@@ -43,9 +46,16 @@ namespace TheDoor.Main {
             CurPlotIndex++;
             CurRolePlotData = RolePlotData.GetData(MyRoleData.ID, CurPlotIndex);
             if (CurRolePlotData == null) {
+                OnRolePlotEnd();
                 return;
             }
             RefreshUI();
+        }
+        /// <summary>
+        /// 腳色劇本跑完跑這裡
+        /// </summary>
+        public void OnRolePlotEnd() {
+
         }
     }
 }

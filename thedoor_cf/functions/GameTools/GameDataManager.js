@@ -1,7 +1,8 @@
 //Json
 const ItemGroupJson = require('../GameData/ItemGroup.json');
 const StringJson = require('../GameData/String.json');
-
+const RoleJson = require('../GameData/Role.json');
+const SupplyJson = require('../GameData/Supply.json');
 
 //自訂方法
 const GameSetting = require('./GameSetting.js');
@@ -42,11 +43,34 @@ module.exports = {
             }
         }
 
-        let Logger = require('./Logger.js');
-        let logStr = jsonName + "表不存在 ID: " + id;
-        Logger.CFLog(logStr, GameSetting.LogTypes.Error);
-        console.log(logStr);
+        // let Logger = require('./Logger.js');
+        //let logStr = jsonName + "表不存在 ID: " + id;
+        // Logger.CFLog(logStr, GameSetting.LogTypes.Error);
+        //console.log(logStr);
+        console.log(jsonName + "表找不到ID為" + id + "的資料")
         return null;
+    },
+    //傳入Json檔名(GameSetting.GameJsonName)與IDs取得該IDs對應的資料
+    GetDatas: function (jsonName, ids) {
+        let jsonData = GetJson(jsonName);
+
+        if (jsonData == null)
+            return null;
+
+        let datas = []
+        for (let id of ids) {
+            let found = false
+            for (let data of jsonData) {
+                if (data["ID"] == id) {
+                    datas.push(data)
+                    found = true
+                    break;
+                }
+            }
+            if (found == false)
+                console.log(jsonName + "表找不到ID為" + id + "的資料")
+        }
+        return datas;
     },
     //傳入Json檔名(GameSetting.GameJsonName)取得該Json表所有ID清單
     GetJsonDataIDs: function (jsonName) {
@@ -65,8 +89,8 @@ module.exports = {
     GetJson: function (jsonName) {
         return GetJson(jsonName);
     },
-    //傳入Json表名稱與Rank取得符合Rank的所有資料
-    GetRankDatas: function (jsonName, rank) {
+    //傳入Json表與欄位條件，取得符合條件的資料
+    GetSpcificDatas: function (jsonName, conditions) {
         let jsonData = GetJson(jsonName);
 
         if (jsonData == null)
@@ -75,9 +99,49 @@ module.exports = {
         let datas = [];
 
         for (let data of jsonData) {
-            if (data["Rank"] == rank) {
-                datas.push(data);
+            for (let key in conditions) {
+                if (data[key] == conditions[key]) {
+                    datas.push(data);
+                }
             }
+        }
+        return datas;
+    },
+    //傳入Json表與欄位條件，取得符合條件(若條件的Key值不存在視同不符合條件)的資料IDs
+    GetSpcificIDs: function (jsonName, conditions) {
+        let jsonData = GetJson(jsonName);
+        if (jsonData == null)
+            return null;
+        let datas = [];
+        for (let data of jsonData) {
+            let available = true;
+            for (let key in conditions) {
+                if (!(key in data) || data[key] != conditions[key]) {
+                    available = false
+                    break;
+                }
+            }
+            if (available == true)
+                datas.push(data.ID);
+        }
+        return datas;
+    },
+    //傳入Json表與欄位條件，取得符合條件(若條件的Key值不存在視同符合條件)的資料IDs
+    GetSpcificIDs2: function (jsonName, conditions) {
+        let jsonData = GetJson(jsonName);
+        if (jsonData == null)
+            return null;
+        let datas = [];
+        for (let data of jsonData) {
+            let available = true;
+            for (let key in conditions) {
+                if ((key in data) && data[key] != conditions[key]) {
+                    available = false
+                    break;
+                }
+            }
+            if (available == true)
+                datas.push(data.ID);
         }
         return datas;
     },
@@ -227,6 +291,12 @@ function GetJson(jsonName) {
     switch (jsonName) {
         case GameSetting.GameJsonNames.ItemGroup://寶箱表
             jsonData = ItemGroupJson.ItemGroup;
+            break;
+        case GameSetting.GameJsonNames.Role://腳色表
+            jsonData = RoleJson.Role;
+            break;
+        case GameSetting.GameJsonNames.Supply://道具表
+            jsonData = SupplyJson.Supply;
             break;
         default:
             console.log("尚未定義Json表: " + jsonName);

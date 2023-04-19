@@ -58,10 +58,10 @@ namespace TheDoor.Main {
             if (RolePlotDataDic[_roleID] == null || RolePlotDataDic[_roleID].Count == 0) return null;
 
             if (_index >= RolePlotDataDic[_roleID].Count) {
-                WriteLog.LogErrorFormat("GetScript的傳入索引超出範圍");
+                //WriteLog.LogErrorFormat("GetScript的傳入索引超出範圍");
                 return null;
             }
-            return RolePlotDataDic[_roleID][_roleID];
+            return RolePlotDataDic[_roleID][_index];
         }
     }
 

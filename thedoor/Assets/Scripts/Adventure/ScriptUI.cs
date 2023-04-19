@@ -11,7 +11,7 @@ using TMPro;
 namespace TheDoor.Main {
 
     public class ScriptUI : BaseUI {
-
+        [SerializeField] Image Img;
         [SerializeField] TextMeshProUGUI Content;
         [SerializeField] GameObject[] OptionGOs;
         [SerializeField] TextMeshProUGUI[] Options;
@@ -31,6 +31,13 @@ namespace TheDoor.Main {
             base.RefreshUI();
             ShowContent();
             ShowOptions();
+            ShowImg();
+        }
+
+        void ShowImg() {
+            AssetGet.GetImg("Plot", CurScriptData.RefImg, sprite => {
+                Img.sprite = sprite;
+            });
         }
 
         void ShowContent() {
@@ -46,12 +53,12 @@ namespace TheDoor.Main {
         /// </summary>
         void ShowOptions() {
             if (CurScriptData == null || !CurScriptData.IsOption) {
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < OptionGOs.Length; i++) {
                     OptionGOs[i].SetActive(false);
                 }
                 return;
             }
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < OptionGOs.Length; i++) {
                 if (i >= CurScriptData.NextIDs.Count) {
                     OptionGOs[i].SetActive(false);
                     continue;

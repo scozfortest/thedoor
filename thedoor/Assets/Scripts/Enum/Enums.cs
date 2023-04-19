@@ -21,18 +21,8 @@ namespace TheDoor.Main {
     }
 
     public enum LobbyUIs {
-        Lobby,//大廳
-        Activity,//活動
-        Mail,//信箱
-        MiniGame,//簽到 & 小遊戲
-        Collection,//蒐藏
-        MaJamPachinko,//麻將柏青哥
-        Shop,//商城
-        Social,//社群
-        Achievement,//生涯
-        Rest,//休息站
-        Call,//休息站-來電
-        ScratchCard,//刮刮卡
+        Default,//預設介面
+        CreateRole,//創腳介面
     }
     public enum AdventureUIs {
         Default,//預設介面

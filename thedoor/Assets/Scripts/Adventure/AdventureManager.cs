@@ -10,8 +10,10 @@ using UnityEngine.Purchasing.Security;
 namespace TheDoor.Main {
     public class AdventureManager : MonoBehaviour {
         [HeaderAttribute("==============Addressable Assets==============")]
-        public Canvas MyCanvas;
+        public Canvas HeightBaseCanvas;
+        public Canvas WidthBaseCanvas;
         public AssetReference AdventureUIAsset;
+        public AssetReference DoorNodeUIAsset;
 
         [HeaderAttribute("==============設定==============")]
         LoadingProgress MyLoadingProgress;//讀取進度，讀取完會跑FinishInitAdventure()
@@ -73,15 +75,16 @@ namespace TheDoor.Main {
             }
         }
         void SpawnAddressableAssets() {
-            MyLoadingProgress.AddLoadingProgress("AdventureUI");//新增讀取中項目
 
             DateTime now = DateTime.Now;
-            //初始化UI
+
+            //AdventureUI
+            MyLoadingProgress.AddLoadingProgress("AdventureUI");//新增讀取中項目
             Addressables.LoadAssetAsync<GameObject>(AdventureUIAsset).Completed += handle => {
                 WriteLog.LogFormat("載入AdventureUI花費: {0}秒", (DateTime.Now - now).TotalSeconds);
                 HandleList.Add(handle);
                 GameObject go = Instantiate(handle.Result);
-                go.transform.SetParent(MyCanvas.transform);
+                go.transform.SetParent(HeightBaseCanvas.transform);
                 go.transform.localPosition = handle.Result.transform.localPosition;
                 go.transform.localScale = handle.Result.transform.localScale;
                 RectTransform rect = go.GetComponent<RectTransform>();
@@ -89,6 +92,22 @@ namespace TheDoor.Main {
                 rect.offsetMax = Vector2.zero;//Right、Top
                 go.GetComponent<AdventureUI>().Init();
                 MyLoadingProgress.FinishProgress("AdventureUI");//完成讀取UI
+            };
+
+            //DoorNodeUI
+            MyLoadingProgress.AddLoadingProgress("DoorNodeUI");//新增讀取中項目
+            Addressables.LoadAssetAsync<GameObject>(DoorNodeUIAsset).Completed += handle => {
+                WriteLog.LogFormat("載入AdventureUI花費: {0}秒", (DateTime.Now - now).TotalSeconds);
+                HandleList.Add(handle);
+                GameObject go = Instantiate(handle.Result);
+                go.transform.SetParent(WidthBaseCanvas.transform);
+                go.transform.localPosition = handle.Result.transform.localPosition;
+                go.transform.localScale = handle.Result.transform.localScale;
+                RectTransform rect = go.GetComponent<RectTransform>();
+                rect.offsetMin = Vector2.zero;//Left、Bottom
+                rect.offsetMax = Vector2.zero;//Right、Top
+                go.GetComponent<DoorNodeUI>().Init();
+                MyLoadingProgress.FinishProgress("DoorNodeUI");//完成讀取UI
             };
         }
     }

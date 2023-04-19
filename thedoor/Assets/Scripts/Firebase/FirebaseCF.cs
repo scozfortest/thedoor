@@ -64,6 +64,38 @@ namespace TheDoor.Main {
             });
         }
         /// <summary>
+        /// RoleID傳入0代表隨機腳色
+        /// </summary>
+        public static void CreateRole(int _roleID, Action<Dictionary<string, object>> _cb) {
+            string funcName = "CreateRole";
+            var function = FirebaseFunctions.GetInstance(MyFirebaseApp, Region).GetHttpsCallable(funcName);
+            var data = new Dictionary<string, object>();
+            data.Add("RoleID", _roleID);
+
+            function.CallAsync(data).ContinueWithOnMainThread(task => {
+                try {
+                    if (task.IsFaulted) {
+                        WriteLog.LogError("Error:" + task.Exception.ToString());
+                        return;
+                    } else {
+                        if (task.Result.Data == null) {
+                            _cb?.Invoke(null);
+                        } else {
+                            CFCallbackHandle(task.Result.Data, successData => {
+                                Dictionary<string, object> cbData = DictionaryExtension.ConvertToStringKeyDic(successData);
+                                _cb?.Invoke(cbData);
+                            }, failStr => {
+                                _cb?.Invoke(null);
+                            });
+                        }
+                    }
+                } catch (Exception _e) {
+                    WriteLog.LogError(_e);
+                }
+            });
+        }
+
+        /// <summary>
         /// 註冊送LOG
         /// </summary>
         public static void PlayerSign_SignUp() {

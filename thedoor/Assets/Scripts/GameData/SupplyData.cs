@@ -26,6 +26,7 @@ namespace TheDoor.Main {
         }
         public ItemType MyItemType { get; } = ItemType.Supply;
         public string Ref { get; set; }
+        public bool Lock { get; private set; }
         public string[] Tags { get; private set; }
         public int Rank { get; private set; }
         public int ExtendHP { get; private set; }
@@ -49,6 +50,9 @@ namespace TheDoor.Main {
                         break;
                     case "Tags":
                         Tags = item[key].ToString().Split(',');
+                        break;
+                    case "Lock":
+                        Lock = bool.Parse(item[key].ToString());
                         break;
                     case "Rank":
                         Rank = int.Parse(item[key].ToString());

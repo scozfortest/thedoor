@@ -114,6 +114,14 @@ MonoBehaviour:
     m_Address: Assets/AddressableAssets/Atlas/ScriptUI.spriteatlas
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 33ba0108d24cb36489070fe90ebb73f0
+    m_Address: Assets/AddressableAssets/Prefab/AdventureUI/DoorNodeUI.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 11871ebdf0c8adb468ab673f00894e41
+    m_Address: Assets/AddressableAssets/Prefab/AdventureUI/NodePrefab.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9bdcae1979219314780bb2d43aff9537, type: 2}
   m_SchemaSet:

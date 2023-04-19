@@ -49,7 +49,14 @@ namespace TheDoor.Main {
                 }
             }
 
+        }
 
+        /// <summary>
+        /// 設定目前使用的腳色UID
+        /// </summary>
+        /// <param name="_curRoleUID"></param>
+        public void SetCurRole_Loco(string _curRoleUID) {
+            CurRoleUID = _curRoleUID;
         }
 
 

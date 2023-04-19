@@ -31,8 +31,7 @@ namespace TheDoor.Main {
             }
         }
         public RequireData Require { get; private set; }
-        public List<int> RandomItems = new List<int>();
-        public List<int> Items = new List<int>();
+        public List<int> Supplies = new List<int>();
         public List<string> ExclusiveScripts = new List<string>();
 
         protected override void GetDataFromJson(JsonData _item, string _dataName) {
@@ -68,11 +67,8 @@ namespace TheDoor.Main {
                             Require = new RequireData(requireType, item[key].ToString());
                         }
                         break;
-                    case "RandomItems":
-                        RandomItems = TextManager.StringSplitToIntList(item[key].ToString(), ',');
-                        break;
-                    case "Items":
-                        Items = TextManager.StringSplitToIntList(item[key].ToString(), ',');
+                    case "Supplies":
+                        Supplies = TextManager.StringSplitToIntList(item[key].ToString(), ',');
                         break;
                     case "ExclusiveScripts":
                         ExclusiveScripts = item[key].ToString().Split(',').ToList();

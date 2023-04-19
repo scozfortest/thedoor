@@ -14,6 +14,9 @@ exports.SetDevice = PlayerSign.SetDevice;
 exports.UpdateOnlineTimestamp = PlayerSign.UpdateOnlineTimestamp;
 exports.TriggerEvent = PlayerSign.TriggerEvent;
 
+//冒險
+const Adventure = require('./Adventure');
+exports.CreateRole = Adventure.CreateRole;
 
 
 //Client取Server時間

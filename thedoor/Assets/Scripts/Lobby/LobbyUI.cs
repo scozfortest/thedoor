@@ -12,7 +12,7 @@ namespace TheDoor.Main {
     public class LobbyUI : BaseUI {
 
 
-        public LobbyUIs CurUI { get; private set; } = LobbyUIs.Lobby;
+        public LobbyUIs CurUI { get; private set; } = LobbyUIs.Default;
         public BaseUI LastPopupUI { get; private set; }//紀錄上次的彈出介面(切介面時要關閉上次的彈出介面)
 
         static bool FirstEnterLobby = true;//第一次進入大廳後會設定回false 用來判斷是否第一次進入大廳而做判斷
@@ -33,23 +33,30 @@ namespace TheDoor.Main {
         public override void Init() {
             base.Init();
             MyCreateRoleUI.Init();
-            SwitchUI(AdventureUIs.Default);
+            SwitchUI(LobbyUIs.Default);
             //MyCreateRoleUI.SetRole(1);
         }
 
-        public void SwitchUI(AdventureUIs _ui, Action _cb = null) {
+        public void SwitchUI(LobbyUIs _ui, Action _cb = null) {
 
             if (LastPopupUI != null)
                 LastPopupUI.SetActive(false);//關閉彈出介面
             //PlayerInfoUI.GetInstance<PlayerInfoUI>()?.SetActive(false);//所有介面預設都不會開啟資訊界面
 
             switch (_ui) {
-                case AdventureUIs.Default://本來在其他介面時，可以傳入Default來關閉彈出介面並顯示回預設介面
+                case LobbyUIs.Default://本來在其他介面時，可以傳入Default來關閉彈出介面並顯示回預設介面
                     MyCreateRoleUI.SetActive(false);
                     MyLobbyMenuUI.SetActive(true);
                     MyLobbyMenuUI.RefreshUI();
                     _cb?.Invoke();
                     LastPopupUI = MyLobbyMenuUI;
+                    break;
+                case LobbyUIs.CreateRole:
+                    MyCreateRoleUI.SetActive(true);
+                    MyCreateRoleUI.ShowUI(GamePlayer.Instance.Data.CurRole);
+                    MyLobbyMenuUI.SetActive(false);
+                    _cb?.Invoke();
+                    LastPopupUI = MyCreateRoleUI;
                     break;
 
                     //case AdventureUIs.Battle:
