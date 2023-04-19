@@ -32,7 +32,7 @@ namespace TheDoor.Main {
         }
         public void ShowUI(OwnedRoleData _ownedData) {
             OwnedRoleData = _ownedData;
-            MyRoleData = RoleData.GetData(OwnedRoleData.RoleID);
+            MyRoleData = RoleData.GetData(OwnedRoleData.ID);
             RefreshUI();
             RefreshSupply();
             RefreshTalent();

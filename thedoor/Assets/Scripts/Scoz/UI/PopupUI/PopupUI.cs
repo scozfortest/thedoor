@@ -468,6 +468,47 @@ namespace Scoz.Func {
             }
         }
 
+        [HeaderAttribute("==============獲得物品視窗==============")]
+
+        //進遊戲不先初始化，等到要用時才初始化UI
+        [SerializeField] AssetReference GainItemListUIAsset;
+        [SerializeField] Transform GainItemListUIParent;
+        GainItemListUI MyGainItemListUI;
+
+        void InitGainItemListUI(Action _ac) {
+            PopupUI.ShowLoading(StringData.GetUIString("WaitForLoadingUI"));
+            //初始化UI
+            AddressablesLoader.GetPrefabByRef(Instance.GainItemListUIAsset, (prefab, handle) => {
+                PopupUI.HideLoading();
+                GameObject go = Instantiate(prefab);
+                go.transform.SetParent(Instance.GainItemListUIParent);
+                go.transform.localPosition = prefab.transform.localPosition;
+                go.transform.localScale = prefab.transform.localScale;
+                RectTransform rect = go.GetComponent<RectTransform>();
+                rect.offsetMin = Vector2.zero;//Left、Bottom
+                rect.offsetMax = Vector2.zero;//Right、Top
+                go.transform.SetAsLastSibling();
+                Instance.MyGainItemListUI = go.GetComponent<GainItemListUI>();
+                MyGainItemListUI.SetActive(false);
+                Instance.MyGainItemListUI.Init();
+                MyGainItemListUI.LoadItemAsset(_ac);
+            }, () => { WriteLog.LogError("載入GainItemListUIAsset失敗"); });
+
+
+        }
+        public static void CallGainItemListUI(List<ItemData> _itemDatas, List<ItemData> _replacedItems, Action _cb = null) {
+            if (!Instance)
+                return;
+            //判斷是否已經載入過此UI，若還沒載過就跳讀取中並開始載入
+            if (Instance.MyGainItemListUI != null) {
+                Instance.MyGainItemListUI.CallUI(_itemDatas, _replacedItems, _cb);
+            } else {
+                Instance.InitGainItemListUI(() => {
+                    Instance.MyGainItemListUI.CallUI(_itemDatas, _replacedItems, _cb);
+                });
+            }
+        }
+
 
 
     }

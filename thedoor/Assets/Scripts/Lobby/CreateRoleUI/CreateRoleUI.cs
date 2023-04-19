@@ -22,7 +22,7 @@ namespace TheDoor.Main {
 
 
         public void ShowUI(OwnedRoleData _ownedData) {
-            MyRoleData = RoleData.GetData(_ownedData.RoleID);
+            MyRoleData = RoleData.GetData(_ownedData.ID);
             CurPlotIndex = 0;
             CurRolePlotData = RolePlotData.GetData(MyRoleData.ID, CurPlotIndex);
             if (CurRolePlotData == null) OnRolePlotEnd();

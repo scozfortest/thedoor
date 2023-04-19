@@ -92,6 +92,20 @@ var methods = {
 
         return returnGainItems;
     },
+    //傳入[gainItems,玩家UID來給予玩家道具,被取代的道具清單]
+    GiveItems: async function (gainItems, playerUID, replaceGainItems) {
+        let returnGainItems = [];//最終真實獲得的道具清單
+        let addCurrency = {};//將要增加的資源記錄在這個字典，之後會更新資料庫
+        let batchAddUniqueItemDatas = [];//將要加入的獨立資料類道具加到這個陣列，之後會送批次更新資料庫
+        let addNotUniqueItem = {};//將要增加的非獨立資料類道具數量記錄在這個字典，之後會更新資料庫
+
+        //將獲得的道具中有重複的道具轉為替代道具並回傳最終獲得的道具清單
+        let newGainItems = await GetReplacedDuplicatedItems(playerUID, gainItems, replaceGainItems);
+        //依據要獲得的道具清單(ItemDatas)來設定要批次寫入資料庫的資料(addCurrency,batchAddUniqueItemDatas,addNotUniqueItem)
+        await SetBatchWriteDatasFromItemDatas(playerUID, newGainItems, addCurrency, batchAddUniqueItemDatas, addNotUniqueItem);
+        await WriteBatchDataToFirestore(returnGainItems, playerUID, addCurrency, batchAddUniqueItemDatas, addNotUniqueItem);//將批次資料寫入資料庫
+        return returnGainItems
+    },
     //傳入[最終獲得的道具清單, ItemGroupID, 數量, 玩家UID,未取代重複道具前的實際獲得道具清單] 來設定最終獲得的道具清單
     GiveItem_ItemGroup: async function (returnGainItems, itemValue, count, playerUID, replaceGainItems) {
         let addCurrency = {};//將要增加的資源記錄在這個字典，之後會更新資料庫
@@ -196,7 +210,7 @@ async function WriteBatchDataToFirestore(returnGainItems, playerUID, addCurrency
 }
 
 //設定玩家獲得獨立類道具的資料(此資料格式可以傳入FirestoreManager.AddDocs更新資料庫)
-function GetUniqueItemAddData(itemType, itemValue, playerUID) {
+async function GetUniqueItemAddData(itemType, itemValue, playerUID) {
     if (!(itemType in GameSetting.UniqueItemTypes))
         return null;
 
@@ -207,9 +221,17 @@ function GetUniqueItemAddData(itemType, itemValue, playerUID) {
 
     switch (itemType) {
         case GameSetting.UniqueItemTypes.Role://腳色
-            addData["EnableCall"] = true;
-            let randFragment = Probability.GetRandInt(3);
-            addData["Fragment"] = randFragment;//獲得腳色時直接給予隨機一個碎片
+            let roleJsonData = GameDataManager.GetData(GameSetting.GameJsonNames.Role, itemValue)
+            addData["CurHP"] = Number(roleJsonData["HP"])
+            addData["CurSanP"] = Number(roleJsonData["SanP"])
+            addData["Effect"] = {}
+            addData["Talent"] = [roleJsonData["Talent"]]
+            break;
+        case GameSetting.UniqueItemTypes.Supply://道具
+            let playerDBData = await FirestoreManager.GetDocData(GameSetting.PlayerDataCols.Player, playerUID)
+            let supplyJsonData = GameDataManager.GetData(GameSetting.GameJsonNames.Supply, itemValue)
+            addData["OwnRoleUID"] = playerDBData["CurRoleUID"]
+            addData["Usage"] = Number(supplyJsonData["Usage"])
             break;
     }
 
@@ -265,7 +287,7 @@ async function SetBatchWriteDatasFromItemDatas(playerUID, itemDatas, addCurrency
                     addCurrency[itemData["ItemType"]] = Number(itemData["ItemValue"]);
                 }
             } else if (itemData["ItemType"] in GameSetting.UniqueItemTypes) {//獨立資料類道具
-                let uniqueItemData = GetUniqueItemAddData(itemData["ItemType"], itemData["ItemValue"], playerUID);
+                let uniqueItemData = await GetUniqueItemAddData(itemData["ItemType"], itemData["ItemValue"], playerUID);
                 if (uniqueItemData != null) {
                     uniqueItemData["ColName"] = GameSetting.PlayerDataCols[itemData["ItemType"]];
                     batchAddUniqueItemDatas.push(uniqueItemData);

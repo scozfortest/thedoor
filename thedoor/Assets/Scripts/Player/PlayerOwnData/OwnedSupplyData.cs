@@ -9,6 +9,7 @@ namespace TheDoor.Main {
     public class OwnedSupplyData : OwnedData {
         public string OwnRoleUID { get; private set; }
         public int Usage { get; private set; }
+        public int ID { get; private set; }
 
         public OwnedSupplyData(Dictionary<string, object> _data)
             : base(_data) {
@@ -18,6 +19,7 @@ namespace TheDoor.Main {
             object value;
             OwnRoleUID = _data.TryGetValue("RoleID", out value) ? Convert.ToString(value) : default(string);
             Usage = _data.TryGetValue("Usage", out value) ? Convert.ToInt32(value) : default(int);
+            ID = _data.TryGetValue("SupplyID", out value) ? Convert.ToInt32(value) : default(int);
         }
 
     }

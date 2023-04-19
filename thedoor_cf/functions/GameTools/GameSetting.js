@@ -46,10 +46,12 @@ module.exports = {
         Supply: "PlayerData-Supply",
         OnlineTimestamp: "PlayerData-OnlineTimestamp",
     }),
-    //道具類型(ItemType)
+    //物品類型(ItemType)
     ItemTypes: Object.freeze({
         Gold: "Gold",//遊戲幣
         Point: "Point",//點數
+        Role: "Role",//腳色
+        Supply: "Supply",//道具
         ItemGroup: "ItemGroup",//寶箱
     }),
     //遊戲中貨幣類型

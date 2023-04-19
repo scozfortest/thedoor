@@ -22,7 +22,7 @@ namespace TheDoor.Main {
             Refresh();
         }
         public void Refresh() {
-            var data = SupplyData.GetData(OwnedData.SupplyID);
+            var data = SupplyData.GetData(OwnedData.ID);
             Description.text = data.Description;
             Usage.text = OwnedData.Usage.ToString();
             Time.text = data.Time.ToString();

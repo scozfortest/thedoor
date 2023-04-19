@@ -31,15 +31,15 @@ namespace TheDoor.Main {
             } else {
 
                 //腳色圖
-                var roleData = RoleData.GetData(GamePlayer.Instance.Data.CurRole.RoleID);
+                var roleData = RoleData.GetData(GamePlayer.Instance.Data.CurRole.ID);
                 if (roleData != null) {
-                    AssetGet.GetImg("Role", GamePlayer.Instance.Data.CurRole.RoleID.ToString(), sprite => {
+                    AssetGet.GetImg("Role", GamePlayer.Instance.Data.CurRole.ID.ToString(), sprite => {
                         RoleImg.sprite = sprite;
                     });
                 }
 
                 //背景圖
-                AssetGet.GetImg("LobbyBG", "lobbybg" + GamePlayer.Instance.Data.CurRole.RoleID, sprite => {
+                AssetGet.GetImg("LobbyBG", "lobbybg" + GamePlayer.Instance.Data.CurRole.ID, sprite => {
                     BG.sprite = sprite;
                 });
 
@@ -63,8 +63,8 @@ namespace TheDoor.Main {
         /// </summary>
         public void CreateRole() {
             PopupUI.ShowLoading(string.Format("Loading"));
-            FirebaseManager.CreateRole(0, cbData => {//創腳
-                string roleUID = cbData["RoleUID"].ToString();
+            FirebaseManager.CreateRole(0, (roleUID, returnItemDic) => {//創腳
+                //PopupUI.CallGainItemListUI(returnItemDic["ReturnGainItems"], returnItemDic["ReplaceGainItems"], null);
                 FirebaseManager.GetDataByDocID(ColEnum.Role, roleUID, (col, data) => {//取DB上最新的腳色資料
                     GamePlayer.Instance.SetOwnedData<OwnedRoleData>(col, data);
                     GamePlayer.Instance.Data.SetCurRole_Loco(roleUID);
