@@ -66,7 +66,7 @@ namespace TheDoor.Main {
         /// <summary>
         /// RoleID傳入0代表隨機腳色
         /// </summary>
-        public static void CreateRole(int _roleID, Action<string, Dictionary<string, List<ItemData>>> _cb) {
+        public static void CreateRole(int _roleID, Action<object> _cb) {
             string funcName = "CreateRole";
             var function = FirebaseFunctions.GetInstance(MyFirebaseApp, Region).GetHttpsCallable(funcName);
             var data = new Dictionary<string, object>();
@@ -79,15 +79,13 @@ namespace TheDoor.Main {
                         return;
                     } else {
                         if (task.Result.Data == null) {
-                            _cb?.Invoke("", null);
+                            _cb?.Invoke(null);
                         } else {
                             CFCallbackHandle(task.Result.Data, successData => {
-                                var returnItemDic = DataHandler.ConvertDataObjToReturnItemDic(successData);
-                                Dictionary<string, object> cbData = DictionaryExtension.ConvertToStringKeyDic(successData);
-                                string roleUID = cbData["RoleUID"].ToString();
-                                _cb?.Invoke(roleUID, returnItemDic);
+
+                                _cb?.Invoke(successData);
                             }, failStr => {
-                                _cb?.Invoke("", null);
+                                _cb?.Invoke(null);
                             });
                         }
                     }

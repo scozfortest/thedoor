@@ -105,7 +105,7 @@ namespace TheDoor.Main {
                     string uid = data["UID"].ToString();
                     T ownedData = (T)Activator.CreateInstance(typeof(T), data);
                     if (!OwnedDatas[_colName].Contains(uid)) {
-                        //DebugLogger.LogErrorFormat("新增{0}資料UID:{1} ID:{2}", _type, uid, data["ID"]);
+                        WriteLog.LogErrorFormat("新增{0}資料UID:{1} ID:{2}", _colName, uid, data["ID"]);
                         OwnedDatas[_colName].Add(uid, ownedData);
                     } else
                         WriteLog.LogErrorFormat("{0}資料有重複的UID:" + uid);
@@ -158,7 +158,7 @@ namespace TheDoor.Main {
             OwnedDatas[_colName].Remove(_uid);
         }
         /// <summary>
-        /// 傳入資料類型與UID，取得玩家擁有的資料(無資料會回傳0長度的List<T> 不會回傳null)
+        /// 傳入資料類型，取得玩家擁有的資料(無資料會回傳0長度的List<T> 不會回傳null)
         /// </summary>
         public List<T> GetOwnedDatas<T>(ColEnum _colName) where T : OwnedData {
             if (!OwnedDatas.ContainsKey(_colName))

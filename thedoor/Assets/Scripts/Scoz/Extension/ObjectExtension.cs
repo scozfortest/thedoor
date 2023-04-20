@@ -27,6 +27,16 @@ namespace Scoz.Func {
         public static float ToFloat(this object _obj) {
             return (float)_obj;
         }
-
+        public static List<int> ObjListToIntList(this object _obj) {
+            if (_obj == null) return null;
+            List<object> objs = _obj as List<object>;
+            if (objs == null || objs.Count == 0) return null;
+            List<int> list = new List<int>();
+            foreach (var o in objs) {
+                int num = Convert.ToInt32(o);
+                list.Add(num);
+            }
+            return list;
+        }
     }
 }

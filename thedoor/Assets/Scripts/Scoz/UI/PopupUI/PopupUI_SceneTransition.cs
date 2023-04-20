@@ -74,17 +74,18 @@ namespace Scoz.Func {
 
         }
 
-        public static void CallTransition(MyScene _scene) {
+        public static void CallTransition(MyScene _scene, Action _ac = null) {
             if (Instance == null)
                 return;
 
             //判斷是否已經載入過此UI，若還沒載過就跳讀取中並開始載入
             if (Instance.MySceneTransition != null) {
-                Instance.MySceneTransition.CallTransition(_scene);
+                Instance.MySceneTransition.CallTransition(_scene, _ac);
             } else {
-                Instance.OnSceneTransitionAssetLoadFinishedAC += () => { Instance.MySceneTransition.CallTransition(_scene); };
+                Instance.OnSceneTransitionAssetLoadFinishedAC += () => { Instance.MySceneTransition.CallTransition(_scene, _ac); };
                 Instance.InitSceneTransition();
             }
+
 
         }
     }

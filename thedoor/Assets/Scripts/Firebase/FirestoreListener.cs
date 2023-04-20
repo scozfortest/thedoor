@@ -83,7 +83,6 @@ namespace TheDoor.Main {
                     SetReturnOwnedData(_col, data);//根據集合類型來處理取回的資料
                 });
             } else {//一個玩家會擁有多個獨立doc類型的偵聽跑這裡(例如PlayerData-Mail，PlayerData-Mail集合中玩家會擁有不只一個 Doc)
-
                 Query query = Store.Collection(colName).WhereEqualTo(OwnedEnum.OwnerUID.ToString(), _playerUID);
                 listener = query.Listen(snapshot => {
                     if (snapshot.Count != 0) {
@@ -150,6 +149,9 @@ namespace TheDoor.Main {
                     break;
                 case ColEnum.Supply:
                     GamePlayer.Instance.SetOwnedDatas<OwnedSupplyData>(ColEnum.Supply, _datas);
+                    var roleInfo = RoleInfoUI.GetInstance<RoleInfoUI>();
+                    if (roleInfo != null && roleInfo.gameObject.activeInHierarchy)
+                        roleInfo.RefreshSupply();
                     break;
                 default:
                     WriteLog.LogErrorFormat("SetReturnOwnedData未加入處理偵聽 {0} 類型的回傳方法", _col);

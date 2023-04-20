@@ -7,7 +7,7 @@ using System;
 using System.Linq;
 
 namespace TheDoor.Main {
-    public class RoleData : MyJsonData {
+    public class RoleData : MyJsonData, IItemJsonData {
         public static string DataName { get; set; }
         public string Name {
             get {
@@ -31,6 +31,8 @@ namespace TheDoor.Main {
             }
         }
         public RequireData Require { get; private set; }
+        public ItemType MyItemType { get; } = ItemType.Role;
+
         public List<int> Supplies = new List<int>();
         public List<string> ExclusiveScripts = new List<string>();
 

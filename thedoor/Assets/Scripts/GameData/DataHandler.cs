@@ -22,6 +22,8 @@ namespace TheDoor.Main {
                 }
 
                 IDictionary tmpDic = _dataObj as IDictionary;
+
+
                 List<ItemData> returnGainItems = ConvertDataObjToItemList(tmpDic["ReturnGainItems"]);
                 List<ItemData> replaceGainItems = ConvertDataObjToItemList(tmpDic["ReplaceGainItems"]);
 

@@ -4,23 +4,42 @@ using UnityEngine;
 using UnityEngine.UI;
 using Scoz.Func;
 using System;
+using TMPro;
+
 namespace TheDoor.Main {
     public class GainItemListUI : ItemSpawner_Remote<ItemPrefab> {
 
+
+        [SerializeField] TextMeshProUGUI NameText;
         [SerializeField] PlayAudio MyPlayAudio;
         //[SerializeField] GameObject ReplaceInfoGO;
         Action BackAction;
+        ItemType MytemType;
 
-        public void CallUI(List<ItemData> _datas, List<ItemData> _replacedItems, Action _ac = null) {
+
+        public void ShowUI(string _title, List<ItemData> _datas, List<ItemData> _replacedItems, Action _ac = null) {
+            if ((_datas == null || _datas.Count == 0) && (_replacedItems == null || _replacedItems.Count == 0)) {
+                _ac?.Invoke();
+                return;
+            }
+
+
             BackAction = _ac;
             //if (_replacedItems != null && _replacedItems.Count > 0)
             //    ReplaceInfoGO.SetActive(true);
             //else
             //    ReplaceInfoGO.SetActive(false);
+            MytemType = _datas[0].Type;
+            if (string.IsNullOrEmpty(_title))
+                NameText.text = string.Format(StringData.GetUIString("GainItemTypeTitle"), MytemType);
+            else
+                NameText.text = _title;
             SpawnItems(_datas, _replacedItems);
+
             SetActive(true);
             MyPlayAudio.PlayByName("reward");
         }
+
 
         void SpawnItems(List<ItemData> _datas, List<ItemData> _replacedItems) {
             if (!LoadItemFinished) {
@@ -51,8 +70,8 @@ namespace TheDoor.Main {
 
         }
         public void OnCloseClick() {
-            BackAction?.Invoke();
             SetActive(false);
+            BackAction?.Invoke();//要先關閉在跑CB否則如果CB中有跑再次開啟GainItemListUI就會因為執行順序而又被關閉
         }
     }
 }

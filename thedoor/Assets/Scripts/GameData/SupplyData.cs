@@ -19,11 +19,6 @@ namespace TheDoor.Main {
                 return StringData.GetString_static(DataName + "_" + ID, "Description");
             }
         }
-        public string TypeName {
-            get {
-                return StringData.GetUIString("Item_" + DataName);
-            }
-        }
         public ItemType MyItemType { get; } = ItemType.Supply;
         public string Ref { get; set; }
         public bool Lock { get; private set; }

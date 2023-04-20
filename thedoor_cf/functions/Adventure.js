@@ -39,7 +39,8 @@ exports.CreateRole = functions.region('asia-east1').https.onCall(async (data, co
     roleID = Number(roleID)
     let roleJsonData = GameDataManager.GetData(GameSetting.GameJsonNames.Role, roleID)
     let writeRoleData = {
-        RoleID: roleID,
+        OwnerUID: context.auth.uid,
+        ID: roleID,
         CurHP: Number(roleJsonData["HP"]),
         CurSanP: Number(roleJsonData["SanP"]),
         Effect: {},
@@ -58,10 +59,21 @@ exports.CreateRole = functions.region('asia-east1').https.onCall(async (data, co
     let dbRoleSetting = await FirestoreManager.GetDocData(GameSetting.GameDataCols.Setting, "Role")
     let rank1SupplyIDs = GameDataManager.GetSpcificIDs2(GameSetting.GameJsonNames.Supply, { Rank: 1, Lock: false })
     let supplyIDs = []
+    let defaultSupplyIDs = []//紀錄腳色初始隨機獲得道具IDs(回傳client用)
     for (let i = 0; i < dbRoleSetting["DefaultSupplyCount"]; i++) {
-        supplyIDs.push(Prob.GetRandFromArray(rank1SupplyIDs))
+        let rndID = Number(Prob.GetRandFromArray(rank1SupplyIDs))
+        supplyIDs.push(rndID)
+        defaultSupplyIDs.push(rndID)
     }
-    supplyIDs.push(TextManager.SplitToInts(roleJsonData["Supplies"]))
+
+    let exclusiveSupplyIDs = []//紀錄腳色獨特道具IDs(回傳client用)
+    if ("Supplies" in roleJsonData) {
+        let ids = TextManager.SplitToInts(roleJsonData["Supplies"], ',')
+        for (let id of ids) {
+            supplyIDs.push(id)
+            exclusiveSupplyIDs.push(id)
+        }
+    }
     for (let supplyID of supplyIDs) {
         gainItems.push({
             ItemType: GameSetting.ItemTypes.Supply,
@@ -70,41 +82,24 @@ exports.CreateRole = functions.region('asia-east1').https.onCall(async (data, co
     }
 
     //寫DB
-    tmpReturnGainItems = await PlayerItemManager.GiveItems(gainItems, context.auth.uid, replaceGainItems)
-    returnGainItems = returnGainItems.concat(tmpReturnGainItems)
+    if (supplyIDs.length > 0) {
+        tmpReturnGainItems = await PlayerItemManager.GiveItems(gainItems, context.auth.uid, replaceGainItems)
+        returnGainItems = returnGainItems.concat(tmpReturnGainItems)
+    }
+
 
     //寫Log
     let writeLogData = {
         GainItems: returnGainItems,
     }
-    Logger.Write(context.auth.uid, GameSetting.GameLogCols.CreateRole, writeLogData);
-
-    // let supplyJsonDatas = GameDataManager.GetDatas(GameSetting.GameJsonNames.Supply, supplyIDs)
-    // let writeSupplyDatas = []
-    // for (let supplyData of supplyJsonDatas) {
-    //     let tmpData = {
-    //         ColName: GameSetting.PlayerDataCols.Supply,
-    //         OwnRoleUID: roleUID,
-    //         OwnerUID: context.auth.uid,
-    //         SupplyID: Number(supplyData["ID"]),
-    //         Usage: Number(supplyData["Usage"]),
-    //     }
-    //     writeSupplyDatas.push(tmpData)
-    // }
-    // //寫DB
-    // await FirestoreManager.AddDocs(writeSupplyDatas)
-
-    // //寫Log
-    // let logData = {
-    //     RoleID: roleID,
-    //     SupplyIDs: supplyIDs,
-    // }
-    // //寫DB
-    // Logger.Write(context.auth.uid, GameSetting.GameLogCols.CreateRole, logData);
+    Logger.Write(context.auth.uid, GameSetting.GameLogCols.CreateRole, writeLogData)
 
     return {
         Result: GameSetting.ResultTypes.Success,
         Data: {
+            RoleUID: roleUID,
+            DefaultSupplyIDs: defaultSupplyIDs,
+            ExclusiveSupplyIDs: exclusiveSupplyIDs,
             ReturnGainItems: returnGainItems,
             ReplaceGainItems: replaceGainItems,
         }

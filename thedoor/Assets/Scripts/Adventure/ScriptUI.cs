@@ -35,9 +35,11 @@ namespace TheDoor.Main {
         }
 
         void ShowImg() {
-            AssetGet.GetImg("Plot", CurScriptData.RefImg, sprite => {
-                Img.sprite = sprite;
-            });
+            if (!string.IsNullOrEmpty(CurScriptData.RefImg)) {
+                AssetGet.GetImg("Plot", CurScriptData.RefImg, sprite => {
+                    Img.sprite = sprite;
+                });
+            }
         }
 
         void ShowContent() {

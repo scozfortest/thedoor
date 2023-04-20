@@ -20,7 +20,7 @@ var methods = {
         number = Math.floor(number)
         return number;
     },
-    SplitToNum: function (str, char) {
+    SplitToNums: function (str, char) {
         return str
             .split(char)
             .map(Number)
@@ -28,7 +28,7 @@ var methods = {
     },
     SplitToInts: function (str, char) {
         return str
-            .split(',')
+            .split(char)
             .map(Number)
             .filter(value => !isNaN(value) && Number.isInteger(value));
     },

@@ -60,5 +60,11 @@ namespace TheDoor.Main {
             return effects;
         }
 
+        public List<OwnedSupplyData> GetSupplyDatas() {
+            List<OwnedSupplyData> supplyDatas = GamePlayer.Instance.GetOwnedDatas<OwnedSupplyData>(ColEnum.Supply);
+            supplyDatas = supplyDatas.FindAll(a => a.OwnRoleUID == UID);
+            return supplyDatas;
+        }
+
     }
 }

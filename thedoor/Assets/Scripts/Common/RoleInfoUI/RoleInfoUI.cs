@@ -18,6 +18,7 @@ namespace TheDoor.Main {
         [SerializeField] TalentSpawner MyTalentSpawner;
         [SerializeField] EffectSpawner MyEffectSpawner;
         [SerializeField] SupplySpawner MySupplySpawner;
+        [SerializeField] GameObject GoAdventureBtn;
 
 
         OwnedRoleData OwnedRoleData;
@@ -30,9 +31,10 @@ namespace TheDoor.Main {
             MyEffectSpawner.Init();
             MySupplySpawner.Init();
         }
-        public void ShowUI(OwnedRoleData _ownedData) {
+        public void ShowUI(OwnedRoleData _ownedData, bool _showGoAdventureBtn = false) {
             OwnedRoleData = _ownedData;
             MyRoleData = RoleData.GetData(OwnedRoleData.ID);
+            GoAdventureBtn.SetActive(_showGoAdventureBtn);
             RefreshUI();
             RefreshSupply();
             RefreshTalent();
@@ -49,9 +51,8 @@ namespace TheDoor.Main {
         }
 
         public void RefreshSupply() {
-            List<OwnedSupplyData> supplyDatas = GamePlayer.Instance.GetOwnedDatas<OwnedSupplyData>(ColEnum.Supply);
             MySupplySpawner.LoadItemAsset(() => {
-                MySupplySpawner.SpawnItems(supplyDatas);
+                MySupplySpawner.SpawnItems(OwnedRoleData.GetSupplyDatas());
             });
         }
         public void RefreshTalent() {
@@ -64,6 +65,12 @@ namespace TheDoor.Main {
             List<TargetEffectData> effectDatas = OwnedRoleData.GetEffectDatas();
             MyEffectSpawner.LoadItemAsset(() => {
                 MyEffectSpawner.SpawnItems(effectDatas);
+            });
+        }
+        public void GoAdventure() {
+            PopupUI.InitSceneTransitionProgress(1, "AdventureUILoaded");
+            PopupUI.CallTransition(MyScene.AdventureScene, () => {
+                SetActive(false);
             });
         }
 

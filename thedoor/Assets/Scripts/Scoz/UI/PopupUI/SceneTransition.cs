@@ -27,6 +27,7 @@ namespace Scoz.Func {
 
         float WaitSecAfterFinish = 0;//讀取完等待幾秒後才離開轉場 因為進到Lobby會載入UI到記憶中 這段時間會卡卡的 所以可以設定這個等待秒數讓讀取介面多停久一點再離開讀取介面
         LoadingProgress MyLoadingProgress;//讀取進度，讀取完會執行傳入的Callback Action
+        Action FinishAC;
 
         public void InitTransition() {
             MyLoadingProgress = new LoadingProgress(CallEndTransition);
@@ -49,7 +50,8 @@ namespace Scoz.Func {
             MyLoadingProgress.FinishProgress(_key);
         }
 
-        public void CallTransition(MyScene _scene) {
+        public void CallTransition(MyScene _scene, Action _ac) {
+            FinishAC = _ac;
             SceneTransitionProgress.fillAmount = 0;
             TransitionAni.SetTrigger("Play");
             SceneTransitionData data = SceneTransitionData.GetRandomData();
@@ -110,6 +112,7 @@ namespace Scoz.Func {
                 Addressables.Release(TransitionBGHandle);
             TransitionAni.SetTrigger("End");
             GameManager.UnloadUnusedAssets();//結束Transition就順便釋放記憶體
+            FinishAC?.Invoke();
         }
 
     }

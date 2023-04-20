@@ -1,9 +1,26 @@
 module.exports = {
+    //物品類型(ItemType)
+    //每次有新增物品類型都要同時確認該物品的分類UniqueItemTypes,UniqueItemNoDuplicatedTypes,PlayerDataCols等是否要加入定義
+    ItemTypes: Object.freeze({
+        Gold: "Gold",//遊戲幣
+        Point: "Point",//點數
+        Role: "Role",//腳色
+        Supply: "Supply",//道具
+        ItemGroup: "ItemGroup",//寶箱
+    }),
+    //遊戲中貨幣類型
+    CurrencyTypes: Object.freeze({
+        Gold: "Gold",
+        Point: "Point",
+    }),
     //獨立資料類道具，獨立資料類代表每個道具有一筆獨立doc，不是記錄在PlayerData-Item裡的道具
     //獨立資料類道具的名稱必須要跟PlayerDataCols裡的Key對應
     UniqueItemTypes: Object.freeze({
         Role: "Role",
         Supply: "Supply",
+    }),
+    //獨立資料類屬於不可重複獲得的物品要加在這裡
+    UniqueItemNoDuplicatedTypes: Object.freeze({
     }),
     //專案PackageName
     GCloudProjects: Object.freeze({
@@ -46,19 +63,7 @@ module.exports = {
         Supply: "PlayerData-Supply",
         OnlineTimestamp: "PlayerData-OnlineTimestamp",
     }),
-    //物品類型(ItemType)
-    ItemTypes: Object.freeze({
-        Gold: "Gold",//遊戲幣
-        Point: "Point",//點數
-        Role: "Role",//腳色
-        Supply: "Supply",//道具
-        ItemGroup: "ItemGroup",//寶箱
-    }),
-    //遊戲中貨幣類型
-    CurrencyTypes: Object.freeze({
-        Gold: "Gold",
-        Point: "Point",
-    }),
+
 
 
     //遊戲Log集合

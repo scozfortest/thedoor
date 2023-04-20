@@ -455,15 +455,15 @@ namespace Scoz.Func {
                 _ac?.Invoke();
             }, () => { WriteLog.LogError("載入RoleInfoUIAsset失敗"); });
         }
-        public static void ShowRoleInfoUI(OwnedRoleData _ownedData) {
+        public static void ShowRoleInfoUI(OwnedRoleData _ownedData, bool _showGoAdventureBtn = false) {
             if (Instance == null) return;
             if (Instance.MyRoleInfoUI != null) {
-                Instance.MyRoleInfoUI.ShowUI(_ownedData);
+                Instance.MyRoleInfoUI.ShowUI(_ownedData, _showGoAdventureBtn);
             } else {
                 PopupUI.ShowLoading(StringData.GetUIString("Loading"));
                 InitRoleInfoUI(() => {
                     PopupUI.HideLoading();
-                    Instance.MyRoleInfoUI.ShowUI(_ownedData);
+                    Instance.MyRoleInfoUI.ShowUI(_ownedData, _showGoAdventureBtn);
                 });
             }
         }
@@ -496,15 +496,16 @@ namespace Scoz.Func {
 
 
         }
-        public static void CallGainItemListUI(List<ItemData> _itemDatas, List<ItemData> _replacedItems, Action _cb = null) {
+        public static void ShowGainItemListUI(string _title, List<ItemData> _itemDatas, List<ItemData> _replacedItems, Action _cb = null) {
             if (!Instance)
                 return;
+
             //判斷是否已經載入過此UI，若還沒載過就跳讀取中並開始載入
             if (Instance.MyGainItemListUI != null) {
-                Instance.MyGainItemListUI.CallUI(_itemDatas, _replacedItems, _cb);
+                Instance.MyGainItemListUI.ShowUI(_title, _itemDatas, _replacedItems, _cb);
             } else {
                 Instance.InitGainItemListUI(() => {
-                    Instance.MyGainItemListUI.CallUI(_itemDatas, _replacedItems, _cb);
+                    Instance.MyGainItemListUI.ShowUI(_title, _itemDatas, _replacedItems, _cb);
                 });
             }
         }

@@ -229,7 +229,7 @@ async function DocsBatchedAdd_Recursive(datas, startIndex, returnUIDs) {
     let nowTime = admin.firestore.Timestamp.now();
     for (let i = startIndex; i < datas.length; i++) {
         let colName = datas[i].ColName;
-        delete datas[i]["ColName"];
+        //delete datas[i]["ColName"];
         let doc = null;
         if (!("UID" in datas[i])) {
             doc = db.collection(colName).doc();
@@ -239,7 +239,9 @@ async function DocsBatchedAdd_Recursive(datas, startIndex, returnUIDs) {
 
         datas[i]["CreateTime"] = nowTime;
         returnUIDs.push(datas[i]["UID"]);
-        batch.create(doc, datas[i]);
+        let newData = Object.assign({}, datas[i])//淺複製dic
+        delete newData["ColName"]
+        batch.create(doc, newData);
         nextStartIndex = i + 1;
         curSize++;
         if (curSize >= maxBatchSize)

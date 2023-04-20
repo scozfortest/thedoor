@@ -17,9 +17,9 @@ namespace TheDoor.Main {
         public override void SetData(Dictionary<string, object> _data) {
             base.SetData(_data);
             object value;
-            OwnRoleUID = _data.TryGetValue("RoleID", out value) ? Convert.ToString(value) : default(string);
+            OwnRoleUID = _data.TryGetValue("OwnRoleUID", out value) ? Convert.ToString(value) : default(string);
             Usage = _data.TryGetValue("Usage", out value) ? Convert.ToInt32(value) : default(int);
-            ID = _data.TryGetValue("SupplyID", out value) ? Convert.ToInt32(value) : default(int);
+            ID = _data.TryGetValue("ID", out value) ? Convert.ToInt32(value) : default(int);
         }
 
     }

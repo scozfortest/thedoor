@@ -63,12 +63,14 @@ namespace TheDoor.Main {
         /// </summary>
         public void CreateRole() {
             PopupUI.ShowLoading(string.Format("Loading"));
-            FirebaseManager.CreateRole(0, (roleUID, returnItemDic) => {//創腳
-                //PopupUI.CallGainItemListUI(returnItemDic["ReturnGainItems"], returnItemDic["ReplaceGainItems"], null);
+            FirebaseManager.CreateRole(0, cbData => {//創腳
+                Dictionary<string, object> cbDic = DictionaryExtension.ConvertToStringKeyDic(cbData);
+                string roleUID = cbDic["RoleUID"].ToString();
                 FirebaseManager.GetDataByDocID(ColEnum.Role, roleUID, (col, data) => {//取DB上最新的腳色資料
                     GamePlayer.Instance.SetOwnedData<OwnedRoleData>(col, data);
                     GamePlayer.Instance.Data.SetCurRole_Loco(roleUID);
                     PopupUI.HideLoading();
+                    CreateRoleUI.GetInstance<CreateRoleUI>().SetCreateRoleCBDic(cbDic);
                     LobbyUI.GetInstance<LobbyUI>()?.SwitchUI(LobbyUIs.CreateRole);
                 });
             });

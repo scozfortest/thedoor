@@ -14,9 +14,6 @@ module.exports = {
         SetItemNames(data)
         //設定玩家基本資料
         SetDefaultPlayerLogData(data, playerUID);
-        console.log("playerUID=" + playerUID)
-        console.log("col=" + col)
-        console.log("data=" + JSON.stringify(data))
         FirestoreManager.AddDoc_DontWait(col, data);
     },
     //寫Cound Function Log
@@ -134,7 +131,7 @@ function GetItemName(itemType, itemValue) {
     }
     //資源類道具
     if (itemType in GameSetting.CurrencyTypes) {
-        return GameDataManager.GetStr("UI_Item_" + itemType, "TW_TW") + "x" + itemValue;
+        return GameDataManager.GetStr("UI_" + itemType, "TW_TW") + "x" + itemValue;
     }
     let strID = itemType + "_" + itemValue;
     return GameDataManager.GetStr(strID, "Name_TW");
