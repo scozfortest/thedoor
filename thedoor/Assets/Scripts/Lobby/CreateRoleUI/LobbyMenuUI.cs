@@ -33,15 +33,16 @@ namespace TheDoor.Main {
                 //腳色圖
                 var roleData = RoleData.GetData(GamePlayer.Instance.Data.CurRole.ID);
                 if (roleData != null) {
-                    AssetGet.GetImg("Role", GamePlayer.Instance.Data.CurRole.ID.ToString(), sprite => {
+                    AssetGet.GetImg("Role", roleData.Ref, sprite => {
                         RoleImg.sprite = sprite;
+                    });
+                    //背景圖
+                    AssetGet.GetImg("LobbyBG", "lobbybg_" + roleData.Ref, sprite => {
+                        BG.sprite = sprite;
                     });
                 }
 
-                //背景圖
-                AssetGet.GetImg("LobbyBG", "lobbybg" + GamePlayer.Instance.Data.CurRole.ID, sprite => {
-                    BG.sprite = sprite;
-                });
+
 
             }
         }

@@ -32,6 +32,22 @@ var methods = {
         let randIndex = GetRandomInt(myArray.length);
         return myArray[randIndex];
     },
+    //從字典{key:weight)中依據權重取得隨機key
+    GetRandKeyByWeight: function (dic) {
+        if (dic == null || Object.keys(dic).length == 0)
+            return null;
+        let totalWeight = Object.values(dic).reduce((acc, weight) => acc + weight, 0);
+        let randomValue = Math.random() * totalWeight;
+
+        let accumulatedWeight = 0;
+        for (const key in dic) {
+            accumulatedWeight += dic[key];
+            if (randomValue <= accumulatedWeight) {
+                return key;
+            }
+        }
+        return null
+    },
     //取得數個不重複隨機整數0~(max-1)，傳入數值不合理 或 要取的數量大於max就回傳空陣列
     GetRandNoDuplicatedIndexFromMax: function (max, count) {
         if (max <= 0 || count <= 0)

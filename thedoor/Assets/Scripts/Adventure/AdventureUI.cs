@@ -17,7 +17,7 @@ namespace TheDoor.Main {
 
         //進遊戲就要初始化的UI放這裡(會增加場景切換時的讀取時間)
         [SerializeField] ScriptUI MyScriptUI;
-
+        [SerializeField] RoleStateUI MyRoleStateUI;
 
         //進遊戲不先初始化，等到要用時才初始化的UI放這裡
         [SerializeField] AssetReference BattleUIAsset;
@@ -29,8 +29,10 @@ namespace TheDoor.Main {
         public override void Init() {
             base.Init();
             MyScriptUI.Init();
+            MyRoleStateUI.Init();
             SwitchUI(AdventureUIs.Default);
             MyScriptUI.LoadScript("witch");
+            MyRoleStateUI.ShowUI(GamePlayer.Instance.Data.CurRole);
         }
 
         public void SwitchUI(AdventureUIs _ui, Action _cb = null) {
@@ -42,12 +44,14 @@ namespace TheDoor.Main {
             switch (_ui) {
                 case AdventureUIs.Default://本來在其他介面時，可以傳入Default來關閉彈出介面並顯示回預設介面
                     MyScriptUI.SetActive(true);
+                    MyRoleStateUI.ShowUI(GamePlayer.Instance.Data.CurRole);
                     MyBattleUI?.SetActive(false);
                     _cb?.Invoke();
                     LastPopupUI = MyScriptUI;
                     break;
                 case AdventureUIs.Battle:
                     MyScriptUI.SetActive(false);
+                    MyRoleStateUI.SetActive(false);
                     MyBattleUI?.SetActive(true);
                     //判斷是否已經載入過此UI，若還沒載過就跳讀取中並開始載入
                     if (MyBattleUI != null) {

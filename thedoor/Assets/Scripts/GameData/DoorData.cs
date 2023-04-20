@@ -7,6 +7,7 @@ using LitJson;
 
 namespace TheDoor.Main {
     public enum DoorType {
+        Start,//起始
         Monster,//妖靈
         Rest,//休息
         Encounter,//遭遇事件

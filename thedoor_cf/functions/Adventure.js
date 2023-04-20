@@ -106,3 +106,94 @@ exports.CreateRole = functions.region('asia-east1').https.onCall(async (data, co
     };
 
 });
+
+
+//移除腳色
+exports.RemoveRole = functions.region('asia-east1').https.onCall(async (data, context) => {
+    if (!context.auth) {
+        console.warn("非Firebase註冊用戶");
+        throw new functions.https.HttpsError(
+            'unauthenticated',
+            'only authenticated users can add requests'
+        );
+    }
+
+    if (!("RoleUID" in data) || !("Type" in data)) {
+        console.log("格式錯誤:Key值錯誤");
+        return { Result: "格式錯誤:Key值錯誤" };
+    }
+
+    //寫DB
+    await FirestoreManager.DeleteDocByUID(GameSetting.PlayerDataCols.Role, data["RoleUID"])
+    await FirestoreManager.UpdateDoc(GameSetting.PlayerDataCols.Player, { CurRoleUID: "" })
+    await FirestoreManager.DeleteDocs_WhereOperation(GameSetting.PlayerDataCols.Supply, "OwnRoleUID", "==", data["RoleUID"])
+    await FirestoreManager.DeleteDocs_WhereOperation(GameSetting.PlayerDataCols.Adventure, "OwnRoleUID", "==", data["RoleUID"])
+
+    //寫Log
+    let writeLogData = {
+        Type: data["Type"],
+        RoleUID: data["RoleUID"],
+    }
+    Logger.Write(context.auth.uid, GameSetting.GameLogCols.RemoveRole, writeLogData)
+
+    return {
+        Result: GameSetting.ResultTypes.Success,
+    };
+
+});
+
+
+//建立冒險
+exports.CreateAdventure = functions.region('asia-east1').https.onCall(async (data, context) => {
+    if (!context.auth) {
+        console.warn("非Firebase註冊用戶");
+        throw new functions.https.HttpsError(
+            'unauthenticated',
+            'only authenticated users can add requests'
+        );
+    }
+
+    if (!("RoleUID" in data)) {
+        console.log("格式錯誤:Key值錯誤");
+        return { Result: "格式錯誤:Key值錯誤" };
+    }
+
+    //設定門資料
+    let dbAdventureSetting = await FirestoreManager.GetDocData(GameSetting.GameDataCols.Setting, "Adventure")
+    let nodeWeight = dbAdventureSetting["NodeTypeWeight"]
+    let doors = []
+    doors.push({
+        DoorType: "Start",
+        Values: [],
+    })
+    for (let i = 0; i < dbAdventureSetting["DoorCount"]; i++) {
+        let doorType = Prob.GetRandKeyByWeight(nodeWeight)
+        let doorData = {
+            DoorType: doorType,
+            Values: [],
+        }
+        doors.push(doorData)
+    }
+
+    //設定冒險資料
+    let writeAdventureData = {
+        OwnerUID: context.auth.uid,
+        OwnRoleUID: data["RoleUID"],
+        Doors: doors,
+        CurDoor: 0,
+    }
+
+
+
+    //寫Log
+    let writeLogData = {
+        Type: "SlefRemove",
+        RoleUID: data["RoleUID"],
+    }
+    Logger.Write(context.auth.uid, GameSetting.GameLogCols.RemoveRole, writeLogData)
+
+    return {
+        Result: GameSetting.ResultTypes.Success,
+    };
+
+});

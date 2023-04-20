@@ -19,7 +19,20 @@ namespace TheDoor.Main {
         public TargetEffectType EffectType { get; private set; }
         public float Probability { get; private set; }
         float[] Values;
-
+        public bool IsBuff {
+            get {
+                switch (EffectType) {
+                    case TargetEffectType.HP:
+                    case TargetEffectType.SanP:
+                        return Values[0] > 0;
+                    case TargetEffectType.Stun:
+                    case TargetEffectType.Bleed:
+                        return Values[0] < 0;
+                    default:
+                        return true;
+                }
+            }
+        }
 
         /// <summary>
         /// 設定目標效果資料
