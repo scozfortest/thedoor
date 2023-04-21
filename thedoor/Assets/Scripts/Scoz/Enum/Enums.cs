@@ -11,11 +11,6 @@ namespace Scoz.Func {
         Test,//測試版(對外提供測試使用)
         Release//正式版
     }
-    public enum LocoData {
-        Setting,//語言,音樂,語音,音效
-        PlayerSetting,//玩家其他設定
-        RedDot,//紅點系統
-    }
     public enum MyAudioType {
         Sound,
         Music,

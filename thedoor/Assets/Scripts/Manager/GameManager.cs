@@ -140,7 +140,7 @@ namespace Scoz.Func {
             //建立AddressableManage
             AddressableManage.CreateNewAddressableManage();
             //※設定本機資料要放最後(要在取得本機GameSetting後以及AudioPlayer.CreateNewAudioPlayer之後
-            GamePlayer.Instance.GetLocoData();
+            GamePlayer.Instance.LoadLocoData();
         }
         /// <summary>
         /// 依序執行以下

@@ -4,6 +4,8 @@ public enum GameSetting
 	DefaultMusic,
 	DefaultSound,
 	DefaultVoice,
+	PostProcessing,
+	Vibration,
 	UnloadUnusedAssetsCD,
 	LoadingMaxTime,
 	NameMaxWeight,

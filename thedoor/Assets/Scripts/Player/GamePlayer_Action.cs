@@ -267,37 +267,5 @@ namespace TheDoor.Main {
         }
 
 
-
-
-        /// <summary>
-        /// 傳入道具ID來判斷是否是尚未查看的道具
-        /// </summary>
-        public bool IsTheItemIsNew(NotUniqueItemTypes _type, int _itemID) {
-            if (RedDot_ItemIDs != null
-                && RedDot_ItemIDs.ContainsKey(_type.ToString())
-                && RedDot_ItemIDs[_type.ToString()].Contains(_itemID))
-                return false;
-            else
-                return true;
-        }
-        /// <summary>
-        /// 是否有未察看的Item，傳入Item類型(必須非獨立資料類道具)
-        /// </summary>
-        public bool GotAnyNewItem(NotUniqueItemTypes _type) {
-            var ownedDic = GetOwneItemDic(_type);
-            if (ownedDic == null) return false;
-            foreach (var id in ownedDic.Keys) {
-                if (id == 0) continue;//ID 0通常是特殊的道具 不用點(例如ID0的title就是不顯示)
-                if (ownedDic[id] <= 0) continue;
-                if (IsTheItemIsNew(_type, id)) {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-
-
     }
 }

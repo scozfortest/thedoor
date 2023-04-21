@@ -85,6 +85,7 @@ namespace Scoz.Func {
                 if (attenuation > 0)
                     attenuation = 0;
             }
+            _volume = MyMath.Round(_volume, 2);
             MusicVolumeRatio = _volume;
             MyAudioMixer.SetFloat("MusicVol", attenuation);
         }
@@ -105,6 +106,8 @@ namespace Scoz.Func {
                 if (attenuation > 0)
                     attenuation = 0;
             }
+
+            _volume = MyMath.Round(_volume, 2);
             SoundVolumeRatio = _volume;
             MyAudioMixer.SetFloat("SoundVol", attenuation);
             MyAudioMixer.SetFloat("BallVol", attenuation);
@@ -123,6 +126,7 @@ namespace Scoz.Func {
                 if (attenuation > 0)
                     attenuation = 0;
             }
+            _volume = MyMath.Round(_volume, 2);
             VoiceVolumeRatio = _volume;
             MyAudioMixer.SetFloat("VoiceVol", attenuation);
             MyAudioMixer.SetFloat("PachinkoVol", attenuation);
@@ -294,7 +298,7 @@ namespace Scoz.Func {
             _source.clip = _clip;
             CurPlayAudio.Play(0);
             switch (_type) {
-                case MyAudioType.Music:                                        
+                case MyAudioType.Music:
                     if (!MusicList.Contains(CurPlayAudio)) {
                         MusicList.Add(CurPlayAudio);
                     }
@@ -308,7 +312,7 @@ namespace Scoz.Func {
                     if (!VoiceList.Contains(CurPlayAudio)) {
                         VoiceList.Add(CurPlayAudio);
                     }
-                    
+
                     break;
             }
         }

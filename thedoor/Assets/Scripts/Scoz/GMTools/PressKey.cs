@@ -21,10 +21,24 @@ namespace Scoz.Func {
                     PopupUI.ShowClickCancel("更新完成", null);
                 });
             } else if (Input.GetKeyDown(KeyCode.W)) {
+                JSONObject jObj = new JSONObject();
+                jObj.Add("ColName", "Monster");
+                JSONObject JsObj2 = new JSONObject();
+                JsObj2.Add("A", 1);
+                JsObj2.Add("B", 2);
+                jObj.Add("Items", JsObj2);
+                Debug.Log(jObj.ToString());
+
+
+                JSONNode jsNode = JSON.Parse(jObj.ToString());
+                Debug.Log(jsNode["Items"].AsObject["A"]);
 
             } else if (Input.GetKeyDown(KeyCode.E)) {
+                GamePlayer.Instance.Data.SaveToLoco();
 
             } else if (Input.GetKeyDown(KeyCode.R)) {
+
+                GamePlayer.Instance.LoadDataFromLoco(LocoDataName.Player);
 
             } else if (Input.GetKeyDown(KeyCode.P)) {
 

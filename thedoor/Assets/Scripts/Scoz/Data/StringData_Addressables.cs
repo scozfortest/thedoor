@@ -4,6 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using LitJson;
 using UnityEngine.AddressableAssets;
+using System.Text;
+
 namespace Scoz.Func {
     public partial class StringData {
         public static void GetStringDic_Remote(string _dataName, Action<Dictionary<string, StringData>> _cb) {

@@ -9,6 +9,7 @@ using Firebase.Extensions;
 using Scoz.Func;
 using System;
 using System.IO;
+using System.Globalization;
 
 namespace TheDoor.Main {
     public partial class FirebaseManager : MonoBehaviour {
@@ -242,14 +243,16 @@ namespace TheDoor.Main {
             try {
                 if (_obj is DateTime)
                     return (DateTime)_obj;
-                return ((Timestamp)_obj).ToDateTime().AddHours(addHour);
-            } catch (Exception _e) {
+                else
+                    return ((Timestamp)_obj).ToDateTime().AddHours(addHour);
+            } catch {
                 try {
-                    DateTime dateTime = TextManager.GetDateTimeFormScozTimeStr(_obj.ToString());
+                    DateTime dateTime = DateTime.Parse(_obj.ToString(), null, DateTimeStyles.RoundtripKind);
                     return dateTime;
-                } catch { }
-                WriteLog.LogError("Firebase時間戳轉換失敗:" + _e);
-                return new DateTime();
+                } catch {
+                    WriteLog.LogError("Firebase時間戳轉換失敗");
+                    return new DateTime();
+                }
             }
         }
 

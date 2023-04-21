@@ -1,4 +1,5 @@
 using Scoz.Func;
+using SimpleJSON;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace TheDoor.Main {
             }
         }
         public int TotalPurchase { get; private set; }
-        public bool Ban { get; private set; } = false;
+        public bool Ban { get; set; } = false;
         public string DeviceUID { get; private set; }
 
         /// <summary>
@@ -59,7 +60,25 @@ namespace TheDoor.Main {
             CurRoleUID = _curRoleUID;
         }
 
+        public void SaveToLoco() {
 
+            JSONObject jsObj = new JSONObject();
+            jsObj.Add("UID", UID);
+            jsObj.Add("CreateTime", CreateTime.ToString("o"));
+            jsObj.Add("Gold", GetCurrency(Currency.Gold));
+            jsObj.Add("Point", GetCurrency(Currency.Point));
+            jsObj.Add("AuthType", MyAuthType.ToString());
+
+            jsObj.Add("CurRoleUID", CurRoleUID);
+            jsObj.Add("TotalPurchase", TotalPurchase);
+            jsObj.Add("Ban", Ban);
+            jsObj.Add("DeviceUID", DeviceUID);
+
+            LocoDataManager.SaveDataToLoco(LocoDataName.Player, jsObj.ToString());
+
+
+
+        }
 
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
-using LitJson;
+using SimpleJSON;
 using TheDoor.Main;
 
 namespace Scoz.Func {
@@ -13,60 +13,58 @@ namespace Scoz.Func {
                 return GamePlayer.Instance;
             }
         }
-        public Language UsingLanguage { get; protected set; } = Language.TW;
+        public Language UsingLanguage { get; protected set; } = Language.TW;//語系
+        public bool PostProcessing { get; private set; } = false;//是否開啟後製效果(預設關閉)
+        public bool Vibration { get; private set; } = true;//是否開啟震動效果(預設開啟)
 
-        public virtual void GetLocoData() {
-            //取的本機Setting資料
+        /// <summary>
+        /// 取的本機Setting資料
+        /// </summary>
+        public virtual void LoadLocoData() {
             LoadSettingFromLoco();
         }
-        void LoadSettingFromLoco() {
-            string str = "";
-            if (PlayerPrefs.HasKey(LocoData.Setting.ToString())) {
-                str = PlayerPrefs.GetString(LocoData.Setting.ToString());
-                JsonData item = JsonMapper.ToObject(str);
-                foreach (string key in item.Keys) {
-                    switch (key) {
-                        case "UseLanguage":
-                            UsingLanguage = ((Language)int.Parse(item[key].ToString()));
-                            break;
-                        case "SoundVolume":
-                            AudioPlayer.SetSoundVolume(float.Parse(item[key].ToString()));
-                            break;
-                        case "MusicVolume":
-                            AudioPlayer.SetMusicVolume(float.Parse(item[key].ToString()));
-                            break;
-                        case "VoiceVolume":
-                            AudioPlayer.SetVoiceVolume(float.Parse(item[key].ToString()));
-                            break;
-                        default:
-                            WriteLog.LogWarning(string.Format("LocoSettingData有不明屬性:{0}", key));
-                            break;
-                    }
-                }
+        public void LoadSettingFromLoco() {
+            string json = LocoDataManager.GetDataFromLoco(LocoDataName.PlayerSetting);
+            if (!string.IsNullOrEmpty(json)) {
+                JSONNode jsNode = JSON.Parse(json);
+                UsingLanguage = (Language)jsNode["UseLanguage"].AsInt;
+                AudioPlayer.SetSoundVolume(jsNode["SoundVolume"].AsFloat);
+                AudioPlayer.SetMusicVolume(jsNode["MusicVolume"].AsFloat);
+                AudioPlayer.SetVoiceVolume(jsNode["VoiceVolume"].AsFloat);
+                PostProcessing = jsNode["PostProcessing"].AsBool;
+                Vibration = jsNode["Vibration"].AsBool;
+
             } else {
                 SetLanguage((Language)GameSettingData.GetInt(GameSetting.DefaultLanguage));
                 AudioPlayer.SetSoundVolume(GameSettingData.GetFloat(GameSetting.DefaultSound));
                 AudioPlayer.SetMusicVolume(GameSettingData.GetFloat(GameSetting.DefaultMusic));
                 AudioPlayer.SetVoiceVolume(GameSettingData.GetFloat(GameSetting.DefaultVoice));
-                return;
+                PostProcessing = GameSettingData.GetBool(GameSetting.PostProcessing);
+                Vibration = GameSettingData.GetBool(GameSetting.Vibration);
             }
         }
-        public string GetSettingJsonStr() {
-            LocoSettingData data = new LocoSettingData((int)UsingLanguage, AudioPlayer.SoundVolumeRatio, AudioPlayer.MusicVolumeRatio, AudioPlayer.VoiceVolumeRatio);
-            JsonData jd = JsonMapper.ToJson(data);
-            return jd.ToString();
-        }
         public void SaveSettingToLoco() {
-            string str = GetSettingJsonStr();
-            WriteLog.LogFormat("<color=Orange>{0}</color>", str);
-            PlayerPrefs.SetString(LocoData.Setting.ToString(), str);
-            WriteLog.LogFormat("<color=Orange>{0}</color>", "Save Setting To Loco");
+            JSONObject jsObj = new JSONObject();
+            jsObj.Add("UseLanguage", (int)UsingLanguage);
+            jsObj.Add("SoundVolume", AudioPlayer.SoundVolumeRatio);
+            jsObj.Add("MusicVolume", AudioPlayer.MusicVolumeRatio);
+            jsObj.Add("VoiceVolume", AudioPlayer.VoiceVolumeRatio);
+            jsObj.Add("PostProcessing", PostProcessing);
+            jsObj.Add("Vibration", Vibration);
+            LocoDataManager.SaveDataToLoco(LocoDataName.PlayerSetting, jsObj.ToString());
         }
+
         public void SetLanguage(Language _value) {
             if (_value != UsingLanguage) {
                 UsingLanguage = _value;
                 MyText.RefreshActiveTexts();//刷新MyText
             }
+        }
+        public void SetPostProcessing(bool _on) {
+            PostProcessing = _on;
+        }
+        public void SetVibration(bool _on) {
+            Vibration = _on;
         }
     }
 }

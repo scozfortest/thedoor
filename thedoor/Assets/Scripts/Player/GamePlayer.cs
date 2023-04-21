@@ -34,10 +34,8 @@ namespace TheDoor.Main {
         : base() {
             Instance = this;
         }
-        public override void GetLocoData() {
-            base.GetLocoData();
-            LoadPlayerSettingFromLoco();
-            LoadReDotFromLoco();
+        public override void LoadLocoData() {
+            base.LoadLocoData();
         }
         public void InitMainPlayerData(Dictionary<string, object> _data) {
             if (Data == null)

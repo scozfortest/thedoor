@@ -3,6 +3,8 @@
 	{	"ID":"DefaultMusic",	"Value":"0.8"},
 	{	"ID":"DefaultSound",	"Value":"0.8"},
 	{	"ID":"DefaultVoice",	"Value":"1"},
+	{	"ID":"PostProcessing",	"Value":"True"},
+	{	"ID":"Vibration",	"Value":"True"},
 	{	"ID":"UnloadUnusedAssetsCD",	"Value":"1"},
 	{	"ID":"LoadingMaxTime",	"Value":"30"},
 	{	"ID":"NameMaxWeight",	"Value":"14"},

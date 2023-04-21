@@ -118,7 +118,6 @@ namespace TheDoor.Main {
 
         public void OnCloseClick() {
             GamePlayer.Instance.SaveSettingToLoco();
-            GamePlayer.Instance.SavePlayerSettingToLoco();
             SetActive(false);
         }
         public void OnBackToStartClick() {
