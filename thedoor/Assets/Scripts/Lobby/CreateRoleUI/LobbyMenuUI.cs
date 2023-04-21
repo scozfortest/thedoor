@@ -67,12 +67,17 @@ namespace TheDoor.Main {
             FirebaseManager.CreateRole(0, cbData => {//創腳
                 Dictionary<string, object> cbDic = DictionaryExtension.ConvertToStringKeyDic(cbData);
                 string roleUID = cbDic["RoleUID"].ToString();
-                FirebaseManager.GetDataByDocID(ColEnum.Role, roleUID, (col, data) => {//取DB上最新的腳色資料
-                    GamePlayer.Instance.SetOwnedData<OwnedRoleData>(col, data);
+                FirebaseManager.GetDataByDocID(ColEnum.Role, roleUID, (col, roleData) => {//取DB上最新的腳色資料
+                    GamePlayer.Instance.SetOwnedData<OwnedRoleData>(col, roleData);
                     GamePlayer.Instance.Data.SetCurRole_Loco(roleUID);
                     PopupUI.HideLoading();
                     CreateRoleUI.GetInstance<CreateRoleUI>().SetCreateRoleCBDic(cbDic);
                     LobbyUI.GetInstance<LobbyUI>()?.SwitchUI(LobbyUIs.CreateRole);
+                    FirebaseManager.CreateAdventure(roleUID, () => {//建立冒險
+                        FirebaseManager.GetDataByDocID(ColEnum.Adventure, roleUID, (col, advData) => {//取DB上最新的冒險資料
+                            GamePlayer.Instance.SetOwnedData<OwnedRoleData>(col, advData);
+                        });
+                    });
                 });
             });
         }
@@ -80,7 +85,12 @@ namespace TheDoor.Main {
         /// 刪除腳色
         /// </summary>
         public void RemoveRole() {
-
+            if (GamePlayer.Instance.Data.CurRole == null) return;
+            PopupUI.ShowLoading(StringData.GetUIString("Loading"));
+            FirebaseManager.RemoveRole(GamePlayer.Instance.Data.CurRole.UID, "SelfRemove", () => {
+                PopupUI.HideLoading();
+                RefreshUI();
+            });
         }
         /// <summary>
         /// 收藏

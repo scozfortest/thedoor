@@ -7,11 +7,11 @@ namespace TheDoor.Main {
     public class AssetGet {
 
 
-        public static void GetIconFromAtlas(string _atlasName, string _spriteName, Action<Sprite> _ac) {
+        public static void GetSpriteFromAtlas(string _atlasName, string _spriteName, Action<Sprite> _ac) {
 
             if (string.IsNullOrEmpty(_atlasName) || string.IsNullOrEmpty(_spriteName))
                 _ac?.Invoke(null);
-            AddressablesLoader.GetSpriteAtlas(_atlasName + "Icon", atlas => {
+            AddressablesLoader.GetSpriteAtlas(_atlasName, atlas => {
                 if (atlas != null) {
                     Sprite sprite = atlas.GetSprite(_spriteName);
                     _ac?.Invoke(sprite);

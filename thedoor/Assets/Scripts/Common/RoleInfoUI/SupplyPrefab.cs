@@ -26,7 +26,7 @@ namespace TheDoor.Main {
             Description.text = data.Description;
             Usage.text = OwnedData.Usage.ToString();
             Time.text = data.Time.ToString();
-            AssetGet.GetIconFromAtlas(SupplyData.DataName, data.Ref, sprite => {
+            AssetGet.GetSpriteFromAtlas(SupplyData.DataName + "Icon", data.Ref, sprite => {
                 Icon.sprite = sprite;
             });
         }

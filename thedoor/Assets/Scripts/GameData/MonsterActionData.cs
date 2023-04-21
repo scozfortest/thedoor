@@ -10,6 +10,7 @@ namespace TheDoor.Main {
         public static string DataName { get; set; }
         public int MonsterID { get; private set; }
         public float Probability { get; private set; }
+        public int Time { get; private set; }
 
         public List<TargetEffectData> MyEffects = new List<TargetEffectData>();
 
@@ -35,6 +36,9 @@ namespace TheDoor.Main {
                         break;
                     case "Probability":
                         Probability = float.Parse(item[key].ToString());
+                        break;
+                    case "Time":
+                        Time = int.Parse(item[key].ToString());
                         break;
                     default:
                         try {

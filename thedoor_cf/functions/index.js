@@ -17,6 +17,10 @@ exports.TriggerEvent = PlayerSign.TriggerEvent;
 //冒險
 const Adventure = require('./Adventure');
 exports.CreateRole = Adventure.CreateRole;
+exports.RemoveRole = Adventure.RemoveRole;
+exports.CreateAdventure = Adventure.CreateAdventure;
+exports.UpdateAdventure = Adventure.UpdateAdventure;
+
 
 
 //Client取Server時間

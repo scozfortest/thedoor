@@ -26,26 +26,28 @@ namespace TheDoor.Main {
         //後產生的UI實體
         BattleUI MyBattleUI;
 
+        //其他UI
+        public DoorNodeUI MyDoorNodeUI { get; set; }
+
         public override void Init() {
             base.Init();
             MyScriptUI.Init();
             MyRoleStateUI.Init();
-            SwitchUI(AdventureUIs.Default);
-            MyScriptUI.LoadScript("witch");
-            MyRoleStateUI.ShowUI(GamePlayer.Instance.Data.CurRole);
         }
 
         public void SwitchUI(AdventureUIs _ui, Action _cb = null) {
 
             if (LastPopupUI != null)
                 LastPopupUI.SetActive(false);//關閉彈出介面
-            //PlayerInfoUI.GetInstance<PlayerInfoUI>()?.SetActive(false);//所有介面預設都不會開啟資訊界面
+
+            RoleInfoUI.GetInstance<RoleInfoUI>()?.SetActive(false);//所有介面預設都不會開啟腳色界面
 
             switch (_ui) {
                 case AdventureUIs.Default://本來在其他介面時，可以傳入Default來關閉彈出介面並顯示回預設介面
                     MyScriptUI.SetActive(true);
                     MyRoleStateUI.ShowUI(GamePlayer.Instance.Data.CurRole);
                     MyBattleUI?.SetActive(false);
+                    MyDoorNodeUI?.ShowUI(GamePlayer.Instance.Data.CurRole.MyAdventure);
                     _cb?.Invoke();
                     LastPopupUI = MyScriptUI;
                     break;
@@ -53,6 +55,7 @@ namespace TheDoor.Main {
                     MyScriptUI.SetActive(false);
                     MyRoleStateUI.SetActive(false);
                     MyBattleUI?.SetActive(true);
+                    MyDoorNodeUI?.SetActive(false);
                     //判斷是否已經載入過此UI，若還沒載過就跳讀取中並開始載入
                     if (MyBattleUI != null) {
                         MyBattleUI.SetBattle();

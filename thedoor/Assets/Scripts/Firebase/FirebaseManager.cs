@@ -88,6 +88,7 @@ namespace TheDoor.Main {
             { ColEnum.Player , "PlayerData-Player"},
             { ColEnum.Role , "PlayerData-Role"},
             { ColEnum.Supply , "PlayerData-Supply"},
+            { ColEnum.Adventure , "PlayerData-Adventure"},
             { ColEnum.Item , "PlayerData-Item"},
             { ColEnum.Shop , "GameData-Shop"},
             { ColEnum.Purchase , "GameData-Purchase"},
@@ -211,6 +212,7 @@ namespace TheDoor.Main {
                         RegisterListener_OwnedData(ColEnum.History, GamePlayer.Instance.Data.UID);//註冊偵聽-玩家紀錄
                         RegisterListener_OwnedData(ColEnum.Role, GamePlayer.Instance.Data.UID);//註冊偵聽-玩家腳色
                         RegisterListener_OwnedData(ColEnum.Supply, GamePlayer.Instance.Data.UID);//註冊偵聽-腳色道具
+                        RegisterListener_OwnedData(ColEnum.Adventure, GamePlayer.Instance.Data.UID);//註冊偵聽-腳色冒險
                         InitNotification();//初始化Firebase推播
 
                         break;

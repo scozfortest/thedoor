@@ -26,7 +26,7 @@ namespace TheDoor.Main {
                 case ItemType.Point:
                     NameText.text = string.Format(StringData.GetUIString("GainCurrencyName"), StringData.GetUIString(_data.Type.ToString()), _data.Value);
                     DescriptionText.text = StringData.GetUIString(_data.Type.ToString() + "Description");
-                    AssetGet.GetIconFromAtlas("Common", _data.Type.ToString(), sprite => {
+                    AssetGet.GetSpriteFromAtlas("CommonIcon", _data.Type.ToString(), sprite => {
                         ItemImg.sprite = sprite;
                     });
                     //AddressablesLoader.GetSpriteAtlas("CommonIcon", atlas => {
@@ -37,7 +37,7 @@ namespace TheDoor.Main {
                     var data = GameDictionary.GetItemJsonData(_data.Type, (int)_data.Value);
                     NameText.text = data.Name;
                     DescriptionText.text = data.Description;
-                    AssetGet.GetIconFromAtlas(_data.Type.ToString(), data.Ref.ToString(), sprite => {
+                    AssetGet.GetSpriteFromAtlas(_data.Type.ToString() + "Icon", data.Ref.ToString(), sprite => {
                         ItemImg.sprite = sprite;
                     });
                     //AddressablesLoader.GetSpriteAtlas("CommonIcon", atlas => {

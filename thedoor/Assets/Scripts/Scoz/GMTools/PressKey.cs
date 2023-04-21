@@ -15,9 +15,11 @@ namespace Scoz.Func {
 
 
             if (Input.GetKeyDown(KeyCode.Q)) {
-                var roleInfo = RoleInfoUI.GetInstance<RoleInfoUI>();
-                if (roleInfo != null && roleInfo.gameObject.activeInHierarchy)
-                    roleInfo.RefreshSupply();
+                Dictionary<string, object> advJsonData = new Dictionary<string, object>();
+                advJsonData.Add("CurDoor", 3);
+                FirebaseManager.UpdateAdventure(advJsonData, null, null, () => {
+                    PopupUI.ShowClickCancel("更新完成", null);
+                });
             } else if (Input.GetKeyDown(KeyCode.W)) {
 
             } else if (Input.GetKeyDown(KeyCode.E)) {

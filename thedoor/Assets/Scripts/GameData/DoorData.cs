@@ -11,26 +11,24 @@ namespace TheDoor.Main {
         Monster,//妖靈
         Rest,//休息
         Encounter,//遭遇事件
+        Boss,//頭目
     }
     public class DoorData {
         public DoorType MyType { get; private set; }
-        object[] Values;
+        Dictionary<string, object> Values;
 
 
         /// <summary>
-        /// 設定目標效果資料
+        /// 初始化門資料
         /// </summary>
-        /// <param name="_type">門的類型</param>
-        /// <param name="_values">門的參數陣列</param>
-        public DoorData(DoorType _type, params object[] _values) {
+        public DoorData(DoorType _type, Dictionary<string, object> _values) {
             MyType = _type;
-            if (_values != null && _values.Length > 0)
-                Values = _values;
+            Values = _values;
         }
 
         public string Name {
             get {
-                return StringData.GetUIString(MyType.ToString());
+                return StringData.GetUIString("DoorType_" + MyType.ToString());
             }
         }
 

@@ -3,6 +3,8 @@ const ItemGroupJson = require('../GameData/ItemGroup.json');
 const StringJson = require('../GameData/String.json');
 const RoleJson = require('../GameData/Role.json');
 const SupplyJson = require('../GameData/Supply.json');
+const MonsterJson = require('../GameData/Monster.json');
+const ScriptTitleJson = require('../GameData/ScriptTitle.json');
 
 //自訂方法
 const GameSetting = require('./GameSetting.js');
@@ -297,6 +299,12 @@ function GetJson(jsonName) {
             break;
         case GameSetting.GameJsonNames.Supply://道具表
             jsonData = SupplyJson.Supply;
+            break;
+        case GameSetting.GameJsonNames.Monster://怪物表
+            jsonData = MonsterJson.Monster;
+            break;
+        case GameSetting.GameJsonNames.ScriptTitle://劇本標題表
+            jsonData = ScriptTitleJson.ScriptTitle;
             break;
         default:
             console.log("尚未定義Json表: " + jsonName);

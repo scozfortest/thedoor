@@ -7,6 +7,10 @@ using System;
 using System.Linq;
 
 namespace TheDoor.Main {
+    public enum MonsterType {
+        Normal,
+        Boss,
+    }
     public class MonsterData : MyJsonData {
         public static string DataName { get; set; }
         public string Name {
@@ -21,6 +25,7 @@ namespace TheDoor.Main {
         }
         public int Rank { get; private set; }
         public string Ref { get; private set; }
+        public MonsterType MyMonsterType { get; private set; }
         public string[] Weakness { get; private set; }
 
         public int HP { get; private set; }
@@ -46,6 +51,9 @@ namespace TheDoor.Main {
                         break;
                     case "Ref":
                         Ref = item[key].ToString();
+                        break;
+                    case "MonsterType":
+                        MyMonsterType = MyEnum.ParseEnum<MonsterType>(item[key].ToString());
                         break;
                     case "Weakness":
                         Weakness = item[key].ToString().Split(',');

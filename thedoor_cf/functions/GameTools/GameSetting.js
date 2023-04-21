@@ -35,11 +35,14 @@ module.exports = {
     }),
 
     //GameData Json表名稱
-    //Json表字典有新增時，GameDataManager.GetData也要加
+    //1. GameDataManager也要加
+    //2. 如果類型是可獲得的物品，GameDataManager.GetData也要加
     GameJsonNames: Object.freeze({
         ItemGroup: "ItemGroup",
         Role: "Role",
         Supply: "Supply",
+        Monster: "Monster",
+        ScriptTitle: "ScriptTitle",
     }),
     //遊戲資料集合
     GameDataCols: Object.freeze({
@@ -75,6 +78,7 @@ module.exports = {
         Signout: "GameLog-Signout",
         CreateRole: "GameLog-CreateRole",
         RemoveRole: "GameLog-RemoveRole",
+        CreateAdventure: "GameLog-CreateAdventure",
         ShopBuy: "GameLog-ShopBuy",
         Purchase: "GameLog-Purchase",
         PayToken: "GameLog-PayToken",

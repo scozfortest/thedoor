@@ -19,7 +19,7 @@ namespace TheDoor.Main {
             Refresh();
         }
         public void Refresh() {
-            AssetGet.GetIconFromAtlas("Effect", MyData.EffectType.ToString(), sprite => {
+            AssetGet.GetSpriteFromAtlas("EffectIcon", MyData.EffectType.ToString(), sprite => {
                 Icon.sprite = sprite;
             });
         }

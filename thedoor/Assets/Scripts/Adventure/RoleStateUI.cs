@@ -29,7 +29,6 @@ namespace TheDoor.Main {
             OwnedRoleData = _ownedData;
             MyRoleData = RoleData.GetData(OwnedRoleData.ID);
             RefreshUI();
-            RefreshEffect();
             SetActive(true);
         }
 
@@ -38,6 +37,8 @@ namespace TheDoor.Main {
             AssetGet.GetImg(RoleData.DataName, MyRoleData.Ref, sprite => {
                 RoleImg.sprite = sprite;
             });
+            RefreshState();
+            RefreshEffect();
         }
 
         public void RefreshState() {
@@ -46,6 +47,11 @@ namespace TheDoor.Main {
         }
         public void RefreshEffect() {
             List<TargetEffectData> effectDatas = OwnedRoleData.GetEffectDatas();
+            if (effectDatas == null || effectDatas.Count == 0) {
+                BuffSpawner.InActiveAllItem();
+                DebuffSpawner.InActiveAllItem();
+                return;
+            }
             var buffs = effectDatas.FindAll(a => a.IsBuff);
             BuffSpawner.LoadItemAsset(() => {
                 BuffSpawner.SpawnItems(buffs);
@@ -54,6 +60,10 @@ namespace TheDoor.Main {
             DebuffSpawner.LoadItemAsset(() => {
                 DebuffSpawner.SpawnItems(debuffs);
             });
+        }
+
+        public void OnRoleInfoClick() {
+            PopupUI.ShowRoleInfoUI(OwnedRoleData);
         }
 
     }

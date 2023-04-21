@@ -111,7 +111,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 80853e0047f059342a5f81b6b9dcc75f
-    m_Address: Assets/AddressableAssets/Atlas/ScriptUI.spriteatlas
+    m_Address: Assets/AddressableAssets/Atlas/AdventureUI.spriteatlas
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 33ba0108d24cb36489070fe90ebb73f0

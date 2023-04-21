@@ -30,7 +30,10 @@ service cloud.firestore {
       allow update: if request.auth != null && 
       HasOnlyKeys(['Name']);
     }
-     match /PlayerData-History/{document} {
+    match /PlayerData-Adventure/{document} {
+      allow read : if request.auth != null;
+    }
+    match /PlayerData-History/{document} {
       allow read : if request.auth != null;
     }
   }

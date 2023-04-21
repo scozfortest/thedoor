@@ -13,6 +13,12 @@ namespace TheDoor.Main {
         public List<string> Talents = new List<string>();
         public Dictionary<TargetEffectType, List<float>> Effects = new Dictionary<TargetEffectType, List<float>>();
 
+        public OwnedAdventureData MyAdventure {
+            get {
+                return GamePlayer.Instance.GetOwnedData<OwnedAdventureData>(ColEnum.Adventure, UID);
+            }
+        }
+
         public OwnedRoleData(Dictionary<string, object> _data)
             : base(_data) {
         }

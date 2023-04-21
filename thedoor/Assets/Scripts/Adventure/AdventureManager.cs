@@ -46,6 +46,8 @@ namespace TheDoor.Main {
         }
 
 
+
+
         /// <summary>
         /// 冒險初始化
         /// </summary>
@@ -58,13 +60,13 @@ namespace TheDoor.Main {
         /// </summary>
         public void AdventureUILoaded() {
             PopupUI.FinishTransitionProgress("AdventureUILoaded");
+            AdventureUI.GetInstance<AdventureUI>().MyDoorNodeUI = DoorNodeUI.GetInstance<DoorNodeUI>();
+            AdventureUI.GetInstance<AdventureUI>().SwitchUI(AdventureUIs.Default);
 
 #if GOOGLE_ADS
             // 初始化Google Ads
             GoogleAdsManager.Inst.Initialize();
 #endif
-
-
 
         }
         private void OnDestroy() {
@@ -107,7 +109,9 @@ namespace TheDoor.Main {
                 rect.offsetMin = Vector2.zero;//Left、Bottom
                 rect.offsetMax = Vector2.zero;//Right、Top
                 go.GetComponent<DoorNodeUI>().Init();
-                MyLoadingProgress.FinishProgress("DoorNodeUI");//完成讀取UI
+                go.GetComponent<DoorNodeUI>().LoadItemAsset(() => {
+                    MyLoadingProgress.FinishProgress("DoorNodeUI");//完成讀取UI
+                });
             };
         }
     }

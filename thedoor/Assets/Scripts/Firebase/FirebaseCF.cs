@@ -94,6 +94,75 @@ namespace TheDoor.Main {
                 }
             });
         }
+        /// <summary>
+        /// 傳入RoleUID刪除腳色資料
+        /// </summary>
+        public static void RemoveRole(string _roleUID, string _removeType, Action _cb) {
+            string funcName = "RemoveRole";
+            var function = FirebaseFunctions.GetInstance(MyFirebaseApp, Region).GetHttpsCallable(funcName);
+            var data = new Dictionary<string, object>();
+            data.Add("RemoveType", _removeType);
+            data.Add("RoleUID", _roleUID);
+
+            function.CallAsync(data).ContinueWithOnMainThread(task => {
+                try {
+                    if (task.IsFaulted) {
+                        WriteLog.LogError("Error:" + task.Exception.ToString());
+                        return;
+                    }
+                    _cb?.Invoke();
+                } catch (Exception _e) {
+                    WriteLog.LogError(_e);
+                    _cb?.Invoke();
+                }
+            });
+        }
+
+        /// <summary>
+        /// 傳入RoleUID建立冒險資料
+        /// </summary>
+        public static void CreateAdventure(string _roleUID, Action _cb) {
+            string funcName = "CreateAdventure";
+            var function = FirebaseFunctions.GetInstance(MyFirebaseApp, Region).GetHttpsCallable(funcName);
+            var data = new Dictionary<string, object>();
+            data.Add("RoleUID", _roleUID);
+
+            function.CallAsync(data).ContinueWithOnMainThread(task => {
+                try {
+                    if (task.IsFaulted) {
+                        WriteLog.LogError("Error:" + task.Exception.ToString());
+                        return;
+                    }
+                    _cb?.Invoke();
+                } catch (Exception _e) {
+                    WriteLog.LogError(_e);
+                }
+            });
+        }
+
+        /// <summary>
+        /// 更新冒險
+        /// </summary>
+        public static void UpdateAdventure(Dictionary<string, object> _ownedAdventureData, Dictionary<string, object> _ownedRoleData, Dictionary<string, object> _ownedSupplyDatas, Action _cb) {
+            string funcName = "UpdateAdventure";
+            var function = FirebaseFunctions.GetInstance(MyFirebaseApp, Region).GetHttpsCallable(funcName);
+            var data = new Dictionary<string, object>();
+            data.Add("OwnedAdventureData", _ownedAdventureData);
+            data.Add("OwnedRoleData", _ownedRoleData);
+            data.Add("OwnedSupplyDatas", _ownedSupplyDatas);
+
+            function.CallAsync(data).ContinueWithOnMainThread(task => {
+                try {
+                    if (task.IsFaulted) {
+                        WriteLog.LogError("Error:" + task.Exception.ToString());
+                        return;
+                    }
+                    _cb?.Invoke();
+                } catch (Exception _e) {
+                    WriteLog.LogError(_e);
+                }
+            });
+        }
 
         /// <summary>
         /// 註冊送LOG
