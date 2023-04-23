@@ -85,7 +85,6 @@ namespace Scoz.Func {
         [HeaderAttribute("==============讀取彈窗==============")]
         [SerializeField] GameObject LoadingGo = null;
         [SerializeField] Text LoadingText = null;
-        [SerializeField] Text LoadinPlayerUIDText;
         static float LoadingMaxTime = 30;
         static int LoadingCoroutineID;
         static string LoadingTimeOutStr;
@@ -93,7 +92,6 @@ namespace Scoz.Func {
         void InitLoading() {
             LoadingGo.SetActive(false);
             LoadingMaxTime = GameSettingData.GetFloat(GameSetting.LoadingMaxTime);
-            LoadinPlayerUIDText.text = FirebaseManager.MyUser.UserId;
         }
         public static void ShowLoading(string _text, float _maxLoadingTime = 0, string _loadingTimeOutStr = "") {
             if (!Instance)

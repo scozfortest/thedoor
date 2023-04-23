@@ -46,7 +46,7 @@ namespace TheDoor.Main {
             List<int> weights = new List<int>();
             for (int i = 0; i < dataList.Count; i++)
                 weights.Add(dataList[i].Weight);
-            return dataList[Probability.GetIndexFromWeigth(weights)];
+            return dataList[Prob.GetIndexFromWeigth(weights)];
         }
     }
 

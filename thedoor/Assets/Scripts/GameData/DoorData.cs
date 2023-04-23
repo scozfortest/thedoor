@@ -13,15 +13,15 @@ namespace TheDoor.Main {
         Encounter,//遭遇事件
         Boss,//頭目
     }
-    public class DoorData {
-        public DoorType MyType { get; private set; }
-        Dictionary<string, object> Values;
+    public class DoorData : IScozJsonConvertible {
+        [ScozSerializable] public DoorType MyType { get; private set; }
+        [ScozSerializable] public Dictionary<string, string> Values { get; private set; }
 
 
         /// <summary>
         /// 初始化門資料
         /// </summary>
-        public DoorData(DoorType _type, Dictionary<string, object> _values) {
+        public DoorData(DoorType _type, Dictionary<string, string> _values) {
             MyType = _type;
             Values = _values;
         }

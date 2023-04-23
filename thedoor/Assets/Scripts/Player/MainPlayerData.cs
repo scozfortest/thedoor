@@ -8,17 +8,18 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace TheDoor.Main {
-    public class MainPlayerData : PlayerData {
+    public class MainPlayerData : PlayerData, IScozJsonConvertible {
 
-        string CurRoleUID;
+        [ScozSerializable] public string CurRoleUID { get; private set; }
         public OwnedRoleData CurRole {
             get {
                 return GamePlayer.Instance.GetOwnedData<OwnedRoleData>(ColEnum.Role, CurRoleUID);
             }
         }
-        public int TotalPurchase { get; private set; }
-        public bool Ban { get; set; } = false;
-        public string DeviceUID { get; private set; }
+
+        [ScozSerializable] public int TotalPurchase { get; private set; }
+        [ScozSerializable] public bool Ban { get; set; } = false;
+        [ScozSerializable] public string DeviceUID { get; private set; }
 
         /// <summary>
         /// 上一場麻將結果，如果為null代表沒有上一場或上一場沒打完
@@ -59,26 +60,5 @@ namespace TheDoor.Main {
         public void SetCurRole_Loco(string _curRoleUID) {
             CurRoleUID = _curRoleUID;
         }
-
-        public void SaveToLoco() {
-
-            JSONObject jsObj = new JSONObject();
-            jsObj.Add("UID", UID);
-            jsObj.Add("CreateTime", CreateTime.ToString("o"));
-            jsObj.Add("Gold", GetCurrency(Currency.Gold));
-            jsObj.Add("Point", GetCurrency(Currency.Point));
-            jsObj.Add("AuthType", MyAuthType.ToString());
-
-            jsObj.Add("CurRoleUID", CurRoleUID);
-            jsObj.Add("TotalPurchase", TotalPurchase);
-            jsObj.Add("Ban", Ban);
-            jsObj.Add("DeviceUID", DeviceUID);
-
-            LocoDataManager.SaveDataToLoco(LocoDataName.Player, jsObj.ToString());
-
-
-
-        }
-
     }
 }

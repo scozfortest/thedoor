@@ -48,7 +48,7 @@ namespace TheDoor.Main {
             if (objs == null) return;
             for (int i = 0; i < objs.Count; i++) {
                 try {
-                    Dictionary<string, object> triggerEventDic = DictionaryExtension.ConvertToStringKeyDic(objs[i] as IDictionary);
+                    Dictionary<string, object> triggerEventDic = DicExtension.ConvertToStringKeyDic(objs[i] as IDictionary);
                     TriggerEvents.Add(new TriggerEventData(triggerEventDic));
                 } catch (Exception _ex) {
                     WriteLog.LogError("GameData-Setting>TriggerEvent資料錯誤: " + _ex);

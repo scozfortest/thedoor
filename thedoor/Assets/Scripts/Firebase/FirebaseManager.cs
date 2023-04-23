@@ -172,16 +172,16 @@ namespace TheDoor.Main {
             //取消偵聽玩家個人資料
             StopListenPlayerOwnedDatas();
             //玩家個資(單筆)
-            GetDataByDocID(ColEnum.Player, MyUser.UserId, SetFinishedLoadData);//取得玩家資料
+            //GetDataByDocID(ColEnum.Player, MyUser.UserId, SetFinishedLoadData);//取得玩家資料
 
             //玩家個資(多筆)
             //GetPersonalDatas(ColEnum.Mail, SetFinishedLoadDatas);//取得信件
 
 
             //註冊偵聽
-            RegisterListener_Shop();//註冊偵聽-商城
-            RegisterListener_Purchase();//註冊偵聽-儲值商城
-            RegisterListener_GameSetting();//註冊偵聽-遊戲設定
+            //RegisterListener_Shop();//註冊偵聽-商城
+            //RegisterListener_Purchase();//註冊偵聽-儲值商城
+            //RegisterListener_GameSetting();//註冊偵聽-遊戲設定
         }
         public static void GetNewServerTime()//跟FirebaseServer要時間(遊戲開始時會要一次以防玩家本機時區不同，時間會錯亂)
         {
@@ -198,7 +198,7 @@ namespace TheDoor.Main {
             try {
                 switch (_colName) {
                     case ColEnum.Player:
-                        GamePlayer.Instance.InitMainPlayerData(_data);
+                        GamePlayer.Instance.SetMainPlayerData(_data);
                         //第一次從Firebase上取得玩家資料後執行以下Funcs
                         FirebaseManager.PlayerSign_SignIn();//送玩家登入LOG
                         GameTimer.Instance.StartDoFirstAction();//執行計時器第一次要執行的東西

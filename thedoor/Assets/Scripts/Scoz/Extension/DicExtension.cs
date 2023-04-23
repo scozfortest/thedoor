@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace Scoz.Func {
-    public static class DictionaryExtension {
+    public static class DicExtension {
         /// <summary>
         /// 取得key值在Dic裡排序 0為第一個
         /// </summary>
@@ -33,11 +33,26 @@ namespace Scoz.Func {
                 resultDic.Add(key.ToString(), _oldDic[key]);
             return resultDic;
         }
+        public static Dictionary<string, string> ConvertToStringKeyStringValueDic(IDictionary _oldDic) {
+            if (_oldDic == null)
+                return null;
+            Dictionary<string, string> resultDic = new Dictionary<string, string>();
+            foreach (var key in _oldDic.Keys)
+                resultDic.Add(key.ToString(), _oldDic[key].ToString());
+            return resultDic;
+        }
         public static Dictionary<string, object> ConvertToStringKeyDic(object _oldDic) {
             if (_oldDic == null)
                 return null;
             IDictionary dic = _oldDic as IDictionary;
             if (dic != null) return ConvertToStringKeyDic(dic);
+            return null;
+        }
+        public static Dictionary<string, string> ConvertToStringKeyStringValueDic(object _oldDic) {
+            if (_oldDic == null)
+                return null;
+            IDictionary dic = _oldDic as IDictionary;
+            if (dic != null) return ConvertToStringKeyStringValueDic(dic);
             return null;
         }
         public static Dictionary<int, int> ConvertToIntKeyValueDic(IDictionary _oldDic) {

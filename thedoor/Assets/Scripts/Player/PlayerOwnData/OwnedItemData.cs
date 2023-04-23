@@ -24,7 +24,7 @@ namespace TheDoor.Main {
                 if (!Enum.TryParse(key, out type))//key值無法轉為NotUniqueItemTypes就代表不是已定義的Item類型
                     continue;
 
-                Dictionary<int, int> itemDic = DictionaryExtension.ConvertToIntKeyValueDic(_data[key] as IDictionary);
+                Dictionary<int, int> itemDic = DicExtension.ConvertToIntKeyValueDic(_data[key] as IDictionary);
                 if (itemDic == null)
                     continue;
                 if (Datas.ContainsKey(type))

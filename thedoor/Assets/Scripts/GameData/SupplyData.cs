@@ -88,11 +88,6 @@ namespace TheDoor.Main {
                 }
             });
         }
-
-        public static SupplyData GetData(int _id) {
-            return GameDictionary.GetJsonData<SupplyData>("Supply", _id);
-        }
-
         public List<SupplyEffectData> GetSupplyEffects() {
             return SupplyEffectData.GetSupplyEffectDatas(ID);
         }
@@ -100,6 +95,17 @@ namespace TheDoor.Main {
             if (Tags == null) return false;
             return Tags.Contains(_tag);
         }
+
+        public static SupplyData GetData(int _id) {
+            return GameDictionary.GetJsonData<SupplyData>("Supply", _id);
+        }
+        public static List<SupplyData> GetRndDatas(int _count) {
+            var supplyDic = GameDictionary.GetIntKeyJsonDic<SupplyData>("Supply");
+            var supplyDatas = supplyDic.Values.ToList().FindAll(a => a.Rank == 1);
+            return Prob.GetRandomTFromTList(supplyDatas, _count);
+        }
+
+
 
     }
 

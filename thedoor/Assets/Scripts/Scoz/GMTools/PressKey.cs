@@ -34,13 +34,14 @@ namespace Scoz.Func {
                 Debug.Log(jsNode["Items"].AsObject["A"]);
 
             } else if (Input.GetKeyDown(KeyCode.E)) {
-                GamePlayer.Instance.Data.SaveToLoco();
+                GamePlayer.Instance.SaveToLoco_RoleData();
 
             } else if (Input.GetKeyDown(KeyCode.R)) {
 
                 GamePlayer.Instance.LoadDataFromLoco(LocoDataName.Player);
 
             } else if (Input.GetKeyDown(KeyCode.P)) {
+                GamePlayer.Instance.SaveToLoco_PlayerData();
 
 
             } else if (Input.GetKeyDown(KeyCode.O)) {

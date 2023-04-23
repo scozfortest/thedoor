@@ -19,7 +19,7 @@ namespace Scoz.Func {
                     StringData data = new StringData(items[i], _dataName);
                     string name = GetValue<string>(items[i]["ID"].ToString());
                     if (dic.ContainsKey(name)) {
-                        WriteLog.LogWarning(string.Format("{0}的主屬性名稱重複", _dataName));
+                        WriteLog.LogWarning(string.Format("{0}表的欄位({1})重複", _dataName, name));
                         break;
                     }
                     dic.Add(name, data);

@@ -7,12 +7,10 @@ using Scoz.Func;
 namespace TheDoor.Main {
     public class PlayerData {
 
-        public string UID { get; protected set; }//玩家UID
-        public DateTime CreateTime { get; private set; }//註冊時間
-        Dictionary<Currency, long> OwnedCurrency = new Dictionary<Currency, long>();//玩家擁有貨幣
-
-
-        public AuthType MyAuthType { get; private set; } = AuthType.Guest;//玩家登入類型，參考AuthType列舉
+        [ScozSerializable] public string UID { get; protected set; }//玩家UID
+        [ScozSerializable] public DateTime CreateTime { get; private set; }//註冊時間
+        [ScozSerializable] Dictionary<Currency, long> OwnedCurrency { get; set; } = new Dictionary<Currency, long>();//玩家擁有貨幣
+        [ScozSerializable] public AuthType MyAuthType { get; private set; } = AuthType.Guest;//玩家登入類型，參考AuthType列舉
 
         /// <summary>
         /// 取得玩家擁有貨幣

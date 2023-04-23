@@ -23,9 +23,12 @@ namespace Scoz.Func {
 
         public static string GetDataFromLoco(LocoDataName _name) {
             string json = "";
-            if (PlayerPrefs.HasKey(_name.ToString()))
+            if (PlayerPrefs.HasKey(_name.ToString())) {
                 json = PlayerPrefs.GetString(_name.ToString());
-            WriteLog.LogFormat("<color=Orange>GetDataFromLoco-{0}:   {1}</color>", _name, json);
+                WriteLog.LogFormat("<color=Orange>GetDataFromLoco-{0}:   {1}</color>", _name, json);
+            } else {
+                WriteLog.LogFormat("<color=Orange>No Loco Data-{0}</color>", _name, json);
+            }
             return json;
         }
     }

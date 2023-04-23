@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Scoz.Func {
-    public class Probability {
+    public class Prob {
         public static bool GetResult(float _probability) {
             int randomNum = Random.Range(0, 100);
             if (randomNum < Mathf.RoundToInt(_probability * 100))
@@ -122,12 +122,23 @@ namespace Scoz.Func {
             int rand = Random.Range(0, _list.Count);
             return _list[rand];
         }
+        public static List<T> GetRandomTFromTList<T>(List<T> _list, int _count) {
+            if (_list == null || _list.Count == 0 || _count <= 0)
+                return null;
+            List<T> list = new List<T>();
+            for (int i = 0; i < _count; i++) {
+                int rand = Random.Range(0, _list.Count);
+                list.Add(_list[rand]);
+            }
+            return list;
+        }
         public static T GetRandomTFromTHashSet<T>(HashSet<T> _hashSet) {
             if (_hashSet == null || _hashSet.Count == 0)
                 return default(T);
             int rand = Random.Range(0, _hashSet.Count);
             return _hashSet.ToArray()[rand];
         }
+
         public static List<T> GetRandNoDuplicatedTFromTList<T>(List<T> _itemList, int _count) {
             if (_itemList == null && _itemList.Count == 0) {
                 WriteLog.LogError("傳入List錯誤");
@@ -150,5 +161,6 @@ namespace Scoz.Func {
             }
             return list;
         }
+
     }
 }

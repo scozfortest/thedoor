@@ -100,7 +100,7 @@ namespace TheDoor.Main {
                     if (triggerEvents != null) {
                         for (int i = 0; i < triggerEvents.Count; i++) {
                             IDictionary dic = triggerEvents[i] as IDictionary;
-                            Dictionary<string, object> eventRecordDic = DictionaryExtension.ConvertToStringKeyDic(dic);
+                            Dictionary<string, object> eventRecordDic = DicExtension.ConvertToStringKeyDic(dic);
                             if (MyEnum.TryParseEnum(eventRecordDic["Type"].ToString(), out TriggerEvent _type)) {
                                 DateTime dateTime = FirebaseManager.GetDateTimeFromFirebaseTimestamp(eventRecordDic["TriggerTime"]);
                                 var eventRecord = new TriggerEventRecord(_type, dateTime);

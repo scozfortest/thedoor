@@ -68,6 +68,14 @@ namespace TheDoor.Main {
              AppsFlyerManager.Inst.IOSAskATTUserTrack();
 #endif
 
+            //離線模式
+            if (GameManager.OfflineMode) {
+                GameManager.Instance.SetTime(DateTime.Now);
+                StartDownloadingAssetAndGoNextScene();
+                return;
+            }
+
+
             if (FirebaseManager.MyUser == null) {//玩家尚未登入
                 WriteLog.Log("玩家尚未登入");
                 MyStartUI.ShowUI(StartUI.Condietion.NotLogin);
@@ -132,16 +140,24 @@ namespace TheDoor.Main {
         public void StartDownloadingAssetAndGoNextScene() {
             StartUI.GetInstance<StartUI>()?.SetMiddleText(StringData.GetUIString("Login_DownloadAsset"));
             GameManager.StartDownloadAddressable(() => {//下載完資源包後執行
-                /// 根據是否能進行遊戲來執行各種狀態
-                /// 1. 判斷玩家版本，若版本低於最低遊戲版本則會跳強制更新
-                /// 2. 判斷玩家版本，若版本低於目前遊戲版本則會跳更新建議
-                /// 3. 判斷Maintain是否為true，若為true則不在MaintainExemptPlayerUIDs中的玩家都會跳維護中
-                /// 4. 判斷該玩家是否被Ban，不是才能進遊戲
-                GameStateManager.Instance.StartCheckCanPlayGame(() => {
+
+                if (!GameManager.OfflineMode) {
+                    /// 根據是否能進行遊戲來執行各種狀態
+                    /// 1. 判斷玩家版本，若版本低於最低遊戲版本則會跳強制更新
+                    /// 2. 判斷玩家版本，若版本低於目前遊戲版本則會跳更新建議
+                    /// 3. 判斷Maintain是否為true，若為true則不在MaintainExemptPlayerUIDs中的玩家都會跳維護中
+                    /// 4. 判斷該玩家是否被Ban，不是才能進遊戲
+                    GameStateManager.Instance.StartCheckCanPlayGame(() => {
+                        FirstTimeLaunchGame = false;
+                        PopupUI.InitSceneTransitionProgress(3, "LobbyUILoaded");
+                        PopupUI.CallTransition(MyScene.LobbyScene);
+                    });
+                } else {//離線模式
                     FirstTimeLaunchGame = false;
                     PopupUI.InitSceneTransitionProgress(3, "LobbyUILoaded");
                     PopupUI.CallTransition(MyScene.LobbyScene);
-                });
+                }
+
             });
         }
 

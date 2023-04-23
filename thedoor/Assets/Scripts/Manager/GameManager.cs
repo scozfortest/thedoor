@@ -19,6 +19,7 @@ namespace Scoz.Func {
         public AssetReference PopupUIAsset;
         public AssetReference PostPocessingAsset;
         public int TargetFPS = 60;
+        public static bool OfflineMode { get; private set; } = true;//離線模式
         public static EnvVersion CurVersion {//取得目前版本
             get {
 #if Dev
@@ -141,6 +142,7 @@ namespace Scoz.Func {
             AddressableManage.CreateNewAddressableManage();
             //※設定本機資料要放最後(要在取得本機GameSetting後以及AudioPlayer.CreateNewAudioPlayer之後
             GamePlayer.Instance.LoadLocoData();
+            if (OfflineMode && GamePlayer.Instance.Data == null) LocoServerManager.CreatePlayer();//如果離線模式且玩家資料為空就創造新玩家資料
         }
         /// <summary>
         /// 依序執行以下

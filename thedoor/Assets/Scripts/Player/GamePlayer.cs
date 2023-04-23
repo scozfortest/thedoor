@@ -36,20 +36,11 @@ namespace TheDoor.Main {
         }
         public override void LoadLocoData() {
             base.LoadLocoData();
-        }
-        public void InitMainPlayerData(Dictionary<string, object> _data) {
-            if (Data == null)
-                Data = new MainPlayerData();
-
-            SetMainPlayerData(_data);
-
+            LoadAllDataFromLoco();
         }
 
         public void SetMainPlayerData(Dictionary<string, object> _data) {
-            if (Data == null) {
-                WriteLog.LogError("尚未初始化MainPlayerData");
-                return;
-            }
+            if (Data == null) Data = new MainPlayerData();
             Data.SetData(_data);
         }
 

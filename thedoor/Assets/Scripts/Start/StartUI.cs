@@ -32,18 +32,22 @@ namespace TheDoor.Main {
             AppleLoginGO.SetActive(true);
 #endif
 
-            
+
         }
 
         public enum Condietion {
             HideAll,//隱藏所有按鈕
             NotLogin,//還沒登入就顯示登入按鈕
+            OfflineMode,//離線模式
             BackFromLobby_ShowLogoutBtn,//從大廳返回主介面 且 已經是登入狀態，會顯示登出按鈕與返回大廳按鈕
             BackFromLobby_ShowLoginBtn,//從大廳返回主介面 且 已經是登入狀態，會顯示登出按鈕與返回大廳按鈕
         }
         public void ShowUI(Condietion _condition) {
             SetActive(true);
             switch (_condition) {
+                case Condietion.OfflineMode:
+                    ShowLoginUI(false);
+                    break;
                 case Condietion.HideAll:
                     SetActive(false);
                     break;

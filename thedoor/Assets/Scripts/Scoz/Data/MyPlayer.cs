@@ -16,6 +16,7 @@ namespace Scoz.Func {
         public Language UsingLanguage { get; protected set; } = Language.TW;//語系
         public bool PostProcessing { get; private set; } = false;//是否開啟後製效果(預設關閉)
         public bool Vibration { get; private set; } = true;//是否開啟震動效果(預設開啟)
+        public Dictionary<string, long> UIDDic = new Dictionary<string, long>();//UID管理器 單機遊戲需要控管玩家擁有物件的UID不重複使用
 
         /// <summary>
         /// 取的本機Setting資料
@@ -51,7 +52,20 @@ namespace Scoz.Func {
             jsObj.Add("VoiceVolume", AudioPlayer.VoiceVolumeRatio);
             jsObj.Add("PostProcessing", PostProcessing);
             jsObj.Add("Vibration", Vibration);
+            JSONObject uidObj = new JSONObject();
+            foreach (string key in UIDDic.Keys)
+                uidObj.Add(key, UIDDic[key]);
+            jsObj.Add("UIDDic", uidObj);
             LocoDataManager.SaveDataToLoco(LocoDataName.PlayerSetting, jsObj.ToString());
+        }
+
+        /// <summary>
+        /// 取得新的UID
+        /// </summary>
+        public string GetNextUID(string _key) {
+            if (UIDDic.ContainsKey(_key)) return (++UIDDic[_key]).ToString();
+            UIDDic.Add(_key, 0);
+            return UIDDic[_key].ToString();
         }
 
         public void SetLanguage(Language _value) {

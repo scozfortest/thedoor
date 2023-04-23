@@ -50,7 +50,7 @@ namespace TheDoor.Main {
             if (objList == null)
                 return items;
             for (int i = 0; i < objList.Count; i++) {
-                var data = DictionaryExtension.ConvertToStringKeyDic(objList[i] as IDictionary);
+                var data = DicExtension.ConvertToStringKeyDic(objList[i] as IDictionary);
                 if (!data.ContainsKey("ItemType") || !data.ContainsKey("ItemValue"))
                     continue;
                 ItemType itemType;

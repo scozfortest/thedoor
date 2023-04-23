@@ -29,7 +29,7 @@ namespace TheDoor.Main {
         void DoMinteThings() {
 
             //Firebase相關執行要在登入狀態時才會跑
-            if (FirebaseManager.MyUser != null)
+            if (!GameManager.OfflineMode && FirebaseManager.MyUser != null)
                 FirebaseRelated();
 
         }

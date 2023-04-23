@@ -18,7 +18,6 @@ namespace Scoz.Func {
         [SerializeField] Image SceneTransitionImg = null;
         [SerializeField] Image SceneTransitionBGImg2 = null;
         [SerializeField] Text SceneTransitionText = null;
-        [SerializeField] Text SceneTransitionPlayerUIDText;
         [SerializeField] float WaitSecAfterFinishProgressPercent = 0.8f;
         public static MyScene PreviousScene = MyScene.StartScene;
         MyScene GoScene;
@@ -32,7 +31,6 @@ namespace Scoz.Func {
         public void InitTransition() {
             MyLoadingProgress = new LoadingProgress(CallEndTransition);
             TransitionAni.gameObject.SetActive(true);
-            SceneTransitionPlayerUIDText.text = FirebaseManager.MyUser.UserId;
         }
         public void InitSceneTransitionProgress(float _waitSecAfterFinish = 0, params string[] _keys) {
             WaitSecAfterFinish = _waitSecAfterFinish;

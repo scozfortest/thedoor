@@ -21,6 +21,7 @@ namespace TheDoor.Main {
         }
 
         public string Ref { get; set; }
+        public bool Lock { get; private set; }
         public int Rank { get; private set; }
         public int HP { get; private set; }
         public int SanP { get; private set; }
@@ -47,6 +48,9 @@ namespace TheDoor.Main {
                         break;
                     case "Ref":
                         Ref = item[key].ToString();
+                        break;
+                    case "Lock":
+                        Lock = bool.Parse(item[key].ToString());
                         break;
                     case "Rank":
                         Rank = int.Parse(item[key].ToString());
@@ -85,6 +89,18 @@ namespace TheDoor.Main {
         public static RoleData GetData(int _id) {
             return GameDictionary.GetJsonData<RoleData>(DataName, _id);
         }
+
+
+        /// <summary>
+        /// 取得隨機已解鎖腳色
+        /// </summary>
+        /// <returns></returns>
+        public static RoleData GetRandAvailableData() {
+            var roleDic = GameDictionary.GetIntKeyJsonDic<RoleData>("Role");
+            var roleDats = roleDic.Values.ToList().FindAll(a => !a.Lock);
+            return Prob.GetRandomTFromTList(roleDats);
+        }
+
     }
 
 }

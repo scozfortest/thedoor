@@ -25,7 +25,7 @@ namespace TheDoor.Main {
         static void CFCallbackHandle(object _obj, Action<object> _successCB, Action<string> _failCB) {
 
             var iDic = (IDictionary)_obj;
-            Dictionary<string, object> cbData = DictionaryExtension.ConvertToStringKeyDic(iDic);
+            Dictionary<string, object> cbData = DicExtension.ConvertToStringKeyDic(iDic);
             object value;
             ResultTypes resultType = cbData.TryGetValue("Result", out value) ? MyEnum.ParseEnum<ResultTypes>(value.ToString()) : ResultTypes.UnknownError;
             if (resultType == ResultTypes.Success) {
@@ -337,7 +337,7 @@ namespace TheDoor.Main {
                                 if (dataObj == null) {
                                     _cb?.Invoke(null);
                                 } else {
-                                    Dictionary<string, object> data = DictionaryExtension.ConvertToStringKeyDic((IDictionary)dataObj);
+                                    Dictionary<string, object> data = DicExtension.ConvertToStringKeyDic((IDictionary)dataObj);
                                     _cb?.Invoke(data);
                                 }
                             }, null);

@@ -63,9 +63,14 @@ namespace TheDoor.Main {
         /// 創腳
         /// </summary>
         public void CreateRole() {
+
+            LocoServerManager.CreateAdventure();
+            LobbyUI.GetInstance<LobbyUI>()?.SwitchUI(LobbyUIs.CreateRole);
+
+            /*
             PopupUI.ShowLoading(string.Format("Loading"));
             FirebaseManager.CreateRole(0, cbData => {//創腳
-                Dictionary<string, object> cbDic = DictionaryExtension.ConvertToStringKeyDic(cbData);
+                Dictionary<string, object> cbDic = DicExtension.ConvertToStringKeyDic(cbData);
                 string roleUID = cbDic["RoleUID"].ToString();
                 FirebaseManager.GetDataByDocID(ColEnum.Role, roleUID, (col, roleData) => {//取DB上最新的腳色資料
                     GamePlayer.Instance.SetOwnedData<OwnedRoleData>(col, roleData);
@@ -80,6 +85,7 @@ namespace TheDoor.Main {
                     });
                 });
             });
+            */
         }
         /// <summary>
         /// 刪除腳色

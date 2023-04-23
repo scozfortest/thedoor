@@ -7,11 +7,11 @@ using System;
 
 namespace TheDoor.Main {
     public class OwnedRoleData : OwnedData {
-        public int ID { get; private set; }
-        public int CurHP { get; private set; }
-        public int CurSanP { get; private set; }
-        public List<string> Talents = new List<string>();
-        public Dictionary<TargetEffectType, List<float>> Effects = new Dictionary<TargetEffectType, List<float>>();
+        [ScozSerializable] public int ID { get; private set; }
+        [ScozSerializable] public int CurHP { get; private set; }
+        [ScozSerializable] public int CurSanP { get; private set; }
+        [ScozSerializable] public List<string> Talents { get; private set; } = new List<string>();
+        [ScozSerializable] public Dictionary<TargetEffectType, List<float>> Effects { get; private set; } = new Dictionary<TargetEffectType, List<float>>();
 
         public OwnedAdventureData MyAdventure {
             get {
@@ -29,18 +29,24 @@ namespace TheDoor.Main {
             CurHP = _data.TryGetValue("CurHP", out value) ? Convert.ToInt32(value) : default(int);
             CurSanP = _data.TryGetValue("CurSanP", out value) ? Convert.ToInt32(value) : default(int);
             //設定Talent清單
+            Talents.Clear();
             List<object> talentObjs = _data.TryGetValue("Talent", out value) ? value as List<object> : null;
-            Talents = talentObjs.OfType<string>().ToList();
+            if (talentObjs != null)
+                Talents = talentObjs.OfType<string>().ToList();
 
             //設定狀態清單
-            Dictionary<string, object> effectDic = _data.TryGetValue("Effect", out value) ? DictionaryExtension.ConvertToStringKeyDic(value) : null;
-            foreach (var key in effectDic.Keys) {
-                if (MyEnum.TryParseEnum(key, out TargetEffectType _type)) {
-                    List<object> valueObjs = effectDic[key] as List<object>;
-                    List<float> values = valueObjs.ToFloatList();
-                    Effects.Add(_type, values);
+            Effects.Clear();
+            Dictionary<string, object> effectDic = _data.TryGetValue("Effect", out value) ? DicExtension.ConvertToStringKeyDic(value) : null;
+            if (effectDic != null) {
+                foreach (var key in effectDic.Keys) {
+                    if (MyEnum.TryParseEnum(key, out TargetEffectType _type)) {
+                        List<object> valueObjs = effectDic[key] as List<object>;
+                        List<float> values = valueObjs.ToFloatList();
+                        Effects.Add(_type, values);
+                    }
                 }
             }
+
         }
 
 

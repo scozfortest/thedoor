@@ -7,9 +7,9 @@ using System;
 
 namespace TheDoor.Main {
     public class OwnedSupplyData : OwnedData {
-        public string OwnRoleUID { get; private set; }
-        public int Usage { get; private set; }
-        public int ID { get; private set; }
+        [ScozSerializable] public string OwnRoleUID { get; private set; }
+        [ScozSerializable] public int Usage { get; private set; }
+        [ScozSerializable] public int ID { get; private set; }
 
         public OwnedSupplyData(Dictionary<string, object> _data)
             : base(_data) {

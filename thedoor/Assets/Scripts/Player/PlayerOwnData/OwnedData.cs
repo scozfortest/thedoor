@@ -7,10 +7,10 @@ using System;
 
 namespace TheDoor.Main {
 
-    public abstract class OwnedData {
-        public string UID { get; private set; }
-        public string OwnerUID { get; private set; }
-        public DateTime CreateTime { get; private set; }
+    public abstract class OwnedData : IScozJsonConvertible {
+        [ScozSerializable] public string UID { get; private set; }
+        [ScozSerializable] public string OwnerUID { get; private set; }
+        [ScozSerializable] public DateTime CreateTime { get; private set; }
 
         public OwnedData(Dictionary<string, object> _data) {
             SetData(_data);

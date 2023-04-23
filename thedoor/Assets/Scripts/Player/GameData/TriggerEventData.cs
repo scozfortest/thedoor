@@ -124,7 +124,7 @@ namespace TheDoor.Main {
                         break;
                     case ConditionType.Probability:
                         float probability = (float)Convert.ToDouble(Conditions[i].Value);
-                        if (!Probability.GetResult(probability))
+                        if (!Prob.GetResult(probability))
                             return false;
                         break;
                     case ConditionType.WinMaJamPointAbove:

@@ -150,7 +150,7 @@ namespace TheDoor.Main {
             return TitleScriptDic[_title];
         }
         public static string GetRandomNonExclusiveTitle() {
-            string randTitle = Probability.GetRandomTFromTList(NonExclusiveTitles);
+            string randTitle = Prob.GetRandomTFromTList(NonExclusiveTitles);
             return randTitle;
         }
         public List<TargetEffectData> GetTargetEffects() {
