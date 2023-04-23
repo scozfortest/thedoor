@@ -86,7 +86,7 @@ namespace TheDoor.Main {
             foreach (var ownedData in ownedSupplyDatas) {
                 jsArray.Add(ownedData.ToScozJson());
             }
-            LocoDataManager.SaveDataToLoco(LocoDataName.Adventure, jsArray);
+            LocoDataManager.SaveDataToLoco(LocoDataName.Supply, jsArray);
         }
         public void SaveToLoco_AdventureData() {
             List<OwnedAdventureData> ownedSupplyDatas = GetOwnedDatas<OwnedAdventureData>(ColEnum.Supply);

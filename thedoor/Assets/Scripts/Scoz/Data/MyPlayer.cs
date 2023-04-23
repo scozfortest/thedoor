@@ -34,6 +34,10 @@ namespace Scoz.Func {
                 AudioPlayer.SetVoiceVolume(jsNode["VoiceVolume"].AsFloat);
                 PostProcessing = jsNode["PostProcessing"].AsBool;
                 Vibration = jsNode["Vibration"].AsBool;
+                UIDDic.Clear();
+                foreach (var key in jsNode["UIDDic"].Keys) {
+                    UIDDic[key] = jsNode["UIDDic"][key].AsLong;
+                }
 
             } else {
                 SetLanguage((Language)GameSettingData.GetInt(GameSetting.DefaultLanguage));
@@ -42,6 +46,7 @@ namespace Scoz.Func {
                 AudioPlayer.SetVoiceVolume(GameSettingData.GetFloat(GameSetting.DefaultVoice));
                 PostProcessing = GameSettingData.GetBool(GameSetting.PostProcessing);
                 Vibration = GameSettingData.GetBool(GameSetting.Vibration);
+                UIDDic.Clear();
             }
         }
         public void SaveSettingToLoco() {

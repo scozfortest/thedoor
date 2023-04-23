@@ -66,8 +66,31 @@ namespace TheDoor.Main {
             GamePlayer.Instance.SetOwnedData<OwnedRoleData>(ColEnum.Role, roleDataDic);
             GamePlayer.Instance.SaveToLoco_RoleData();
 
+            //設定玩家資料
             GamePlayer.Instance.Data.SetCurRole_Loco(roleDataDic["UID"].ToString());
             GamePlayer.Instance.SaveToLoco_PlayerData();
+
+            //設定道具資料
+            List<Dictionary<string, object>> supplyListDic = new List<Dictionary<string, object>>();
+            List<SupplyData> tmpSupplyDatas = new List<SupplyData>();
+            tmpSupplyDatas.AddRange(rndSuppies);
+            tmpSupplyDatas.AddRange(exclusiveSupplies);
+            foreach (var data in tmpSupplyDatas) {
+                Dictionary<string, object> supplyDataDic = new Dictionary<string, object>();
+                supplyDataDic.Add("UID", GamePlayer.Instance.GetNextUID("Supply"));
+                supplyDataDic.Add("OwnerUID", GamePlayer.Instance.Data.UID);
+                supplyDataDic.Add("CreateTime", GameManager.Instance.NowTime);
+
+                supplyDataDic.Add("ID", data.ID);
+                supplyDataDic.Add("Usage", data.Usage);
+                supplyDataDic.Add("OwnRoleUID", GamePlayer.Instance.Data.CurRoleUID);
+                supplyListDic.Add(supplyDataDic);
+            }
+            GamePlayer.Instance.SetOwnedDatas<OwnedSupplyData>(ColEnum.Supply, supplyListDic);
+            GamePlayer.Instance.SaveToLoco_SupplyData();
+
+            //設定PlayerSetting
+            GamePlayer.Instance.SaveSettingToLoco();
 
         }
     }
