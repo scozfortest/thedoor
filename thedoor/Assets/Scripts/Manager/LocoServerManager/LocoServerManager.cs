@@ -1,4 +1,6 @@
+using Newtonsoft.Json;
 using Scoz.Func;
+using SimpleJSON;
 using System.Collections;
 using System.Collections.Generic;
 using TheDoor.Main;
@@ -47,10 +49,11 @@ namespace TheDoor.Main {
             roleDataDic.Add("ID", roleData.ID);
             roleDataDic.Add("CurHP", roleData.HP);
             roleDataDic.Add("CurSanP", roleData.SanP);
-            GamePlayer.Instance.SetOwnedData<OwnedRoleData>(ColEnum.Role, roleDataDic);
+            GamePlayer.Instance.SetOwnedDatas<OwnedRoleData>(ColEnum.Role, new List<Dictionary<string, object>>() { roleDataDic });
 
             //設定道具資料
-            var defaultSuppies = SupplyData.GetRndDatas(3);
+            int defaultSupplyCount = GameSettingData.GetInt(GameSetting.Role_DefaultSupplyCount);
+            var defaultSuppies = SupplyData.GetRndDatas(defaultSupplyCount);
             var exclusiveSupplies = new List<SupplyData>();
             foreach (var id in roleData.Supplies) {
                 var supplyData = SupplyData.GetData(id);
@@ -86,14 +89,41 @@ namespace TheDoor.Main {
             GamePlayer.Instance.Data.SetCurRole_Loco(roleDataDic["UID"].ToString());
 
             //設定冒險資料
-            string doorTypeWeightJson = GameSettingData.GetStr(GameSetting.Adventure_DoorTypeWeight);
-            Debug.LogError(doorTypeWeightJson);
+            var doorCount = GameSettingData.GetJsNode(GameSetting.Adventure_DoorCount);
+            var doorTypeWeight = GameSettingData.GetJsNode(GameSetting.Adventure_DoorTypeWeight);
+            List<DoorData> doorDatas = new List<DoorData>();
+            doorDatas.Add(new DoorData(DoorType.Start));
+            for (int i = 0; i < doorCount; i++) {
+                DoorType rndDoorType = MyEnum.ParseEnum<DoorType>(Prob.GetRandomKeyFromJsNodeKeyWeight(doorTypeWeight));
+                doorDatas.Add(new DoorData(rndDoorType));
+            }
+            doorDatas.Add(new DoorData(DoorType.Boss));
+
+            Dictionary<string, object> adventureDataDic = new Dictionary<string, object>();
+            adventureDataDic.Add("UID", GamePlayer.Instance.GetNextUID("Adventure"));
+            adventureDataDic.Add("OwnerUID", GamePlayer.Instance.Data.UID);
+            adventureDataDic.Add("CreateTime", GameManager.Instance.NowTime);
+
+            adventureDataDic.Add("CurDoor", 0);
+            adventureDataDic.Add("OwnRoleUID", GamePlayer.Instance.Data.CurRoleUID);
+            List<object> doorListDic = new List<object>();
+            foreach (var data in doorDatas) {
+                Dictionary<string, object> doorDataDic = new Dictionary<string, object>();
+                doorDataDic.Add("DoorType", data.MyType);
+                doorDataDic.Add("Values", data.Values);
+                doorListDic.Add(doorDataDic);
+            }
+            adventureDataDic.Add("Doors", doorListDic);
+
+            GamePlayer.Instance.SetOwnedDatas<OwnedAdventureData>(ColEnum.Adventure, new List<Dictionary<string, object>>() { adventureDataDic });
+
 
             //存本地資料
             GamePlayer.Instance.SaveSettingToLoco();
             GamePlayer.Instance.SaveToLoco_PlayerData();
             GamePlayer.Instance.SaveToLoco_RoleData();
             GamePlayer.Instance.SaveToLoco_SupplyData();
+            GamePlayer.Instance.SaveToLoco_AdventureData();
 
             //設定UI
             CreateRoleUI.GetInstance<CreateRoleUI>().SetGainItemList(exclusiveItems, defaultItems, inheritItems);

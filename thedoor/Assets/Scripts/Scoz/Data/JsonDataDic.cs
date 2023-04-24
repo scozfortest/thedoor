@@ -48,7 +48,9 @@ namespace Scoz.Func {
             //清空static字典
             GameSettingData.ClearStaticDic();
             ScriptData.ClearStaticDic();
+            ScriptTitleData.ClearStaticDic();
             SupplyEffectData.ClearStaticDic();
+            MonsterData.ClearStaticDic();
             MonsterActionData.ClearStaticDic();
             RolePlotData.ClearStaticDic();
 
@@ -73,6 +75,8 @@ namespace Scoz.Func {
             MyJsonData.SetDataStringKey_Remote<TalentData>(TalentData.DataName, SetDic);
             ScriptData.DataName = "Script";
             MyJsonData.SetDataStringKey_Remote<ScriptData>(ScriptData.DataName, SetDic);
+            ScriptTitleData.DataName = "ScriptTitle";
+            MyJsonData.SetDataStringKey_Remote<ScriptTitleData>(ScriptTitleData.DataName, SetDic);
             ScriptEffectData.DataName = "ScriptEffect";
             MyJsonData.SetData_Remote<ScriptEffectData>(ScriptEffectData.DataName, SetDic);
             ItemGroupData.DataName = "ItemGroup";

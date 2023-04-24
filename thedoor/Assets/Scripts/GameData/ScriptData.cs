@@ -18,7 +18,6 @@ namespace TheDoor.Main {
                 return str;
             }
         }
-        public bool Exclusive { get; private set; }
         public List<string> NextIDs = new List<string>();
         public bool IsOption { get; private set; }
         public string EndType { get; private set; }
@@ -40,7 +39,6 @@ namespace TheDoor.Main {
             return strs;
         }
         static Dictionary<string, ScriptData> TitleScriptDic = new Dictionary<string, ScriptData>();
-        static List<string> NonExclusiveTitles = new();
         public static void ClearStaticDic() {
             TitleScriptDic.Clear();
         }
@@ -58,9 +56,6 @@ namespace TheDoor.Main {
                     case "Title":
                         Title = item[key].ToString();
                         TitleScriptDic.Add(Title, this);
-                        break;
-                    case "Exclusive":
-                        Exclusive = bool.Parse(item[key].ToString());
                         break;
                     case "NextIDs":
                         NextIDs = item[key].ToString().Split('/').ToList();
@@ -115,9 +110,6 @@ namespace TheDoor.Main {
                         break;
                 }
             }
-            //把非獨特的劇本加入清單中，在隨機取劇本時用
-            if (!string.IsNullOrEmpty(Title) && !Exclusive)
-                NonExclusiveTitles.Add(Title);
         }
         public static ScriptData GetData(string _id) {
             return GameDictionary.GetJsonData<ScriptData>(DataName, _id);
@@ -148,10 +140,6 @@ namespace TheDoor.Main {
             if (!TitleScriptDic.ContainsKey(_title))
                 return null;
             return TitleScriptDic[_title];
-        }
-        public static string GetRandomNonExclusiveTitle() {
-            string randTitle = Prob.GetRandomTFromTList(NonExclusiveTitles);
-            return randTitle;
         }
         public List<TargetEffectData> GetTargetEffects() {
             if (EffectIDs == null || EffectIDs.Length == 0) return null;

@@ -23,13 +23,16 @@ namespace TheDoor.Main {
             //設定門資料
             DoorDatas.Clear();
             List<object> doorObjs = _data.TryGetValue("Doors", out value) ? value as List<object> : null;
-            for (int i = 0; i < doorObjs.Count; i++) {
-                Dictionary<string, object> doorDic = DicExtension.ConvertToStringKeyDic(doorObjs[i]);
-                string typeStr = doorDic.TryGetValue("DoorType", out value) ? Convert.ToString(value) : default(string);
-                if (MyEnum.TryParseEnum(typeStr, out DoorType type)) {
-                    Dictionary<string, string> values = doorDic.TryGetValue("Values", out value) ? DicExtension.ConvertToStringKeyStringValueDic(value) : null;
-                    var doorData = new DoorData(type, values);
-                    DoorDatas.Add(doorData);
+            if (doorObjs != null) {
+                for (int i = 0; i < doorObjs.Count; i++) {
+                    Dictionary<string, object> doorDic = DicExtension.ConvertToStringKeyDic(doorObjs[i]);
+                    if (doorDic == null) continue;
+                    string typeStr = doorDic.TryGetValue("DoorType", out value) ? Convert.ToString(value) : default(string);
+                    if (MyEnum.TryParseEnum(typeStr, out DoorType type)) {
+                        Dictionary<string, object> values = doorDic.TryGetValue("Values", out value) ? DicExtension.ConvertToStringKeyDic(value) : null;
+                        var doorData = new DoorData(type, values);
+                        DoorDatas.Add(doorData);
+                    }
                 }
             }
         }

@@ -13,54 +13,32 @@ namespace Scoz.Func {
         /// </summary>
         public static JSONObject ToScozJson<T>(this T _obj) where T : IScozJsonConvertible {
             if (_obj == null) return null;
-            return GetJson(_obj);
+            return GetScozJson(_obj);
         }
         /// <summary>
         /// 將class轉為json 轉換目標是有標記為ScozJsonSerializableAttribute的屬性
         /// </summary>
-        static JSONObject GetJson(object _obj) {
-            if (_obj == null) return null;
+        static JSONObject GetScozJson(object _classObj) {
+            if (_classObj == null) return null;
             JSONObject jsonObj = new JSONObject();
-            PropertyInfo[] properties = _obj.GetType().GetProperties();
-
+            PropertyInfo[] properties = _classObj.GetType().GetProperties();
             foreach (PropertyInfo property in properties) {
                 if (Attribute.IsDefined(property, typeof(ScozSerializableAttribute))) {
                     string propertyName = property.Name;
-                    object propertyValue = property.GetValue(_obj);
-
+                    object propertyValue = property.GetValue(_classObj);
 
                     if (propertyValue is IConvertible) {
-                        if (propertyValue is string) {//字串
-                            jsonObj.Add(propertyName, propertyValue.ToString());
-                        } else if (propertyValue is bool) {//布林
-                            jsonObj.Add(propertyName, (bool)propertyValue);
-                        } else if (propertyValue.GetType().IsEnum) {//列舉
-                            jsonObj.Add(propertyName, propertyValue.ToString());
-                        } else if (IsNumeric(propertyValue)) {//數字
-                            double numberValue = Convert.ToDouble(propertyValue);
-                            jsonObj.Add(propertyName, new JSONNumber(numberValue));
-                        } else if (propertyValue is DateTime) {
-                            jsonObj.Add(propertyName, ((DateTime)propertyValue).ToString("o"));
-                        } else {//其他
-                            jsonObj.Add(propertyName, propertyValue.ToString());
-                        }
+                        SetIConvertibleToJSONObj(jsonObj, propertyName, (IConvertible)propertyValue);
                     } else if (propertyValue is IDictionary) {//Dictionary類
                         JSONObject jsonDictionary = new JSONObject();
-                        foreach (DictionaryEntry entry in (IDictionary)propertyValue) {
-                            string key = entry.Key.ToString();
-                            object value = entry.Value;
-                            var valueJsonNode = GetJson(value);
-                            jsonDictionary.Add(key, valueJsonNode);
-                        }
+                        SetIDicToJSONObj(jsonDictionary, (IDictionary)propertyValue);
                         jsonObj.Add(propertyName, jsonDictionary);
                     } else if (propertyValue is IEnumerable) {//List類或Array類
                         JSONArray jsonArray = new JSONArray();
-                        foreach (object item in (IList)propertyValue) {
-                            jsonArray.Add(GetJson(item));
-                        }
+                        SetIEnumerableToJSONArray(jsonArray, (IEnumerable)propertyValue);
                         jsonObj.Add(propertyName, jsonArray);
                     } else { // 其他
-                        jsonObj.Add(propertyName, GetJson(propertyValue));
+                        jsonObj.Add(propertyName, GetScozJson(propertyValue));
                     }
                 }
             }
@@ -68,6 +46,77 @@ namespace Scoz.Func {
             return jsonObj;
         }
 
+        static void SetIConvertibleToJSONObj(JSONObject _jsObj, string _key, IConvertible _iConvertible) {
+            if (_iConvertible is string) {//字串
+                _jsObj.Add(_key, _iConvertible.ToString());
+            } else if (_iConvertible is bool) {//布林
+                _jsObj.Add(_key, (bool)_iConvertible);
+            } else if (_iConvertible.GetType().IsEnum) {//列舉
+                _jsObj.Add(_key, _iConvertible.ToString());
+            } else if (IsNumeric(_iConvertible)) {//數字
+                double numberValue = Convert.ToDouble(_iConvertible);
+                _jsObj.Add(_key, new JSONNumber(numberValue));
+            } else if (_iConvertible is DateTime) {
+                _jsObj.Add(_key, ((DateTime)_iConvertible).ToString("o"));
+            } else {//其他
+                _jsObj.Add(_key, _iConvertible.ToString());
+            }
+        }
+        static void SetIConvertibleToJSONArray(JSONArray _jsArray, IConvertible _iConvertible) {
+            if (_iConvertible is string) {//字串
+                _jsArray.Add(_iConvertible.ToString());
+            } else if (_iConvertible is bool) {//布林
+                _jsArray.Add((bool)_iConvertible);
+            } else if (_iConvertible.GetType().IsEnum) {//列舉
+                _jsArray.Add(_iConvertible.ToString());
+            } else if (IsNumeric(_iConvertible)) {//數字
+                double numberValue = Convert.ToDouble(_iConvertible);
+                _jsArray.Add(new JSONNumber(numberValue));
+            } else if (_iConvertible is DateTime) {
+                _jsArray.Add(((DateTime)_iConvertible).ToString("o"));
+            } else {//其他
+                _jsArray.Add(_iConvertible.ToString());
+            }
+        }
+        static void SetIDicToJSONObj(JSONObject _jsObj, IDictionary _iDic) {
+            foreach (DictionaryEntry entry in _iDic) {
+                string key = entry.Key.ToString();
+                object value = entry.Value;
+                if (value is IConvertible) {
+                    SetIConvertibleToJSONObj(_jsObj, key, (IConvertible)value);
+                } else if (value is IDictionary) {
+                    JSONObject subJsObj = new JSONObject();
+                    SetIDicToJSONObj(subJsObj, (IDictionary)value);
+                    _jsObj.Add(key, subJsObj);
+                } else if (value is IEnumerable) {
+                    JSONArray subJsArray = new JSONArray();
+                    SetIEnumerableToJSONArray(subJsArray, (IEnumerable)value);
+                    _jsObj.Add(key, subJsArray);
+                } else {
+                    var valueJsonNode = GetScozJson(value);
+                    _jsObj.Add(key, valueJsonNode);
+                }
+            }
+        }
+        static void SetIEnumerableToJSONArray(JSONArray _jsArray, IEnumerable _iEnumerable) {
+            foreach (object value in (IList)_iEnumerable) {
+
+                if (value is IConvertible) {
+                    SetIConvertibleToJSONArray(_jsArray, (IConvertible)value);
+                } else if (value is IDictionary) {
+                    JSONObject subJsObj = new JSONObject();
+                    SetIDicToJSONObj(subJsObj, (IDictionary)value);
+                    _jsArray.Add(subJsObj);
+                } else if (value is IEnumerable) {
+                    JSONArray subJsArray = new JSONArray();
+                    SetIEnumerableToJSONArray(subJsArray, (IEnumerable)value);
+                    _jsArray.Add(subJsArray);
+                } else {
+                    var valueJsonNode = GetScozJson(value);
+                    _jsArray.Add(valueJsonNode);
+                }
+            }
+        }
         static bool IsNumeric(object value) {
             if (value == null) {
                 return false;

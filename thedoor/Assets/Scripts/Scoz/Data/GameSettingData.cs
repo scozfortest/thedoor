@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using LitJson;
+using SimpleJSON;
 
 namespace Scoz.Func {
     public class GameSettingData : MyJsonData {
@@ -26,6 +27,11 @@ namespace Scoz.Func {
         }
         public static string GetStr(GameSetting _type) {
             return SettingDic[_type];
+        }
+        public static JSONNode GetJsNode(GameSetting _type) {
+            string jsStr = GetStr(_type);
+            JSONNode jsNode = JSONNode.Parse(jsStr);
+            return jsNode;
         }
         public static void ClearStaticDic() {
             SettingDic.Clear();

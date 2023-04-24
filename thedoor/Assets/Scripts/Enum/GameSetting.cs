@@ -28,6 +28,5 @@ public enum GameSetting
 	Adventure_DoorVisibility,
 	Adventure_DoorTypeWeight,
 	Adventure_ScriptWeight,
-	Adventure_Test,
-	Adventure_DefaultSupplyCount,
+	Role_DefaultSupplyCount,
 }

@@ -110,11 +110,9 @@ namespace TheDoor.Main {
                     AdventureUI.GetInstance<AdventureUI>()?.SwitchUI(AdventureUIs.Battle);
                     return true;
                 case "NextScript":
-
                     if (!string.IsNullOrEmpty(CurScriptData.EndValue)) LoadScript(CurScriptData.EndValue);
                     else {
-                        WriteLog.Log("ScriptData.GetRandomNonExclusiveTitle()=" + ScriptData.GetRandomNonExclusiveTitle());
-                        LoadScript(ScriptData.GetRandomNonExclusiveTitle());
+                        LoadScript(ScriptTitleData.GetRndDataByType(ScriptType.Side).ID);
                     }
                     return true;
                 default:

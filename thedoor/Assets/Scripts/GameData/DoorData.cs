@@ -15,21 +15,58 @@ namespace TheDoor.Main {
     }
     public class DoorData : IScozJsonConvertible {
         [ScozSerializable] public DoorType MyType { get; private set; }
-        [ScozSerializable] public Dictionary<string, string> Values { get; private set; }
+        [ScozSerializable] public Dictionary<string, object> Values { get; private set; } = new Dictionary<string, object>();
 
 
         /// <summary>
         /// 初始化門資料
         /// </summary>
-        public DoorData(DoorType _type, Dictionary<string, string> _values) {
+        public DoorData(DoorType _type, Dictionary<string, object> _values) {
             MyType = _type;
             Values = _values;
+        }
+        /// <summary>
+        /// 初始化門資料
+        /// </summary>
+        public DoorData(DoorType _type) {
+            MyType = _type;
+            Values = GetDoorValueDicByType(_type);
         }
 
         public string Name {
             get {
                 return StringData.GetUIString("DoorType_" + MyType.ToString());
             }
+        }
+
+        Dictionary<string, object> GetDoorValueDicByType(DoorType _type) {
+
+            var dataDic = new Dictionary<string, object>();
+            MonsterData monsterData;
+            switch (_type) {
+                case DoorType.Monster:
+                    monsterData = MonsterData.GetRndMonsterData(MonsterType.Normal);
+                    dataDic.Add("MonsterID", monsterData.ID);
+                    break;
+                case DoorType.Boss:
+                    monsterData = MonsterData.GetRndMonsterData(MonsterType.Boss);
+                    dataDic.Add("MonsterID", monsterData.ID);
+                    break;
+                case DoorType.Encounter:
+                    var scriptWeight = GameSettingData.GetJsNode(GameSetting.Adventure_ScriptWeight);
+                    var rndScriptType = MyEnum.ParseEnum<ScriptType>(Prob.GetRandomKeyFromJsNodeKeyWeight(scriptWeight));
+                    var rndScriptTitleData = ScriptTitleData.GetRndDataByType(rndScriptType);
+                    dataDic.Add("ScriptTitleID", rndScriptTitleData.ID);
+                    break;
+                case DoorType.Rest:
+                    break;
+                case DoorType.Start:
+                    break;
+                default:
+                    WriteLog.LogError("GetDoorValueDicByType有尚未實作的DoorType: " + _type);
+                    break;
+            }
+            return dataDic;
         }
 
         //public string Name {

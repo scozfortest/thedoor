@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using SimpleJSON;
 
 namespace Scoz.Func {
     public class Prob {
@@ -140,7 +141,7 @@ namespace Scoz.Func {
         }
 
         public static List<T> GetRandNoDuplicatedTFromTList<T>(List<T> _itemList, int _count) {
-            if (_itemList == null && _itemList.Count == 0) {
+            if (_itemList == null || _itemList.Count == 0) {
                 WriteLog.LogError("傳入List錯誤");
                 return null;
             }
@@ -160,6 +161,36 @@ namespace Scoz.Func {
                 _itemList.RemoveAt(index);
             }
             return list;
+        }
+
+        /// <summary>
+        /// 傳入json {"Encounter":3, "Monster":2, "Rest":1}的JSONNode 根據權重隨機取得key值
+        /// </summary>
+        public static string GetRandomKeyFromJsNodeKeyWeight(JSONNode _jsNode) {
+            if (_jsNode == null || _jsNode.Count == 0) {
+                WriteLog.LogError("GetRandomTFromJsNode傳入為空");
+                return null;
+            }
+            int totalWeight = 0;
+            Dictionary<string, int> weights = new Dictionary<string, int>();
+
+            foreach (KeyValuePair<string, JSONNode> entry in _jsNode) {
+                int weight = entry.Value.AsInt;
+                totalWeight += weight;
+                weights.Add(entry.Key, weight);
+            }
+
+            int randomWeight = Random.Range(0, totalWeight);
+            int currentWeight = 0;
+
+            foreach (KeyValuePair<string, int> entry in weights) {
+                currentWeight += entry.Value;
+                if (randomWeight < currentWeight) {
+                    return entry.Key;
+                }
+            }
+
+            return null;
         }
 
     }

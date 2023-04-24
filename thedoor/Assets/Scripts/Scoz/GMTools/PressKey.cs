@@ -15,10 +15,7 @@ namespace Scoz.Func {
 
 
             if (Input.GetKeyDown(KeyCode.Q)) {
-                string doorTypeWeightJson = GameSettingData.GetStr(GameSetting.Adventure_Test);
-                JSONNode jsNode = JSONNode.Parse(doorTypeWeightJson);
-                Debug.LogError(doorTypeWeightJson);
-                Debug.LogError(jsNode["Main"]);
+
 
             } else if (Input.GetKeyDown(KeyCode.W)) {
 

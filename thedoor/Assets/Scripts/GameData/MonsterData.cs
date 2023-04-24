@@ -36,7 +36,11 @@ namespace TheDoor.Main {
         public float LimbsDmg { get; private set; }
         public float LimbsProb { get; private set; }
 
+        public static Dictionary<MonsterType, List<MonsterData>> MonsterTypeDic = new Dictionary<MonsterType, List<MonsterData>>();
 
+        public static void ClearStaticDic() {
+            MonsterTypeDic.Clear();
+        }
 
         protected override void GetDataFromJson(JsonData _item, string _dataName) {
             DataName = _dataName;
@@ -84,6 +88,24 @@ namespace TheDoor.Main {
                         break;
                 }
             }
+            if (MonsterTypeDic.ContainsKey(MyMonsterType))
+                MonsterTypeDic[MyMonsterType].Add(this);
+            else
+                MonsterTypeDic.Add(MyMonsterType, new List<MonsterData>() { this });
+        }
+        public static MonsterData GetRndMonsterData(MonsterType _type) {
+            return Prob.GetRandomTFromTList(MonsterTypeDic[_type]);
+        }
+        public static void GetSprite(int _id, Action<Sprite> _ac) {
+
+            var data = GameDictionary.GetJsonData<MonsterData>(DataName, _id);
+            if (data == null) {
+                _ac?.Invoke(null);
+                return;
+            }
+            data.GetSprite(sprite => {
+                _ac?.Invoke(sprite);
+            });
         }
         public void GetSprite(Action<Sprite> _ac) {
             if (string.IsNullOrEmpty(Ref)) {
@@ -97,17 +119,7 @@ namespace TheDoor.Main {
                 }
             });
         }
-        public static void GetSprite(int _id, Action<Sprite> _ac) {
 
-            var data = GameDictionary.GetJsonData<MonsterData>(DataName, _id);
-            if (data == null) {
-                _ac?.Invoke(null);
-                return;
-            }
-            data.GetSprite(sprite => {
-                _ac?.Invoke(sprite);
-            });
-        }
 
         public bool WeakTo(params string[] _tags) {
             if (Weakness == null) return false;
@@ -132,6 +144,9 @@ namespace TheDoor.Main {
             }
             return matchs;
         }
+
+
+
 
     }
 
