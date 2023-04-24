@@ -33,28 +33,12 @@ namespace TheDoor.Main {
         /// 建立冒險
         /// </summary>
         public static void CreateAdventure() {
-            List<ItemData> gainItems = new List<ItemData>();
-
-            //腳色
-            var roleData = RoleData.GetRandAvailableData();
-
-            //道具
-            var rndSuppies = SupplyData.GetRndDatas(3);
-            var exclusiveSupplies = new List<SupplyData>();
-            foreach (var id in roleData.Supplies) {
-                var supplyData = SupplyData.GetData(id);
-                exclusiveSupplies.Add(supplyData);
-            }
-
-            foreach (var supplyData in rndSuppies) {
-                gainItems.Add(new ItemData(ItemType.Supply, supplyData.ID));
-            }
-            foreach (var supplyData in exclusiveSupplies) {
-                gainItems.Add(new ItemData(ItemType.Supply, supplyData.ID));
-            }
-
+            List<ItemData> defaultItems = new List<ItemData>();
+            List<ItemData> exclusiveItems = new List<ItemData>();
+            List<ItemData> inheritItems = new List<ItemData>();
 
             //設定腳色資料
+            var roleData = RoleData.GetRandAvailableData();
             Dictionary<string, object> roleDataDic = new Dictionary<string, object>();
             roleDataDic.Add("UID", GamePlayer.Instance.GetNextUID("Role"));
             roleDataDic.Add("OwnerUID", GamePlayer.Instance.Data.UID);
@@ -64,16 +48,25 @@ namespace TheDoor.Main {
             roleDataDic.Add("CurHP", roleData.HP);
             roleDataDic.Add("CurSanP", roleData.SanP);
             GamePlayer.Instance.SetOwnedData<OwnedRoleData>(ColEnum.Role, roleDataDic);
-            GamePlayer.Instance.SaveToLoco_RoleData();
-
-            //設定玩家資料
-            GamePlayer.Instance.Data.SetCurRole_Loco(roleDataDic["UID"].ToString());
-            GamePlayer.Instance.SaveToLoco_PlayerData();
 
             //設定道具資料
+            var defaultSuppies = SupplyData.GetRndDatas(3);
+            var exclusiveSupplies = new List<SupplyData>();
+            foreach (var id in roleData.Supplies) {
+                var supplyData = SupplyData.GetData(id);
+                exclusiveSupplies.Add(supplyData);
+            }
+            foreach (var supplyData in defaultSuppies) {
+                defaultItems.Add(new ItemData(ItemType.Supply, supplyData.ID));
+            }
+            foreach (var supplyData in exclusiveSupplies) {
+                exclusiveItems.Add(new ItemData(ItemType.Supply, supplyData.ID));
+            }
+
+
             List<Dictionary<string, object>> supplyListDic = new List<Dictionary<string, object>>();
             List<SupplyData> tmpSupplyDatas = new List<SupplyData>();
-            tmpSupplyDatas.AddRange(rndSuppies);
+            tmpSupplyDatas.AddRange(defaultSuppies);
             tmpSupplyDatas.AddRange(exclusiveSupplies);
             foreach (var data in tmpSupplyDatas) {
                 Dictionary<string, object> supplyDataDic = new Dictionary<string, object>();
@@ -87,10 +80,23 @@ namespace TheDoor.Main {
                 supplyListDic.Add(supplyDataDic);
             }
             GamePlayer.Instance.SetOwnedDatas<OwnedSupplyData>(ColEnum.Supply, supplyListDic);
+
+
+            //設定玩家資料
+            GamePlayer.Instance.Data.SetCurRole_Loco(roleDataDic["UID"].ToString());
+
+            //設定冒險資料
+            string doorTypeWeightJson = GameSettingData.GetStr(GameSetting.Adventure_DoorTypeWeight);
+            Debug.LogError(doorTypeWeightJson);
+
+            //存本地資料
+            GamePlayer.Instance.SaveSettingToLoco();
+            GamePlayer.Instance.SaveToLoco_PlayerData();
+            GamePlayer.Instance.SaveToLoco_RoleData();
             GamePlayer.Instance.SaveToLoco_SupplyData();
 
-            //設定PlayerSetting
-            GamePlayer.Instance.SaveSettingToLoco();
+            //設定UI
+            CreateRoleUI.GetInstance<CreateRoleUI>().SetGainItemList(exclusiveItems, defaultItems, inheritItems);
 
         }
     }

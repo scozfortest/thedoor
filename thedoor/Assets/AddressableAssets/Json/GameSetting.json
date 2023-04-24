@@ -22,5 +22,11 @@
 	{	"ID":"SameUIRefreshCD",	"Value":"3"},
 	{	"ID":"MailUICD",	"Value":"5"},
 	{	"ID":"PopupEventVibrationMilliSecs",	"Value":"300"},
-	{	"ID":"VibrationOnVibrationMilliSecs",	"Value":"500"}
+	{	"ID":"VibrationOnVibrationMilliSecs",	"Value":"500"},
+	{	"ID":"Adventure_DoorCount",	"Value":"14"},
+	{	"ID":"Adventure_DoorVisibility",	"Value":"2"},
+	{	"ID":"Adventure_DoorTypeWeight",	"Value":"{\"Encounter\":3, \"Monster\":2, \"Rest\":1}"},
+	{	"ID":"Adventure_ScriptWeight",	"Value":"{\"Main\":0, \"Side\":0}"},
+	{	"ID":"Adventure_Test",	"Value":"{\"Main\":\"Monster\", \"Side\":\"¤HÃþ\"}"},
+	{	"ID":"Adventure_DefaultSupplyCount",	"Value":"3"}
 ]}

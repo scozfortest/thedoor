@@ -57,38 +57,13 @@ namespace TheDoor.Main {
 
 
 
-
         /// <summary>
         /// 設定創腳介面跑完要跳出獲得的道具資料
         /// </summary>
-        public void SetCreateRoleCBDic(Dictionary<string, object> _cbDic) {
-            DefaultItems = new List<ItemData>();
-            ExclusiveItems = new List<ItemData>();
-            InheritItems = new List<ItemData>();
-            try {
-                var returnItemDic = DataHandler.ConvertDataObjToReturnItemDic(_cbDic);
-                List<ItemData> returnGainItems = returnItemDic["ReturnGainItems"];
-                List<int> exclusiveSupplyIDs = _cbDic["ExclusiveSupplyIDs"].ObjListToIntList();
-                List<int> defaultSupplyIDs = _cbDic["DefaultSupplyIDs"].ObjListToIntList();
-                for (int i = 0; i < returnGainItems.Count; i++) {
-                    if (returnGainItems[i].Type != ItemType.Supply) continue;
-                    if (defaultSupplyIDs.Contains((int)returnGainItems[i].Value)) {
-                        DefaultItems.Add(returnGainItems[i]);
-                        defaultSupplyIDs.Remove((int)returnGainItems[i].Value);
-                        continue;
-                    } else if (exclusiveSupplyIDs.Contains((int)returnGainItems[i].Value)) {
-                        ExclusiveItems.Add(returnGainItems[i]);
-                        exclusiveSupplyIDs.Remove((int)returnGainItems[i].Value);
-                        continue;
-                    } else {
-                        InheritItems.Add(returnGainItems[i]);
-                        continue;
-                    }
-                }
-            } catch (Exception _e) {
-                WriteLog.LogError("SetCreateRoleCBDic錯誤: " + _e);
-            }
-
+        public void SetGainItemList(List<ItemData> _exclusiveItems, List<ItemData> _defaultItems, List<ItemData> _inheritItems) {
+            ExclusiveItems = _exclusiveItems;
+            DefaultItems = _defaultItems;
+            InheritItems = _inheritItems;
         }
         /// <summary>
         /// 腳色劇本跑完跑這裡
@@ -124,3 +99,39 @@ namespace TheDoor.Main {
         }
     }
 }
+
+
+
+//不使用Server回傳資料了
+///// <summary>
+///// 設定創腳介面跑完要跳出獲得的道具資料
+///// </summary>
+//public void SetCreateRoleCBDic(Dictionary<string, object> _cbDic) {
+//    DefaultItems = new List<ItemData>();
+//    ExclusiveItems = new List<ItemData>();
+//    InheritItems = new List<ItemData>();
+//    try {
+//        var returnItemDic = DataHandler.ConvertDataObjToReturnItemDic(_cbDic);
+//        List<ItemData> returnGainItems = returnItemDic["ReturnGainItems"];
+//        List<int> exclusiveSupplyIDs = _cbDic["ExclusiveSupplyIDs"].ObjListToIntList();
+//        List<int> defaultSupplyIDs = _cbDic["DefaultSupplyIDs"].ObjListToIntList();
+//        for (int i = 0; i < returnGainItems.Count; i++) {
+//            if (returnGainItems[i].Type != ItemType.Supply) continue;
+//            if (defaultSupplyIDs.Contains((int)returnGainItems[i].Value)) {
+//                DefaultItems.Add(returnGainItems[i]);
+//                defaultSupplyIDs.Remove((int)returnGainItems[i].Value);
+//                continue;
+//            } else if (exclusiveSupplyIDs.Contains((int)returnGainItems[i].Value)) {
+//                ExclusiveItems.Add(returnGainItems[i]);
+//                exclusiveSupplyIDs.Remove((int)returnGainItems[i].Value);
+//                continue;
+//            } else {
+//                InheritItems.Add(returnGainItems[i]);
+//                continue;
+//            }
+//        }
+//    } catch (Exception _e) {
+//        WriteLog.LogError("SetCreateRoleCBDic錯誤: " + _e);
+//    }
+
+//}

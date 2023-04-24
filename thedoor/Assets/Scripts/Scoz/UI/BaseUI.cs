@@ -12,6 +12,7 @@ namespace Scoz.Func {
         public static bool operator true(BaseUI baseUI) { return baseUI != null; }
         public static bool operator false(BaseUI baseUI) { return baseUI == null; }
 
+
         public static T GetInstance<T>() where T : BaseUI {
             string name = typeof(T).FullName;
             if (!UIDic.ContainsKey(name))

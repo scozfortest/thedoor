@@ -67,7 +67,12 @@ namespace Scoz.Func {
         /// </summary>
         public static Dictionary<string, MyJsonData> GetDataStringKey<T>(string _dataName) where T : MyJsonData, new() {
             string jsonStr = Resources.Load<TextAsset>(string.Format("Json/{0}", _dataName)).ToString();
-            JsonData jd = JsonMapper.ToObject(jsonStr);
+            JsonData jd = null;
+            try {
+                jd = JsonMapper.ToObject(jsonStr);
+            } catch (Exception _e) {
+                WriteLog.LogErrorFormat("{0}表的json格式錯誤: {1}", _dataName, _e);
+            }
             JsonData items = jd[_dataName];
             Dictionary<string, MyJsonData> dic = new Dictionary<string, MyJsonData>();
             for (int i = 0; i < items.Count; i++) {

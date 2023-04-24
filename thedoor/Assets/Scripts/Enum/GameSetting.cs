@@ -24,4 +24,10 @@ public enum GameSetting
 	MailUICD,
 	PopupEventVibrationMilliSecs,
 	VibrationOnVibrationMilliSecs,
+	Adventure_DoorCount,
+	Adventure_DoorVisibility,
+	Adventure_DoorTypeWeight,
+	Adventure_ScriptWeight,
+	Adventure_Test,
+	Adventure_DefaultSupplyCount,
 }
