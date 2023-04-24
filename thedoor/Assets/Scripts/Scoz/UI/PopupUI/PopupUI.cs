@@ -508,6 +508,75 @@ namespace Scoz.Func {
             }
         }
 
+        //進遊戲不先初始化，等到要用時才初始化UI
+        [HeaderAttribute("==============轉場UI==============")]
+        [SerializeField] AssetReference UITransitionAsset;
+        [SerializeField] Transform UITransitionParent;
+        UITransition MyUITransition = null;
+        Action OnUITransitionAssetLoadFinishedAC;//載完Asset後要執行的Action
+        static bool IsLoadingUITransitionAsset = false;//是否載入UI中
+
+        void InitUITransition() {
+            if (IsLoadingUITransitionAsset)
+                return;
+            IsLoadingUITransitionAsset = true;
+            PopupUI.ShowLoading(StringData.GetUIString("Loading"));
+            //初始化UI
+            AddressablesLoader.GetPrefabByRef(Instance.UITransitionAsset, (prefab, handle) => {
+                IsLoadingUITransitionAsset = false;
+                PopupUI.HideLoading();
+                GameObject go = Instantiate(prefab);
+                go.transform.SetParent(Instance.UITransitionParent);
+                go.transform.localPosition = prefab.transform.localPosition;
+                go.transform.localScale = prefab.transform.localScale;
+                RectTransform rect = go.GetComponent<RectTransform>();
+                rect.offsetMin = Vector2.zero;//Left、Bottom
+                rect.offsetMax = Vector2.zero;//Right、Top
+                go.transform.SetAsLastSibling();
+                Instance.MyUITransition = go.GetComponent<UITransition>();
+                Instance.MyUITransition.gameObject.SetActive(true);
+                Instance.MyUITransition.InitTransition();
+                Instance.OnUITransitionAssetLoadFinishedAC?.Invoke();
+            }, () => { WriteLog.LogError("載入UITransitionAsset失敗"); });
+        }
+        public static void InitUITransitionProgress(params string[] _keys) {
+            if (Instance == null)
+                return;
+
+            //判斷是否已經載入過此UI，若還沒載過就跳讀取中並開始載入
+            if (Instance.MyUITransition != null) {
+                Instance.MyUITransition.SetTransitionProgress(_keys);
+            } else {
+                Instance.OnUITransitionAssetLoadFinishedAC += () => { Instance.MyUITransition.SetTransitionProgress(_keys); };
+                Instance.InitUITransition();
+            }
+        }
+
+        public static void FinishUITransitionProgress(string _key) {
+            if (Instance == null)
+                return;
+
+            //判斷是否已經載入過此UI，若還沒載過就跳讀取中並開始載入
+            if (Instance.MyUITransition != null) {
+                Instance.MyUITransition.FinishTransitionProgress(_key);
+            } else {
+                Instance.OnUITransitionAssetLoadFinishedAC += () => { Instance.MyUITransition.FinishTransitionProgress(_key); };
+                Instance.InitUITransition();
+            }
+
+        }
+        public static void CallUITransition(Sprite _sprite, string _text, float _minWaitSec, Action _ac = null) {
+            if (Instance == null)
+                return;
+
+            //判斷是否已經載入過此UI，若還沒載過就跳讀取中並開始載入
+            if (Instance.MyUITransition != null) {
+                Instance.MyUITransition.CallTransition(_sprite, _text, _minWaitSec, _ac);
+            } else {
+                Instance.OnUITransitionAssetLoadFinishedAC += () => { Instance.MyUITransition.CallTransition(_sprite, _text, _minWaitSec, _ac); };
+                Instance.InitUITransition();
+            }
+        }
 
 
     }

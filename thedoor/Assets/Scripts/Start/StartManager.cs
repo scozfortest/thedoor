@@ -150,12 +150,12 @@ namespace TheDoor.Main {
                     GameStateManager.Instance.StartCheckCanPlayGame(() => {
                         FirstTimeLaunchGame = false;
                         PopupUI.InitSceneTransitionProgress(3, "LobbyUILoaded");
-                        PopupUI.CallTransition(MyScene.LobbyScene);
+                        PopupUI.CallSceneTransition(MyScene.LobbyScene);
                     });
                 } else {//離線模式
                     FirstTimeLaunchGame = false;
                     PopupUI.InitSceneTransitionProgress(3, "LobbyUILoaded");
-                    PopupUI.CallTransition(MyScene.LobbyScene);
+                    PopupUI.CallSceneTransition(MyScene.LobbyScene);
                 }
 
             });

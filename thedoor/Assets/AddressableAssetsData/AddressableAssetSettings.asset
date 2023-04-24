@@ -43,6 +43,7 @@ MonoBehaviour:
   m_GroupAssets:
   - {fileID: 11400000, guid: 82ad2fd6c8047da46a9b989fb2415f72, type: 2}
   - {fileID: 11400000, guid: 6b96cbc8f9f8b7e469265537e54e54b1, type: 2}
+  - {fileID: 11400000, guid: 8ca3310a5b028d8479886701339f2f73, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -133,33 +134,7 @@ MonoBehaviour:
     - Particle
     - MaJam
     - ScriptableObject
-    - Role2001
-    - Role1004
-    - Role1002
-    - Role1011
-    - Role1008
-    - Role1007
-    - Role1009
-    - Role1003
-    - Role1006
-    - Role1005
-    - Role1010
-    - Role2007
-    - Role1001
-    - Role2008
-    - Role3001
-    - Role1201
-    - Role1101
-    - Role1107
-    - Role1108
-    - Role1102
-    - Role1105
-    - Role1110
-    - Role5003
-    - Role5004
-    - Role5006
-    - Role5009
-    - Role5011
+    - Rolerole1.png
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: b52ca25ebe45b064584febea735e7172, type: 2}

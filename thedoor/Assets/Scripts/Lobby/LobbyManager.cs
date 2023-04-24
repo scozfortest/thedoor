@@ -55,7 +55,7 @@ namespace TheDoor.Main {
         /// 大廳初始化完成時執行
         /// </summary>
         public void LobbyUILoaded() {
-            PopupUI.FinishTransitionProgress("LobbyUILoaded");
+            PopupUI.FinishSceneTransitionProgress("LobbyUILoaded");
 
 #if GOOGLE_ADS
             // 初始化Google Ads

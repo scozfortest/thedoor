@@ -69,7 +69,7 @@ namespace TheDoor.Main {
         }
         public void GoAdventure() {
             PopupUI.InitSceneTransitionProgress(1, "AdventureUILoaded");
-            PopupUI.CallTransition(MyScene.AdventureScene, () => {
+            PopupUI.CallSceneTransition(MyScene.AdventureScene, () => {
                 SetActive(false);
             });
         }

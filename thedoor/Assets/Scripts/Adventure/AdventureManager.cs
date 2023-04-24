@@ -59,7 +59,7 @@ namespace TheDoor.Main {
         /// 冒險初始化完成時執行
         /// </summary>
         public void AdventureUILoaded() {
-            PopupUI.FinishTransitionProgress("AdventureUILoaded");
+            PopupUI.FinishSceneTransitionProgress("AdventureUILoaded");
             AdventureUI.GetInstance<AdventureUI>().MyDoorNodeUI = DoorNodeUI.GetInstance<DoorNodeUI>();
             AdventureUI.GetInstance<AdventureUI>().SwitchUI(AdventureUIs.Default);
 

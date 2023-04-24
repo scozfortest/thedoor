@@ -123,7 +123,7 @@ namespace TheDoor.Main {
         public void OnBackToStartClick() {
             OnCloseClick();
             PopupUI.InitSceneTransitionProgress();
-            PopupUI.CallTransition(MyScene.StartScene);
+            PopupUI.CallSceneTransition(MyScene.StartScene);
         }
 
         public void OnPostProcessingChange() {

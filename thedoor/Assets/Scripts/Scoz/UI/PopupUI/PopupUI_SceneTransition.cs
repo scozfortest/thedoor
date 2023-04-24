@@ -12,7 +12,6 @@ namespace Scoz.Func {
     public partial class PopupUI {
         //進遊戲不先初始化，等到要用時才初始化UI
         [HeaderAttribute("==============轉場UI==============")]
-        //進遊戲不先初始化，等到要用時才初始化UI
         [SerializeField] AssetReference SceneTransitionAsset;
         [SerializeField] Transform SceneTransitionParent;
         SceneTransition MySceneTransition = null;
@@ -53,14 +52,14 @@ namespace Scoz.Func {
 
             //判斷是否已經載入過此UI，若還沒載過就跳讀取中並開始載入
             if (Instance.MySceneTransition != null) {
-                Instance.MySceneTransition.InitSceneTransitionProgress(_waitSecAfterFinish, _keys);
+                Instance.MySceneTransition.SetSceneTransitionProgress(_waitSecAfterFinish, _keys);
             } else {
-                Instance.OnSceneTransitionAssetLoadFinishedAC += () => { Instance.MySceneTransition.InitSceneTransitionProgress(_waitSecAfterFinish, _keys); };
+                Instance.OnSceneTransitionAssetLoadFinishedAC += () => { Instance.MySceneTransition.SetSceneTransitionProgress(_waitSecAfterFinish, _keys); };
                 Instance.InitSceneTransition();
             }
         }
 
-        public static void FinishTransitionProgress(string _key) {
+        public static void FinishSceneTransitionProgress(string _key) {
             if (Instance == null)
                 return;
 
@@ -74,7 +73,7 @@ namespace Scoz.Func {
 
         }
 
-        public static void CallTransition(MyScene _scene, Action _ac = null) {
+        public static void CallSceneTransition(MyScene _scene, Action _ac = null) {
             if (Instance == null)
                 return;
 
@@ -85,8 +84,6 @@ namespace Scoz.Func {
                 Instance.OnSceneTransitionAssetLoadFinishedAC += () => { Instance.MySceneTransition.CallTransition(_scene, _ac); };
                 Instance.InitSceneTransition();
             }
-
-
         }
     }
 }

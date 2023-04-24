@@ -32,13 +32,13 @@ namespace Scoz.Func {
             MyLoadingProgress = new LoadingProgress(CallEndTransition);
             TransitionAni.gameObject.SetActive(true);
         }
-        public void InitSceneTransitionProgress(float _waitSecAfterFinish = 0, params string[] _keys) {
+        public void SetSceneTransitionProgress(float _waitSecAfterFinish = 0, params string[] _keys) {
             WaitSecAfterFinish = _waitSecAfterFinish;
             if (Application.isEditor)
                 WaitSecAfterFinish = 0;
-            InitSceneTransitionProgress(_keys);
+            SetSceneTransitionProgress(_keys);
         }
-        public void InitSceneTransitionProgress(params string[] _keys) {
+        public void SetSceneTransitionProgress(params string[] _keys) {
             MyLoadingProgress.ResetProgress();
             MyLoadingProgress.AddLoadingProgress("SceneTransitionScene");
             MyLoadingProgress.AddLoadingProgress(_keys);

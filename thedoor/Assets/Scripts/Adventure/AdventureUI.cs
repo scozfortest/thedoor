@@ -33,6 +33,13 @@ namespace TheDoor.Main {
             base.Init();
             MyScriptUI.Init();
             MyRoleStateUI.Init();
+            AssetGet.GetImg("Door", "door1", sprite => {
+                PopupUI.CallUITransition(sprite, "測試文字", 2, () => {
+                    SwitchUI(AdventureUIs.Default);
+
+                });
+            });
+
         }
 
         public void SwitchUI(AdventureUIs _ui, Action _cb = null) {
