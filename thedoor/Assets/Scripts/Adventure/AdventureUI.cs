@@ -18,6 +18,8 @@ namespace TheDoor.Main {
         //進遊戲就要初始化的UI放這裡(會增加場景切換時的讀取時間)
         [SerializeField] ScriptUI MyScriptUI;
         [SerializeField] RoleStateUI MyRoleStateUI;
+        [SerializeField] TransitionDoorUI MyTransitionDoorUI;
+        [SerializeField] RestUI MyRestUI;
 
         //進遊戲不先初始化，等到要用時才初始化的UI放這裡
         [SerializeField] AssetReference BattleUIAsset;
@@ -33,13 +35,9 @@ namespace TheDoor.Main {
             base.Init();
             MyScriptUI.Init();
             MyRoleStateUI.Init();
-            AssetGet.GetImg("Door", "door1", sprite => {
-                PopupUI.CallUITransition(sprite, "測試文字", 2, () => {
-                    SwitchUI(AdventureUIs.Default);
-
-                });
-            });
-
+            MyTransitionDoorUI.Init();
+            MyRestUI.Init();
+            AdventureManager.GoNextDoor();
         }
 
         public void SwitchUI(AdventureUIs _ui, Action _cb = null) {
@@ -55,20 +53,34 @@ namespace TheDoor.Main {
                     MyRoleStateUI.ShowUI(GamePlayer.Instance.Data.CurRole);
                     MyBattleUI?.SetActive(false);
                     MyDoorNodeUI?.ShowUI(GamePlayer.Instance.Data.CurRole.MyAdventure);
+                    MyRestUI.SetActive(false);
                     _cb?.Invoke();
                     LastPopupUI = MyScriptUI;
                     break;
-                case AdventureUIs.Battle:
+                case AdventureUIs.Rest://安全區
                     MyScriptUI.SetActive(false);
-                    MyRoleStateUI.SetActive(false);
+                    MyRoleStateUI.ShowUI(GamePlayer.Instance.Data.CurRole);
+                    MyBattleUI?.SetActive(false);
+                    MyDoorNodeUI?.ShowUI(GamePlayer.Instance.Data.CurRole.MyAdventure);
+                    MyRestUI.ShowUI();
+                    _cb?.Invoke();
+                    LastPopupUI = MyScriptUI;
+                    break;
+                case AdventureUIs.Battle://戰鬥
+                    MyScriptUI.SetActive(false);
+                    MyRoleStateUI.ShowUI(GamePlayer.Instance.Data.CurRole);
                     MyBattleUI?.SetActive(true);
                     MyDoorNodeUI?.SetActive(false);
+                    MyRestUI.ShowUI();
                     //判斷是否已經載入過此UI，若還沒載過就跳讀取中並開始載入
                     if (MyBattleUI != null) {
                         MyBattleUI.SetBattle();
                         _cb?.Invoke();
                     } else {
-                        LoadAssets(_ui, _cb);//讀取介面
+                        LoadAssets(_ui, () => {
+                            MyBattleUI.SetBattle();
+                            _cb?.Invoke();
+                        });//讀取介面
                     }
                     LastPopupUI = MyBattleUI;
 

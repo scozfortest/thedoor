@@ -22,27 +22,32 @@ namespace TheDoor.Main {
                 }
             }
         }
-
+        bool start = false;
         public void LoadDataFromLoco(LocoDataName _name) {
             string json = LocoDataManager.GetDataFromLoco(_name);
             if (string.IsNullOrEmpty(json)) return;
             Dictionary<string, object> dic;
             List<Dictionary<string, object>> list;
+            List<object> objectList;
             switch (_name) {
                 case LocoDataName.Player:
-                    dic = GetDicFromJson(json);
+                    dic = (Dictionary<string, object>)ScozJsonConverter.ParseJson(json);
                     SetMainPlayerData(dic);
                     break;
                 case LocoDataName.Role:
-                    list = GetListDicFromJson(json);
+                    objectList = (List<object>)ScozJsonConverter.ParseJson(json);
+                    list = objectList.Cast<Dictionary<string, object>>().ToList();
                     SetOwnedDatas<OwnedRoleData>(ColEnum.Role, list);
                     break;
                 case LocoDataName.Supply:
-                    list = GetListDicFromJson(json);
+                    objectList = (List<object>)ScozJsonConverter.ParseJson(json);
+                    list = objectList.Cast<Dictionary<string, object>>().ToList();
                     SetOwnedDatas<OwnedSupplyData>(ColEnum.Supply, list);
                     break;
                 case LocoDataName.Adventure:
-                    list = GetListDicFromJson(json);
+                    start = true;
+                    objectList = (List<object>)ScozJsonConverter.ParseJson(json);
+                    list = objectList.Cast<Dictionary<string, object>>().ToList();
                     SetOwnedDatas<OwnedAdventureData>(ColEnum.Adventure, list);
                     break;
                 default:
@@ -50,22 +55,7 @@ namespace TheDoor.Main {
                     break;
             }
         }
-        Dictionary<string, object> GetDicFromJson(string _json) {
-            JSONNode jsNode = JSONObject.Parse(_json);
-            Dictionary<string, object> data = new Dictionary<string, object>();
-            foreach (var key in jsNode.Keys)
-                data[key] = jsNode[key].Value;
-            return data;
-        }
-        List<Dictionary<string, object>> GetListDicFromJson(string _json) {
-            JSONNode jsNode = JSONArray.Parse(_json);
-            List<Dictionary<string, object>> list = new List<Dictionary<string, object>>();
-            foreach (var value in jsNode.Values) {
-                Dictionary<string, object> data = GetDicFromJson(value.ToString());
-                list.Add(data);
-            }
-            return list;
-        }
+
 
 
         public void SaveToLoco_PlayerData() {

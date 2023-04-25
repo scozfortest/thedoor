@@ -18,7 +18,7 @@ namespace TheDoor.Main {
 
         public void ShowUI(OwnedAdventureData _ownedAdvData) {
             MyOwnedAdvData = _ownedAdvData;
-            SpawnItems(MyOwnedAdvData.DoorDatas);
+            SpawnItems(MyOwnedAdvData.Doors);
             RefreshUI();
             SetActive(true);
         }
@@ -35,9 +35,9 @@ namespace TheDoor.Main {
             InActiveAllItem();
             if (_doorDatas != null && _doorDatas.Count > 0) {
                 for (int i = 0; i < _doorDatas.Count; i++) {
-                    bool showUnknown = i > (MyOwnedAdvData.CurDoor + FirestoreGameSetting.GetIntData(GameDataDocEnum.Adventure, "DoorVisibility "));
-                    bool showIndicator = i == MyOwnedAdvData.CurDoor;
-                    bool showCover = i < MyOwnedAdvData.CurDoor;
+                    bool showUnknown = i > (MyOwnedAdvData.CurDoorIndex + GameSettingData.GetInt(GameSetting.Adventure_DoorVisibility));
+                    bool showIndicator = i == MyOwnedAdvData.CurDoorIndex;
+                    bool showCover = i < MyOwnedAdvData.CurDoorIndex;
                     if (i < ItemList.Count) {
                         ItemList[i].SetData(_doorDatas[i], showUnknown, showIndicator, showCover);
                         ItemList[i].IsActive = true;

@@ -14,7 +14,7 @@ namespace TheDoor.Main {
         Boss,//頭目
     }
     public class DoorData : IScozJsonConvertible {
-        [ScozSerializable] public DoorType MyType { get; private set; }
+        [ScozSerializable] public DoorType DoorType { get; private set; }
         [ScozSerializable] public Dictionary<string, object> Values { get; private set; } = new Dictionary<string, object>();
 
 
@@ -22,20 +22,20 @@ namespace TheDoor.Main {
         /// 初始化門資料
         /// </summary>
         public DoorData(DoorType _type, Dictionary<string, object> _values) {
-            MyType = _type;
+            DoorType = _type;
             Values = _values;
         }
         /// <summary>
         /// 初始化門資料
         /// </summary>
         public DoorData(DoorType _type) {
-            MyType = _type;
+            DoorType = _type;
             Values = GetDoorValueDicByType(_type);
         }
 
         public string Name {
             get {
-                return StringData.GetUIString("DoorType_" + MyType.ToString());
+                return StringData.GetUIString("DoorType_" + DoorType.ToString());
             }
         }
 

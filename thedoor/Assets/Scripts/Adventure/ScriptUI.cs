@@ -71,7 +71,6 @@ namespace TheDoor.Main {
         }
 
         public void Next() {
-            Debug.Log("Next");
             if (EndTrigger()) {
                 return;
             }
@@ -93,6 +92,10 @@ namespace TheDoor.Main {
                 return;
             }
             CurScriptData = CurScriptData.NextScript(0);
+            if (CurScriptData == null) {
+                NextDoor();
+                return;
+            }
             RefreshUI();
         }
         bool EndTrigger() {
@@ -121,7 +124,7 @@ namespace TheDoor.Main {
             }
         }
         void NextDoor() {
-            WriteLog.Log("NextDoor");
+            AdventureManager.GoNextDoor();
         }
 
 

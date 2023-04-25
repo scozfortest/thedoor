@@ -31,7 +31,7 @@ namespace Scoz.Func {
             InitClickCancel();
             InitConfirmCancel();
             InitInput();
-            InitScreenEffect();
+            //InitScreenEffect();
             InitRoleInfoUI();
 
         }
@@ -316,21 +316,21 @@ namespace Scoz.Func {
             InputAction_Cancel?.Invoke();
         }
 
-        [HeaderAttribute("==============螢幕效果==============")]
-        [SerializeField]
-        Transform ScreenEffectTrans;
-        void InitScreenEffect() {
-            ScreenEffectTrans.gameObject.SetActive(false);
-        }
-        public static void CallScreenEffect(string _name) {
-            Instance.ScreenEffectTrans.gameObject.SetActive(true);
-            Instance.ScreenEffectTrans.Find(_name).gameObject.SetActive(true);
-        }
-        public void OnScreenEffectEnd() {
-            foreach (Transform trans in ScreenEffectTrans) {
-                trans.gameObject.SetActive(false);
-            }
-        }
+        //[HeaderAttribute("==============螢幕效果==============")]
+        //[SerializeField]
+        //Transform ScreenEffectTrans;
+        //void InitScreenEffect() {
+        //    ScreenEffectTrans.gameObject.SetActive(false);
+        //}
+        //public static void CallScreenEffect(string _name) {
+        //    Instance.ScreenEffectTrans.gameObject.SetActive(true);
+        //    Instance.ScreenEffectTrans.Find(_name).gameObject.SetActive(true);
+        //}
+        //public void OnScreenEffectEnd() {
+        //    foreach (Transform trans in ScreenEffectTrans) {
+        //        trans.gameObject.SetActive(false);
+        //    }
+        //}
 
 
 

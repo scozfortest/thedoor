@@ -8,8 +8,10 @@ using System;
 namespace TheDoor.Main {
     public class OwnedAdventureData : OwnedData {
         [ScozSerializable] public string OwnRoleUID { get; private set; }
-        [ScozSerializable] public int CurDoor { get; private set; }
-        [ScozSerializable] public List<DoorData> DoorDatas { get; private set; } = new List<DoorData>();
+        [ScozSerializable] public int CurDoorIndex { get; private set; }
+        [ScozSerializable] public List<DoorData> Doors { get; private set; } = new List<DoorData>();
+
+        public DoorData CurDoor { get { return Doors[CurDoorIndex]; } }
 
         public OwnedAdventureData(Dictionary<string, object> _data)
             : base(_data) {
@@ -18,10 +20,10 @@ namespace TheDoor.Main {
             base.SetData(_data);
             object value;
             OwnRoleUID = _data.TryGetValue("OwnRoleUID", out value) ? Convert.ToString(value) : default(string);
-            CurDoor = _data.TryGetValue("CurDoor", out value) ? Convert.ToInt32(value) : default(int);
+            CurDoorIndex = _data.TryGetValue("CurDoorIndex", out value) ? Convert.ToInt32(value) : default(int);
 
             //設定門資料
-            DoorDatas.Clear();
+            Doors.Clear();
             List<object> doorObjs = _data.TryGetValue("Doors", out value) ? value as List<object> : null;
             if (doorObjs != null) {
                 for (int i = 0; i < doorObjs.Count; i++) {
@@ -31,11 +33,15 @@ namespace TheDoor.Main {
                     if (MyEnum.TryParseEnum(typeStr, out DoorType type)) {
                         Dictionary<string, object> values = doorDic.TryGetValue("Values", out value) ? DicExtension.ConvertToStringKeyDic(value) : null;
                         var doorData = new DoorData(type, values);
-                        DoorDatas.Add(doorData);
+                        Doors.Add(doorData);
                     }
                 }
             }
         }
+        public void NextDoor() {
+            CurDoorIndex++;
+        }
+
 
     }
 }

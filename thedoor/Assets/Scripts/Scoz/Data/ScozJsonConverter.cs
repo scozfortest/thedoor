@@ -117,6 +117,36 @@ namespace Scoz.Func {
                 }
             }
         }
+
+        /// <summary>
+        /// 遞迴轉換 如果json是List轉List<object> 如果Dictionary就轉Dictionary<string,object> 如果是其他就轉object
+        /// 傳換後再用cast轉回去json應該有的資料格式就可以
+        /// </summary>
+        public static object ParseJson(string json) {
+            JSONNode node = JSON.Parse(json);
+
+            if (node.IsArray) {
+                List<object> list = new List<object>();
+
+                foreach (JSONNode element in node.AsArray) {
+                    list.Add(ParseJson(element.ToString()));
+                }
+
+                return list;
+            } else if (node.IsObject) {
+                Dictionary<string, object> dict = new Dictionary<string, object>();
+
+                foreach (KeyValuePair<string, JSONNode> entry in node.AsObject) {
+                    dict.Add(entry.Key, ParseJson(entry.Value.ToString()));
+                }
+
+                return dict;
+            } else {
+                return node.Value;
+            }
+        }
+
+
         static bool IsNumeric(object value) {
             if (value == null) {
                 return false;

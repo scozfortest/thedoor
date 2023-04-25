@@ -5,15 +5,14 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TheDoor.Main;
+using Scoz.Func;
 using System;
 using TMPro;
 
-namespace Scoz.Func {
+namespace TheDoor.Main {
 
-    public class UITransition : MonoBehaviour {
-        //進遊戲不先初始化，等到要用時才初始化UI
-        [HeaderAttribute("==============轉場UI==============")]
+    public class TransitionDoorUI : BaseUI {
+
         [SerializeField] Animator TransitionAni = null;
         [SerializeField] Image TransitionImg = null;
         [SerializeField] TextMeshProUGUI TransitionText = null;
@@ -24,44 +23,43 @@ namespace Scoz.Func {
         Action FinishAC;
 
 
-        public void InitTransition() {
+        public override void Init() {
+            base.Init();
             MyLoadingProgress = new LoadingProgress(End);
-            TransitionAni.gameObject.SetActive(true);
         }
-        public void SetTransitionProgress(params string[] _keys) {
-            MyLoadingProgress.ResetProgress();
-            MyLoadingProgress.AddLoadingProgress(_keys);
-        }
-
-        public void FinishTransitionProgress(string _key) {
+        void AddTransitionProgress(string _key) {
             MyLoadingProgress.FinishProgress(_key);
         }
 
-        public void CallTransition(Sprite _sprite, string _description, float _waitMinSec, Action _ac = null) {
+        public void CallTransition(Sprite _sprite, string _description, float _waitMinSec, Action _ac, params string[] _addLoadingProgress) {
+
             FinishAC = _ac;
             WaitMinSec = _waitMinSec;
             TransitionAni.SetTrigger("Play");
+            MyLoadingProgress.ResetProgress();
             MyLoadingProgress.AddLoadingProgress("WaitMinSec");
             MyLoadingProgress.AddLoadingProgress("AniEnd");
+            MyLoadingProgress.AddLoadingProgress("OnClick");
+            MyLoadingProgress.AddLoadingProgress(_addLoadingProgress);
             TransitionText.text = _description;
             TransitionImg.gameObject.SetActive(true);
             TransitionImg.sprite = _sprite;
             TransitionImg.SetNativeSize();
-
-        }
-        public void OnTransition() {
             CoroutineJob.Instance.StartNewAction(() => {
-                FinishTransitionProgress("WaitMinSec");
+                AddTransitionProgress("WaitMinSec");
             }, WaitMinSec);
         }
 
-        public void CallEndTransition() {
-            FinishTransitionProgress("AniEnd");
+        public void OnStartAniEnd() {
+            AddTransitionProgress("AniEnd");
         }
         void End() {
             TransitionAni.SetTrigger("End");
             GameManager.UnloadUnusedAssets();//結束Transition就順便釋放記憶體
             FinishAC?.Invoke();
+        }
+        public void OnClick() {
+            AddTransitionProgress("OnClick");
         }
 
     }

@@ -28,7 +28,7 @@ namespace TheDoor.Main {
                 WriteLog.LogError("尚未設定要螢幕截圖的ScreenCaptureCam");
                 return;
             }
-            PopupUI.CallScreenEffect("Flash");
+            //PopupUI.CallScreenEffect("Flash");
             string fileName = string.Format("{0}.jpg", GameManager.Instance.NowTime.ToScozTimeStr());
             MyCam.TakePicAndGetBytes(bytes => {
                 //SpriteConvert.GetSprite(bytes);<------要將bytes轉sprite可以用這個Function

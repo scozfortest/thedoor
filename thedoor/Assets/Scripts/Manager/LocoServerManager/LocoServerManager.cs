@@ -104,12 +104,12 @@ namespace TheDoor.Main {
             adventureDataDic.Add("OwnerUID", GamePlayer.Instance.Data.UID);
             adventureDataDic.Add("CreateTime", GameManager.Instance.NowTime);
 
-            adventureDataDic.Add("CurDoor", 0);
+            adventureDataDic.Add("CurDoorIndex", 0);
             adventureDataDic.Add("OwnRoleUID", GamePlayer.Instance.Data.CurRoleUID);
             List<object> doorListDic = new List<object>();
             foreach (var data in doorDatas) {
                 Dictionary<string, object> doorDataDic = new Dictionary<string, object>();
-                doorDataDic.Add("DoorType", data.MyType);
+                doorDataDic.Add("DoorType", data.DoorType);
                 doorDataDic.Add("Values", data.Values);
                 doorListDic.Add(doorDataDic);
             }

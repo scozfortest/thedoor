@@ -118,6 +118,10 @@ MonoBehaviour:
     m_Address: Assets/AddressableAssets/Prefab/AdventureUI/NodePrefab.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: e682bed64816b4e429641a3ab92418e9
+    m_Address: Assets/AddressableAssets/Prefab/AdventureUI/DoorUITransition.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9bdcae1979219314780bb2d43aff9537, type: 2}
   m_SchemaSet:

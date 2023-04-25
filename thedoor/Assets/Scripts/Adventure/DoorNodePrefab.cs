@@ -19,7 +19,7 @@ namespace TheDoor.Main {
         public void SetData(DoorData _data, bool _showKnown, bool _showIndicator, bool _showCover) {
             MyData = _data;
 
-            string spriteName = MyData.MyType.ToString();
+            string spriteName = MyData.DoorType.ToString();
             Indicator.SetActive(_showIndicator);
             Cover.SetActive(_showCover);
             if (_showKnown)

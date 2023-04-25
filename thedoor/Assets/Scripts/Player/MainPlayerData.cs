@@ -11,12 +11,8 @@ namespace TheDoor.Main {
     public class MainPlayerData : PlayerData, IScozJsonConvertible {
 
         [ScozSerializable] public string CurRoleUID { get; private set; }
-        public OwnedRoleData CurRole {
-            get {
-                return GamePlayer.Instance.GetOwnedData<OwnedRoleData>(ColEnum.Role, CurRoleUID);
-            }
-        }
-
+        public OwnedRoleData CurRole { get { return GamePlayer.Instance.GetOwnedData<OwnedRoleData>(ColEnum.Role, CurRoleUID); } }
+        public OwnedAdventureData CurAdventure { get { return CurRole.MyAdventure; } }
         [ScozSerializable] public int TotalPurchase { get; private set; }
         [ScozSerializable] public bool Ban { get; set; } = false;
         [ScozSerializable] public string DeviceUID { get; private set; }

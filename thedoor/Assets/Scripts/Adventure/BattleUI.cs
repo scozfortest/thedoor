@@ -21,6 +21,9 @@ namespace TheDoor.Main {
 
 
         }
+        public void GoNextDoor() {
+            AdventureManager.GoNextDoor();
+        }
 
     }
 }
