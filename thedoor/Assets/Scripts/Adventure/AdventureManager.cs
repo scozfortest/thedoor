@@ -12,7 +12,6 @@ namespace TheDoor.Main {
             PlayTransition();
         }
         static void PlayTransition() {
-            Debug.Log("PlayTransition");
             AssetGet.GetImg("Door", "door1", sprite => {
                 var transitionUI = TransitionDoorUI.GetInstance<TransitionDoorUI>();
                 transitionUI?.CallTransition(sprite, "測試文字", 2, () => {
@@ -23,7 +22,6 @@ namespace TheDoor.Main {
         static void OpeTheDoor() {
             var adventureUI = AdventureUI.GetInstance<AdventureUI>();
 
-            Debug.Log("CurDoorType=" + CurDoorType);
             switch (CurDoorType) {
                 case DoorType.Encounter:
                     var scriptUI = ScriptUI.GetInstance<ScriptUI>();
