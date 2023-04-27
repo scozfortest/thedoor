@@ -12,21 +12,21 @@ namespace TheDoor.Main {
             base.Init();
         }
 
-        public void SpawnItems(List<TargetEffectData> _effectData) {
+        public void SpawnItems(List<StatusEffect> _effects) {
             if (!LoadItemFinished) {
                 WriteLog.LogError("EffectPrefab尚未載入完成");
                 return;
             }
             InActiveAllItem();
-            if (_effectData != null && _effectData.Count > 0) {
-                for (int i = 0; i < _effectData.Count; i++) {
+            if (_effects != null && _effects.Count > 0) {
+                for (int i = 0; i < _effects.Count; i++) {
                     if (i < ItemList.Count) {
-                        ItemList[i].SetData(_effectData[i]);
+                        ItemList[i].SetData(_effects[i]);
                         ItemList[i].IsActive = true;
                         ItemList[i].gameObject.SetActive(true);
                     } else {
                         var item = Spawn();
-                        item.SetData(_effectData[i]);
+                        item.SetData(_effects[i]);
                     }
                     ItemList[i].transform.SetParent(ParentTrans);
                 }

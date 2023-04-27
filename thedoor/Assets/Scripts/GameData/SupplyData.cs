@@ -88,7 +88,25 @@ namespace TheDoor.Main {
                 }
             });
         }
-        public List<SupplyEffectData> GetSupplyEffects() {
+        public RoleAction GetAction(Role _doer, Role _target) {
+            var supplyEffectDatas = GetSupplyEffects();
+            var statusEffects = new List<StatusEffect>();
+            foreach (var supplyEffectData in supplyEffectDatas) {
+                if (!Prob.GetResult(supplyEffectData.Probability)) continue;
+                Role doer = _doer;
+                Role target = (supplyEffectData.MyTarget == Target.Myself) ? _doer : _target;
+                var targetEffectDatas = supplyEffectData.MyEffects;
+                if (targetEffectDatas == null || targetEffectDatas.Count == 0) continue;
+                foreach (var effectData in targetEffectDatas) {
+                    if (!Prob.GetResult(effectData.Probability)) continue;
+                    var effect = EffectFactory.Create(effectData.EffectType, (int)effectData.GetValue(0), _doer, _target);
+                    if (effect != null)
+                        statusEffects.Add(effect);
+                }
+            }
+            return new RoleAction(_doer, Time, statusEffects);
+        }
+        List<SupplyEffectData> GetSupplyEffects() {
             return SupplyEffectData.GetSupplyEffectDatas(ID);
         }
         public bool BelongToTag(string _tag) {

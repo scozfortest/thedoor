@@ -93,6 +93,34 @@ namespace TheDoor.Main {
             else
                 MonsterTypeDic.Add(MyMonsterType, new List<MonsterData>() { this });
         }
+        public static MonsterData GetData(int _id) {
+            return GameDictionary.GetJsonData<MonsterData>(DataName, _id);
+        }
+        public RoleAction GetAction(Role _doer, Role _target) {
+            var mActionDatas = MonsterActionData.GetMonsterActionDatas(ID);
+            var statusEffects = new List<StatusEffect>();
+            int time = 0;
+            RoleAction action = null;
+            for (int i = 0; i < 10; i++) {//跑10次還是沒有產生行動才回傳null
+                foreach (var mActionData in mActionDatas) {
+                    if (!Prob.GetResult(mActionData.Probability)) continue;
+                    Role doer = _doer;
+                    var targetEffectDatas = mActionData.MyEffects;
+                    if (targetEffectDatas == null || targetEffectDatas.Count == 0) continue;
+                    foreach (var effectData in targetEffectDatas) {
+                        if (!Prob.GetResult(effectData.Probability)) continue;
+                        Role target = (effectData.MyTarget == Target.Myself) ? _doer : _target;
+                        var effect = EffectFactory.Create(effectData.EffectType, (int)effectData.GetValue(0), _doer, target);
+                        if (effect != null)
+                            statusEffects.Add(effect);
+                    }
+                }
+                if (time == 0 || statusEffects == null || statusEffects.Count <= 0) continue;
+                if (action != null) break;
+            }
+            return action;
+        }
+
         public static MonsterData GetRndMonsterData(MonsterType _type) {
             return Prob.GetRandomTFromTList(MonsterTypeDic[_type]);
         }

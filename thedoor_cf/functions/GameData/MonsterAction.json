@@ -1,6 +1,6 @@
 {"MonsterAction":[
 	{	"ID":"10",	"MonsterID":"1",	"Probability":"0.5",	"Time":"1",	"Target1":"Enemy",	"EffectType1":"HP",	"EffectValue1":"-20",	"Target2":"Enemy",	"EffectType2":"HP",	"EffectValue2":"-20"},
-	{	"ID":"11",	"MonsterID":"1",	"Probability":"0.3",	"Time":"1",	"Target1":"Enemy",	"EffectType1":"HP",	"EffectValue1":"-10",	"Target2":"Enemy",	"EffectType2":"Stun",	"EffectValue2":"-10"},
+	{	"ID":"11",	"MonsterID":"1",	"Probability":"0.3",	"Time":"1",	"Target1":"Enemy",	"EffectType1":"HP",	"EffectValue1":"-10",	"Target2":"Enemy",	"EffectType2":"Dizzy",	"EffectValue2":"-10"},
 	{	"ID":"10010",	"MonsterID":"1001",	"Time":"1",	"Target1":"Enemy",	"EffectType1":"HP",	"EffectValue1":"-20"},
 	{	"ID":"10020",	"MonsterID":"1002",	"Time":"1",	"Target1":"Enemy",	"EffectType1":"HP",	"EffectValue1":"-20"},
 	{	"ID":"10030",	"MonsterID":"1003",	"Time":"1",	"Target1":"Enemy",	"EffectType1":"HP",	"EffectValue1":"-20"},

@@ -6,27 +6,39 @@ using Scoz.Func;
 using LitJson;
 
 namespace TheDoor.Main {
-    public enum TargetEffectType {
+    public enum EffectType {
         HP,//  生命
         SanP,//  理智
-        Stun,//    造成暈眩
-        Bleed,//   造成流血
-        Flee,//    逃離戰鬥
+        Dizzy,//    暈眩
+        Poison,//中毒
+        Insanity,//神智崩潰
+        Bleeding,//   流血
+        Fear,//   恐懼
+
+        Evade,//迴避
+        Calm,//冷靜
+        Flee,//    戰鬥
+        Focus,//專注
+        Horror,//恐怖
     }
     public class TargetEffectData {
 
         public Target MyTarget { get; private set; }
-        public TargetEffectType EffectType { get; private set; }
+        public EffectType EffectType { get; private set; }
         public float Probability { get; private set; }
         float[] Values;
+        public float GetValue(int _index) {
+            if (_index < Values.Length) return Values[_index];
+            return 0;
+        }
         public bool IsBuff {
             get {
                 switch (EffectType) {
-                    case TargetEffectType.HP:
-                    case TargetEffectType.SanP:
+                    case EffectType.HP:
+                    case EffectType.SanP:
                         return Values[0] > 0;
-                    case TargetEffectType.Stun:
-                    case TargetEffectType.Bleed:
+                    case EffectType.Dizzy:
+                    case EffectType.Bleeding:
                         return Values[0] < 0;
                     default:
                         return true;
@@ -41,7 +53,7 @@ namespace TheDoor.Main {
         /// <param name="_type">效果類型</param>
         /// <param name="_probability">觸發機率</param>
         /// <param name="_values">效果參數陣列</param>
-        public TargetEffectData(Target _target, TargetEffectType _type, float _probability, params float[] _values) {
+        public TargetEffectData(Target _target, EffectType _type, float _probability, params float[] _values) {
             MyTarget = _target;
             EffectType = _type;
             if (_values != null && _values.Length > 0)
@@ -52,10 +64,10 @@ namespace TheDoor.Main {
             get {
                 string description = "";
                 switch (EffectType) {
-                    case TargetEffectType.Bleed:
+                    case EffectType.Bleeding:
                         description = string.Format(StringData.GetUIString(EffectType.ToString()), Values[0]);
                         break;
-                    case TargetEffectType.Stun:
+                    case EffectType.Dizzy:
                         description = string.Format(StringData.GetUIString(EffectType.ToString()), Values[0]);
                         break;
                     default:

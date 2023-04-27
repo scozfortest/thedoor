@@ -26,6 +26,7 @@ namespace TheDoor.Main {
     }
     public enum AdventureUIs {
         Default,//預設介面
+        Script,
         Battle,
         Rest,
     }

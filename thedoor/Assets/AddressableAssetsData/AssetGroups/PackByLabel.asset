@@ -122,6 +122,14 @@ MonoBehaviour:
     m_Address: Assets/AddressableAssets/Prefab/AdventureUI/DoorUITransition.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: dbd63acdae411f84a98b61f663aaf439
+    m_Address: Assets/AddressableAssets/Prefab/AdventureUI/Battle/RoleActionPrefab.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 625ff94c57409b64dbae11656e0ab6ca
+    m_Address: Assets/AddressableAssets/Image
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9bdcae1979219314780bb2d43aff9537, type: 2}
   m_SchemaSet:

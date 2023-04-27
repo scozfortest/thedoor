@@ -13,7 +13,7 @@ namespace TheDoor.Main {
         protected override void GetDataFromJson(JsonData _item, string _dataName) {
             DataName = _dataName;
             JsonData item = _item;
-            TargetEffectType tmpTEffectType = TargetEffectType.HP;
+            EffectType tmpTEffectType = EffectType.HP;
             List<float> tmpTEffectValues = new List<float>();
             MyEffects.Clear();
             foreach (string key in item.Keys) {
@@ -24,7 +24,7 @@ namespace TheDoor.Main {
                     default:
                         try {
                             if (key.Contains("EffectType")) {
-                                tmpTEffectType = MyEnum.ParseEnum<TargetEffectType>(item[key].ToString());
+                                tmpTEffectType = MyEnum.ParseEnum<EffectType>(item[key].ToString());
                             } else if (key.Contains("EffectValue")) {
                                 tmpTEffectValues.Add(int.Parse(item[key].ToString()));
                             } else if (key.Contains("EffectProb")) {

@@ -17,24 +17,22 @@ namespace TheDoor.Main {
         [SerializeField] EffectSpawner BuffSpawner;
         [SerializeField] EffectSpawner DebuffSpawner;
 
-        OwnedRoleData OwnedRoleData;
-        RoleData MyRoleData;
+        PlayerRole MyRole;
 
         public override void Init() {
             base.Init();
             BuffSpawner.Init();
             DebuffSpawner.Init();
         }
-        public void ShowUI(OwnedRoleData _ownedData) {
-            OwnedRoleData = _ownedData;
-            MyRoleData = RoleData.GetData(OwnedRoleData.ID);
+        public void ShowUI(PlayerRole _role) {
+            MyRole = _role;
             RefreshUI();
             SetActive(true);
         }
 
         public override void RefreshUI() {
             base.RefreshUI();
-            AssetGet.GetImg(RoleData.DataName, MyRoleData.Ref, sprite => {
+            AssetGet.GetImg(RoleData.DataName, MyRole.MyData.Ref, sprite => {
                 RoleImg.sprite = sprite;
             });
             RefreshState();
@@ -42,11 +40,11 @@ namespace TheDoor.Main {
         }
 
         public void RefreshState() {
-            HPImg.fillAmount = (float)OwnedRoleData.CurHP / (float)MyRoleData.HP;
-            SanPImg.fillAmount = (float)OwnedRoleData.CurSanP / (float)MyRoleData.SanP;
+            HPImg.fillAmount = MyRole.HPRatio;
+            SanPImg.fillAmount = MyRole.SanPRatio;
         }
         public void RefreshEffect() {
-            List<TargetEffectData> effectDatas = OwnedRoleData.GetEffectDatas();
+            List<StatusEffect> effectDatas = MyRole.Effects.Values.ToList();
             if (effectDatas == null || effectDatas.Count == 0) {
                 BuffSpawner.InActiveAllItem();
                 DebuffSpawner.InActiveAllItem();
@@ -63,7 +61,7 @@ namespace TheDoor.Main {
         }
 
         public void OnRoleInfoClick() {
-            PopupUI.ShowRoleInfoUI(OwnedRoleData);
+            PopupUI.ShowRoleInfoUI(MyRole);
         }
 
     }

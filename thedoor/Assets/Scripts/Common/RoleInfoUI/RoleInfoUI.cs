@@ -27,7 +27,7 @@ namespace TheDoor.Main {
 
         public override void Init() {
             base.Init();
-            MySupplySpawner.Init();
+            MyTalentSpawner.Init();
             MyEffectSpawner.Init();
             MySupplySpawner.Init();
         }
