@@ -15,12 +15,14 @@ namespace TheDoor.Main {
 
         [SerializeField] EnemyUI MyEnemyUI;
         [SerializeField] SupplySpawner MySupplySpawner;
+        [SerializeField] DragIndicator MyDragIndicator;
         RoleStateUI MyRoleStateUI;
 
         public override void Init() {
             base.Init();
             MySupplySpawner.Init();
             MyRoleStateUI = RoleStateUI.GetInstance<RoleStateUI>();
+            MyDragIndicator.Init();
         }
 
         public void ShowUI() {
@@ -31,7 +33,12 @@ namespace TheDoor.Main {
             });
         }
 
-
+        public void StartDrag(Transform _startTarget) {
+            MyDragIndicator.StartDrag(_startTarget);
+        }
+        public void EndDrag() {
+            MyDragIndicator.EndDrag();
+        }
 
         public void GoNextDoor() {
             AdventureManager.GoNextDoor();

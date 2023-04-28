@@ -85,6 +85,8 @@ namespace TheDoor.Main {
                 OwnedDatas[_colName] = new Dictionary<string, object>();
             else
                 OwnedDatas[_colName].Clear();
+
+
             if (_datas == null)
                 return;
             try {

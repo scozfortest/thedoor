@@ -165,5 +165,11 @@ namespace Scoz.Func {
         public static float BytesToGB(long _bytes) {
             return _bytes / Mathf.Pow(1024, 3);
         }
+        /// <summary>
+        /// 取得二次貝茲曲線上的點
+        /// </summary>
+        public static Vector2 QuadraticBezierCurve(Vector2 _startPos, Vector2 _ctrlPos, Vector2 _endPos, float _t) {
+            return Mathf.Pow(1 - _t, 2) * _startPos + 2 * (1 - _t) * _t * _ctrlPos + Mathf.Pow(_t, 2) * _endPos;
+        }
     }
 }

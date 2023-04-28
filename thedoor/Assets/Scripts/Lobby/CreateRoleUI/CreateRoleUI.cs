@@ -75,7 +75,7 @@ namespace TheDoor.Main {
             tmpList.Add(InheritItems);
             string[] titles = new string[3] { "GainExclusiveSupply", "GainDefaultSupply", "GainInheritSupply" };
             int index = 0;
-            PopupUI.ShowRoleInfoUI(GamePlayer.Instance.Data.CurRole, true);
+            PopupUI.ShowRoleInfoUI(GamePlayer.Instance.Data.CurRole, AdventureManager.PRole, true);
             ShowGainItem(index, tmpList, titles);
         }
         void ShowGainItem(int _index, List<List<ItemData>> tmpList, string[] _titles) {

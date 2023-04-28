@@ -10,22 +10,19 @@ namespace TheDoor.Main {
         public static PlayerRole PRole { get; private set; }
         public static EnemyRole ERole { get; private set; }
 
-        public static void Init() {
-            SetPlayerRole();
-
-        }
-        static void SetPlayerRole() {
+        public static void CreatePlayerRole() {
             //建立玩家冒險用腳色
             var ownedPlayerData = GamePlayer.Instance.Data.CurRole;
             var roleData = RoleData.GetData(ownedPlayerData.ID);
             PRole = new PlayerRole.Builder()
+                .SetData(roleData)
                 .SetMaxHP(roleData.HP)
                 .SetCurHP(ownedPlayerData.CurHP)
                 .SetMaxSanP(roleData.SanP)
                 .SetCurSanP(ownedPlayerData.CurSanP)
                 .Build();
         }
-        static void SetEnemyRole() {
+        public static void SetEnemyRole() {
             MonsterData mData = MonsterData.GetData(Convert.ToInt32(CurDoorData.Values["MonsterID"]));
             ERole = new EnemyRole.Builder()
                 .SetData(mData)

@@ -453,15 +453,15 @@ namespace Scoz.Func {
                 _ac?.Invoke();
             }, () => { WriteLog.LogError("載入RoleInfoUIAsset失敗"); });
         }
-        public static void ShowRoleInfoUI(OwnedRoleData _ownedData, bool _showGoAdventureBtn = false) {
+        public static void ShowRoleInfoUI(OwnedRoleData _ownedRoleData, PlayerRole _pRole, bool _showGoAdventureBtn = false) {
             if (Instance == null) return;
             if (Instance.MyRoleInfoUI != null) {
-                Instance.MyRoleInfoUI.ShowUI(_ownedData, _showGoAdventureBtn);
+                Instance.MyRoleInfoUI.ShowUI(_ownedRoleData, _pRole, _showGoAdventureBtn);
             } else {
                 PopupUI.ShowLoading(StringData.GetUIString("Loading"));
                 InitRoleInfoUI(() => {
                     PopupUI.HideLoading();
-                    Instance.MyRoleInfoUI.ShowUI(_ownedData, _showGoAdventureBtn);
+                    Instance.MyRoleInfoUI.ShowUI(_ownedRoleData, _pRole, _showGoAdventureBtn);
                 });
             }
         }

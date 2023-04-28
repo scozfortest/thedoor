@@ -50,6 +50,8 @@ namespace TheDoor.Main {
             roleDataDic.Add("CurHP", roleData.HP);
             roleDataDic.Add("CurSanP", roleData.SanP);
             GamePlayer.Instance.SetOwnedDatas<OwnedRoleData>(ColEnum.Role, new List<Dictionary<string, object>>() { roleDataDic });
+            //設定玩家資料
+            GamePlayer.Instance.Data.SetCurRole_Loco(roleDataDic["UID"].ToString());
 
             //設定道具資料
             int defaultSupplyCount = GameSettingData.GetInt(GameSetting.Role_DefaultSupplyCount);
@@ -85,8 +87,7 @@ namespace TheDoor.Main {
             GamePlayer.Instance.SetOwnedDatas<OwnedSupplyData>(ColEnum.Supply, supplyListDic);
 
 
-            //設定玩家資料
-            GamePlayer.Instance.Data.SetCurRole_Loco(roleDataDic["UID"].ToString());
+
 
             //設定冒險資料
             var doorCount = GameSettingData.GetJsNode(GameSetting.Adventure_DoorCount);
@@ -117,6 +118,8 @@ namespace TheDoor.Main {
 
             GamePlayer.Instance.SetOwnedDatas<OwnedAdventureData>(ColEnum.Adventure, new List<Dictionary<string, object>>() { adventureDataDic });
 
+            //建立冒險用腳色資料
+            AdventureManager.CreatePlayerRole();
 
             //存本地資料
             GamePlayer.Instance.SaveSettingToLoco();

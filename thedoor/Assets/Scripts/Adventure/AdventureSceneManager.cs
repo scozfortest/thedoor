@@ -23,7 +23,6 @@ namespace TheDoor.Main {
 
         void Start() {
             Instance = this;
-            AdventureManager.Init();
             if (GameManager.IsInit) {
                 InitAdventure();
             } else {

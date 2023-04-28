@@ -13,16 +13,15 @@ namespace TheDoor.Main {
     public class RoleInfoUI : BaseUI {
 
         [SerializeField] Image RoleImg;
-        [SerializeField] TextMeshProUGUI HPText;
-        [SerializeField] TextMeshProUGUI SanPText;
+        [SerializeField] Image HP;
+        [SerializeField] Image SanP;
         [SerializeField] TalentSpawner MyTalentSpawner;
         [SerializeField] EffectSpawner MyEffectSpawner;
         [SerializeField] SupplySpawner MySupplySpawner;
         [SerializeField] GameObject GoAdventureBtn;
 
-
+        PlayerRole PRole;
         OwnedRoleData OwnedRoleData;
-        RoleData MyRoleData;
 
 
         public override void Init() {
@@ -31,9 +30,9 @@ namespace TheDoor.Main {
             MyEffectSpawner.Init();
             MySupplySpawner.Init();
         }
-        public void ShowUI(OwnedRoleData _ownedData, bool _showGoAdventureBtn = false) {
+        public void ShowUI(OwnedRoleData _ownedData, PlayerRole _pRole, bool _showGoAdventureBtn = false) {
             OwnedRoleData = _ownedData;
-            MyRoleData = RoleData.GetData(OwnedRoleData.ID);
+            PRole = _pRole;
             GoAdventureBtn.SetActive(_showGoAdventureBtn);
             RefreshUI();
             RefreshSupply();
@@ -43,9 +42,11 @@ namespace TheDoor.Main {
         }
         public override void RefreshUI() {
             base.RefreshUI();
-            HPText.text = string.Format("HP:{0}/{1}", OwnedRoleData.CurHP, MyRoleData.HP);
-            SanPText.text = string.Format("SanP:{0}/{1}", OwnedRoleData.CurSanP, MyRoleData.SanP);
-            AssetGet.GetImg(RoleData.DataName, MyRoleData.Ref, sprite => {
+            if (PRole == null) HP.fillAmount = 1;
+            else HP.fillAmount = PRole.HPRatio;
+            if (PRole == null) SanP.fillAmount = 1;
+            else SanP.fillAmount = PRole.SanPRatio;
+            AssetGet.GetImg(RoleData.DataName, PRole.Ref, sprite => {
                 RoleImg.sprite = sprite;
             });
         }
@@ -62,10 +63,14 @@ namespace TheDoor.Main {
             });
         }
         public void RefreshEffect() {
-            List<TargetEffectData> effectDatas = OwnedRoleData.GetEffectDatas();
+
             MyEffectSpawner.LoadItemAsset(() => {
-                MyEffectSpawner.SpawnItems(effectDatas);
+                if (PRole == null)
+                    MyEffectSpawner.SpawnItems(null);
+                else
+                    MyEffectSpawner.SpawnItems(PRole.Effects.Values.ToList());
             });
+
         }
         public void GoAdventure() {
             PopupUI.InitSceneTransitionProgress(1, "AdventureUILoaded");

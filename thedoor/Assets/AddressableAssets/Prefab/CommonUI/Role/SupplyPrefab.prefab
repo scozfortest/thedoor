@@ -310,7 +310,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 180, y: -225}
-  m_SizeDelta: {x: 300, y: 390}
+  m_SizeDelta: {x: 200, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4890529630825439919
 MonoBehaviour:
@@ -328,6 +328,7 @@ MonoBehaviour:
   Description: {fileID: 5636587702477999994}
   Usage: {fileID: 4421177144826819834}
   Time: {fileID: 7025225295570395046}
+  VerticalDistToDragCard: 50
 --- !u!1 &5301892701211033896
 GameObject:
   m_ObjectHideFlags: 0

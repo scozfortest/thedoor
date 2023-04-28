@@ -56,13 +56,14 @@ namespace TheDoor.Main {
         /// </summary>
         public void LobbyUILoaded() {
             PopupUI.FinishSceneTransitionProgress("LobbyUILoaded");
+            //建立冒險用腳色資料
+            if (GamePlayer.Instance.Data.CurRole != null)
+                AdventureManager.CreatePlayerRole();
 
 #if GOOGLE_ADS
             // 初始化Google Ads
             GoogleAdsManager.Inst.Initialize();
 #endif
-
-
 
         }
         private void OnDestroy() {

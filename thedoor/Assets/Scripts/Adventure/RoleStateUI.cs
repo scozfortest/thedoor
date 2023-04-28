@@ -61,7 +61,7 @@ namespace TheDoor.Main {
         }
 
         public void OnRoleInfoClick() {
-            PopupUI.ShowRoleInfoUI(MyRole);
+            PopupUI.ShowRoleInfoUI(GamePlayer.Instance.Data.CurRole, MyRole);
         }
 
     }

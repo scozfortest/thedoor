@@ -2711,7 +2711,6 @@ MonoBehaviour:
   InputGo: {fileID: 8150504379205307148}
   InputTitleText: {fileID: 1511432321411176061}
   MyInputField: {fileID: 3590707411241983618}
-  ScreenEffectTrans: {fileID: 0}
   PopupItemPrefab: {fileID: 5464633626754899172, guid: 35c9ca1b9f955af4c9633ffef040e907, type: 3}
   PopupEventParent: {fileID: 2980876744951825533}
   SettingUIParent: {fileID: 9181177132476306702}

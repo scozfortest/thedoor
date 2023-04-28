@@ -82,7 +82,7 @@ namespace TheDoor.Main {
                     MyRoleStateUI.ShowUI(AdventureManager.PRole);
                     MyBattleUI.SetActive(true);
                     MyDoorNodeUI?.SetActive(false);
-                    MyRestUI.ShowUI();
+                    MyRestUI.SetActive(false);
                     //判斷是否已經載入過此UI，若還沒載過就跳讀取中並開始載入
                     if (MyBattleUI != null) {
                         MyBattleUI.ShowUI();

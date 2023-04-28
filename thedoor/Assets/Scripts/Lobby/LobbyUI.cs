@@ -34,7 +34,6 @@ namespace TheDoor.Main {
             base.Init();
             MyCreateRoleUI.Init();
             SwitchUI(LobbyUIs.Default);
-            //MyCreateRoleUI.SetRole(1);
         }
 
         public void SwitchUI(LobbyUIs _ui, Action _cb = null) {
