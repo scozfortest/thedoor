@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,11 +11,13 @@ namespace Scoz.Func {
         [SerializeField] float HeightVariation = 30; // 曲線高度的變化範圍
         [SerializeField] float Speed = 3; // 曲線變化的速度
         [SerializeField] ScrollRect SupplyScrollView;//在拖曳時要關閉ScrollView的滾動功能
+        [SerializeField] List<Image> TargetImgs;//目標
 
         Transform StartTrans;//起始目標Transfrom
         bool IsDragging = false;
         List<GameObject> Nodes = new List<GameObject>();
         Canvas MyCanvas;
+        Action<string> TargetNameCB;
 
         public void Init() {
             IsDragging = false;
@@ -25,17 +28,35 @@ namespace Scoz.Func {
             }
             MyCanvas = GetComponentInParent<Canvas>();
         }
-        public void StartDrag(Transform _startTrans) {
+        public void StartDrag(Transform _startTrans, Action<string> _cb) {
             SupplyScrollView.enabled = false;
             StartTrans = _startTrans;
+            TargetNameCB = _cb;
             IsDragging = true;
             Dragging();
             ShowNodes(true);
         }
         public void EndDrag() {
+            Debug.Log("EndDrag");
             SupplyScrollView.enabled = true;
             IsDragging = false;
+            CheckReleaseOnTarget();
             ShowNodes(false);
+        }
+        void CheckReleaseOnTarget() {
+            foreach (var img in TargetImgs) {
+                RectTransform targetRect = img.GetComponent<RectTransform>();
+                Vector2 localPoint;
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(targetRect, Input.mousePosition, MyCanvas.worldCamera, out localPoint);
+                float radius = Mathf.Min(targetRect.rect.width, targetRect.rect.height) * 0.5f;
+                if (Vector2.Distance(localPoint, targetRect.rect.center) <= radius) {
+                    OnTarget(img.name);
+                    break;
+                }
+            }
+        }
+        void OnTarget(string _name) {
+            TargetNameCB?.Invoke(_name);
         }
         void ShowNodes(bool _show) {
             foreach (var node in Nodes) node.SetActive(_show);

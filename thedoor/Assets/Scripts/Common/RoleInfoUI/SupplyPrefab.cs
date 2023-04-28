@@ -10,9 +10,11 @@ using UnityEngine.EventSystems;
 namespace TheDoor.Main {
     public class SupplyPrefab : MonoBehaviour, IItem, IPointerDownHandler {
         [SerializeField] Image Icon;
+        [SerializeField] Image CardBG;
         [SerializeField] TextMeshProUGUI Description;
         [SerializeField] TextMeshProUGUI Usage;
         [SerializeField] TextMeshProUGUI Time;
+        [SerializeField] Material OutlineMaterial;
         [SerializeField] float VerticalDistToDragCard = 200;
 
         OwnedSupplyData OwnedData;
@@ -28,6 +30,7 @@ namespace TheDoor.Main {
 
         public void SetData(OwnedSupplyData _data) {
             OwnedData = _data;
+            CardBG.material = null;
             Refresh();
         }
         public void Refresh() {
@@ -47,14 +50,20 @@ namespace TheDoor.Main {
         private void Update() {
             if (CurDragState == DragState.Start) {
                 if (Mathf.Abs(((Vector2)Input.mousePosition - StartPos).y) > VerticalDistToDragCard) {
-                    BattleUI.GetInstance<BattleUI>().StartDrag(transform);
+                    BattleUI.GetInstance<BattleUI>().StartDrag(transform, UseSupplyToTarget);
                     CurDragState = DragState.Dragging;
+                    CardBG.material = OutlineMaterial;
                 }
             }
-            if (Input.GetMouseButtonUp(0)) {
+            if (CurDragState != DragState.End && Input.GetMouseButtonUp(0)) {
                 CurDragState = DragState.End;
                 BattleUI.GetInstance<BattleUI>().EndDrag();
+                CardBG.material = null;
             }
+        }
+
+        void UseSupplyToTarget(string _name) {
+            Debug.Log("UseSupplyToTarget=" + _name);
         }
 
     }

@@ -13,7 +13,8 @@ namespace TheDoor.Main {
     public class EnemyUI : MonoBehaviour {
         [SerializeField] Image EnemyImg;
         [SerializeField] Image HP;
-        [SerializeField] List<GameObject> HitGOs;//頭、身、四肢
+        [SerializeField] List<Image> HitGOs;//頭、身、四肢
+        [SerializeField] Material OutlineMaterial;
 
         EnemyRole ERole;
 
@@ -25,23 +26,19 @@ namespace TheDoor.Main {
             AssetGet.GetImg("Monster", ERole.MyData.Ref, sprite => {
                 EnemyImg.sprite = sprite;
             });
-            if (ERole.MyData.HeadDmg != 0 && ERole.MyData.HeadProb != 0)
-                HitGOs[0].SetActive(true);
-            else
-                HitGOs[0].SetActive(false);
-            if (ERole.MyData.BodyDmg != 0 && ERole.MyData.BodyProb != 0)
-                HitGOs[1].SetActive(true);
-            else
-                HitGOs[1].SetActive(false);
-            if (ERole.MyData.LimbsDmg != 0 && ERole.MyData.LimbsProb != 0)
-                HitGOs[2].SetActive(true);
-            else
-                HitGOs[2].SetActive(false);
+            for (int i = 0; i < HitGOs.Count; i++) {
+                HitGOs[i].gameObject.SetActive(ERole.MyData.GetAttackPartTuple((AttackPart)i) != null);
+            }
         }
 
         public void SetHP(float _hp) {
             HP.fillAmount = _hp;
         }
 
+        public void ShowOutlineMaterial(bool _show) {
+            for (int i = 0; i < HitGOs.Count; i++) {
+                HitGOs[i].material = (_show) ? OutlineMaterial : null;
+            }
+        }
     }
 }

@@ -11,6 +11,11 @@ namespace TheDoor.Main {
         Normal,
         Boss,
     }
+    public enum AttackPart {
+        Head,
+        Body,
+        Limbs,
+    }
     public class MonsterData : MyJsonData {
         public static string DataName { get; set; }
         public string Name {
@@ -29,12 +34,9 @@ namespace TheDoor.Main {
         public string[] Weakness { get; private set; }
 
         public int HP { get; private set; }
-        public float HeadDmg { get; private set; }
-        public float HeadProb { get; private set; }
-        public float BodyDmg { get; private set; }
-        public float BodyProb { get; private set; }
-        public float LimbsDmg { get; private set; }
-        public float LimbsProb { get; private set; }
+        public Dictionary<AttackPart, float> AttackPartDmgs = new Dictionary<AttackPart, float>();
+        public Dictionary<AttackPart, float> AttackPartProbs = new Dictionary<AttackPart, float>();
+
 
         public static Dictionary<MonsterType, List<MonsterData>> MonsterTypeDic = new Dictionary<MonsterType, List<MonsterData>>();
 
@@ -66,22 +68,22 @@ namespace TheDoor.Main {
                         HP = int.Parse(item[key].ToString());
                         break;
                     case "HeadDmg":
-                        HeadDmg = float.Parse(item[key].ToString());
+                        AttackPartDmgs.Add(AttackPart.Head, float.Parse(item[key].ToString()));
                         break;
                     case "HeadProb":
-                        HeadProb = float.Parse(item[key].ToString());
+                        AttackPartProbs.Add(AttackPart.Head, float.Parse(item[key].ToString()));
                         break;
                     case "BodyDmg":
-                        BodyDmg = float.Parse(item[key].ToString());
+                        AttackPartDmgs.Add(AttackPart.Body, float.Parse(item[key].ToString()));
                         break;
                     case "BodyProb":
-                        BodyProb = float.Parse(item[key].ToString());
+                        AttackPartProbs.Add(AttackPart.Body, float.Parse(item[key].ToString()));
                         break;
                     case "LimbsDmg":
-                        LimbsDmg = float.Parse(item[key].ToString());
+                        AttackPartDmgs.Add(AttackPart.Limbs, float.Parse(item[key].ToString()));
                         break;
                     case "LimbsProb":
-                        LimbsProb = float.Parse(item[key].ToString());
+                        AttackPartProbs.Add(AttackPart.Limbs, float.Parse(item[key].ToString()));
                         break;
                     default:
                         WriteLog.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));
@@ -119,6 +121,14 @@ namespace TheDoor.Main {
                 if (action != null) break;
             }
             return action;
+        }
+
+        /// <summary>
+        /// 取得部位攻擊資料Turple<傷害,命中機率>
+        /// </summary>
+        public Tuple<float, float> GetAttackPartTuple(AttackPart _part) {
+            if (!AttackPartDmgs.ContainsKey(_part) || !AttackPartProbs.ContainsKey(_part)) return null;
+            return new Tuple<float, float>(AttackPartDmgs[_part], AttackPartProbs[_part]);
         }
 
         public static MonsterData GetRndMonsterData(MonsterType _type) {

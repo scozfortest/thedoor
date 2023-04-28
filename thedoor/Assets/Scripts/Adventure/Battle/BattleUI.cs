@@ -32,12 +32,13 @@ namespace TheDoor.Main {
                 MySupplySpawner.SpawnItems(GamePlayer.Instance.Data.CurRole.GetSupplyDatas());
             });
         }
-
-        public void StartDrag(Transform _startTarget) {
-            MyDragIndicator.StartDrag(_startTarget);
+        public void StartDrag(Transform _startTarget, Action<string> _cb) {
+            MyDragIndicator.StartDrag(_startTarget, _cb);
+            MyEnemyUI.ShowOutlineMaterial(true);
         }
         public void EndDrag() {
             MyDragIndicator.EndDrag();
+            MyEnemyUI.ShowOutlineMaterial(false);
         }
 
         public void GoNextDoor() {
