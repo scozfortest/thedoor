@@ -64,6 +64,11 @@ namespace TheDoor.Main {
 
         void UseSupplyToTarget(string _name) {
             Debug.Log("UseSupplyToTarget=" + _name);
+            var data = SupplyData.GetData(OwnedData.ID);
+            AttackPart attackPart = MyEnum.ParseEnum<AttackPart>(_name);
+            PlayerAction pAction = data.GetAction(BattleManager.PRole, BattleManager.ERole, attackPart);
+            BattleManager.PlayerDoAction(pAction);
+
         }
 
     }

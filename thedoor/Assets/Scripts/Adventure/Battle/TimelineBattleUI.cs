@@ -9,18 +9,20 @@ namespace TheDoor.Main {
 
         private PlayerRole PRole;
         private EnemyRole ERole;
-        private int CurTime;
+
 
         public TimelineBattleUI(PlayerRole _pRole, EnemyRole _eRole) {
             PRole = _pRole;
             ERole = _eRole;
-            CurTime = 0;
         }
         public override void Init() {
             base.Init();
         }
+        public void UpdateTimeline(List<Action> _actions, int _curTime) {
 
-        public void SpawnItems() {
+        }
+
+        void SpawnItems() {
             if (!LoadItemFinished) {
                 WriteLog.LogError("RoleActionPrefab尚未載入完成");
                 return;
@@ -41,13 +43,6 @@ namespace TheDoor.Main {
                 }
             }
         }
-        public void PlayerDoAction(RoleAction _action) {
-            int remainTime = ERole.Actions[0].Time - CurTime;
-            if (_action.Time < remainTime) {
-                _action.DoAction();
-            } else {
-                ERole.Actions[0].DoAction();
-            }
-        }
+
     }
 }

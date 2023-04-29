@@ -3,12 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace TheDoor.Main {
-    public class AdventureManager {
+    public class AdventureManager : MonoBehaviour {
+
+        [SerializeField] BattleManager BattleManager;
+
+        public static AdventureManager Instance { get; private set; }
         public static OwnedAdventureData CurAdventureData { get { return GamePlayer.Instance.Data.CurAdventure; } }
         public static DoorData CurDoorData { get { return GamePlayer.Instance.Data.CurAdventure.CurDoor; } }
         public static DoorType CurDoorType { get { return CurDoorData.DoorType; } }
         public static PlayerRole PRole { get; private set; }
-        public static EnemyRole ERole { get; private set; }
+
+        public void Init() {
+            Instance = this;
+            BattleManager.Init();
+        }
+
 
         public static void CreatePlayerRole() {
             //建立玩家冒險用腳色
@@ -20,14 +29,6 @@ namespace TheDoor.Main {
                 .SetCurHP(ownedPlayerData.CurHP)
                 .SetMaxSanP(roleData.SanP)
                 .SetCurSanP(ownedPlayerData.CurSanP)
-                .Build();
-        }
-        public static void SetEnemyRole() {
-            MonsterData mData = MonsterData.GetData(Convert.ToInt32(CurDoorData.Values["MonsterID"]));
-            ERole = new EnemyRole.Builder()
-                .SetData(mData)
-                .SetMaxHP(mData.HP)
-                .SetCurHP(mData.HP)
                 .Build();
         }
 
@@ -57,11 +58,11 @@ namespace TheDoor.Main {
                     adventureUI.SwitchUI(AdventureUIs.Rest);
                     break;
                 case DoorType.Monster:
-                    SetEnemyRole();
+                    BattleManager.ResetBattle(PRole, Convert.ToInt32(CurDoorData.Values["MonsterID"]));
                     adventureUI.SwitchUI(AdventureUIs.Battle);
                     break;
                 case DoorType.Boss:
-                    SetEnemyRole();
+                    BattleManager.ResetBattle(PRole, Convert.ToInt32(CurDoorData.Values["MonsterID"]));
                     adventureUI.SwitchUI(AdventureUIs.Battle);
                     break;
                 default:

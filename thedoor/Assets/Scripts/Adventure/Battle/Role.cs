@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace TheDoor.Main {
     public abstract class Role {
+        public virtual string Name { get; }
         public virtual string Ref { get; }
         public int MaxHP { get; protected set; }
         public int MaxSanP { get; protected set; }

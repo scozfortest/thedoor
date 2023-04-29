@@ -110,9 +110,8 @@ namespace TheDoor.Main {
                     var targetEffectDatas = mActionData.MyEffects;
                     if (targetEffectDatas == null || targetEffectDatas.Count == 0) continue;
                     foreach (var effectData in targetEffectDatas) {
-                        if (!Prob.GetResult(effectData.Probability)) continue;
                         Role target = (effectData.MyTarget == Target.Myself) ? _doer : _target;
-                        var effect = EffectFactory.Create(effectData.EffectType, (int)effectData.GetValue(0), _doer, target);
+                        var effect = EffectFactory.Create(effectData.Probability, effectData.EffectType, (int)effectData.GetValue(0), _doer, target);
                         if (effect != null)
                             statusEffects.Add(effect);
                     }

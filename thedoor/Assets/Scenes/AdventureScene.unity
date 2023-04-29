@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -334,6 +334,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1133165783}
   - component: {fileID: 1133165784}
+  - component: {fileID: 1133165786}
+  - component: {fileID: 1133165785}
   m_Layer: 0
   m_Name: AdventureSceneManager
   m_TagString: Untagged
@@ -370,6 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6999fec1c0bcaa4c85300a061d2685c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AdvManager: {fileID: 1133165786}
   HeightBaseCanvas: {fileID: 1050268622}
   WidthBaseCanvas: {fileID: 957847677}
   AdventureUIAsset:
@@ -382,6 +385,31 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+--- !u!114 &1133165785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133165781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 920bf61555c759a43b2b3e27e5a7361b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1133165786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133165781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0922e25e65bd96e4ab3b84cdca35ba14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BattleManager: {fileID: 1133165785}
 --- !u!1 &1729712140
 GameObject:
   m_ObjectHideFlags: 0

@@ -88,7 +88,7 @@ namespace TheDoor.Main {
                 }
             });
         }
-        public RoleAction GetAction(Role _doer, Role _target) {
+        public PlayerAction GetAction(PlayerRole _doer, Role _target, AttackPart _attackPart) {
             var supplyEffectDatas = GetSupplyEffects();
             var statusEffects = new List<StatusEffect>();
             foreach (var supplyEffectData in supplyEffectDatas) {
@@ -98,13 +98,12 @@ namespace TheDoor.Main {
                 var targetEffectDatas = supplyEffectData.MyEffects;
                 if (targetEffectDatas == null || targetEffectDatas.Count == 0) continue;
                 foreach (var effectData in targetEffectDatas) {
-                    if (!Prob.GetResult(effectData.Probability)) continue;
-                    var effect = EffectFactory.Create(effectData.EffectType, (int)effectData.GetValue(0), _doer, _target);
+                    var effect = EffectFactory.Create(effectData.Probability, effectData.EffectType, (int)effectData.GetValue(0), _doer, _target);
                     if (effect != null)
                         statusEffects.Add(effect);
                 }
             }
-            return new RoleAction(_doer, Time, statusEffects);
+            return new PlayerAction(_doer, Time, statusEffects, _attackPart);
         }
         List<SupplyEffectData> GetSupplyEffects() {
             return SupplyEffectData.GetSupplyEffectDatas(ID);

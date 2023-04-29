@@ -26,8 +26,8 @@ namespace TheDoor.Main {
         }
 
         public void ShowUI() {
-            MyRoleStateUI.ShowUI(AdventureManager.PRole);
-            MyEnemyUI.RefreshUI(AdventureManager.ERole);
+            MyRoleStateUI.ShowUI(BattleManager.PRole);
+            MyEnemyUI.RefreshUI(BattleManager.ERole);
             MySupplySpawner.LoadItemAsset(() => {
                 MySupplySpawner.SpawnItems(GamePlayer.Instance.Data.CurRole.GetSupplyDatas());
             });

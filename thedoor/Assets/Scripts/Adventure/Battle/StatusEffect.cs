@@ -10,14 +10,10 @@ namespace TheDoor.Main {
         public bool IsExpired { get { return Stack <= 0; } }
         public Role Doer { get; private set; }//執行者
         public Role MyTarget { get; private set; }//目標
+        public float Probability { get; private set; }//命中機率，失敗會跳Miss
         public bool IsBuff { get; protected set; }//是否為Buff
 
-        public StatusEffect(EffectType _type, int _stack, Role _doer, Role _target) {
-            MyType = _type;
-            Stack = _stack;
-            Doer = _doer;
-            MyTarget = _target;
-        }
+
         public void AddStack(int _stack) {
             Stack += _stack;
         }
@@ -53,15 +49,62 @@ namespace TheDoor.Main {
 
         #endregion
 
+        protected StatusEffect() {
+        }
+        public abstract class Builder<T> where T : StatusEffect, new() {
+            protected T instance;
+
+            public Builder() {
+                instance = new T();
+            }
+
+            public Builder<T> SetStack(int _stack) {
+                instance.Stack = _stack;
+                return this;
+            }
+            public Builder<T> SetDoer(Role _role) {
+                instance.Doer = _role;
+                return this;
+            }
+            public Builder<T> SetTarget(Role _role) {
+                instance.MyTarget = _role;
+                return this;
+            }
+            public Builder<T> SetProb(float _prob) {
+                instance.Probability = _prob;
+                return this;
+            }
+
+            public T Build() {
+                return instance;
+            }
+        }
+
     }
 
     public class EffectFactory {
-        public static StatusEffect Create(EffectType _effectType, int _stack, Role _doer, Role _target) {
-            Type effectClass = Type.GetType($"TheDoor.Main.{_effectType}Effect"); // 獲取對應的效果類型，需替換Namespace為實際的命名空間名稱
-            if (effectClass != null) {
-                return (StatusEffect)Activator.CreateInstance(effectClass, _stack, _doer, _target);
+        private delegate StatusEffect EffectCreator(float _prob, int stack, Role doer, Role target);
+        private static Dictionary<EffectType, EffectCreator> effectCreators = new Dictionary<EffectType, EffectCreator>{
+        { EffectType.HP, (_prob,stack, doer, target) => new HPEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).Build() },
+        { EffectType.SanP, (_prob,stack, doer, target) => new SanPEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).Build() },
+        { EffectType.Dizzy, (_prob,stack, doer, target) => new DizzyEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).Build() },
+        { EffectType.Poison, (_prob,stack, doer, target) => new PoisonEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).Build() },
+        { EffectType.Insanity, (_prob,stack, doer, target) => new InsanityEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).Build() },
+        { EffectType.Bleeding, (_prob,stack, doer, target) => new BleedingEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).Build() },
+        { EffectType.Fear, (_prob,stack, doer, target) => new FearEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).Build() },
+        { EffectType.Evade, (_prob,stack, doer, target) => new EvadeEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).Build() },
+        { EffectType.Calm, (_prob,stack, doer, target) => new CalmEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).Build() },
+        { EffectType.Focus, (_prob,stack, doer, target) => new FocusEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).Build() },
+        { EffectType.Horror, (_prob,stack, doer, target) => new HorrorEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).Build() },
+        // 有新增狀態效果要往下加
+    };
+
+        public static StatusEffect Create(float _prob, EffectType effectType, int stack, Role doer, Role target) {
+            if (effectCreators.TryGetValue(effectType, out EffectCreator creator)) {
+                return creator(_prob, stack, doer, target);
             }
-            WriteLog.LogErrorFormat("EffectFactory反射類型類型錯誤", _effectType);
+
+            WriteLog.LogErrorFormat("EffectFactory: 未定義的效果字典", effectType);
             return null;
         }
     }
@@ -70,7 +113,10 @@ namespace TheDoor.Main {
     /// 可以是傷害或恢復生命
     /// </summary>
     public class HPEffect : StatusEffect {
-        public HPEffect(int _stack, Role _doer, Role _target) : base(EffectType.HP, _stack, _doer, _target) { }
+        public class Builder : Builder<HPEffect> { }
+        public HPEffect() {
+            MyType = EffectType.HP;
+        }
 
         public override int Dmg() {
             if (Stack >= 0) return 0;
@@ -90,7 +136,10 @@ namespace TheDoor.Main {
     /// 可以是傷害或恢復神智
     /// </summary>
     public class SanPEffect : StatusEffect {
-        public SanPEffect(int _stack, Role _doer, Role _target) : base(EffectType.SanP, _stack, _doer, _target) { }
+        public class Builder : Builder<SanPEffect> { }
+        public SanPEffect() {
+            MyType = EffectType.SanP;
+        }
 
         public override int SanDmg() {
             if (Stack >= 0) return 0;
@@ -114,7 +163,12 @@ namespace TheDoor.Main {
     ///  所以這時玩家發動砍消耗2s就直接換怪物進行咬 也就是說 暈眩就是使行動消耗增加的狀態
     /// </summary>
     public class DizzyEffect : StatusEffect {
-        public DizzyEffect(int _stack, Role _doer, Role _target) : base(EffectType.Dizzy, _stack, _doer, _target) { IsBuff = false; }
+
+        public class Builder : Builder<DizzyEffect> { }
+
+        public DizzyEffect() {
+            MyType = EffectType.Dizzy;
+        }
 
         public override int TimeModification() {
             if (Stack <= 0) return 0;
@@ -131,7 +185,11 @@ namespace TheDoor.Main {
     /// 如果目前2層 此行動消耗3s 發動完此行動只會受到2傷害 並剩下0層
     /// </summary>
     public class PoisonEffect : StatusEffect {
-        public PoisonEffect(int _stack, Role _doer, Role _target) : base(EffectType.Poison, _stack, _doer, _target) { IsBuff = false; }
+        public class Builder : Builder<PoisonEffect> { }
+        public PoisonEffect() {
+            IsBuff = false;
+            MyType = EffectType.Poison;
+        }
 
         public override int TimeDmgTaken(int _time) {
             if (Stack <= 0) return 0;
@@ -146,7 +204,11 @@ namespace TheDoor.Main {
     /// 如果目前2層 此行動消耗3s 發動完此行動只會受到2傷害 並剩下0層
     /// </summary>
     public class InsanityEffect : StatusEffect {
-        public InsanityEffect(int _stack, Role _doer, Role _target) : base(EffectType.Insanity, _stack, _doer, _target) { IsBuff = false; }
+        public class Builder : Builder<InsanityEffect> { }
+        public InsanityEffect() {
+            IsBuff = false;
+            MyType = EffectType.Insanity;
+        }
 
         public override int TimeSanDmgTaken(int _time) {
             if (Stack <= 0) return 0;
@@ -161,7 +223,11 @@ namespace TheDoor.Main {
     /// 每次受到攻擊都會受到 層數的傷害 例如目前5層 每次受到攻擊都會受到5點傷害
     /// </summary>
     public class BleedingEffect : StatusEffect {
-        public BleedingEffect(int stacks, Role _doer, Role _target) : base(EffectType.Bleeding, stacks, _doer, _target) { IsBuff = false; }
+        public class Builder : Builder<BleedingEffect> { }
+        public BleedingEffect() {
+            IsBuff = false;
+            MyType = EffectType.Bleeding;
+        }
 
         public override int BeAtteckedExtraDmgTaken() {
             if (Stack <= 0) return 0;
@@ -173,7 +239,11 @@ namespace TheDoor.Main {
     /// 每次受到攻擊都會受到 層數的心智傷害 例如目前5層 每次受到攻擊都會受到5點神智傷害
     /// </summary>
     public class FearEffect : StatusEffect {
-        public FearEffect(int _stack, Role _doer, Role _target) : base(EffectType.Fear, _stack, _doer, _target) { IsBuff = false; }
+        public class Builder : Builder<FearEffect> { }
+        public FearEffect() {
+            IsBuff = false;
+            MyType = EffectType.Fear;
+        }
 
         public override int BeAtteckedExtraSanDmgTaken() {
             if (Stack <= 0) return 0;
@@ -185,7 +255,11 @@ namespace TheDoor.Main {
     /// 攻擊時增加層數的傷害
     /// </summary>
     public class FocusEffect : StatusEffect {
-        public FocusEffect(int _stack, Role _doer, Role _target) : base(EffectType.Focus, _stack, _doer, _target) { IsBuff = true; }
+        public class Builder : Builder<FocusEffect> { }
+        public FocusEffect() {
+            IsBuff = false;
+            MyType = EffectType.Focus;
+        }
 
         public override int AttackExtraDamageDealt() {
             if (Stack <= 0) return 0;
@@ -197,7 +271,11 @@ namespace TheDoor.Main {
     /// 攻擊時增加層數的傷害
     /// </summary>
     public class HorrorEffect : StatusEffect {
-        public HorrorEffect(int _stack, Role _doer, Role _target) : base(EffectType.Horror, _stack, _doer, _target) { IsBuff = true; }
+        public class Builder : Builder<HorrorEffect> { }
+        public HorrorEffect() {
+            IsBuff = true;
+            MyType = EffectType.Horror;
+        }
 
         public override int AttackExtraSanDamageDealt() {
             if (Stack <= 0) return 0;
@@ -209,7 +287,11 @@ namespace TheDoor.Main {
     /// 減少下次受到的傷害 如果有2層 下次受到攻擊時傷害減少2 並移除2層
     /// </summary>
     public class EvadeEffect : StatusEffect {
-        public EvadeEffect(int _stack, Role _doer, Role _target) : base(EffectType.Evade, _stack, _doer, _target) { IsBuff = true; }
+        public class Builder : Builder<EvadeEffect> { }
+        public EvadeEffect() {
+            IsBuff = true;
+            MyType = EffectType.Evade;
+        }
 
         public override int BeAttackDamageReduction(int _dmg) {
             if (Stack <= 0) return 0;
@@ -223,7 +305,11 @@ namespace TheDoor.Main {
     /// 減少下次受到的神智傷害 如果有2層 下次受到攻擊時神智傷害減少2 並移除2層
     /// </summary>
     public class CalmEffect : StatusEffect {
-        public CalmEffect(int _stack, Role _doer, Role _target) : base(EffectType.Calm, _stack, _doer, _target) { IsBuff = true; }
+        public class Builder : Builder<CalmEffect> { }
+        public CalmEffect() {
+            IsBuff = true;
+            MyType = EffectType.Calm;
+        }
 
         public override int BeAttackDamageReduction(int _dmg) {
             if (Stack <= 0) return 0;

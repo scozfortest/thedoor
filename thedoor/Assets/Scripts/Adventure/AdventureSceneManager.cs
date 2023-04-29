@@ -9,11 +9,13 @@ using UnityEngine.Purchasing.Security;
 
 namespace TheDoor.Main {
     public class AdventureSceneManager : MonoBehaviour {
+        [SerializeField] AdventureManager AdvManager;
         [HeaderAttribute("==============Addressable Assets==============")]
         public Canvas HeightBaseCanvas;
         public Canvas WidthBaseCanvas;
         public AssetReference AdventureUIAsset;
         public AssetReference DoorNodeUIAsset;
+
 
         [HeaderAttribute("==============設定==============")]
         LoadingProgress MyLoadingProgress;//讀取進度，讀取完會跑FinishInitAdventure()
@@ -52,6 +54,7 @@ namespace TheDoor.Main {
         /// 冒險初始化
         /// </summary>
         public void InitAdventure() {
+            AdvManager.Init();
             MyLoadingProgress = new LoadingProgress(AdventureUILoaded);
             SpawnAddressableAssets();
         }

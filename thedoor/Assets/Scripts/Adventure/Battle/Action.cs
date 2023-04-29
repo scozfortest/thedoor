@@ -1,3 +1,4 @@
+using Scoz.Func;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,14 +18,19 @@ namespace TheDoor.Main {
         /// <summary>
         /// 執行行動
         /// </summary>
-        public void DoAction() {
-
+        public virtual void DoAction() {
+            WriteLog.Log(Doer.Name + "行動");
             //執行效果
             foreach (var effect in Effects) {
+                WriteLog.Log(Doer.Name + "對" + effect.MyTarget.Name + "賦予" + effect.MyType);
                 // 如果執行者或目標已經死亡就不執行效果
                 if (effect.MyTarget.IsDead || effect.Doer.IsDead) continue;
 
                 //對目標進行攻擊
+                if (!Prob.GetResult(effect.Probability)) {
+                    Debug.LogError("Miss");
+                    continue;
+                }
                 int dmg = effect.Dmg();
                 dmg += effect.Doer.GetExtraAttackDmg();
                 effect.MyTarget.TackenDmgAttacked(dmg);
