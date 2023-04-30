@@ -25,36 +25,61 @@ namespace TheDoor.Main {
                 WriteLog.Log(Doer.Name + "對" + effect.MyTarget.Name + "賦予" + effect.MyType);
                 // 如果執行者或目標已經死亡就不執行效果
                 if (effect.MyTarget.IsDead || effect.Doer.IsDead) continue;
-
                 //對目標進行攻擊
                 if (!Prob.GetResult(effect.Probability)) {
                     Debug.LogError("Miss");
                     continue;
                 }
                 int dmg = effect.Dmg();
-                dmg += effect.Doer.GetExtraAttackDmg();
-                effect.MyTarget.TackenDmgAttacked(dmg);
+                if (dmg != 0) {
+                    effect.Doer.AddExtraDmg(ref dmg);
+                    effect.MyTarget.GetAttacked(dmg);
+                }
+
 
                 //對目標進行神智攻擊
-                int sanDmg = effect.SanDmg();
-                sanDmg += effect.Doer.GetExtraAttackSanDmg();
-                effect.MyTarget.TackenSanDmgAttacked(sanDmg);
+                if (effect.MyTarget is PlayerRole) {
+                    int sanDmg = effect.SanDmg();
+                    if (sanDmg != 0) {
+                        effect.Doer.AddExtraSanDmg(ref sanDmg);
+                        ((PlayerRole)effect.MyTarget).GetSanAttacked(sanDmg);
+                    }
+                }
+
 
                 //對目標恢復生命
                 int restore = effect.Restore();
-                effect.MyTarget.AddHP(restore);
+                if (restore != 0) {
+                    effect.MyTarget.AddHP(restore);
+                }
+
 
                 //對目標恢復神智
-                int restoreSanP = effect.SanRestore();
-                effect.Doer.AddSanP(restoreSanP);
+                if (effect.MyTarget is PlayerRole) {
+                    int restoreSanP = effect.SanRestore();
+                    if (restoreSanP != 0) {
+                        ((PlayerRole)effect.Doer).AddSanP(restoreSanP);
+                    }
+                }
+
 
                 //承受時間流逝傷害
-                int timeDmg = effect.Doer.GetTimeDmgTaken(Time);
-                effect.Doer.AddHP(-timeDmg);
+                int timeDmg = 0;
+                effect.Doer.AddTimePassDmg(ref timeDmg, Time);
+                if (timeDmg != 0) {
+                    effect.Doer.AddHP(-timeDmg);
+                }
+
 
                 //承受時間流逝神智傷害
-                int timeSanDmg = effect.Doer.GetTimeSanDmgTaken(Time);
-                effect.Doer.AddSanP(-timeSanDmg);
+                int timeSanDmg = 0;
+                effect.Doer.AddTimePassSanDmg(ref timeSanDmg, Time);
+                if (timeSanDmg != 0) {
+                    if (effect.MyTarget is PlayerRole) {
+                        ((PlayerRole)effect.Doer).AddSanP(-timeSanDmg);
+                    }
+                }
+
             }
 
         }

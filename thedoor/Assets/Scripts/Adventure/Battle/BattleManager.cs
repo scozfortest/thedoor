@@ -21,7 +21,6 @@ namespace TheDoor.Main {
             CurTime = 0;
         }
         static void SetEnemyRole(int _monsterID) {
-            Debug.LogError("_monsterID=" + _monsterID);
             MonsterData mData = MonsterData.GetData(_monsterID);
             ERole = new EnemyRole.Builder()
                 .SetData(mData)
@@ -34,7 +33,6 @@ namespace TheDoor.Main {
             Instance.StartCoroutine(Instance.ActionSchedule(_action));
         }
         IEnumerator ActionSchedule(RoleAction _action) {
-            Debug.Log("ActionSchedule:" + ERole.Actions.Count);
             int remainTime = 0;
             List<RoleAction> scheduledActions = new List<RoleAction>();
             do {
@@ -46,7 +44,6 @@ namespace TheDoor.Main {
                     scheduledActions.Add(_action);
                 }
             } while (remainTime > 0);
-            Debug.Log(scheduledActions.Count);
             //敵方執行行動並補新的行為
             for (int i = 0; i < scheduledActions.Count; i++) {
                 OnActionTrigger(scheduledActions[i]);

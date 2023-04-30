@@ -1,5 +1,5 @@
 {"SupplyEffect":[
-	{	"ID":"11",	"SupplyID":"1",	"Target":"Enemy",	"EffectType1":"HP",	"EffectValue1":"-20",	"EffectType2":"Dizzy",	"EffectValue2":"2",	"EffectProb2":"0.5"},
-	{	"ID":"21",	"SupplyID":"2",	"Target":"Enemy",	"EffectType1":"HP",	"EffectValue1":"-100",	"EffectType2":"Bleeding",	"EffectValue2":"5"},
-	{	"ID":"22",	"SupplyID":"2",	"Target":"Myself",	"EffectType1":"SanP",	"EffectValue1":"-1"}
+	{	"ID":"11",	"SupplyID":"1",	"Target":"Enemy",	"Probability":"1",	"EffectType1":"HP",	"EffectValue1":"-20",	"EffectProb1":"1",	"EffectType2":"Dizzy",	"EffectValue2":"2",	"EffectProb2":"1"},
+	{	"ID":"21",	"SupplyID":"2",	"Target":"Enemy",	"Probability":"1",	"EffectType1":"HP",	"EffectValue1":"-100",	"EffectProb1":"1",	"EffectType2":"Bleeding",	"EffectValue2":"5",	"EffectProb2":"1"},
+	{	"ID":"22",	"SupplyID":"2",	"Target":"Myself",	"Probability":"1",	"EffectType1":"SanP",	"EffectValue1":"-1",	"EffectProb1":"1"}
 ]}

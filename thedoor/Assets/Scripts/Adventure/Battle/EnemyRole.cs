@@ -14,15 +14,17 @@ namespace TheDoor.Main {
 
         public void ScheduleActions() {
             int needCount = GameSettingData.GetInt(GameSetting.Monster_ScheduleActionCount);
-            Debug.LogError("needCount=" + needCount);
             int addCount = needCount - Actions.Count;
-            Debug.LogError("addCount=" + addCount);
             for (int i = 0; i < addCount; i++) {
                 var action = MyData.GetAction(this, BattleManager.PRole);
-                Debug.Log("ac=" + action);
                 if (action == null) continue;
                 Actions.Add(action);
             }
+        }
+
+        public override void AddHP(int _value) {
+            base.AddHP(_value);
+            EnemyUI.GetInstance<EnemyUI>()?.RefreshUI();
         }
 
 

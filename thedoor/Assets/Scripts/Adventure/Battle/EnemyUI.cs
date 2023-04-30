@@ -10,7 +10,7 @@ using TMPro;
 
 namespace TheDoor.Main {
 
-    public class EnemyUI : MonoBehaviour {
+    public class EnemyUI : BaseUI {
         [SerializeField] Image EnemyImg;
         [SerializeField] Image HP;
         [SerializeField] List<Image> HitGOs;//頭、身、四肢
@@ -19,10 +19,13 @@ namespace TheDoor.Main {
         EnemyRole ERole;
 
 
-        public void RefreshUI(EnemyRole _enemyRole) {
+        public void SetRole(EnemyRole _enemyRole) {
+            Debug.Log("SetRole");
             ERole = _enemyRole;
+        }
+        public override void RefreshUI() {
+            base.RefreshUI();
             SetHP(ERole.HPRatio);
-
             AssetGet.GetImg("Monster", ERole.MyData.Ref, sprite => {
                 EnemyImg.sprite = sprite;
             });

@@ -23,11 +23,13 @@ namespace TheDoor.Main {
             MySupplySpawner.Init();
             MyRoleStateUI = RoleStateUI.GetInstance<RoleStateUI>();
             MyDragIndicator.Init();
+            MyEnemyUI.Init();
         }
 
         public void ShowUI() {
             MyRoleStateUI.ShowUI(BattleManager.PRole);
-            MyEnemyUI.RefreshUI(BattleManager.ERole);
+            MyEnemyUI.SetRole(BattleManager.ERole);
+            MyEnemyUI.RefreshUI();
             MySupplySpawner.LoadItemAsset(() => {
                 MySupplySpawner.SpawnItems(GamePlayer.Instance.Data.CurRole.GetSupplyDatas());
             });

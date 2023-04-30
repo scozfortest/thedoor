@@ -101,9 +101,9 @@ namespace TheDoor.Main {
         public RoleAction GetAction(Role _doer, Role _target) {
             var mActionDatas = MonsterActionData.GetMonsterActionDatas(ID);
             var statusEffects = new List<StatusEffect>();
-            int time = 0;
             RoleAction action = null;
-            for (int i = 0; i < 10; i++) {//跑10次還是沒有產生行動才回傳null
+            if (mActionDatas.Count == 0) return null;
+            for (int i = 0; i < 30; i++) {//跑30次還是沒有產生行動才回傳null
                 foreach (var mActionData in mActionDatas) {
                     if (!Prob.GetResult(mActionData.Probability)) continue;
                     Role doer = _doer;
@@ -115,8 +115,9 @@ namespace TheDoor.Main {
                         if (effect != null)
                             statusEffects.Add(effect);
                     }
+                    action = new RoleAction(doer, mActionData.Time, statusEffects);
+                    break;
                 }
-                if (time == 0 || statusEffects == null || statusEffects.Count <= 0) continue;
                 if (action != null) break;
             }
             return action;

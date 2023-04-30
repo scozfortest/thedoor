@@ -8,103 +8,68 @@ namespace TheDoor.Main {
         public virtual string Name { get; }
         public virtual string Ref { get; }
         public int MaxHP { get; protected set; }
-        public int MaxSanP { get; protected set; }
         private int curHP;
         public int CurHP {
             get { return curHP; }
             protected set { curHP = Mathf.Clamp(value, 0, MaxHP); }
         }
         public float HPRatio { get { return (float)CurHP / (float)MaxHP; } }
-        private int curSanP;
-        public int CurSanP {
-            get { return curSanP; }
-            protected set { curSanP = Mathf.Clamp(value, 0, MaxSanP); }
-        }
-        public float SanPRatio { get { return (float)CurSanP / (float)MaxSanP; } }
+
 
         public Dictionary<EffectType, StatusEffect> Effects { get; protected set; } = new Dictionary<EffectType, StatusEffect>();
-        public bool IsDead { get { return (CurHP <= 0 || CurSanP <= 0); } }
+        public virtual bool IsDead { get { return (CurHP <= 0); } }
 
 
-        public void AddHP(int _value) {
-            if (_value == 0) return;
+        public virtual void AddHP(int _value) {
+            Debug.Log("_value=" + _value);
             if (IsDead) return;
 
             CurHP += _value;
-
             if (IsDead) OnDeath();
         }
 
-        public void AddSanP(int _value) {
-            if (_value == 0) return;
-            if (IsDead) return;
 
-            CurSanP += _value;
-
-            if (IsDead) OnDeath();
-        }
         protected virtual void OnDeath() {
         }
 
 
-        public int GetTimeDmgTaken(int _time) {
-            int value = 0;
+        public void AddTimePassDmg(ref int _value, int _time) {
             foreach (var effect in Effects.Values) {
-                value += effect.TimeDmgTaken(_time);
+                _value += effect.TimeDmgTaken(_time);
             }
-            return value;
         }
-        public int GetTimeSanDmgTaken(int _time) {
-            int value = 0;
+        public void AddTimePassSanDmg(ref int _value, int _time) {
             foreach (var effect in Effects.Values) {
-                value += effect.TimeSanDmgTaken(_time);
+                _value += effect.TimeSanDmgTaken(_time);
             }
-            return value;
         }
-        public int GetExtraAttackDmg() {
-            int value = 0;
+        public void AddExtraDmg(ref int _value) {
             foreach (var effect in Effects.Values) {
-                value += effect.AttackExtraDamageDealt();
+                _value += effect.AttackExtraDamageDealt();
             }
-            return value;
         }
-        public int GetExtraAttackSanDmg() {
-            int value = 0;
+        public void AddExtraSanDmg(ref int _value) {
             foreach (var effect in Effects.Values) {
-                value += effect.AttackExtraSanDamageDealt();
+                _value += effect.AttackExtraSanDamageDealt();
             }
-            return value;
         }
         /// <summary>
         /// 承受攻擊
         /// </summary>
-        public void TackenDmgAttacked(int _dmg) {
+        public void GetAttacked(int _dmg) {
             if (_dmg == 0) return;
             if (IsDead) return;
 
             //執行效果
             foreach (var effect in Effects.Values) {
-                _dmg += effect.BeAtteckedExtraDmgTaken();
-                _dmg -= effect.BeAttackDamageReduction(_dmg);
+                _dmg -= effect.BeAtteckedExtraDmgTaken();
+                _dmg += effect.BeAttackDamageReduction(_dmg);
             }
-            AddHP(-_dmg);
+            if (_dmg > 0) _dmg = 0;
+            AddHP(_dmg);
             RemoveExpiredEffects();
         }
-        /// <summary>
-        /// 承受神智攻擊
-        /// </summary>
-        public void TackenSanDmgAttacked(int _dmg) {
-            if (_dmg == 0) return;
-            if (IsDead) return;
 
-            //執行效果
-            foreach (var effect in Effects.Values) {
-                _dmg += effect.BeAtteckedExtraSanDmgTaken();
-                _dmg -= effect.BeAttackSanDamageReduction(_dmg);
-            }
-            AddSanP(-_dmg);
-            RemoveExpiredEffects();
-        }
 
 
         /// <summary>
@@ -156,15 +121,7 @@ namespace TheDoor.Main {
                 return this;
             }
 
-            public Builder<T> SetMaxSanP(int _maxSanP) {
-                instance.MaxSanP = _maxSanP;
-                return this;
-            }
 
-            public Builder<T> SetCurSanP(int _curSanP) {
-                instance.CurSanP = _curSanP;
-                return this;
-            }
 
             public T Build() {
                 return instance;

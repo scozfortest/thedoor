@@ -25,10 +25,12 @@ namespace TheDoor.Main {
             var roleData = RoleData.GetData(ownedPlayerData.ID);
             PRole = new PlayerRole.Builder()
                 .SetData(roleData)
-                .SetMaxHP(roleData.HP)
-                .SetCurHP(ownedPlayerData.CurHP)
                 .SetMaxSanP(roleData.SanP)
                 .SetCurSanP(ownedPlayerData.CurSanP)
+                .SetMaxHP(roleData.HP)
+                .SetCurHP(ownedPlayerData.CurHP)
+
+
                 .Build();
         }
 
