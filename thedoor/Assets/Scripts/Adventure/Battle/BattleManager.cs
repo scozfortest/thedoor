@@ -53,7 +53,12 @@ namespace TheDoor.Main {
         }
         void OnActionTrigger(RoleAction _action) {
             _action.DoAction();
-            ERole.ScheduleActions();
+            if (_action is PlayerAction) {
+
+            } else if (_action is EnemyAction) {
+                ERole.ScheduleActions();
+            }
+
         }
     }
 }

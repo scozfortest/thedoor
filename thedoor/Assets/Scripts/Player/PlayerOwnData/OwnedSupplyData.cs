@@ -22,5 +22,12 @@ namespace TheDoor.Main {
             ID = _data.TryGetValue("ID", out value) ? Convert.ToInt32(value) : default(int);
         }
 
+        public void AddUsage(int _value) {
+            if (_value == 0) return;
+            Usage += _value;
+            if (Usage <= 0)
+                GamePlayer.Instance.RemoveOwnedData(ColEnum.Supply, UID);
+        }
+
     }
 }

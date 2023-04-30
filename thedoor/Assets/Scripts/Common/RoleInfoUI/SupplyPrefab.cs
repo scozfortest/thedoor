@@ -68,6 +68,9 @@ namespace TheDoor.Main {
             AttackPart attackPart = MyEnum.ParseEnum<AttackPart>(_name);
             PlayerAction pAction = data.GetAction(BattleManager.PRole, BattleManager.ERole, attackPart);
             BattleManager.PlayerDoAction(pAction);
+            OwnedData.AddUsage(-1);
+            BattleUI.GetInstance<BattleUI>()?.RefreshSupplyUI();
+            //GamePlayer.Instance.SaveToLoco_SupplyData();
 
         }
 

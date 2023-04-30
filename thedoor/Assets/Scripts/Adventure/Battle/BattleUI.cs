@@ -24,15 +24,19 @@ namespace TheDoor.Main {
             MyRoleStateUI = RoleStateUI.GetInstance<RoleStateUI>();
             MyDragIndicator.Init();
             MyEnemyUI.Init();
+            MySupplySpawner.LoadItemAsset(() => {
+                MySupplySpawner.SpawnItems(GamePlayer.Instance.Data.CurRole.GetSupplyDatas());
+            });
         }
 
         public void ShowUI() {
             MyRoleStateUI.ShowUI(BattleManager.PRole);
             MyEnemyUI.SetRole(BattleManager.ERole);
             MyEnemyUI.RefreshUI();
-            MySupplySpawner.LoadItemAsset(() => {
-                MySupplySpawner.SpawnItems(GamePlayer.Instance.Data.CurRole.GetSupplyDatas());
-            });
+            RefreshSupplyUI();
+        }
+        public void RefreshSupplyUI() {
+            MySupplySpawner.SpawnItems(GamePlayer.Instance.Data.CurRole.GetSupplyDatas());
         }
         public void StartDrag(Transform _startTarget, Action<string> _cb) {
             MyDragIndicator.StartDrag(_startTarget, _cb);
