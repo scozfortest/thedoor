@@ -18,6 +18,13 @@ namespace TheDoor.Main {
         [SerializeField] Text MiddleText;//等待登入文字
         [SerializeField] RectTransform QuestReportButton; // 問題回報的按鍵
 
+        public static StartUI Instance { get; private set; }
+
+        public override void Init() {
+            base.Init();
+            Instance = this;
+        }
+
 
         private void Start() {
             //編輯器材顯示Debugger物件

@@ -9,16 +9,15 @@ namespace TheDoor.Main {
         public static PlayerRole PRole { get; private set; }
         public static EnemyRole ERole { get; private set; }
         public static BattleManager Instance { get; private set; }
-        public static int CurTime { get; private set; }//目前時間
+        static PlayerAction CurPlayerAction;
 
         public void Init() {
-            CurTime = 0;
             Instance = this;
         }
         public static void ResetBattle(PlayerRole _pRole, int _monsterID) {
             PRole = _pRole;
             SetEnemyRole(_monsterID);
-            CurTime = 0;
+            TimelineBattleUI.Instance.UpdateTimeline(ERole.Actions);
         }
         static void SetEnemyRole(int _monsterID) {
             MonsterData mData = MonsterData.GetData(_monsterID);
@@ -29,36 +28,32 @@ namespace TheDoor.Main {
                 .Build();
         }
 
-        public static void PlayerDoAction(RoleAction _action) {
-            Instance.StartCoroutine(Instance.ActionSchedule(_action));
+        public static void PlayerDoAction(PlayerAction _action) {
+            CurPlayerAction = _action;
+            DoActionSchedule();
         }
-        IEnumerator ActionSchedule(RoleAction _action) {
-            int remainTime = 0;
-            List<RoleAction> scheduledActions = new List<RoleAction>();
-            do {
-                remainTime = ERole.Actions[0].Time - _action.Time;
-                if (remainTime < 0) {
-                    scheduledActions.Add(ERole.Actions[0]);
-                    ERole.Actions.RemoveAt(0);
-                } else {
-                    scheduledActions.Add(_action);
-                }
-            } while (remainTime > 0);
-            //敵方執行行動並補新的行為
-            for (int i = 0; i < scheduledActions.Count; i++) {
-                OnActionTrigger(scheduledActions[i]);
-                yield return new WaitForSeconds(1f);
+        static void DoActionSchedule() {
+
+            RoleAction nextERoleAction = ERole.Actions[0];
+            if (nextERoleAction.Time < CurPlayerAction.Time) {//敵方攻擊
+                ERole.Actions.RemoveAt(0);
+                OnActionTrigger(nextERoleAction);
+            } else {//玩家攻擊
+                nextERoleAction.ModifyTime(nextERoleAction.Time - CurPlayerAction.Time);
+                OnActionTrigger(CurPlayerAction);
             }
 
         }
-        void OnActionTrigger(RoleAction _action) {
+        static void OnActionTrigger(RoleAction _action) {
             _action.DoAction();
             if (_action is PlayerAction) {
-
+                CurPlayerAction = null;
             } else if (_action is EnemyAction) {
                 ERole.ScheduleActions();
             }
-
+            TimelineBattleUI.Instance.UpdateTimeline(ERole.Actions);
+            if (CurPlayerAction != null)
+                DoActionSchedule();
         }
     }
 }

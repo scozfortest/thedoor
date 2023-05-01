@@ -98,15 +98,15 @@ namespace TheDoor.Main {
         public static MonsterData GetData(int _id) {
             return GameDictionary.GetJsonData<MonsterData>(DataName, _id);
         }
-        public RoleAction GetAction(Role _doer, Role _target) {
+        public EnemyAction GetAction(EnemyRole _doer, Role _target) {
             var mActionDatas = MonsterActionData.GetMonsterActionDatas(ID);
             var statusEffects = new List<StatusEffect>();
-            RoleAction action = null;
+            EnemyAction action = null;
             if (mActionDatas.Count == 0) return null;
             for (int i = 0; i < 30; i++) {//跑30次還是沒有產生行動才回傳null
                 foreach (var mActionData in mActionDatas) {
                     if (!Prob.GetResult(mActionData.Probability)) continue;
-                    Role doer = _doer;
+                    EnemyRole doer = _doer;
                     var targetEffectDatas = mActionData.MyEffects;
                     if (targetEffectDatas == null || targetEffectDatas.Count == 0) continue;
                     foreach (var effectData in targetEffectDatas) {
@@ -115,7 +115,7 @@ namespace TheDoor.Main {
                         if (effect != null)
                             statusEffects.Add(effect);
                     }
-                    action = new RoleAction(doer, mActionData.Time, statusEffects);
+                    action = new EnemyAction(mActionData.Name, doer, mActionData.Time, statusEffects);
                     break;
                 }
                 if (action != null) break;

@@ -18,9 +18,12 @@ namespace TheDoor.Main {
 
 
         ScriptData CurScriptData;
+        public static ScriptUI Instance { get; private set; }
+
 
         public override void Init() {
             base.Init();
+            Instance = this;
         }
 
         public void LoadScript(string _title) {
@@ -107,10 +110,10 @@ namespace TheDoor.Main {
             WriteLog.Log(CurScriptData.EndType);
             switch (CurScriptData.EndType) {
                 case "Battle":
-                    AdventureUI.GetInstance<AdventureUI>()?.SwitchUI(AdventureUIs.Battle);
+                    AdventureUI.Instance?.SwitchUI(AdventureUIs.Battle);
                     return true;
                 case "NextDoor":
-                    AdventureUI.GetInstance<AdventureUI>()?.SwitchUI(AdventureUIs.Battle);
+                    AdventureUI.Instance?.SwitchUI(AdventureUIs.Battle);
                     return true;
                 case "NextScript":
                     if (!string.IsNullOrEmpty(CurScriptData.EndValue)) LoadScript(CurScriptData.EndValue);

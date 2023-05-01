@@ -130,6 +130,10 @@ MonoBehaviour:
     m_Address: Assets/AddressableAssets/Image
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 38e254d5a0805ef4f9a606e285c8db7d
+    m_Address: Assets/AddressableAssets/Atlas/RoleIcon.spriteatlas
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9bdcae1979219314780bb2d43aff9537, type: 2}
   m_SchemaSet:

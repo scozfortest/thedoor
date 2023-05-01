@@ -17,16 +17,16 @@ namespace TheDoor.Main {
         public override bool IsDead { get { return (CurHP <= 0 || CurSanP <= 0); } }
 
         public override void AddHP(int _value) {
+            Debug.LogError("prole get dmg=" + _value);
             base.AddHP(_value);
-            RoleStateUI.GetInstance<RoleStateUI>().RefreshState();
+            RoleStateUI.Instance.RefreshState();
         }
 
         public void AddSanP(int _value) {
             if (IsDead) return;
-
             CurSanP += _value;
-
             if (IsDead) OnDeath();
+            RoleStateUI.Instance.RefreshState();
         }
         /// <summary>
         /// 承受神智攻擊

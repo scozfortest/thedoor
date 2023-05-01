@@ -138,7 +138,7 @@ namespace TheDoor.Main {
         /// 3. 切至下一個場景
         /// </summary>
         public void StartDownloadingAssetAndGoNextScene() {
-            StartUI.GetInstance<StartUI>()?.SetMiddleText(StringData.GetUIString("Login_DownloadAsset"));
+            StartUI.Instance?.SetMiddleText(StringData.GetUIString("Login_DownloadAsset"));
             GameManager.StartDownloadAddressable(() => {//下載完資源包後執行
 
                 if (!GameManager.OfflineMode) {

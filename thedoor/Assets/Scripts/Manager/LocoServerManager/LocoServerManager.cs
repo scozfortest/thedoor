@@ -129,7 +129,7 @@ namespace TheDoor.Main {
             GamePlayer.Instance.SaveToLoco_AdventureData();
 
             //設定UI
-            CreateRoleUI.GetInstance<CreateRoleUI>().SetGainItemList(exclusiveItems, defaultItems, inheritItems);
+            CreateRoleUI.Instance.SetGainItemList(exclusiveItems, defaultItems, inheritItems);
 
         }
     }

@@ -16,17 +16,23 @@ namespace TheDoor.Main {
         [SerializeField] EnemyUI MyEnemyUI;
         [SerializeField] SupplySpawner MySupplySpawner;
         [SerializeField] DragIndicator MyDragIndicator;
+        [SerializeField] TimelineBattleUI MyTimelineBattleUI;
         RoleStateUI MyRoleStateUI;
+
+        public static BattleUI Instance { get; private set; }
 
         public override void Init() {
             base.Init();
+            Instance = this;
             MySupplySpawner.Init();
-            MyRoleStateUI = RoleStateUI.GetInstance<RoleStateUI>();
+            MyRoleStateUI = RoleStateUI.Instance;
             MyDragIndicator.Init();
             MyEnemyUI.Init();
             MySupplySpawner.LoadItemAsset(() => {
                 MySupplySpawner.SpawnItems(GamePlayer.Instance.Data.CurRole.GetSupplyDatas());
             });
+            MyTimelineBattleUI.Init();
+            MyTimelineBattleUI.LoadItemAsset();
         }
 
         public void ShowUI() {

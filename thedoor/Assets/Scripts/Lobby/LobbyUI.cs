@@ -22,6 +22,8 @@ namespace TheDoor.Main {
         [SerializeField] CreateRoleUI MyCreateRoleUI;
         [SerializeField] LobbyMenuUI MyLobbyMenuUI;
 
+        public static LobbyUI Instance { get; private set; }
+
 
         ////進遊戲不先初始化，等到要用時才初始化的UI放這裡
         //[SerializeField] AssetReference BattleUIAsset;
@@ -34,6 +36,7 @@ namespace TheDoor.Main {
             base.Init();
             MyCreateRoleUI.Init();
             SwitchUI(LobbyUIs.Default);
+            Instance = this;
         }
 
         public void SwitchUI(LobbyUIs _ui, Action _cb = null) {

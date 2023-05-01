@@ -14,7 +14,12 @@ namespace TheDoor.Main {
 
         OwnedAdventureData MyOwnedAdvData;
 
+        public static DoorNodeUI Instance { get; private set; }
 
+        public override void Init() {
+            base.Init();
+            Instance = this;
+        }
 
         public void ShowUI(OwnedAdventureData _ownedAdvData) {
             MyOwnedAdvData = _ownedAdvData;

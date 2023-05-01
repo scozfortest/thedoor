@@ -9,11 +9,11 @@ namespace TheDoor.Main {
     public class RoleActionPrefab : MonoBehaviour, IItem {
         [SerializeField] Image Icon;
 
-        RoleAction MyData;
+        EnemyAction MyData;
 
         public bool IsActive { get; set; }
 
-        public void SetData(RoleAction _data) {
+        public void SetData(EnemyAction _data) {
             MyData = _data;
             Refresh();
         }

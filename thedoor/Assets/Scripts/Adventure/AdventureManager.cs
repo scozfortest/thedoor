@@ -13,6 +13,7 @@ namespace TheDoor.Main {
         public static DoorType CurDoorType { get { return CurDoorData.DoorType; } }
         public static PlayerRole PRole { get; private set; }
 
+
         public void Init() {
             Instance = this;
             BattleManager.Init();
@@ -40,7 +41,7 @@ namespace TheDoor.Main {
         }
         static void PlayTransition() {
             AssetGet.GetImg("Door", "door1", sprite => {
-                var transitionUI = TransitionDoorUI.GetInstance<TransitionDoorUI>();
+                var transitionUI = TransitionDoorUI.Instance;
                 transitionUI?.CallTransition(sprite, "測試文字", 2, () => {
                     OpeTheDoor();
                 });
@@ -48,11 +49,11 @@ namespace TheDoor.Main {
         }
 
         static void OpeTheDoor() {
-            var adventureUI = AdventureUI.GetInstance<AdventureUI>();
+            var adventureUI = AdventureUI.Instance;
             Debug.Log("CurDoorType=" + CurDoorType);
             switch (CurDoorType) {
                 case DoorType.Encounter:
-                    var scriptUI = ScriptUI.GetInstance<ScriptUI>();
+                    var scriptUI = ScriptUI.Instance;
                     scriptUI.LoadScript(CurDoorData.Values["ScriptTitleID"].ToString());
                     adventureUI.SwitchUI(AdventureUIs.Script);
                     break;

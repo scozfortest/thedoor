@@ -1,9 +1,11 @@
 {"MonsterAction":[
-	{	"ID":"10",	"MonsterID":"1",	"Probability":"0.5",	"Time":"1",	"Target1":"Enemy",	"EffectType1":"HP",	"EffectValue1":"-20",	"EffectProb1":"1",	"Target2":"Enemy",	"EffectType2":"HP",	"EffectValue2":"-20",	"EffectProb2":"1"},
-	{	"ID":"11",	"MonsterID":"1",	"Probability":"0.3",	"Time":"1",	"Target1":"Enemy",	"EffectType1":"HP",	"EffectValue1":"-10",	"EffectProb1":"1",	"Target2":"Enemy",	"EffectType2":"Dizzy",	"EffectValue2":"-10",	"EffectProb2":"1"},
-	{	"ID":"10010",	"MonsterID":"1001",	"Probability":"1",	"Time":"1",	"Target1":"Enemy",	"EffectType1":"HP",	"EffectValue1":"-20",	"EffectProb1":"1"},
-	{	"ID":"10020",	"MonsterID":"1002",	"Probability":"1",	"Time":"1",	"Target1":"Enemy",	"EffectType1":"HP",	"EffectValue1":"-20",	"EffectProb1":"1"},
-	{	"ID":"10030",	"MonsterID":"1003",	"Probability":"1",	"Time":"1",	"Target1":"Enemy",	"EffectType1":"HP",	"EffectValue1":"-20",	"EffectProb1":"1"},
-	{	"ID":"10040",	"MonsterID":"1004",	"Probability":"1",	"Time":"1",	"Target1":"Enemy",	"EffectType1":"HP",	"EffectValue1":"-20",	"EffectProb1":"1"},
-	{	"ID":"10050",	"MonsterID":"1005",	"Probability":"1",	"Time":"1",	"Target1":"Enemy",	"EffectType1":"HP",	"EffectValue1":"-20",	"EffectProb1":"1"}
+	{	"ID":"10",	"MonsterID":"1",	"Probability":"0.5",	"Time":"4",	"Target1":"Enemy",	"EffectType1":"HP",	"EffectValue1":"-30",	"EffectProb1":"1",	"Target2":"Enemy",	"EffectType2":"HP",	"EffectValue2":"-20",	"EffectProb2":"1"},
+	{	"ID":"11",	"MonsterID":"1",	"Probability":"0.3",	"Time":"3",	"Target1":"Enemy",	"EffectType1":"HP",	"EffectValue1":"-20",	"EffectProb1":"1",	"Target2":"Enemy",	"EffectType2":"Dizzy",	"EffectValue2":"-10",	"EffectProb2":"1"},
+	{	"ID":"10010",	"MonsterID":"1001",	"Probability":"1",	"Time":"3",	"Target1":"Enemy",	"EffectType1":"HP",	"EffectValue1":"-15",	"EffectProb1":"1",	"Target2":"Enemy",	"EffectType2":"HP",	"EffectValue2":"-15",	"EffectProb2":"1"},
+	{	"ID":"10020",	"MonsterID":"1002",	"Probability":"0.3",	"Time":"2",	"Target1":"Enemy",	"EffectType1":"SanP",	"EffectValue1":"-10",	"EffectProb1":"1"},
+	{	"ID":"10021",	"MonsterID":"1002",	"Probability":"0.3",	"Time":"3",	"Target1":"Enemy",	"EffectType1":"HP",	"EffectValue1":"-20",	"EffectProb1":"1"},
+	{	"ID":"10022",	"MonsterID":"1002",	"Probability":"0.3",	"Time":"4",	"Target1":"Enemy",	"EffectType1":"HP",	"EffectValue1":"-30",	"EffectProb1":"1"},
+	{	"ID":"10030",	"MonsterID":"1003",	"Probability":"1",	"Time":"3",	"Target1":"Enemy",	"EffectType1":"HP",	"EffectValue1":"-30",	"EffectProb1":"1"},
+	{	"ID":"10040",	"MonsterID":"1004",	"Probability":"1",	"Time":"2",	"Target1":"Enemy",	"EffectType1":"HP",	"EffectValue1":"-20",	"EffectProb1":"1"},
+	{	"ID":"10050",	"MonsterID":"1005",	"Probability":"1",	"Time":"2",	"Target1":"Enemy",	"EffectType1":"HP",	"EffectValue1":"-20",	"EffectProb1":"1"}
 ]}

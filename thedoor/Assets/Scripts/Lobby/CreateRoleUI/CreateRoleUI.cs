@@ -23,6 +23,13 @@ namespace TheDoor.Main {
         List<ItemData> ExclusiveItems;
         List<ItemData> InheritItems;
 
+        public static CreateRoleUI Instance { get; private set; }
+
+        public override void Init() {
+            base.Init();
+            Instance = this;
+        }
+
         public void ShowUI(OwnedRoleData _ownedData) {
             MyOwnedRoleData = _ownedData;
             MyRoleData = RoleData.GetData(MyOwnedRoleData.ID);

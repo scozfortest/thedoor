@@ -4,25 +4,30 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace TheDoor.Main {
     public class RoleAction {
+        public string Name { get; private set; }
         public Role Doer;
         public int Time { get; private set; }//消耗時間
         public List<StatusEffect> Effects { get; private set; }
 
-        public RoleAction(Role _doer, int _time, List<StatusEffect> _effects) {
+        public RoleAction(string _name, Role _doer, int _time, List<StatusEffect> _effects) {
+            Name = _name;
             Doer = _doer;
             Time = _time;
             Effects = _effects;
         }
 
+        public void ModifyTime(int _value) {
+            Time = _value;
+        }
 
         /// <summary>
         /// 執行行動
         /// </summary>
         public virtual void DoAction() {
-            WriteLog.Log(Doer.Name + "行動");
+            WriteLog.Log(Doer.Name + "執行行動:" + Name);
             //執行效果
             foreach (var effect in Effects) {
-                WriteLog.Log(Doer.Name + "對" + effect.MyTarget.Name + "賦予" + effect.MyType);
+                WriteLog.Log("對 " + effect.MyTarget.Name + " 賦予效果:" + effect.MyType);
                 // 如果執行者或目標已經死亡就不執行效果
                 if (effect.MyTarget.IsDead || effect.Doer.IsDead) continue;
                 //對目標進行攻擊
@@ -36,7 +41,6 @@ namespace TheDoor.Main {
                     effect.MyTarget.GetAttacked(dmg);
                 }
 
-
                 //對目標進行神智攻擊
                 if (effect.MyTarget is PlayerRole) {
                     int sanDmg = effect.SanDmg();
@@ -45,7 +49,6 @@ namespace TheDoor.Main {
                         ((PlayerRole)effect.MyTarget).GetSanAttacked(sanDmg);
                     }
                 }
-
 
                 //對目標恢復生命
                 int restore = effect.Restore();

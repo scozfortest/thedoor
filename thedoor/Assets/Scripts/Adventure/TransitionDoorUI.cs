@@ -22,9 +22,12 @@ namespace TheDoor.Main {
         LoadingProgress MyLoadingProgress;//讀取進度，讀取完會執行傳入的Callback Action
         Action FinishAC;
 
+        public static TransitionDoorUI Instance { get; private set; }
+
 
         public override void Init() {
             base.Init();
+            Instance = this;
             MyLoadingProgress = new LoadingProgress(End);
         }
         void AddTransitionProgress(string _key) {

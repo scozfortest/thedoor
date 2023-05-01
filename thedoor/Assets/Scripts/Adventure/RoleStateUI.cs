@@ -18,9 +18,11 @@ namespace TheDoor.Main {
         [SerializeField] EffectSpawner DebuffSpawner;
 
         PlayerRole MyRole;
+        public static RoleStateUI Instance { get; private set; }
 
         public override void Init() {
             base.Init();
+            Instance = this;
             BuffSpawner.Init();
             DebuffSpawner.Init();
         }

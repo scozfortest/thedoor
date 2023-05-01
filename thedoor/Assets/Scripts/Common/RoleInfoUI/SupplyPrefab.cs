@@ -50,26 +50,27 @@ namespace TheDoor.Main {
         private void Update() {
             if (CurDragState == DragState.Start) {
                 if (Mathf.Abs(((Vector2)Input.mousePosition - StartPos).y) > VerticalDistToDragCard) {
-                    BattleUI.GetInstance<BattleUI>().StartDrag(transform, UseSupplyToTarget);
+                    BattleUI.Instance.StartDrag(transform, UseSupplyToTarget);
                     CurDragState = DragState.Dragging;
                     CardBG.material = OutlineMaterial;
                 }
             }
             if (CurDragState != DragState.End && Input.GetMouseButtonUp(0)) {
                 CurDragState = DragState.End;
-                BattleUI.GetInstance<BattleUI>().EndDrag();
+                BattleUI.Instance.EndDrag();
                 CardBG.material = null;
             }
         }
 
         void UseSupplyToTarget(string _name) {
-            Debug.Log("UseSupplyToTarget=" + _name);
+
             var data = SupplyData.GetData(OwnedData.ID);
+            WriteLog.LogFormat("對{0}部位 使用道具: {1}", _name, data.Name);
             AttackPart attackPart = MyEnum.ParseEnum<AttackPart>(_name);
             PlayerAction pAction = data.GetAction(BattleManager.PRole, BattleManager.ERole, attackPart);
             BattleManager.PlayerDoAction(pAction);
             OwnedData.AddUsage(-1);
-            BattleUI.GetInstance<BattleUI>()?.RefreshSupplyUI();
+            BattleUI.Instance?.RefreshSupplyUI();
             //GamePlayer.Instance.SaveToLoco_SupplyData();
 
         }

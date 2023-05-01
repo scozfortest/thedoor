@@ -98,12 +98,12 @@ namespace TheDoor.Main {
                 var targetEffectDatas = supplyEffectData.MyEffects;
                 if (targetEffectDatas == null || targetEffectDatas.Count == 0) continue;
                 foreach (var effectData in targetEffectDatas) {
-                    var effect = EffectFactory.Create(effectData.Probability, effectData.EffectType, (int)effectData.GetValue(0), _doer, _target);
+                    var effect = EffectFactory.Create(effectData.Probability, effectData.EffectType, (int)effectData.GetValue(0), _doer, target);
                     if (effect != null)
                         statusEffects.Add(effect);
                 }
             }
-            return new PlayerAction(_doer, Time, statusEffects, _attackPart);
+            return new PlayerAction(Name, _doer, Time, statusEffects, _attackPart);
         }
         List<SupplyEffectData> GetSupplyEffects() {
             return SupplyEffectData.GetSupplyEffectDatas(ID);

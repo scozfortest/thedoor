@@ -31,9 +31,12 @@ namespace TheDoor.Main {
 
         //其他UI
         public DoorNodeUI MyDoorNodeUI { get; set; }
+        public static AdventureUI Instance { get; private set; }
+
 
         public override void Init() {
             base.Init();
+            Instance = this;
             MyScriptUI.Init();
             MyRoleStateUI.Init();
             MyTransitionDoorUI.Init();
@@ -47,7 +50,7 @@ namespace TheDoor.Main {
             if (LastPopupUI != null)
                 LastPopupUI.SetActive(false);//關閉彈出介面
 
-            RoleInfoUI.GetInstance<RoleInfoUI>()?.SetActive(false);//所有介面預設都不會開啟腳色界面
+            RoleInfoUI.Instance?.SetActive(false);//所有介面預設都不會開啟腳色界面
 
             switch (_ui) {
                 case AdventureUIs.Default://本來在其他介面時，可以傳入Default來關閉彈出介面並顯示回預設介面

@@ -16,8 +16,14 @@ namespace TheDoor.Main {
         [SerializeField] List<Image> HitGOs;//頭、身、四肢
         [SerializeField] Material OutlineMaterial;
 
+
+        public static EnemyUI Instance { get; private set; }
         EnemyRole ERole;
 
+        public override void Init() {
+            base.Init();
+            Instance = this;
+        }
 
         public void SetRole(EnemyRole _enemyRole) {
             Debug.Log("SetRole");

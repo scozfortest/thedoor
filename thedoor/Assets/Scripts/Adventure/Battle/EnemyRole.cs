@@ -9,7 +9,7 @@ namespace TheDoor.Main {
         public override string Name { get { return MyData.Name; } }
         public override string Ref { get { return MyData.Ref; } }
 
-        public List<RoleAction> Actions { get; private set; } = new List<RoleAction>();
+        public List<EnemyAction> Actions { get; private set; } = new List<EnemyAction>();
 
 
         public void ScheduleActions() {
@@ -24,7 +24,7 @@ namespace TheDoor.Main {
 
         public override void AddHP(int _value) {
             base.AddHP(_value);
-            EnemyUI.GetInstance<EnemyUI>()?.RefreshUI();
+            EnemyUI.Instance?.RefreshUI();
         }
 
 
@@ -35,6 +35,7 @@ namespace TheDoor.Main {
         }
         public class Builder : Role.Builder<EnemyRole> {
             public Builder SetData(MonsterData _data) {
+                WriteLog.Log("產生怪物:" + _data.Name);
                 instance.MyData = _data;
                 instance.ScheduleActions();
                 return this;

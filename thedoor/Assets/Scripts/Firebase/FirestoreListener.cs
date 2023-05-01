@@ -150,7 +150,7 @@ namespace TheDoor.Main {
                     break;
                 case ColEnum.Supply:
                     GamePlayer.Instance.SetOwnedDatas<OwnedSupplyData>(_col, _datas);
-                    var roleInfo = RoleInfoUI.GetInstance<RoleInfoUI>();
+                    var roleInfo = RoleInfoUI.Instance;
                     if (roleInfo != null && roleInfo.gameObject.activeInHierarchy)
                         roleInfo.RefreshSupply();
                     break;

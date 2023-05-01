@@ -22,10 +22,13 @@ namespace TheDoor.Main {
 
         PlayerRole PRole;
         OwnedRoleData OwnedRoleData;
+        public static RoleInfoUI Instance { get; private set; }
+
 
 
         public override void Init() {
             base.Init();
+            Instance = this;
             MyTalentSpawner.Init();
             MyEffectSpawner.Init();
             MySupplySpawner.Init();

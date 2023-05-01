@@ -7,39 +7,40 @@ using Scoz.Func;
 namespace TheDoor.Main {
     public class TimelineBattleUI : ItemSpawner_Remote<RoleActionPrefab> {
 
-        private PlayerRole PRole;
-        private EnemyRole ERole;
+        [SerializeField] int BaseUnit = 100;
 
-
-        public TimelineBattleUI(PlayerRole _pRole, EnemyRole _eRole) {
-            PRole = _pRole;
-            ERole = _eRole;
-        }
+        public static TimelineBattleUI Instance { get; private set; }
         public override void Init() {
             base.Init();
+            Instance = this;
         }
-        public void UpdateTimeline(List<Action> _actions, int _curTime) {
-
+        public void UpdateTimeline(List<EnemyAction> _actions) {
+            SpawnItems(_actions);
         }
 
-        void SpawnItems() {
+        void SpawnItems(List<EnemyAction> _actions) {
             if (!LoadItemFinished) {
                 WriteLog.LogError("RoleActionPrefab尚未載入完成");
                 return;
             }
             InActiveAllItem();
-            var actions = ERole.Actions;
-            if (actions != null && actions.Count > 0) {
-                for (int i = 0; i < actions.Count; i++) {
+            int curTime = 0;
+            if (_actions != null && _actions.Count > 0) {
+                for (int i = 0; i < _actions.Count; i++) {
                     if (i < ItemList.Count) {
-                        ItemList[i].SetData(actions[i]);
+                        ItemList[i].SetData(_actions[i]);
                         ItemList[i].IsActive = true;
                         ItemList[i].gameObject.SetActive(true);
                     } else {
                         var item = Spawn();
-                        item.SetData(actions[i]);
+                        item.SetData(_actions[i]);
                     }
                     ItemList[i].transform.SetParent(ParentTrans);
+                    //設定位置
+                    var rectTrans = ItemList[i].GetComponent<RectTransform>();
+                    int posY = curTime - _actions[i].Time * BaseUnit;
+                    rectTrans.anchoredPosition = new Vector2(0, posY);
+                    curTime = posY;
                 }
             }
         }

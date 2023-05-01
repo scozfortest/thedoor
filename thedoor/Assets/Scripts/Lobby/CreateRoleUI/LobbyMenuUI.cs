@@ -65,7 +65,7 @@ namespace TheDoor.Main {
         public void CreateRole() {
 
             LocoServerManager.CreateAdventure();
-            LobbyUI.GetInstance<LobbyUI>()?.SwitchUI(LobbyUIs.CreateRole);
+            LobbyUI.Instance?.SwitchUI(LobbyUIs.CreateRole);
 
             /*
             PopupUI.ShowLoading(string.Format("Loading"));
