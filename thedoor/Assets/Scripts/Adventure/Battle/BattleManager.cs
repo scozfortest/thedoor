@@ -17,7 +17,7 @@ namespace TheDoor.Main {
         public static void ResetBattle(PlayerRole _pRole, int _monsterID) {
             PRole = _pRole;
             SetEnemyRole(_monsterID);
-            TimelineBattleUI.Instance.UpdateTimeline(ERole.Actions);
+            TimelineBattleUI.Instance.SpawnActions(ERole.Actions);
         }
         static void SetEnemyRole(int _monsterID) {
             MonsterData mData = MonsterData.GetData(_monsterID);
@@ -36,6 +36,7 @@ namespace TheDoor.Main {
 
             RoleAction nextERoleAction = ERole.Actions[0];
             if (nextERoleAction.Time < CurPlayerAction.Time) {//敵方攻擊
+                nextERoleAction.ModifyTime(0);//設定為0代表該行動已經可以觸發，在TimelineBattleUI.Instance.PassTime結束階段會移除Time為0的ActionPrefab
                 ERole.Actions.RemoveAt(0);
                 OnActionTrigger(nextERoleAction);
             } else {//玩家攻擊
@@ -49,11 +50,14 @@ namespace TheDoor.Main {
             if (_action is PlayerAction) {
                 CurPlayerAction = null;
             } else if (_action is EnemyAction) {
-                ERole.ScheduleActions();
+                var newEAction = ERole.AddNewAction();
+                TimelineBattleUI.Instance.SpawnNewAction(newEAction);
             }
-            TimelineBattleUI.Instance.UpdateTimeline(ERole.Actions);
-            if (CurPlayerAction != null)
-                DoActionSchedule();
+            TimelineBattleUI.Instance.PassTime(_action.Time, () => {
+                if (CurPlayerAction != null)
+                    DoActionSchedule();
+            });
+
         }
     }
 }

@@ -9,7 +9,7 @@ namespace TheDoor.Main {
     public class RoleActionPrefab : MonoBehaviour, IItem {
         [SerializeField] Image Icon;
 
-        EnemyAction MyData;
+        public EnemyAction MyData { get; private set; }
 
         public bool IsActive { get; set; }
 

@@ -11,8 +11,14 @@ namespace TheDoor.Main {
 
         public List<EnemyAction> Actions { get; private set; } = new List<EnemyAction>();
 
+        public EnemyAction AddNewAction() {
+            var action = MyData.GetAction(this, BattleManager.PRole);
+            if (action == null) return null;
+            Actions.Add(action);
+            return action;
+        }
 
-        public void ScheduleActions() {
+        void ScheduleNewActions() {
             int needCount = GameSettingData.GetInt(GameSetting.Monster_ScheduleActionCount);
             int addCount = needCount - Actions.Count;
             for (int i = 0; i < addCount; i++) {
@@ -37,7 +43,7 @@ namespace TheDoor.Main {
             public Builder SetData(MonsterData _data) {
                 WriteLog.Log("產生怪物:" + _data.Name);
                 instance.MyData = _data;
-                instance.ScheduleActions();
+                instance.ScheduleNewActions();
                 return this;
             }
         }
