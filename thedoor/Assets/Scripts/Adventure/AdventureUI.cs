@@ -21,6 +21,7 @@ namespace TheDoor.Main {
         [SerializeField] TransitionDoorUI MyTransitionDoorUI;
         [SerializeField] RestUI MyRestUI;
         [SerializeField] BattleUI MyBattleUI;
+        [SerializeField] GameOverUI MyGameOverUI;
 
         //進遊戲不先初始化，等到要用時才初始化的UI放這裡
         //[SerializeField] AssetReference BattleUIAsset;
@@ -42,6 +43,7 @@ namespace TheDoor.Main {
             MyTransitionDoorUI.Init();
             MyRestUI.Init();
             MyBattleUI.Init();
+            MyGameOverUI.Init();
             AdventureManager.GoNextDoor();
         }
 
