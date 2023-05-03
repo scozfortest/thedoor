@@ -72,9 +72,44 @@ namespace TheDoor.Main {
             return effects;
         }
 
-        public List<OwnedSupplyData> GetSupplyDatas() {
+        public List<OwnedSupplyData> GetSupplyDatas(bool _getRoleMeleeData, params SupplyData.Timing[] _timings) {
             List<OwnedSupplyData> supplyDatas = GamePlayer.Instance.GetOwnedDatas<OwnedSupplyData>(ColEnum.Supply);
-            supplyDatas = supplyDatas.FindAll(a => a.OwnRoleUID == UID);
+            if (_getRoleMeleeData)
+                supplyDatas.AddRange(GetMeleeSupplyDatas());
+
+            if (_timings == null || _timings.Length == 0)
+                supplyDatas = supplyDatas.FindAll(a => a.OwnRoleUID == UID);
+            else {
+                supplyDatas = supplyDatas.FindAll(a => {
+                    if (a.OwnRoleUID != UID)
+                        return false;
+                    var supplyData = SupplyData.GetData(a.ID);
+                    for (int i = 0; i < _timings.Length; i++) {
+                        if (supplyData.BelongToTiming(_timings[i]))
+                            return true;
+                    }
+                    return false;
+                });
+            }
+            return supplyDatas;
+        }
+        List<OwnedSupplyData> GetMeleeSupplyDatas() {
+            List<OwnedSupplyData> supplyDatas = new List<OwnedSupplyData>();
+            var roleData = RoleData.GetData(ID);
+            foreach (var id in roleData.Melees) {
+                var supplyData = SupplyData.GetData(id);
+                if (supplyData == null) continue;
+                Dictionary<string, object> supplyDataDic = new Dictionary<string, object>();
+                supplyDataDic.Add("UID", GamePlayer.Instance.GetNextUID("Supply"));
+                supplyDataDic.Add("OwnerUID", GamePlayer.Instance.Data.UID);
+                supplyDataDic.Add("CreateTime", GameManager.Instance.NowTime);
+
+                supplyDataDic.Add("ID", id);
+                supplyDataDic.Add("Usage", -1);
+                supplyDataDic.Add("OwnRoleUID", UID);
+                var ownedSupplyData = new OwnedSupplyData(supplyDataDic);
+                supplyDatas.Add(ownedSupplyData);
+            }
             return supplyDatas;
         }
 

@@ -7,32 +7,34 @@ namespace TheDoor.Main {
         public string Name { get; private set; }
         public Role Doer;
         public int Time { get; private set; }//消耗時間
+        public int RemainTime { get; private set; }//距離行動剩餘需求時間
         public List<StatusEffect> Effects { get; private set; }
 
         public RoleAction(string _name, Role _doer, int _time, List<StatusEffect> _effects) {
             Name = _name;
             Doer = _doer;
             Time = _time;
+            RemainTime = _time;
             Effects = _effects;
         }
 
-        public void ModifyTime(int _value) {
-            Time = _value;
+        public void ModifyRemainTime(int _value) {
+            RemainTime = _value;
         }
 
         /// <summary>
         /// 執行行動
         /// </summary>
         public virtual void DoAction() {
-            WriteLog.Log(Doer.Name + "執行行動:" + Name);
+            WriteLog.LogColor(Doer.Name + "執行行動:" + Name, WriteLog.LogType.Battle);
             //執行效果
             foreach (var effect in Effects) {
-                WriteLog.Log("對 " + effect.MyTarget.Name + " 賦予效果:" + effect.MyType);
+                WriteLog.LogColor("對 " + effect.MyTarget.Name + " 賦予效果:" + effect.MyType, WriteLog.LogType.Battle);
                 // 如果執行者或目標已經死亡就不執行效果
                 if (effect.MyTarget.IsDead || effect.Doer.IsDead) continue;
                 //對目標進行攻擊
                 if (!Prob.GetResult(effect.Probability)) {
-                    Debug.LogError("Miss");
+                    WriteLog.LogColor(Name + " 賦予效果:" + effect.MyType + "失敗", WriteLog.LogType.Battle);
                     continue;
                 }
                 int dmg = effect.Dmg();

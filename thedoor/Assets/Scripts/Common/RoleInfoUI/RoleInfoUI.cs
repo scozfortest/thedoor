@@ -56,7 +56,7 @@ namespace TheDoor.Main {
 
         public void RefreshSupply() {
             MySupplySpawner.LoadItemAsset(() => {
-                MySupplySpawner.SpawnItems(OwnedRoleData.GetSupplyDatas());
+                MySupplySpawner.SpawnItems(OwnedRoleData.GetSupplyDatas(true));
             });
         }
         public void RefreshTalent() {

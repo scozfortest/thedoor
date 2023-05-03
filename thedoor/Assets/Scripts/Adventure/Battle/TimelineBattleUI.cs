@@ -16,10 +16,10 @@ namespace TheDoor.Main {
         public override void Init() {
             base.Init();
             Instance = this;
-            CurTime = 0;
         }
 
-        public void SpawnActions(List<EnemyAction> _actions) {
+        public void ResetBattleUI(List<EnemyAction> _actions) {
+            CurTime = 0;
             if (!LoadItemFinished) {
                 WriteLog.LogError("RoleActionPrefab尚未載入完成");
                 return;
@@ -55,11 +55,15 @@ namespace TheDoor.Main {
             rectTrans.anchoredPosition = new Vector2(0, posY);
             CurTime = posY;
         }
+
+        /// <summary>
+        /// 將剩餘耗時為0的ActionPrefab從清單中移除並刪除物件
+        /// </summary>
         public void RemoveOldActions() {
             if (ItemList == null || ItemList.Count == 0) return;
             List<int> removeIndex = new List<int>();
             for (int i = 0; i < ItemList.Count; i++) {
-                if (ItemList[i].MyData.Time <= 0)
+                if (ItemList[i].MyData.RemainTime <= 0)
                     removeIndex.Add(i);
             }
             for (int i = removeIndex.Count - 1; i >= 0; i--) {
@@ -67,18 +71,20 @@ namespace TheDoor.Main {
                 ItemList.RemoveAt(removeIndex[i]);
             }
         }
-
         public void PassTime(int _passTime, Action _ac) {
             CurTime += _passTime;
             for (int i = 0; i < ItemList.Count; i++) {
                 var rectTrans = ItemList[i].GetComponent<RectTransform>();
                 float targetPosY = rectTrans.anchoredPosition.y + _passTime * BaseUnit;
-                rectTrans.DOAnchorPosY(targetPosY, 0.5f, true);
+                var doTween = rectTrans.DOAnchorPosY(targetPosY, 0.5f, true);
+                //最後一個Item移動到位後callback
+                if (i == ItemList.Count - 1) {
+                    doTween.OnComplete(() => {//完成動畫時執行
+                        RemoveOldActions();
+                        _ac?.Invoke();
+                    });
+                }
             }
-            CoroutineJob.Instance.StartNewAction(() => {
-                RemoveOldActions();
-                _ac?.Invoke();
-            }, 1f);
 
         }
 

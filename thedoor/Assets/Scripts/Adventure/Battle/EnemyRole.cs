@@ -37,11 +37,10 @@ namespace TheDoor.Main {
 
         protected override void OnDeath() {
             base.OnDeath();
-            Debug.Log("敵人已死亡");
         }
         public class Builder : Role.Builder<EnemyRole> {
             public Builder SetData(MonsterData _data) {
-                WriteLog.Log("產生怪物:" + _data.Name);
+                WriteLog.LogColor("產生怪物:" + _data.Name, WriteLog.LogType.Battle);
                 instance.MyData = _data;
                 instance.ScheduleNewActions();
                 return this;

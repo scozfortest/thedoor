@@ -1,3 +1,4 @@
+using Scoz.Func;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,8 +31,6 @@ namespace TheDoor.Main {
                 .SetCurSanP(ownedPlayerData.CurSanP)
                 .SetMaxHP(roleData.HP)
                 .SetCurHP(ownedPlayerData.CurHP)
-
-
                 .Build();
         }
 
@@ -50,7 +49,7 @@ namespace TheDoor.Main {
 
         static void OpeTheDoor() {
             var adventureUI = AdventureUI.Instance;
-            Debug.Log("CurDoorType=" + CurDoorType);
+            WriteLog.LogColor(CurDoorType + "事件", WriteLog.LogType.Adventure);
             switch (CurDoorType) {
                 case DoorType.Encounter:
                     var scriptUI = ScriptUI.Instance;
@@ -71,6 +70,9 @@ namespace TheDoor.Main {
                 default:
                     break;
             }
+        }
+        public static void GameOver() {
+
         }
 
 

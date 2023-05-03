@@ -20,7 +20,7 @@ namespace TheDoor.Main {
 
     public class OwnedHistoryData : OwnedData {
 
-
+        [ScozSerializable] public List<int> InheritSupplies { get; private set; } = new List<int>();//繼承道具ID清單
         //限購商品
         public List<string> LimitShopItems = new List<string>();//已購買的限量商品UID清單
         public List<string> DailyLimitShopItems = new List<string>();//已購買的每日限量商品UID清單
@@ -38,6 +38,17 @@ namespace TheDoor.Main {
         public override void SetData(Dictionary<string, object> _data) {
             base.SetData(_data);
             object value;
+
+            //設定繼承道具資料
+            InheritSupplies.Clear();
+            List<object> inheritSupplyListObj = _data.TryGetValue("InheritSupplies", out value) ? value as List<object> : null;
+            if (inheritSupplyListObj != null) {
+                for (int i = 0; i < inheritSupplyListObj.Count; i++) {
+                    int supplyID = Convert.ToInt32(inheritSupplyListObj);
+                    InheritSupplies.Add(supplyID);
+                }
+            }
+
 
             //已購買的限量商品UID清單
             try {
@@ -151,6 +162,19 @@ namespace TheDoor.Main {
         public void SetBougthShopUID(string bougthShopUID) {
             BougthShopUID = bougthShopUID;
             FirebaseManager.SetBougthShopUID(bougthShopUID, null);
+        }
+
+        /// <summary>
+        /// 增加繼承道具清單
+        /// </summary>
+        public void AddInheritedSupply(List<int> _ids) {
+            InheritSupplies.AddRange(_ids);
+        }
+        /// <summary>
+        /// 清空繼承道具清單
+        /// </summary>
+        public void ClearInheritSupplies() {
+            InheritSupplies.Clear();
         }
     }
 }

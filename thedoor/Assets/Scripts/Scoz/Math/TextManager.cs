@@ -96,6 +96,18 @@ namespace Scoz.Func {
             }
             return hashSet;
         }
+        public static HashSet<int> GetIntHashSetFromSplitStr(string _s, char _char) {
+            HashSet<int> hashSet = new HashSet<int>();
+            string[] strs = _s.Split(_char);
+            for (int i = 0; i < strs.Length; i++) {
+                string t = strs[i];
+                if (int.TryParse(t, out int value)) {
+                    if (!hashSet.Contains(value))
+                        hashSet.Add(value);
+                }
+            }
+            return hashSet;
+        }
         /// <summary>
         /// 字串以字元分割轉字串List
         /// </summary>
@@ -167,6 +179,7 @@ namespace Scoz.Func {
             string resultStr = "<color=#" + _colorColde + ">" + _value + "</color>";
             return resultStr;
         }
+
         public static string GetTransAddressStr(Transform _trans) {
             if (_trans == null)
                 return "";

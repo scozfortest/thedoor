@@ -1,3 +1,4 @@
+using Scoz.Func;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace TheDoor.Main {
 
 
         public virtual void AddHP(int _value) {
-            Debug.Log("_value=" + _value);
+            WriteLog.LogColor(Name + "HP增加:" + _value, WriteLog.LogType.Battle);
             if (IsDead) return;
 
             CurHP += _value;
@@ -30,6 +31,7 @@ namespace TheDoor.Main {
 
 
         protected virtual void OnDeath() {
+            WriteLog.LogColor(Name + "死亡", WriteLog.LogType.Battle);
         }
 
 

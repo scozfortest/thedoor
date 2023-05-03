@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Scoz.Func;
 namespace TheDoor.Main {
     public class PlayerRole : Role {
 
@@ -17,7 +18,6 @@ namespace TheDoor.Main {
         public override bool IsDead { get { return (CurHP <= 0 || CurSanP <= 0); } }
 
         public override void AddHP(int _value) {
-            Debug.LogError("prole get dmg=" + _value);
             base.AddHP(_value);
             RoleStateUI.Instance.RefreshState();
         }
@@ -25,6 +25,7 @@ namespace TheDoor.Main {
         public void AddSanP(int _value) {
             if (IsDead) return;
             CurSanP += _value;
+            WriteLog.LogColor(Name + "SanP增加:" + _value, WriteLog.LogType.Battle);
             if (IsDead) OnDeath();
             RoleStateUI.Instance.RefreshState();
         }
@@ -46,7 +47,6 @@ namespace TheDoor.Main {
         }
         protected override void OnDeath() {
             base.OnDeath();
-            Debug.Log("玩家已死亡");
         }
 
 

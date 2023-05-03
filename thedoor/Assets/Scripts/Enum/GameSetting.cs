@@ -29,5 +29,6 @@ public enum GameSetting
 	Adventure_DoorTypeWeight,
 	Adventure_ScriptWeight,
 	Role_DefaultSupplyCount,
+	Role_InheritSupplyCount,
 	Monster_ScheduleActionCount,
 }

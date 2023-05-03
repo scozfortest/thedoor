@@ -28,7 +28,18 @@ namespace TheDoor.Main {
             playerDataDic.Add("Ban", false);
             playerDataDic.Add("DeviceUID", SystemInfo.deviceUniqueIdentifier);
             GamePlayer.Instance.SetMainPlayerData(playerDataDic);
+
+
+            //設定玩家資料
+            Dictionary<string, object> historyDataDic = new Dictionary<string, object>();
+            historyDataDic.Add("UID", playerDataDic["UID"]);
+            historyDataDic.Add("CreateTime", GameManager.Instance.NowTime);
+            historyDataDic.Add("InheritSupplies", null);
+            GamePlayer.Instance.SetOwnedData<OwnedHistoryData>(ColEnum.History, historyDataDic);
+
+            //存本地資料
             GamePlayer.Instance.SaveToLoco_PlayerData();
+            GamePlayer.Instance.SaveToLoco_HistoryData();
         }
 
         /// <summary>
@@ -57,15 +68,25 @@ namespace TheDoor.Main {
             int defaultSupplyCount = GameSettingData.GetInt(GameSetting.Role_DefaultSupplyCount);
             var defaultSuppies = SupplyData.GetRndDatas(defaultSupplyCount);
             var exclusiveSupplies = new List<SupplyData>();
+            var inheritSupplies = new List<SupplyData>();
             foreach (var id in roleData.Supplies) {
                 var supplyData = SupplyData.GetData(id);
                 exclusiveSupplies.Add(supplyData);
             }
+            foreach (var id in GamePlayer.Instance.MyHistoryData.InheritSupplies) {
+                var supplyData = SupplyData.GetData(id);
+                inheritSupplies.Add(supplyData);
+            }
+            GamePlayer.Instance.MyHistoryData.ClearInheritSupplies();
+
             foreach (var supplyData in defaultSuppies) {
                 defaultItems.Add(new ItemData(ItemType.Supply, supplyData.ID));
             }
             foreach (var supplyData in exclusiveSupplies) {
                 exclusiveItems.Add(new ItemData(ItemType.Supply, supplyData.ID));
+            }
+            foreach (var supplyData in inheritSupplies) {
+                inheritItems.Add(new ItemData(ItemType.Supply, supplyData.ID));
             }
 
 
@@ -84,6 +105,7 @@ namespace TheDoor.Main {
                 supplyDataDic.Add("OwnRoleUID", GamePlayer.Instance.Data.CurRoleUID);
                 supplyListDic.Add(supplyDataDic);
             }
+
             GamePlayer.Instance.SetOwnedDatas<OwnedSupplyData>(ColEnum.Supply, supplyListDic);
 
 
@@ -123,6 +145,7 @@ namespace TheDoor.Main {
 
             //存本地資料
             GamePlayer.Instance.SaveSettingToLoco();
+            GamePlayer.Instance.SaveToLoco_HistoryData();
             GamePlayer.Instance.SaveToLoco_PlayerData();
             GamePlayer.Instance.SaveToLoco_RoleData();
             GamePlayer.Instance.SaveToLoco_SupplyData();
@@ -131,6 +154,34 @@ namespace TheDoor.Main {
             //設定UI
             CreateRoleUI.Instance.SetGainItemList(exclusiveItems, defaultItems, inheritItems);
 
+        }
+
+        /// <summary>
+        /// 移除腳色
+        /// </summary>
+        public static void RemoveCurUseRole() {
+            //移除冒險
+            GamePlayer.Instance.RemoveOwnedData(ColEnum.Adventure, GamePlayer.Instance.Data.CurRole.MyAdventure.UID);
+            //移除道具並取隨機道具作為繼承道具
+            var ownedSupplies = GamePlayer.Instance.Data.CurRole.GetSupplyDatas(false);
+            var getRndSupplies = Prob.GetRandNoDuplicatedTFromTList(ownedSupplies, GameSettingData.GetInt(GameSetting.Role_InheritSupplyCount));
+            List<int> inheritSupplyIDs = getRndSupplies.ConvertAll(a => a.ID);
+            var ownedHistoryData = GamePlayer.Instance.MyHistoryData;
+            ownedHistoryData.AddInheritedSupply(inheritSupplyIDs);
+            foreach (var data in ownedSupplies) {
+                GamePlayer.Instance.RemoveOwnedData(ColEnum.Supply, data.UID);
+            }
+            //移除腳色
+            GamePlayer.Instance.RemoveOwnedData(ColEnum.Role, GamePlayer.Instance.Data.CurRoleUID);
+            GamePlayer.Instance.Data.SetCurRole_Loco("");
+
+            //存本地資料
+            GamePlayer.Instance.SaveSettingToLoco();
+            GamePlayer.Instance.SaveToLoco_HistoryData();
+            GamePlayer.Instance.SaveToLoco_PlayerData();
+            GamePlayer.Instance.SaveToLoco_RoleData();
+            GamePlayer.Instance.SaveToLoco_SupplyData();
+            GamePlayer.Instance.SaveToLoco_AdventureData();
         }
     }
 }

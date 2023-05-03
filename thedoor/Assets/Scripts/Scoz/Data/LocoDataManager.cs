@@ -10,6 +10,7 @@ namespace Scoz.Func {
     public enum LocoDataName {
         PlayerSetting,//玩家設定
         Player,
+        History,
         Role,
         Supply,
         Adventure,

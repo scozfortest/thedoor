@@ -34,6 +34,10 @@ namespace TheDoor.Main {
                     dic = (Dictionary<string, object>)ScozJsonConverter.ParseJson(json);
                     SetMainPlayerData(dic);
                     break;
+                case LocoDataName.History:
+                    dic = (Dictionary<string, object>)ScozJsonConverter.ParseJson(json);
+                    SetOwnedData<OwnedHistoryData>(ColEnum.History, dic);
+                    break;
                 case LocoDataName.Role:
                     objectList = (List<object>)ScozJsonConverter.ParseJson(json);
                     list = objectList.Cast<Dictionary<string, object>>().ToList();
@@ -61,6 +65,11 @@ namespace TheDoor.Main {
         public void SaveToLoco_PlayerData() {
             LocoDataManager.SaveDataToLoco(LocoDataName.Player, Data.ToScozJson());
         }
+        public void SaveToLoco_HistoryData() {
+            OwnedHistoryData ownedHistoryData = GetOwnedData<OwnedHistoryData>(ColEnum.History, Data.UID);
+            JSONObject jsObj = ownedHistoryData.ToScozJson();
+            LocoDataManager.SaveDataToLoco(LocoDataName.History, jsObj);
+        }
         public void SaveToLoco_RoleData() {
             List<OwnedRoleData> ownedRoleDatas = GetOwnedDatas<OwnedRoleData>(ColEnum.Role);
             JSONArray jsArray = new JSONArray();
@@ -69,6 +78,7 @@ namespace TheDoor.Main {
             }
             LocoDataManager.SaveDataToLoco(LocoDataName.Role, jsArray);
         }
+
 
         public void SaveToLoco_SupplyData() {
             List<OwnedSupplyData> ownedSupplyDatas = GetOwnedDatas<OwnedSupplyData>(ColEnum.Supply);

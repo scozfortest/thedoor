@@ -44,6 +44,7 @@ namespace TheDoor.Main {
         }
 
         public void OnPointerDown(PointerEventData eventData) {
+            if (BattleManager.CurBattleState != BattleState.PlayerTurn) return;//玩家操作階段才可以使用卡牌
             StartPos = eventData.position;
             CurDragState = DragState.Start;
         }

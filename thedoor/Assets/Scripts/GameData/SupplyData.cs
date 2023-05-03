@@ -22,14 +22,17 @@ namespace TheDoor.Main {
         public ItemType MyItemType { get; } = ItemType.Supply;
         public string Ref { get; set; }
         public bool Lock { get; private set; }
-        public string[] Tags { get; private set; }
         public int Rank { get; private set; }
         public int ExtendHP { get; private set; }
         public int ExtendSanP { get; private set; }
-        public bool UseInBattle { get; private set; }
-        public bool UseInRest { get; private set; }
         public int Usage { get; private set; }
         public int Time { get; private set; }
+        HashSet<string> Tags;//道具分類
+        HashSet<Timing> Timings;//使用時機
+        public enum Timing {
+            Battle,
+            Rest,
+        }
 
 
         protected override void GetDataFromJson(JsonData _item, string _dataName) {
@@ -44,7 +47,7 @@ namespace TheDoor.Main {
                         Ref = item[key].ToString();
                         break;
                     case "Tags":
-                        Tags = item[key].ToString().Split(',');
+                        Tags = TextManager.GetHashSetFromSplitStr(item[key].ToString(), ',');
                         break;
                     case "Lock":
                         Lock = bool.Parse(item[key].ToString());
@@ -58,11 +61,8 @@ namespace TheDoor.Main {
                     case "ExtendSanP":
                         ExtendSanP = int.Parse(item[key].ToString());
                         break;
-                    case "UseInBattle":
-                        UseInBattle = bool.Parse(item[key].ToString());
-                        break;
-                    case "UseInRest":
-                        UseInRest = bool.Parse(item[key].ToString());
+                    case "Timing":
+                        Timings = TextManager.GetEnumHashSetFromSplitStr<Timing>(item[key].ToString(), ',');
                         break;
                     case "Usage":
                         Usage = int.Parse(item[key].ToString());
@@ -107,6 +107,10 @@ namespace TheDoor.Main {
         }
         List<SupplyEffectData> GetSupplyEffects() {
             return SupplyEffectData.GetSupplyEffectDatas(ID);
+        }
+        public bool BelongToTiming(Timing _timing) {
+            if (Timings == null) return false;
+            return Timings.Contains(_timing);
         }
         public bool BelongToTag(string _tag) {
             if (Tags == null) return false;

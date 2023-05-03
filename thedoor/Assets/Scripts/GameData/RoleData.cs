@@ -35,7 +35,8 @@ namespace TheDoor.Main {
         public ItemType MyItemType { get; } = ItemType.Role;
 
         public List<int> Supplies = new List<int>();
-        public List<string> ExclusiveScripts = new List<string>();
+        public HashSet<string> ExclusiveScripts = new HashSet<string>();
+        public HashSet<int> Melees = new HashSet<int>();
 
         protected override void GetDataFromJson(JsonData _item, string _dataName) {
             DataName = _dataName;
@@ -73,11 +74,14 @@ namespace TheDoor.Main {
                             Require = new RequireData(requireType, item[key].ToString());
                         }
                         break;
+                    case "Melees":
+                        Melees = TextManager.GetIntHashSetFromSplitStr(item[key].ToString(), ',');
+                        break;
                     case "Supplies":
                         Supplies = TextManager.StringSplitToIntList(item[key].ToString(), ',');
                         break;
                     case "ExclusiveScripts":
-                        ExclusiveScripts = item[key].ToString().Split(',').ToList();
+                        ExclusiveScripts = TextManager.GetHashSetFromSplitStr(item[key].ToString(), ',');
                         break;
                     default:
                         WriteLog.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));

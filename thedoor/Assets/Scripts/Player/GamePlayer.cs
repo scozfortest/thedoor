@@ -64,7 +64,6 @@ namespace TheDoor.Main {
             } catch (Exception _e) {
                 WriteLog.LogError("SetOwnedData錯誤: " + _e);
             }
-
         }
 
         /// <summary>
@@ -138,16 +137,7 @@ namespace TheDoor.Main {
                 _cb?.Invoke();
             });
         }
-        /// <summary>
-        /// 傳入資料類型與UID，刪除玩家擁有的資料
-        /// </summary>
-        public void RemoveOwnedData<T>(ColEnum _colName, string _uid) where T : OwnedData {
-            if (!OwnedDatas.ContainsKey(_colName)) return;
-            if (OwnedDatas[_colName] == null) return;
-            if (!OwnedDatas[_colName].Contains(_uid)) return;
-            OwnedDatas[_colName][_uid] = null;
-            OwnedDatas[_colName].Remove(_uid);
-        }
+
         /// <summary>
         /// 傳入資料類型，取得玩家擁有的資料(無資料會回傳0長度的List<T> 不會回傳null)
         /// </summary>
