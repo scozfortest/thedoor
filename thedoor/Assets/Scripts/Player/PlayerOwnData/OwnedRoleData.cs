@@ -76,10 +76,9 @@ namespace TheDoor.Main {
             List<OwnedSupplyData> supplyDatas = GamePlayer.Instance.GetOwnedDatas<OwnedSupplyData>(ColEnum.Supply);
             if (_getRoleMeleeData)
                 supplyDatas.AddRange(GetMeleeSupplyDatas());
-
-            if (_timings == null || _timings.Length == 0)
+            if (_timings == null || _timings.Length == 0) {
                 supplyDatas = supplyDatas.FindAll(a => a.OwnRoleUID == UID);
-            else {
+            } else {
                 supplyDatas = supplyDatas.FindAll(a => {
                     if (a.OwnRoleUID != UID)
                         return false;

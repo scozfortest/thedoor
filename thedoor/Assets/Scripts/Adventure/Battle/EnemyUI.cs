@@ -26,7 +26,6 @@ namespace TheDoor.Main {
         }
 
         public void SetRole(EnemyRole _enemyRole) {
-            Debug.Log("SetRole");
             ERole = _enemyRole;
         }
         public override void RefreshUI() {

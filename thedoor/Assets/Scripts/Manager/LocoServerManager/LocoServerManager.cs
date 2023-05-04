@@ -164,16 +164,20 @@ namespace TheDoor.Main {
             GamePlayer.Instance.RemoveOwnedData(ColEnum.Adventure, GamePlayer.Instance.Data.CurRole.MyAdventure.UID);
             //移除道具並取隨機道具作為繼承道具
             var ownedSupplies = GamePlayer.Instance.Data.CurRole.GetSupplyDatas(false);
+            //移除道具
+            foreach (var data in ownedSupplies) {
+                GamePlayer.Instance.RemoveOwnedData(ColEnum.Supply, data.UID);
+            }
+            //取隨機道具
             var getRndSupplies = Prob.GetRandNoDuplicatedTFromTList(ownedSupplies, GameSettingData.GetInt(GameSetting.Role_InheritSupplyCount));
             List<int> inheritSupplyIDs = getRndSupplies.ConvertAll(a => a.ID);
             var ownedHistoryData = GamePlayer.Instance.MyHistoryData;
             ownedHistoryData.AddInheritedSupply(inheritSupplyIDs);
-            foreach (var data in ownedSupplies) {
-                GamePlayer.Instance.RemoveOwnedData(ColEnum.Supply, data.UID);
-            }
             //移除腳色
             GamePlayer.Instance.RemoveOwnedData(ColEnum.Role, GamePlayer.Instance.Data.CurRoleUID);
             GamePlayer.Instance.Data.SetCurRole_Loco("");
+
+
 
             //存本地資料
             GamePlayer.Instance.SaveSettingToLoco();

@@ -16,7 +16,15 @@ namespace TheDoor.Main {
         /// </summary>
         public OwnedHistoryData MyHistoryData {
             get {
-                return GetOwnedData<OwnedHistoryData>(ColEnum.History, Data.UID);
+                if (GetOwnedData<OwnedHistoryData>(ColEnum.History, Data.UID) == null) {
+                    var dic = new Dictionary<string, object>();
+                    dic.Add("UID", Data.UID);
+                    dic.Add("OwnerUID", Data.UID);
+                    dic.Add("CreateTime", GameManager.Instance.NowTime);
+                    SetOwnedData<OwnedHistoryData>(ColEnum.History, dic);
+                    return GetOwnedData<OwnedHistoryData>(ColEnum.History, Data.UID);
+                } else
+                    return GetOwnedData<OwnedHistoryData>(ColEnum.History, Data.UID);
             }
         }
         /// <summary>

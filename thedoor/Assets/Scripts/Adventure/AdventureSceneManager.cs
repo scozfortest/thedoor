@@ -54,7 +54,6 @@ namespace TheDoor.Main {
         /// 冒險初始化
         /// </summary>
         public void InitAdventure() {
-            AdvManager.Init();
             MyLoadingProgress = new LoadingProgress(AdventureUILoaded);
             SpawnAddressableAssets();
         }

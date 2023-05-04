@@ -107,9 +107,9 @@ namespace TheDoor.Main {
                 return true;
             }
             if (string.IsNullOrEmpty(CurScriptData.EndType)) return false;
-            WriteLog.Log(CurScriptData.EndType);
             switch (CurScriptData.EndType) {
                 case "Battle":
+                    AdventureManager.CallBattle(int.Parse(CurScriptData.EndValue));
                     AdventureUI.Instance?.SwitchUI(AdventureUIs.Battle);
                     return true;
                 case "NextDoor":

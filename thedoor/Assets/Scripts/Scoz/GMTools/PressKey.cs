@@ -16,6 +16,7 @@ namespace Scoz.Func {
 
             if (Input.GetKeyDown(KeyCode.Q)) {
 
+                LocoServerManager.RemoveCurUseRole();
 
             } else if (Input.GetKeyDown(KeyCode.W)) {
 

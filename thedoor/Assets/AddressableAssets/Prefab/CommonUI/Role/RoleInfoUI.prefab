@@ -1672,8 +1672,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RoleImg: {fileID: 7336715744155759180}
-  HPText: {fileID: 0}
-  SanPText: {fileID: 0}
+  HP: {fileID: 8604737427629830541}
+  SanP: {fileID: 3581281242399812934}
   MyTalentSpawner: {fileID: 7336715744731054286}
   MyEffectSpawner: {fileID: 7336715744731054273}
   MySupplySpawner: {fileID: 7336715744731054272}

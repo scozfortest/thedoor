@@ -19,7 +19,6 @@ namespace TheDoor.Main {
         [SerializeField] TimelineBattleUI MyTimelineBattleUI;
         [SerializeField] Animator WinAni;
         [SerializeField] Animator LoseAni;
-        RoleStateUI MyRoleStateUI;
 
         public static BattleUI Instance { get; private set; }
 
@@ -27,7 +26,6 @@ namespace TheDoor.Main {
             base.Init();
             Instance = this;
             MySupplySpawner.Init();
-            MyRoleStateUI = RoleStateUI.Instance;
             MyDragIndicator.Init();
             MyEnemyUI.Init();
             MySupplySpawner.LoadItemAsset(() => {
@@ -40,7 +38,7 @@ namespace TheDoor.Main {
         public void ShowUI() {
             LoseAni.gameObject.SetActive(false);
             WinAni.gameObject.SetActive(false);
-            MyRoleStateUI.ShowUI(BattleManager.PRole);
+            RoleStateUI.Instance.ShowUI(BattleManager.PRole);
             MyEnemyUI.SetRole(BattleManager.ERole);
             MyEnemyUI.RefreshUI();
             RefreshSupplyUI();

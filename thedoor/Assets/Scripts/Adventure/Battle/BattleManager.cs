@@ -26,6 +26,7 @@ namespace TheDoor.Main {
             Instance = this;
         }
         public static void ResetBattle(PlayerRole _pRole, int _monsterID) {
+
             PRole = _pRole;
             SetEnemyRole(_monsterID);
             TimelineBattleUI.Instance.ResetBattleUI(ERole.Actions);

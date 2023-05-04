@@ -4,21 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace TheDoor.Main {
-    public class AdventureManager : MonoBehaviour {
+    public class AdventureManager {
 
         [SerializeField] BattleManager BattleManager;
-
-        public static AdventureManager Instance { get; private set; }
         public static OwnedAdventureData CurAdventureData { get { return GamePlayer.Instance.Data.CurAdventure; } }
         public static DoorData CurDoorData { get { return GamePlayer.Instance.Data.CurAdventure.CurDoor; } }
         public static DoorType CurDoorType { get { return CurDoorData.DoorType; } }
         public static PlayerRole PRole { get; private set; }
 
-
-        public void Init() {
-            Instance = this;
-            BattleManager.Init();
-        }
 
 
         public static void CreatePlayerRole() {
@@ -60,19 +53,20 @@ namespace TheDoor.Main {
                     adventureUI.SwitchUI(AdventureUIs.Rest);
                     break;
                 case DoorType.Monster:
-                    BattleManager.ResetBattle(PRole, Convert.ToInt32(CurDoorData.Values["MonsterID"]));
-                    adventureUI.SwitchUI(AdventureUIs.Battle);
-                    break;
                 case DoorType.Boss:
-                    BattleManager.ResetBattle(PRole, Convert.ToInt32(CurDoorData.Values["MonsterID"]));
-                    adventureUI.SwitchUI(AdventureUIs.Battle);
+                    CallBattle(Convert.ToInt32(CurDoorData.Values["MonsterID"]));
                     break;
                 default:
                     break;
             }
         }
+        public static void CallBattle(int _monsterID) {
+            BattleManager.ResetBattle(PRole, _monsterID);
+            AdventureUI.Instance.SwitchUI(AdventureUIs.Battle);
+        }
         public static void GameOver() {
-
+            LocoServerManager.RemoveCurUseRole();
+            PopupUI.CallSceneTransition(MyScene.LobbyScene);
         }
 
 
