@@ -4,6 +4,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace TheDoor.Main {
+    public enum EffectType {
+        HP,//  生命
+        SanP,//  理智
+        Dizzy,//    暈眩
+        Poison,//中毒
+        Insanity,//神智崩潰
+        Bleeding,//   流血
+        Fear,//   恐懼
+        Evade,//迴避
+        Calm,//冷靜
+        Focus,//專注
+        Horror,//恐怖
+
+        Protection,//防護
+        Fortitude,//堅毅
+        Antidote,//解毒
+        Recovery,//恢復理智
+        Strong,//強壯
+        Faith,//信仰
+
+        Flee,//    戰鬥
+    }
     public abstract class StatusEffect {
         public EffectType MyType { get; protected set; }
         public int Stack { get; protected set; }
@@ -29,7 +51,8 @@ namespace TheDoor.Main {
         public virtual int AttackExtraSanDamageDealt() { return 0; }//攻擊造成額外神智傷害
         public virtual int Restore() { return 0; }//恢復生命
         public virtual int SanRestore() { return 0; }//恢復神智
-        public virtual int TimeModification() { return 0; }//時間調整
+        public virtual int TimeModification(int _time) { return _time; }//時間調整
+        public virtual HashSet<EffectType> RemoveStatusEffect() { return null; }//移除狀態
 
         #endregion
 
@@ -46,6 +69,13 @@ namespace TheDoor.Main {
 
         public virtual int TimeDmgTaken(int _actionTime) { return 0; }//經過時間受到傷害
         public virtual int TimeSanDmgTaken(int _actionTime) { return 0; }//經過時間受到神智傷害
+
+        #endregion
+
+
+        #region 免疫狀態
+
+        public virtual bool ImmuneStatusEffect(EffectType _type) { return false; }//免疫狀態
 
         #endregion
 
@@ -96,6 +126,13 @@ namespace TheDoor.Main {
         { EffectType.Calm, (_prob,stack, doer, target) => new CalmEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).Build() },
         { EffectType.Focus, (_prob,stack, doer, target) => new FocusEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).Build() },
         { EffectType.Horror, (_prob,stack, doer, target) => new HorrorEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).Build() },
+        { EffectType.Protection, (_prob,stack, doer, target) => new ProtectionEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).Build() },
+        { EffectType.Fortitude, (_prob,stack, doer, target) => new FortitudeEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).Build() },
+        { EffectType.Antidote, (_prob,stack, doer, target) => new AntidoteEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).Build() },
+        { EffectType.Recovery, (_prob,stack, doer, target) => new RecoveryEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).Build() },
+        { EffectType.Strong, (_prob,stack, doer, target) => new StrongEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).Build() },
+        { EffectType.Faith, (_prob,stack, doer, target) => new FaithEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).Build() },
+        { EffectType.Flee, (_prob,stack, doer, target) => new FleeEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).Build() },
         // 有新增狀態效果要往下加
     };
 
@@ -158,9 +195,7 @@ namespace TheDoor.Main {
 
     /// <summary>
     /// 暈眩效果，使行動消耗增加
-    /// 遊戲是時間軸制 假設怪物下次攻擊分別是 咬(3s) 重擊(5s) 在時間軸上就會顯示3s時候進行咬 在8s時進行重擊 也就是玩家在距離
-    ///  下次怪物攻擊前有3s的時間格可以用 如果玩家本來發動砍消耗2s 那玩家會剩下1s可以行動 假設玩家重了狀態"暈眩"1層結果會是 怪物在2s後進行咬 在7s秒後進行重擊
-    ///  所以這時玩家發動砍消耗2s就直接換怪物進行咬 也就是說 暈眩就是使行動消耗增加的狀態
+    /// 消耗行動耗時追加層數
     /// </summary>
     public class DizzyEffect : StatusEffect {
 
@@ -170,11 +205,11 @@ namespace TheDoor.Main {
             MyType = EffectType.Dizzy;
         }
 
-        public override int TimeModification() {
+        public override int TimeModification(int _time) {
             if (Stack <= 0) return 0;
-            int value = Stack;
+            _time += Stack;
             SetStack(0);
-            return value;
+            return _time;
         }
     }
 
@@ -183,6 +218,7 @@ namespace TheDoor.Main {
     /// 中毒效果，在行動後受到行動消耗秒數的傷害並移除相應層數
     /// 每次腳色行動後受到行動消耗s的傷害並移除s層數 假設目前5層 此行動消耗3s 發動完此行動會受到3的傷害並移除3層剩下2層
     /// 如果目前2層 此行動消耗3s 發動完此行動只會受到2傷害 並剩下0層
+    /// 戰鬥後不會移除效果 要休息,完成冒險,使用道具來解除
     /// </summary>
     public class PoisonEffect : StatusEffect {
         public class Builder : Builder<PoisonEffect> { }
@@ -199,9 +235,10 @@ namespace TheDoor.Main {
         }
     }
     /// <summary>
-    /// 出血效果，在受到攻擊時受到額外的層數傷害
+    /// 精神崩潰效果，行動後受到行動消耗秒數的神智傷害並移除相應層數
     /// 每次腳色行動後受到行動消耗s的神智傷害並移除s層數 假設目前5層 此行動消耗3s 發動完此行動會受到3的神智傷害並移除3層剩下2層
     /// 如果目前2層 此行動消耗3s 發動完此行動只會受到2傷害 並剩下0層
+    /// 戰鬥後不會移除效果 要休息,完成冒險,使用道具來解除
     /// </summary>
     public class InsanityEffect : StatusEffect {
         public class Builder : Builder<InsanityEffect> { }
@@ -219,7 +256,7 @@ namespace TheDoor.Main {
     }
 
     /// <summary>
-    /// 恐懼效果，在受到攻擊時受到額外的層數神智傷害
+    /// 流血效果，在受到攻擊時受到額外的層數傷害
     /// 每次受到攻擊都會受到 層數的傷害 例如目前5層 每次受到攻擊都會受到5點傷害
     /// </summary>
     public class BleedingEffect : StatusEffect {
@@ -235,7 +272,7 @@ namespace TheDoor.Main {
         }
     }
     /// <summary>
-    /// 專注效果，攻擊時增加層數的傷害
+    /// 恐懼效果，攻擊時增加層數的傷害
     /// 每次受到攻擊都會受到 層數的心智傷害 例如目前5層 每次受到攻擊都會受到5點神智傷害
     /// </summary>
     public class FearEffect : StatusEffect {
@@ -316,6 +353,118 @@ namespace TheDoor.Main {
             int value = Mathf.Min(Stack, _dmg);
             AddStack(-value);
             return value;
+        }
+    }
+
+    /// <summary>
+    /// 受到的傷害降低層數 
+    /// </summary>
+    public class ProtectionEffect : StatusEffect {
+        public class Builder : Builder<ProtectionEffect> { }
+        public ProtectionEffect() {
+            IsBuff = true;
+            MyType = EffectType.Protection;
+        }
+
+        public override int BeAttackDamageReduction(int _dmg) {
+            if (Stack <= 0) return 0;
+            int value = Mathf.Min(Stack, _dmg);
+            return value;
+        }
+    }
+
+    /// <summary>
+    /// 受到的神智傷害降低層數
+    /// </summary>
+    public class FortitudeEffect : StatusEffect {
+        public class Builder : Builder<FortitudeEffect> { }
+        public FortitudeEffect() {
+            IsBuff = true;
+            MyType = EffectType.Fortitude;
+        }
+
+        public override int BeAttackSanDamageReduction(int _dmg) {
+            if (Stack <= 0) return 0;
+            int value = Mathf.Min(Stack, _dmg);
+            return value;
+        }
+    }
+
+    /// <summary>
+    /// 解除中毒狀態
+    /// </summary>
+    public class AntidoteEffect : StatusEffect {
+        public class Builder : Builder<AntidoteEffect> { }
+        public AntidoteEffect() {
+            IsBuff = true;
+            MyType = EffectType.Antidote;
+        }
+
+        public override HashSet<EffectType> RemoveStatusEffect() {
+            SetStack(0);
+            return new HashSet<EffectType> { EffectType.Poison };
+        }
+    }
+
+    /// <summary>
+    /// 解除精神崩潰狀態
+    /// </summary>
+    public class RecoveryEffect : StatusEffect {
+        public class Builder : Builder<RecoveryEffect> { }
+        public RecoveryEffect() {
+            IsBuff = true;
+            MyType = EffectType.Recovery;
+        }
+
+        public override HashSet<EffectType> RemoveStatusEffect() {
+            SetStack(0);
+            return new HashSet<EffectType> { EffectType.Insanity };
+        }
+    }
+
+
+    /// <summary>
+    /// 免疫流血與中毒狀態
+    /// </summary>
+    public class StrongEffect : StatusEffect {
+        public class Builder : Builder<StrongEffect> { }
+        public StrongEffect() {
+            IsBuff = true;
+            MyType = EffectType.Strong;
+        }
+
+        public override bool ImmuneStatusEffect(EffectType _type) {
+            if (_type == EffectType.Bleeding || _type == EffectType.Poison)
+                return true;
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// 免疫精神崩潰與恐懼狀態
+    /// </summary>
+    public class FaithEffect : StatusEffect {
+        public class Builder : Builder<FaithEffect> { }
+        public FaithEffect() {
+            IsBuff = true;
+            MyType = EffectType.Faith;
+        }
+
+        public override bool ImmuneStatusEffect(EffectType _type) {
+            if (_type == EffectType.Insanity || _type == EffectType.Fear)
+                return true;
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// 免疫精神崩潰與恐懼狀態
+    /// </summary>
+    public class FleeEffect : StatusEffect {
+        public class Builder : Builder<FleeEffect> { }
+        public FleeEffect() {
+            IsBuff = true;
+            MyType = EffectType.Flee;
         }
     }
 

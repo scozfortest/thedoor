@@ -1,6 +1,7 @@
 using Scoz.Func;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 namespace TheDoor.Main {
     public class RoleAction {
@@ -14,8 +15,15 @@ namespace TheDoor.Main {
             Name = _name;
             Doer = _doer;
             Time = _time;
-            RemainTime = _time;
+            StatusEffect();//行動耗時因狀態而改變
+            RemainTime = Time;
             Effects = _effects;
+
+        }
+        void StatusEffect() {
+            foreach (var effect in Doer.Effects.Values) {
+                Time = effect.TimeModification(Time);
+            }
         }
 
         public void ModifyRemainTime(int _value) {
@@ -84,6 +92,20 @@ namespace TheDoor.Main {
                         ((PlayerRole)effect.Doer).AddSanP(-timeSanDmg);
                     }
                 }
+
+                //移除狀態效果
+                effect.MyTarget.RemoveEffects(effect.RemoveStatusEffect().ToArray());
+
+                //賦予效果
+                bool emmune = false;
+                foreach (var tEffect in effect.MyTarget.Effects.Values) {
+                    if (tEffect.ImmuneStatusEffect(effect.MyType)) {
+                        emmune = true;
+                        break;
+                    }
+                }
+                if (!emmune)
+                    effect.MyTarget.ApplyEffect(effect);
 
             }
 

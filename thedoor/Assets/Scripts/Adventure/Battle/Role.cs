@@ -88,7 +88,15 @@ namespace TheDoor.Main {
                 Effects.Add(_effect.MyType, _effect);
             }
         }
-
+        /// <summary>
+        /// 移除狀態效果
+        /// </summary>
+        public void RemoveEffects(params EffectType[] _types) {
+            if (_types == null || _types.Length == 0) return;
+            foreach (var type in _types) {
+                Effects.Remove(type);
+            }
+        }
         /// <summary>
         /// 移除過期的效果
         /// </summary>

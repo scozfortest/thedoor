@@ -6,21 +6,6 @@ using Scoz.Func;
 using LitJson;
 
 namespace TheDoor.Main {
-    public enum EffectType {
-        HP,//  生命
-        SanP,//  理智
-        Dizzy,//    暈眩
-        Poison,//中毒
-        Insanity,//神智崩潰
-        Bleeding,//   流血
-        Fear,//   恐懼
-
-        Evade,//迴避
-        Calm,//冷靜
-        Flee,//    戰鬥
-        Focus,//專注
-        Horror,//恐怖
-    }
     public class TargetEffectData {
 
         public Target MyTarget { get; private set; }
