@@ -154,6 +154,7 @@ namespace Scoz.Func {
         public static void StartDownloadAddressable(Action _action) {
             AddressableManage.Instance.StartLoadAsset(() =>//下載AssetBundle
             {
+                OnAddressableDownloaded();
                 GameDictionary.LoadJsonDataToDic(() => { //載入Bundle的json資料
                     MyText.RefreshActivityTextsAndFunctions();//更新介面的MyTex
                     Instance.CreateAddressableUIs(() => { //產生PopupUI
@@ -162,8 +163,12 @@ namespace Scoz.Func {
                 });
             });
         }
+        static void OnAddressableDownloaded() {
+            //建立DNPManager
+            DNPManager.CreateNewInstance();
+        }
         public void CreateAddressableUIs(Action _ac) {
-            //載入PopupUI(這個UI東西較多會載較久，約4秒，所以在載好前會先設定StartUI文字讓玩家不要覺得是卡住)
+            //載入PopupUI(這個UI東西較多會載較久，所以在載好前會先設定StartUI文字讓玩家不要覺得是卡住)
             if (SceneManager.GetActiveScene().name == MyScene.StartScene.ToString()) {
                 StartUI.Instance?.SetMiddleText(StringData.GetUIString("Login_WaitingForStartScene"));
                 PopupUI_Local.ShowLoading(StringData.GetUIString("Login_WaitingForStartScene"));

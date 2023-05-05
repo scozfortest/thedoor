@@ -92,11 +92,13 @@ namespace TheDoor.Main {
         /// </summary>
         public void RemoveRole() {
             if (GamePlayer.Instance.Data.CurRole == null) return;
-            PopupUI.ShowLoading(StringData.GetUIString("Loading"));
-            FirebaseManager.RemoveRole(GamePlayer.Instance.Data.CurRole.UID, "SelfRemove", () => {
-                PopupUI.HideLoading();
-                RefreshUI();
-            });
+            LocoServerManager.RemoveCurUseRole();
+            RefreshUI();
+            //PopupUI.ShowLoading(StringData.GetUIString("Loading"));
+            //FirebaseManager.RemoveRole(GamePlayer.Instance.Data.CurRole.UID, "SelfRemove", () => {
+            //    PopupUI.HideLoading();
+            //    RefreshUI();
+            //});
         }
         /// <summary>
         /// 收藏

@@ -30,6 +30,9 @@ namespace TheDoor.Main {
 
         public override void AddHP(int _value) {
             base.AddHP(_value);
+            if (_value <= 0) {
+                DNPManager.Instance.Spawn(DNPManager.DPNType.Dmg, _value, EnemyUI.Instance.GetComponent<RectTransform>(), Vector2.zero);
+            }
             EnemyUI.Instance?.RefreshUI();
         }
 

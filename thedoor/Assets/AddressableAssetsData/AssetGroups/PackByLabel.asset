@@ -22,11 +22,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Prefab
-  - m_GUID: f29e2e96a75df16449c2e57943f7ba66
-    m_Address: Assets/AddressableAssets/Prefab/CommonUI
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Prefab
   - m_GUID: df03987b14b698347aed86d7ca06a541
     m_Address: Assets/AddressableAssets/Json
     m_ReadOnly: 0
@@ -52,11 +47,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Atlas
-  - m_GUID: 21eb99ca657fdd642a0827ab0f5ab460
-    m_Address: Assets/AddressableAssets/Prefab/LobbyUI
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Prefab
   - m_GUID: 5c4163594bd9ecc4d8c4c137f7caffeb
     m_Address: Assets/AddressableAssets/Atlas/CommonUI.spriteatlas
     m_ReadOnly: 0
@@ -82,14 +72,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Atlas
-  - m_GUID: cb917bf4e6a75334683f7886b70422a7
-    m_Address: Assets/AddressableAssets/Prefab/AdventureUI/AdventureUI.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 222cb66cba3db1d43b5d8d15cc8cf570
-    m_Address: Assets/AddressableAssets/Prefab/AdventureUI/BattleUI.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: ccfdc2cc44821df4a8a0cb689bd3e61a
     m_Address: Assets/AddressableAssets/Audios/Music
     m_ReadOnly: 0
@@ -110,18 +92,6 @@ MonoBehaviour:
     m_Address: Assets/AddressableAssets/Atlas/AdventureUI.spriteatlas
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 33ba0108d24cb36489070fe90ebb73f0
-    m_Address: Assets/AddressableAssets/Prefab/AdventureUI/DoorNodeUI.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 11871ebdf0c8adb468ab673f00894e41
-    m_Address: Assets/AddressableAssets/Prefab/AdventureUI/NodePrefab.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: e682bed64816b4e429641a3ab92418e9
-    m_Address: Assets/AddressableAssets/Prefab/AdventureUI/DoorUITransition.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: dbd63acdae411f84a98b61f663aaf439
     m_Address: Assets/AddressableAssets/Prefab/AdventureUI/Battle/RoleActionPrefab.prefab
     m_ReadOnly: 0
@@ -132,6 +102,10 @@ MonoBehaviour:
     m_SerializedLabels: []
   - m_GUID: 38e254d5a0805ef4f9a606e285c8db7d
     m_Address: Assets/AddressableAssets/Atlas/RoleIcon.spriteatlas
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e3d5f72761e25b346be0b2e0dd47f773
+    m_Address: Assets/AddressableAssets/Prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

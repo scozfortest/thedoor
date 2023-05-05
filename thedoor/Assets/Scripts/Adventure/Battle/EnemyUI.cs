@@ -34,6 +34,8 @@ namespace TheDoor.Main {
             AssetGet.GetImg("Monster", ERole.MyData.Ref, sprite => {
                 EnemyImg.sprite = sprite;
             });
+
+
             for (int i = 0; i < HitGOs.Count; i++) {
                 HitGOs[i].gameObject.SetActive(ERole.MyData.GetAttackPartTuple((AttackPart)i) != null);
             }

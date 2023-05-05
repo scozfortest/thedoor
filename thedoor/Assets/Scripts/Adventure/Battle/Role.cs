@@ -26,6 +26,7 @@ namespace TheDoor.Main {
             if (IsDead) return;
 
             CurHP += _value;
+
             if (IsDead) OnDeath();
         }
 

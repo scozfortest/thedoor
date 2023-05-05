@@ -228,6 +228,8 @@
 	{	"ID":"MonsterAction_10050",	"Name_TW":"沒有弱點 只能攻擊身體 但不好命中",	"Name_CH":"沒有弱點 只能攻擊身體 但不好命中",	"Name_EN":"沒有弱點 只能攻擊身體 但不好命中",	"Name_JP":"沒有弱點 只能攻擊身體 但不好命中"},
 	{	"ID":"Supply_1",	"Name_TW":"厚重教科書",	"Description_TW":"最大理智增加10",	"Name_CH":"厚重教科書",	"Description_CH":"最大理智增加10",	"Name_EN":"厚重教科書",	"Description_EN":"最大理智增加10",	"Name_JP":"厚重教科書",	"Description_JP":"最大理智增加10"},
 	{	"ID":"Supply_2",	"Name_TW":"手槍",	"Description_TW":"強",	"Name_CH":"手槍",	"Description_CH":"強",	"Name_EN":"手槍",	"Description_EN":"強",	"Name_JP":"手槍",	"Description_JP":"強"},
+	{	"ID":"Supply_10001",	"Name_TW":"重踹",	"Description_TW":"基本肉搏",	"Name_CH":"重踹",	"Description_CH":"基本肉搏",	"Name_EN":"重踹",	"Description_EN":"基本肉搏",	"Name_JP":"重踹",	"Description_JP":"基本肉搏"},
+	{	"ID":"Supply_10002",	"Name_TW":"徒手搏擊",	"Description_TW":"基本肉搏",	"Name_CH":"徒手搏擊",	"Description_CH":"基本肉搏",	"Name_EN":"徒手搏擊",	"Description_EN":"基本肉搏",	"Name_JP":"徒手搏擊",	"Description_JP":"基本肉搏"},
 	{	"ID":"ItemGroup_1",	"Name_TW":"全部獲得"},
 	{	"ID":"ItemGroup_2",	"Name_TW":"獲得隨機1個"},
 	{	"ID":"ItemGroup_3",	"Name_TW":"獲得隨機金幣"},

@@ -9,6 +9,7 @@ namespace TheDoor.Main {
         public Role Doer;
         public int Time { get; private set; }//消耗時間
         public int RemainTime { get; private set; }//距離行動剩餘需求時間
+
         public List<StatusEffect> Effects { get; private set; }
 
         public RoleAction(string _name, Role _doer, int _time, List<StatusEffect> _effects) {
@@ -31,6 +32,46 @@ namespace TheDoor.Main {
         }
 
         /// <summary>
+        /// 傷害目標
+        /// </summary>
+        protected virtual void DoDmg(StatusEffect _effect) {
+            int dmg = _effect.Dmg();
+            if (dmg != 0) {
+                _effect.Doer.AddExtraDmg(ref dmg);
+                _effect.MyTarget.GetAttacked(dmg);
+            }
+        }
+        /// <summary>
+        /// 精神傷害目標
+        /// </summary>
+        protected virtual void DoSanDmg(StatusEffect _effect) {
+            int sanDmg = _effect.SanDmg();
+            if (sanDmg != 0) {
+                _effect.Doer.AddExtraSanDmg(ref sanDmg);
+                ((PlayerRole)_effect.MyTarget).GetSanAttacked(sanDmg);
+            }
+        }
+
+        /// <summary>
+        /// 生命影響
+        /// </summary>
+        protected virtual void RestoreHP(StatusEffect _effect) {
+            int restore = _effect.Restore();
+            if (restore != 0) {
+                _effect.MyTarget.AddHP(restore);
+            }
+        }
+        /// <summary>
+        /// 神智影響
+        /// </summary>
+        protected virtual void RestoreSanP(StatusEffect _effect) {
+            int restoreSanP = _effect.SanRestore();
+            if (restoreSanP != 0) {
+                ((PlayerRole)_effect.Doer).AddSanP(restoreSanP);
+            }
+        }
+
+        /// <summary>
         /// 執行行動
         /// </summary>
         public virtual void DoAction() {
@@ -45,36 +86,17 @@ namespace TheDoor.Main {
                     WriteLog.LogColor(Name + " 賦予效果:" + effect.MyType + "失敗", WriteLog.LogType.Battle);
                     continue;
                 }
-                int dmg = effect.Dmg();
-                if (dmg != 0) {
-                    effect.Doer.AddExtraDmg(ref dmg);
-                    effect.MyTarget.GetAttacked(dmg);
-                }
 
-                //對目標進行神智攻擊
-                if (effect.MyTarget is PlayerRole) {
-                    int sanDmg = effect.SanDmg();
-                    if (sanDmg != 0) {
-                        effect.Doer.AddExtraSanDmg(ref sanDmg);
-                        ((PlayerRole)effect.MyTarget).GetSanAttacked(sanDmg);
-                    }
-                }
-
+                //傷害目標
+                DoDmg(effect);
+                //精神傷害目標
+                if (effect.MyTarget is PlayerRole)
+                    DoSanDmg(effect);
                 //對目標恢復生命
-                int restore = effect.Restore();
-                if (restore != 0) {
-                    effect.MyTarget.AddHP(restore);
-                }
-
-
+                RestoreHP(effect);
                 //對目標恢復神智
-                if (effect.MyTarget is PlayerRole) {
-                    int restoreSanP = effect.SanRestore();
-                    if (restoreSanP != 0) {
-                        ((PlayerRole)effect.Doer).AddSanP(restoreSanP);
-                    }
-                }
-
+                if (effect.MyTarget is PlayerRole)
+                    RestoreSanP(effect);
 
                 //承受時間流逝傷害
                 int timeDmg = 0;
@@ -82,7 +104,6 @@ namespace TheDoor.Main {
                 if (timeDmg != 0) {
                     effect.Doer.AddHP(-timeDmg);
                 }
-
 
                 //承受時間流逝神智傷害
                 int timeSanDmg = 0;
@@ -94,7 +115,8 @@ namespace TheDoor.Main {
                 }
 
                 //移除狀態效果
-                effect.MyTarget.RemoveEffects(effect.RemoveStatusEffect().ToArray());
+                if (effect.RemoveStatusEffect() != null)
+                    effect.MyTarget.RemoveEffects(effect.RemoveStatusEffect().ToArray());
 
                 //賦予效果
                 bool emmune = false;
@@ -106,6 +128,14 @@ namespace TheDoor.Main {
                 }
                 if (!emmune)
                     effect.MyTarget.ApplyEffect(effect);
+
+                //逃跑效果 觸發後就不會觸發之後的效果
+                if (effect.MyType == EffectType.Flee) {
+                    if (effect.MyTarget.IsDead) {
+                        BattleUI.Instance.Lose();
+                        break;
+                    }
+                }
 
             }
 

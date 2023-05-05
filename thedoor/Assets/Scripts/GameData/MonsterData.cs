@@ -123,6 +123,7 @@ namespace TheDoor.Main {
             return action;
         }
 
+
         /// <summary>
         /// 取得部位攻擊資料Turple<傷害,命中機率>
         /// </summary>
