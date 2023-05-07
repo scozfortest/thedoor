@@ -455,7 +455,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  spamGroup: Default
+  spamGroup: Dmg
   enableCombination: 1
   combinationSettings:
     method: 0

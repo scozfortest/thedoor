@@ -57,13 +57,13 @@ namespace TheDoor.Main {
         }
 
         /// <summary>
-        /// 將剩餘耗時為0的ActionPrefab從清單中移除並刪除物件
+        /// 將已經執行的ActionPrefab從清單中移除並刪除物件
         /// </summary>
         public void RemoveOldActions() {
             if (ItemList == null || ItemList.Count == 0) return;
             List<int> removeIndex = new List<int>();
             for (int i = 0; i < ItemList.Count; i++) {
-                if (ItemList[i].MyData.RemainTime <= 0)
+                if (ItemList[i].MyData.Done)
                     removeIndex.Add(i);
             }
             for (int i = removeIndex.Count - 1; i >= 0; i--) {

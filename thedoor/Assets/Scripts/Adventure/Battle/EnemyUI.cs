@@ -15,7 +15,7 @@ namespace TheDoor.Main {
         [SerializeField] Image HP;
         [SerializeField] List<Image> HitGOs;//頭、身、四肢
         [SerializeField] Material OutlineMaterial;
-
+        public RectTransform DNPTrans;//跳血位置
 
         public static EnemyUI Instance { get; private set; }
         EnemyRole ERole;

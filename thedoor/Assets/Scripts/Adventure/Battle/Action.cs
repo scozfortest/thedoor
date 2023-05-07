@@ -1,4 +1,5 @@
 using Scoz.Func;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,23 @@ namespace TheDoor.Main {
     public class RoleAction {
         public string Name { get; private set; }
         public Role Doer;
-        public int Time { get; private set; }//消耗時間
-        public int RemainTime { get; private set; }//距離行動剩餘需求時間
+        public int Time { get; protected set; }//該行動原本需消耗時間
+        public int NeedTime {//實際需求幾秒(考量狀態效果影響)
+            get {
+                int value = Time;
+                foreach (var effect in Doer.Effects.Values) {
+                    value = effect.TimeModification(value);
+                }
+                return value;
+            }
+        }
+
+        /// <summary>
+        /// 考慮行動順序後在時間軸上是第幾秒才會執行
+        /// </summary>
+        public virtual int NeedTimeBeforeAction { get { return NeedTime; } }
+
+        public bool Done { get; protected set; }
 
         public List<StatusEffect> Effects { get; private set; }
 
@@ -16,19 +32,8 @@ namespace TheDoor.Main {
             Name = _name;
             Doer = _doer;
             Time = _time;
-            StatusEffect();//行動耗時因狀態而改變
-            RemainTime = Time;
             Effects = _effects;
-
-        }
-        void StatusEffect() {
-            foreach (var effect in Doer.Effects.Values) {
-                Time = effect.TimeModification(Time);
-            }
-        }
-
-        public void ModifyRemainTime(int _value) {
-            RemainTime = _value;
+            Done = false;
         }
 
         /// <summary>
@@ -75,6 +80,7 @@ namespace TheDoor.Main {
         /// 執行行動
         /// </summary>
         public virtual void DoAction() {
+
             WriteLog.LogColor(Doer.Name + "執行行動:" + Name, WriteLog.LogType.Battle);
             //執行效果
             foreach (var effect in Effects) {
@@ -84,6 +90,11 @@ namespace TheDoor.Main {
                 //對目標進行攻擊
                 if (!Prob.GetResult(effect.Probability)) {
                     WriteLog.LogColor(Name + " 賦予效果:" + effect.MyType + "失敗", WriteLog.LogType.Battle);
+                    //如果沒成功會跳Miss或Fail
+                    if (effect.IsBuff)
+                        DNPManager.Instance.Spawn(DNPManager.DPNType.Fail, 0, BattleUI.GetTargetRectTrans(effect.MyTarget), Vector2.zero);
+                    else
+                        DNPManager.Instance.Spawn(DNPManager.DPNType.Miss, 0, BattleUI.GetTargetRectTrans(effect.MyTarget), Vector2.zero);
                     continue;
                 }
 
@@ -113,21 +124,30 @@ namespace TheDoor.Main {
                         ((PlayerRole)effect.Doer).AddSanP(-timeSanDmg);
                     }
                 }
-
                 //移除狀態效果
                 if (effect.RemoveStatusEffect() != null)
                     effect.MyTarget.RemoveEffects(effect.RemoveStatusEffect().ToArray());
 
+
+
+
                 //賦予效果
-                bool emmune = false;
-                foreach (var tEffect in effect.MyTarget.Effects.Values) {
-                    if (tEffect.ImmuneStatusEffect(effect.MyType)) {
-                        emmune = true;
-                        break;
+                var applyEffects = effect.ApplyStatusEffect();
+                if (applyEffects != null && applyEffects.Count > 0) {
+                    foreach (var applyEffect in applyEffects) {
+                        bool emmune = false;
+                        foreach (var tEffect in effect.MyTarget.Effects.Values) {
+                            if (tEffect.ImmuneStatusEffect(effect.MyType)) {
+                                emmune = true;
+                                break;
+                            }
+                        }
+                        if (!emmune)
+                            effect.MyTarget.ApplyEffect(applyEffect);
                     }
                 }
-                if (!emmune)
-                    effect.MyTarget.ApplyEffect(effect);
+
+
 
                 //逃跑效果 觸發後就不會觸發之後的效果
                 if (effect.MyType == EffectType.Flee) {
@@ -136,9 +156,22 @@ namespace TheDoor.Main {
                         break;
                     }
                 }
-
             }
+            OnDoActionDone();
 
         }
+
+        protected virtual void OnDoActionDone() {
+            Done = true;
+            foreach (var effect in Doer.Effects.Values) {
+                var removeEffects = effect.RemoveStatusEffectWhenActionDone();
+                Doer.RemoveEffects(removeEffects.ToArray());
+            }
+        }
+
+
+
+
+
     }
 }

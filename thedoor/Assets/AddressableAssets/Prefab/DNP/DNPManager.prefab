@@ -44,10 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f959f5422b9974ebeae6271e05a7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MissDPN: {fileID: 6857471811954192295, guid: 26169b89b1c8b4a47addf3884dae62bc, type: 3}
+  FailDPN: {fileID: 6857471811954192295, guid: 064dee6701fb6bc42a5bf1003fe70548, type: 3}
   DmgDPN: {fileID: 6857471811954192295, guid: 9a1b8836039731f4fa830e58d1511114, type: 3}
   SanDmgDPN: {fileID: 6857471811954192295, guid: 675d38af746659543b1fb9953d35d077, type: 3}
-  RestoreDPN: {fileID: 0}
-  SanRestoreDPN: {fileID: 0}
+  RestoreDPN: {fileID: 6857471811954192295, guid: 1ca7350c72614704097372fa1d5d74ef, type: 3}
+  SanRestoreDPN: {fileID: 6857471811954192295, guid: 88e7de3eb7827314c988474ea346b711, type: 3}
+  DizzyDPN: {fileID: 6857471811954192295, guid: 60c0012a725e5124dbbb0ecc3da6b4c3, type: 3}
+  PoisonDPN: {fileID: 6857471811954192295, guid: 0be45541996cf6e47a7134baa29f4b4a, type: 3}
   InsanityDPN: {fileID: 0}
   BleedingDPN: {fileID: 0}
   FearDPN: {fileID: 0}

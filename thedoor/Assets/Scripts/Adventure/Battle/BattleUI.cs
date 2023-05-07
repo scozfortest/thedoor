@@ -77,5 +77,14 @@ namespace TheDoor.Main {
                 AdventureManager.GameOver();
         }
 
+        public static RectTransform GetTargetRectTrans(Role _role) {
+            RectTransform targetRectTrans = null;
+            if (_role is PlayerRole)
+                targetRectTrans = RoleStateUI.Instance.DNPTrans;
+            else if (_role is EnemyRole)
+                targetRectTrans = EnemyUI.Instance.DNPTrans;
+            return targetRectTrans;
+        }
+
     }
 }

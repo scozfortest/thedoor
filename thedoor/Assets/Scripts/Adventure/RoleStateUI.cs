@@ -16,6 +16,7 @@ namespace TheDoor.Main {
         [SerializeField] Image SanPImg;
         [SerializeField] EffectSpawner BuffSpawner;
         [SerializeField] EffectSpawner DebuffSpawner;
+        public RectTransform DNPTrans;//跳血位置
 
         PlayerRole MyRole;
         public static RoleStateUI Instance { get; private set; }

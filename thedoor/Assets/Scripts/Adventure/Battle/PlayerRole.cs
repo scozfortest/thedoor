@@ -19,13 +19,22 @@ namespace TheDoor.Main {
 
         public override void AddHP(int _value) {
             base.AddHP(_value);
+            if (_value <= 0)
+                DNPManager.Instance.Spawn(DNPManager.DPNType.Dmg, _value, RoleStateUI.Instance.DNPTrans, Vector2.zero);
+            else
+                DNPManager.Instance.Spawn(DNPManager.DPNType.Restore, _value, RoleStateUI.Instance.DNPTrans, Vector2.zero);
             RoleStateUI.Instance.RefreshState();
         }
+
 
         public void AddSanP(int _value) {
             if (IsDead) return;
             CurSanP += _value;
             WriteLog.LogColor(Name + "SanP增加:" + _value, WriteLog.LogType.Battle);
+            if (_value <= 0)
+                DNPManager.Instance.Spawn(DNPManager.DPNType.SanDmg, _value, BattleUI.GetTargetRectTrans(this), Vector2.zero);
+            else
+                DNPManager.Instance.Spawn(DNPManager.DPNType.SanRestore, _value, BattleUI.GetTargetRectTrans(this), Vector2.zero);
             if (IsDead) OnDeath();
             RoleStateUI.Instance.RefreshState();
         }
@@ -47,6 +56,14 @@ namespace TheDoor.Main {
         }
         protected override void OnDeath() {
             base.OnDeath();
+        }
+        public override void ApplyEffect(StatusEffect _effect) {
+            base.ApplyEffect(_effect);
+
+            if (MyEnum.TryParseEnum(_effect.MyType.ToString(), out DNPManager.DPNType _type)) {
+                DNPManager.Instance.Spawn(_type, _effect.Stack, BattleUI.GetTargetRectTrans(this), Vector2.zero);
+            }
+
         }
 
 

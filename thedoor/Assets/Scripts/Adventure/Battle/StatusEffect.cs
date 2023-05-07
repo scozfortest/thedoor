@@ -54,6 +54,14 @@ namespace TheDoor.Main {
         public virtual int TimeModification(int _time) { return _time; }//時間調整
         public virtual HashSet<EffectType> RemoveStatusEffect() { return null; }//移除狀態
 
+        public virtual List<StatusEffect> ApplyStatusEffect() { return null; }//賦予效果
+
+
+        #endregion
+
+        #region 行動完觸發
+        public virtual HashSet<EffectType> RemoveStatusEffectWhenActionDone() { return null; }//行動完移除狀態
+
         #endregion
 
         #region 受到攻擊觸發
@@ -206,10 +214,14 @@ namespace TheDoor.Main {
         }
 
         public override int TimeModification(int _time) {
-            if (Stack <= 0) return 0;
             _time += Stack;
-            SetStack(0);
             return _time;
+        }
+        public override List<StatusEffect> ApplyStatusEffect() {
+            return new List<StatusEffect> { this };
+        }
+        public override HashSet<EffectType> RemoveStatusEffectWhenActionDone() {
+            return new HashSet<EffectType> { this.MyType };
         }
     }
 
@@ -233,6 +245,10 @@ namespace TheDoor.Main {
             AddStack(-_time);
             return value;
         }
+
+        public override List<StatusEffect> ApplyStatusEffect() {
+            return new List<StatusEffect> { this };
+        }
     }
     /// <summary>
     /// 精神崩潰效果，行動後受到行動消耗秒數的神智傷害並移除相應層數
@@ -253,6 +269,10 @@ namespace TheDoor.Main {
             AddStack(-value);
             return value;
         }
+
+        public override List<StatusEffect> ApplyStatusEffect() {
+            return new List<StatusEffect> { this };
+        }
     }
 
     /// <summary>
@@ -270,6 +290,10 @@ namespace TheDoor.Main {
             if (Stack <= 0) return 0;
             return Stack;
         }
+
+        public override List<StatusEffect> ApplyStatusEffect() {
+            return new List<StatusEffect> { this };
+        }
     }
     /// <summary>
     /// 恐懼效果，攻擊時增加層數的傷害
@@ -285,6 +309,10 @@ namespace TheDoor.Main {
         public override int BeAtteckedExtraSanDmgTaken() {
             if (Stack <= 0) return 0;
             return Stack;
+        }
+
+        public override List<StatusEffect> ApplyStatusEffect() {
+            return new List<StatusEffect> { this };
         }
     }
     /// <summary>
@@ -302,6 +330,10 @@ namespace TheDoor.Main {
             if (Stack <= 0) return 0;
             return Stack;
         }
+
+        public override List<StatusEffect> ApplyStatusEffect() {
+            return new List<StatusEffect> { this };
+        }
     }
     /// <summary>
     /// 恐怖效果，攻擊時增加層數的傷害
@@ -317,6 +349,10 @@ namespace TheDoor.Main {
         public override int AttackExtraSanDamageDealt() {
             if (Stack <= 0) return 0;
             return Stack;
+        }
+
+        public override List<StatusEffect> ApplyStatusEffect() {
+            return new List<StatusEffect> { this };
         }
     }
     /// <summary>
@@ -336,6 +372,10 @@ namespace TheDoor.Main {
             AddStack(-value);
             return value;
         }
+
+        public override List<StatusEffect> ApplyStatusEffect() {
+            return new List<StatusEffect> { this };
+        }
     }
     /// <summary>
     /// 冷靜效果，減少下次受到的神智傷害並移除相應層數
@@ -354,6 +394,9 @@ namespace TheDoor.Main {
             AddStack(-value);
             return value;
         }
+        public override List<StatusEffect> ApplyStatusEffect() {
+            return new List<StatusEffect> { this };
+        }
     }
 
     /// <summary>
@@ -370,6 +413,10 @@ namespace TheDoor.Main {
             if (Stack <= 0) return 0;
             int value = Mathf.Min(Stack, _dmg);
             return value;
+        }
+
+        public override List<StatusEffect> ApplyStatusEffect() {
+            return new List<StatusEffect> { this };
         }
     }
 
@@ -388,6 +435,10 @@ namespace TheDoor.Main {
             int value = Mathf.Min(Stack, _dmg);
             return value;
         }
+
+        public override List<StatusEffect> ApplyStatusEffect() {
+            return new List<StatusEffect> { this };
+        }
     }
 
     /// <summary>
@@ -404,6 +455,7 @@ namespace TheDoor.Main {
             SetStack(0);
             return new HashSet<EffectType> { EffectType.Poison };
         }
+
     }
 
     /// <summary>
@@ -420,6 +472,7 @@ namespace TheDoor.Main {
             SetStack(0);
             return new HashSet<EffectType> { EffectType.Insanity };
         }
+
     }
 
 
@@ -433,10 +486,18 @@ namespace TheDoor.Main {
             MyType = EffectType.Strong;
         }
 
+        public override HashSet<EffectType> RemoveStatusEffect() {
+            return new HashSet<EffectType> { EffectType.Bleeding, EffectType.Poison };
+        }
+
         public override bool ImmuneStatusEffect(EffectType _type) {
             if (_type == EffectType.Bleeding || _type == EffectType.Poison)
                 return true;
             return false;
+        }
+
+        public override List<StatusEffect> ApplyStatusEffect() {
+            return new List<StatusEffect> { this };
         }
     }
 
@@ -449,16 +510,22 @@ namespace TheDoor.Main {
             IsBuff = true;
             MyType = EffectType.Faith;
         }
-
+        public override HashSet<EffectType> RemoveStatusEffect() {
+            return new HashSet<EffectType> { EffectType.Insanity, EffectType.Fear };
+        }
         public override bool ImmuneStatusEffect(EffectType _type) {
             if (_type == EffectType.Insanity || _type == EffectType.Fear)
                 return true;
             return false;
         }
+
+        public override List<StatusEffect> ApplyStatusEffect() {
+            return new List<StatusEffect> { this };
+        }
     }
 
     /// <summary>
-    /// 免疫精神崩潰與恐懼狀態
+    /// 逃跑
     /// </summary>
     public class FleeEffect : StatusEffect {
         public class Builder : Builder<FleeEffect> { }

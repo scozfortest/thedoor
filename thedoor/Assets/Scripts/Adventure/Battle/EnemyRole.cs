@@ -12,17 +12,20 @@ namespace TheDoor.Main {
         public List<EnemyAction> Actions { get; private set; } = new List<EnemyAction>();
 
         public EnemyAction AddNewAction() {
-            var action = MyData.GetAction(this, BattleManager.PRole);
+            var action = MyData.GetAction(this, BattleManager.PRole, GetLastAction());
             if (action == null) return null;
             Actions.Add(action);
             return action;
+        }
+        EnemyAction GetLastAction() {
+            return Actions.Count > 0 ? Actions[Actions.Count - 1] : null;
         }
 
         void ScheduleNewActions() {
             int needCount = GameSettingData.GetInt(GameSetting.Monster_ScheduleActionCount);
             int addCount = needCount - Actions.Count;
             for (int i = 0; i < addCount; i++) {
-                var action = MyData.GetAction(this, BattleManager.PRole);
+                var action = MyData.GetAction(this, BattleManager.PRole, GetLastAction());
                 if (action == null) continue;
                 Actions.Add(action);
             }
@@ -30,10 +33,20 @@ namespace TheDoor.Main {
 
         public override void AddHP(int _value) {
             base.AddHP(_value);
-            if (_value <= 0) {
-                DNPManager.Instance.Spawn(DNPManager.DPNType.Dmg, _value, EnemyUI.Instance.GetComponent<RectTransform>(), Vector2.zero);
-            }
+            if (_value <= 0)
+                DNPManager.Instance.Spawn(DNPManager.DPNType.Dmg, _value, BattleUI.GetTargetRectTrans(this), Vector2.zero);
+            else
+                DNPManager.Instance.Spawn(DNPManager.DPNType.Restore, _value, BattleUI.GetTargetRectTrans(this), Vector2.zero);
+
             EnemyUI.Instance?.RefreshUI();
+        }
+
+        public override void ApplyEffect(StatusEffect _effect) {
+            base.ApplyEffect(_effect);
+
+            if (MyEnum.TryParseEnum(_effect.MyType.ToString(), out DNPManager.DPNType _type)) {
+                DNPManager.Instance.Spawn(_type, _effect.Stack, BattleUI.GetTargetRectTrans(this), Vector2.zero);
+            }
         }
 
 

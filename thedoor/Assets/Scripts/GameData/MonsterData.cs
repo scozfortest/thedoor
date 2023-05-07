@@ -98,7 +98,7 @@ namespace TheDoor.Main {
         public static MonsterData GetData(int _id) {
             return GameDictionary.GetJsonData<MonsterData>(DataName, _id);
         }
-        public EnemyAction GetAction(EnemyRole _doer, Role _target) {
+        public EnemyAction GetAction(EnemyRole _doer, Role _target, EnemyAction _previousAction) {
             var mActionDatas = MonsterActionData.GetMonsterActionDatas(ID);
             var statusEffects = new List<StatusEffect>();
             EnemyAction action = null;
@@ -115,7 +115,7 @@ namespace TheDoor.Main {
                         if (effect != null)
                             statusEffects.Add(effect);
                     }
-                    action = new EnemyAction(mActionData.Name, doer, mActionData.Time, statusEffects);
+                    action = new EnemyAction(mActionData.Name, doer, mActionData.Time, statusEffects, _previousAction);
                     break;
                 }
                 if (action != null) break;

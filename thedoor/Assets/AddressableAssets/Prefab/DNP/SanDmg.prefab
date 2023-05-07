@@ -70,8 +70,7 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 534c7ce2496d9a74ab28e2f1f85c2216, type: 2}
   m_sharedMaterial: {fileID: 5894866814813299862, guid: 534c7ce2496d9a74ab28e2f1f85c2216, type: 2}
-  m_fontSharedMaterials:
-  - {fileID: 5894866814813299862, guid: 534c7ce2496d9a74ab28e2f1f85c2216, type: 2}
+  m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -336,23 +335,23 @@ MonoBehaviour:
   enableCrossScaleFadeIn: 1
   crossScaleFadeIn: {x: 1, y: 1.5}
   enableShakeFadeIn: 1
-  shakeOffsetFadeIn: {x: 0, y: 1}
+  shakeOffsetFadeIn: {x: 0, y: 2.5}
   shakeFrequencyFadeIn: 4
   durationFadeOut: 0.2
   enableOffsetFadeOut: 0
   offsetFadeOut: {x: 0.5, y: 0}
-  enableScaleFadeOut: 1
-  scaleFadeOut: {x: 0.6, y: 1.4}
+  enableScaleFadeOut: 0
+  scaleFadeOut: {x: 0.4, y: 0.4}
   enableCrossScaleFadeOut: 0
   crossScaleFadeOut: {x: 1, y: 1.5}
-  enableShakeFadeOut: 1
-  shakeOffsetFadeOut: {x: 0, y: -1}
-  shakeFrequencyFadeOut: 2
+  enableShakeFadeOut: 0
+  shakeOffsetFadeOut: {x: 0, y: 1.5}
+  shakeFrequencyFadeOut: 4
   enableLerp: 1
   lerpSettings:
     speed: 5
-    minX: -0.3
-    maxX: 0.3
+    minX: -0.4
+    maxX: 0.4
     minY: 0.5
     maxY: 1
     randomFlip: 0
@@ -430,7 +429,7 @@ MonoBehaviour:
     fromNumber: 0
     toNumber: 1000
     fromScale: 1
-    toScale: 1.5
+    toScale: 2
   enableScaleOverTime: 0
   scaleOverTime:
     serializedVersion: 2
@@ -456,13 +455,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  spamGroup: Default
-  enableCombination: 1
+  spamGroup: SanDmg
+  enableCombination: 0
   combinationSettings:
     method: 0
     maxDistance: 10
-    spawnDelay: 1
-    absorbDuration: 0.2
+    spawnDelay: 0.2
+    absorbDuration: 0.4
     scaleCurve:
       serializedVersion: 2
       m_Curve:
@@ -509,6 +508,15 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
+        time: 0.5
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
         time: 1
         value: 0
         inSlope: 0
@@ -521,11 +529,11 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     moveToAbsorber: 1
-    teleportToAbsorber: 1
+    teleportToAbsorber: 0
     absorberScaleFactor: 1.5
     absorberScaleFade: 15
     instantGain: 0
-    bonusLifetime: 0.5
+    bonusLifetime: 1
   enableDestruction: 0
   destructionSettings:
     maxDistance: 2
@@ -579,11 +587,11 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  enableCollision: 1
+  enableCollision: 0
   collisionSettings:
-    radius: 5
-    pushFactor: 0.15
-    desiredDirection: {x: 0, y: -1, z: 0}
+    radius: 0.5
+    pushFactor: 1
+    desiredDirection: {x: 0, y: 0, z: 0}
   enablePush: 0
   pushSettings:
     radius: 3
