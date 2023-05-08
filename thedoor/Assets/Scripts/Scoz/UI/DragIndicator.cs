@@ -42,7 +42,6 @@ namespace Scoz.Func {
         public void EndDrag() {
             SupplyScrollView.enabled = true;
             IsDragging = false;
-            Debug.LogError("EndDrag");
             CheckReleaseOnTarget();
             ShowNodes(false);
         }
