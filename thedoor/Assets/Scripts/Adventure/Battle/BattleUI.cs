@@ -46,9 +46,10 @@ namespace TheDoor.Main {
         public void RefreshSupplyUI() {
             MySupplySpawner.SpawnItems(GamePlayer.Instance.Data.CurRole.GetSupplyDatas(true, SupplyData.Timing.Battle));
         }
-        public void StartDrag(Transform _startTarget, Action<string> _cb) {
-            MyDragIndicator.StartDrag(_startTarget, _cb);
+        public void StartDrag(PlayerAction _action, Transform _startTarget, Action<string> _cb) {
+            MyDragIndicator.StartDrag(_startTarget, _cb, () => { TimelineBattleUI.Instance.RemovePlayerToken(); });
             MyEnemyUI.ShowOutlineMaterial(true);
+            TimelineBattleUI.Instance.ShowPlayerToken(_action);
         }
         public void EndDrag() {
             MyDragIndicator.EndDrag();

@@ -18,6 +18,7 @@ namespace TheDoor.Main {
         [SerializeField] float VerticalDistToDragCard = 200;
 
         OwnedSupplyData OwnedData;
+        PlayerAction CurPAction;
         enum DragState {
             Start,
             Dragging,
@@ -47,11 +48,13 @@ namespace TheDoor.Main {
             if (BattleManager.CurBattleState != BattleState.PlayerTurn) return;//玩家操作階段才可以使用卡牌
             StartPos = eventData.position;
             CurDragState = DragState.Start;
+            CurPAction = GetPlayerAction("Head");
         }
         private void Update() {
             if (CurDragState == DragState.Start) {
                 if (Mathf.Abs(((Vector2)Input.mousePosition - StartPos).y) > VerticalDistToDragCard) {
-                    BattleUI.Instance.StartDrag(transform, UseSupplyToTarget);
+                    BattleUI.Instance.StartDrag(CurPAction, transform, UseSupplyToTarget);
+
                     CurDragState = DragState.Dragging;
                     CardBG.material = OutlineMaterial;
                 }
@@ -63,13 +66,19 @@ namespace TheDoor.Main {
             }
         }
 
+        PlayerAction GetPlayerAction(string _attackPartStr) {
+            var data = SupplyData.GetData(OwnedData.ID);
+            AttackPart attackPart = MyEnum.ParseEnum<AttackPart>(_attackPartStr);
+            PlayerAction pAction = data.GetAction(BattleManager.PRole, BattleManager.ERole, attackPart);
+            return pAction;
+        }
+
         void UseSupplyToTarget(string _name) {
 
             var data = SupplyData.GetData(OwnedData.ID);
             WriteLog.LogFormat("對{0}部位 使用道具: {1}", _name, data.Name);
-            AttackPart attackPart = MyEnum.ParseEnum<AttackPart>(_name);
-            PlayerAction pAction = data.GetAction(BattleManager.PRole, BattleManager.ERole, attackPart);
-            BattleManager.PlayerDoAction(pAction);
+            CurPAction = GetPlayerAction(_name);
+            BattleManager.PlayerDoAction(CurPAction);
             OwnedData.AddUsage(-1);
             BattleUI.Instance?.RefreshSupplyUI();
             //GamePlayer.Instance.SaveToLoco_SupplyData();
