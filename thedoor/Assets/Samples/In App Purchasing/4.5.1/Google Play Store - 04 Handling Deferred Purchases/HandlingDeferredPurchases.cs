@@ -3,11 +3,9 @@ using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.UI;
 
-namespace Samples.Purchasing.GooglePlay.HandlingDeferredPurchases
-{
+namespace Samples.Purchasing.GooglePlay.HandlingDeferredPurchases {
     [RequireComponent(typeof(UserWarningGooglePlayStore))]
-    public class HandlingDeferredPurchases : MonoBehaviour, IStoreListener
-    {
+    public class HandlingDeferredPurchases : MonoBehaviour, IStoreListener {
         IStoreController m_StoreController;
         IGooglePlayStoreExtensions m_GooglePlayStoreExtensions;
 
@@ -19,14 +17,12 @@ namespace Samples.Purchasing.GooglePlay.HandlingDeferredPurchases
 
         int m_GoldCount;
 
-        void Start()
-        {
+        void Start() {
             InitializePurchasing();
             UpdateWarningMessage();
         }
 
-        void InitializePurchasing()
-        {
+        void InitializePurchasing() {
             var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 
             builder.Configure<IGooglePlayConfiguration>().SetDeferredPurchaseListener(OnDeferredPurchase);
@@ -36,14 +32,12 @@ namespace Samples.Purchasing.GooglePlay.HandlingDeferredPurchases
             UnityPurchasing.Initialize(this, builder);
         }
 
-        void OnDeferredPurchase(Product product)
-        {
+        void OnDeferredPurchase(Product product) {
             Debug.Log($"Purchase of {product.definition.id} is deferred");
             UpdateUI();
         }
 
-        public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
-        {
+        public void OnInitialized(IStoreController controller, IExtensionProvider extensions) {
             Debug.Log("In-App Purchasing successfully initialized");
 
             m_StoreController = controller;
@@ -52,19 +46,16 @@ namespace Samples.Purchasing.GooglePlay.HandlingDeferredPurchases
             UpdateUI();
         }
 
-        public void BuyGold()
-        {
+        public void BuyGold() {
             m_StoreController.InitiatePurchase(goldProductId);
         }
 
-        public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
-        {
+        public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args) {
             var product = args.purchasedProduct;
 
             Debug.Log($"Processing Purchase: {product.definition.id}");
 
-            if (m_GooglePlayStoreExtensions.IsPurchasedProductDeferred(product))
-            {
+            if (m_GooglePlayStoreExtensions.IsPurchasedProductDeferred(product)) {
                 //The purchase is Deferred.
                 //Therefore, we do not unlock the content or complete the transaction.
                 //ProcessPurchase will be called again once the purchase is Purchased.
@@ -76,48 +67,44 @@ namespace Samples.Purchasing.GooglePlay.HandlingDeferredPurchases
             return PurchaseProcessingResult.Complete;
         }
 
-        void UnlockContent(Product product)
-        {
+        void UnlockContent(Product product) {
             Debug.Log($"Unlock Content: {product.definition.id}");
 
-            if (product.definition.id == goldProductId)
-            {
+            if (product.definition.id == goldProductId) {
                 AddGold();
             }
 
             UpdateUI();
         }
 
-        void AddGold()
-        {
+        void AddGold() {
             m_GoldCount++;
         }
 
-        void UpdateUI()
-        {
+        void UpdateUI() {
             goldCountText.text = $"Your Gold: {m_GoldCount}";
             waitingOnDeferredPurchaseText.text = IsPurchasedProductDeferred(goldProductId) ? $"Waiting on deferred purchase: {goldProductId}" : "";
         }
 
-        bool IsPurchasedProductDeferred(string productId)
-        {
+        bool IsPurchasedProductDeferred(string productId) {
             var product = m_StoreController.products.WithID(productId);
             return m_GooglePlayStoreExtensions.IsPurchasedProductDeferred(product);
         }
 
-        public void OnInitializeFailed(InitializationFailureReason error)
-        {
+        public void OnInitializeFailed(InitializationFailureReason error) {
             Debug.Log($"In-App Purchasing initialize failed: {error}");
         }
 
-        public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
-        {
+        public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason) {
             Debug.Log($"Purchase failed - Product: '{product.definition.id}', PurchaseFailureReason: {failureReason}");
         }
 
-        void UpdateWarningMessage()
-        {
+        void UpdateWarningMessage() {
             GetComponent<UserWarningGooglePlayStore>().UpdateWarningText();
+        }
+
+        public void OnInitializeFailed(InitializationFailureReason error, string message) {
+            throw new NotImplementedException();
         }
     }
 }

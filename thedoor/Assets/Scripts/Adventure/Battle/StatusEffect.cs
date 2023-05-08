@@ -51,7 +51,7 @@ namespace TheDoor.Main {
         public virtual int AttackExtraSanDamageDealt() { return 0; }//攻擊造成額外神智傷害
         public virtual int Restore() { return 0; }//恢復生命
         public virtual int SanRestore() { return 0; }//恢復神智
-        public virtual int TimeModification(int _time) { return _time; }//時間調整
+        public virtual int TimeModification() { return 0; }//時間調整
         public virtual HashSet<EffectType> RemoveStatusEffect() { return null; }//移除狀態
 
         public virtual List<StatusEffect> ApplyStatusEffect() { return null; }//賦予效果
@@ -64,6 +64,12 @@ namespace TheDoor.Main {
 
         #endregion
 
+        #region 被賦予狀態時觸發
+        public virtual HashSet<EffectType> BeAppliedEffectRemove() { return null; }//被賦予狀態時觸發移除狀態
+
+        #endregion
+
+
         #region 受到攻擊觸發
 
         public virtual int BeAtteckedExtraDmgTaken() { return 0; }//受到攻擊受到傷害
@@ -72,6 +78,7 @@ namespace TheDoor.Main {
         public virtual int BeAttackSanDamageReduction(int _dmg) { return 0; }//受到攻擊減少神智傷害
 
         #endregion
+
 
         #region 時間流逝時觸發
 
@@ -213,15 +220,17 @@ namespace TheDoor.Main {
             MyType = EffectType.Dizzy;
         }
 
-        public override int TimeModification(int _time) {
-            _time += Stack;
-            return _time;
+        public override int TimeModification() {
+            return Stack;
         }
         public override List<StatusEffect> ApplyStatusEffect() {
             return new List<StatusEffect> { this };
         }
-        public override HashSet<EffectType> RemoveStatusEffectWhenActionDone() {
-            return new HashSet<EffectType> { this.MyType };
+        public override HashSet<EffectType> BeAppliedEffectRemove() {
+            if (MyTarget is PlayerRole)
+                return null;
+            else
+                return new HashSet<EffectType> { MyType };
         }
     }
 

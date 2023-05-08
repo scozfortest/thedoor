@@ -23,6 +23,11 @@ public class IAPStoreController : IStoreController
 
     }
     public void FetchAdditionalProducts(HashSet<ProductDefinition> products, Action successCallback, Action<InitializationFailureReason> failCallback) { }
+
+    public void FetchAdditionalProducts(HashSet<ProductDefinition> additionalProducts, Action successCallback, Action<InitializationFailureReason, string> failCallback) {
+        throw new NotImplementedException();
+    }
+
     public void InitiatePurchase(Product product, string payload) { }
     public void InitiatePurchase(string productId, string payload) { }
     public  void InitiatePurchase(Product product) { }
@@ -48,6 +53,10 @@ public class IAPAppleStoreController : IAppleExtensions {
     public void SetApplicationUsername(string applicationUsername) { }
     public void SetStorePromotionOrder(List<Product> products) { }
     public void SetStorePromotionVisibility(Product product, AppleStorePromotionVisibility visible) { }
+
+    public void RestoreTransactions(Action<bool, string> callback) {
+        throw new NotImplementedException();
+    }
 }
 
 #endif

@@ -6,11 +6,9 @@ using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.UI;
 
-namespace Samples.Purchasing.GooglePlay.FraudDetection
-{
+namespace Samples.Purchasing.GooglePlay.FraudDetection {
     [RequireComponent(typeof(UserWarningGooglePlayStore))]
-    public class FraudDetection : MonoBehaviour, IStoreListener
-    {
+    public class FraudDetection : MonoBehaviour, IStoreListener {
         IStoreController m_StoreController;
 
         public User user;
@@ -22,14 +20,12 @@ namespace Samples.Purchasing.GooglePlay.FraudDetection
 
         int m_GoldCount;
 
-        void Start()
-        {
+        void Start() {
             InitializePurchasing();
             UpdateWarningMessage();
         }
 
-        void InitializePurchasing()
-        {
+        void InitializePurchasing() {
             var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 
             var googlePlayConfiguration = builder.Configure<IGooglePlayConfiguration>();
@@ -40,8 +36,7 @@ namespace Samples.Purchasing.GooglePlay.FraudDetection
             UnityPurchasing.Initialize(this, builder);
         }
 
-        void ConfigureGoogleFraudDetection(IGooglePlayConfiguration googlePlayConfiguration)
-        {
+        void ConfigureGoogleFraudDetection(IGooglePlayConfiguration googlePlayConfiguration) {
             //To make sure the account id and profile id do not contain personally identifiable information, we obfuscate this information by hashing it.
             var obfuscatedAccountId = HashString(user.AccountId);
             var obfuscatedProfileId = HashString(user.ProfileId);
@@ -50,8 +45,7 @@ namespace Samples.Purchasing.GooglePlay.FraudDetection
             googlePlayConfiguration.SetObfuscatedProfileId(obfuscatedProfileId);
         }
 
-        static string HashString(string input)
-        {
+        static string HashString(string input) {
             var stringBuilder = new StringBuilder();
             foreach (var b in GetHash(input))
                 stringBuilder.Append(b.ToString("X2"));
@@ -59,14 +53,12 @@ namespace Samples.Purchasing.GooglePlay.FraudDetection
             return stringBuilder.ToString();
         }
 
-        static IEnumerable<byte> GetHash(string input)
-        {
+        static IEnumerable<byte> GetHash(string input) {
             using (HashAlgorithm algorithm = SHA256.Create())
                 return algorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
         }
 
-        public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
-        {
+        public void OnInitialized(IStoreController controller, IExtensionProvider extensions) {
             Debug.Log("In-App Purchasing successfully initialized");
 
             m_StoreController = controller;
@@ -74,13 +66,11 @@ namespace Samples.Purchasing.GooglePlay.FraudDetection
             UpdateUI();
         }
 
-        public void BuyGold()
-        {
+        public void BuyGold() {
             m_StoreController.InitiatePurchase(goldProductId);
         }
 
-        public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
-        {
+        public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args) {
             var product = args.purchasedProduct;
 
             Debug.Log($"Processing Purchase: {product.definition.id}");
@@ -90,39 +80,36 @@ namespace Samples.Purchasing.GooglePlay.FraudDetection
             return PurchaseProcessingResult.Complete;
         }
 
-        void UnlockContent(Product product)
-        {
-            if (product.definition.id == goldProductId)
-            {
+        void UnlockContent(Product product) {
+            if (product.definition.id == goldProductId) {
                 AddGold();
             }
 
             UpdateUI();
         }
 
-        void AddGold()
-        {
+        void AddGold() {
             m_GoldCount++;
         }
 
-        void UpdateUI()
-        {
+        void UpdateUI() {
             goldCountText.text = $"Your Gold: {m_GoldCount}";
         }
 
-        public void OnInitializeFailed(InitializationFailureReason error)
-        {
+        public void OnInitializeFailed(InitializationFailureReason error) {
             Debug.Log($"In-App Purchasing initialize failed: {error}");
         }
 
-        public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
-        {
+        public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason) {
             Debug.Log($"Purchase failed - Product: '{product.definition.id}', PurchaseFailureReason: {failureReason}");
         }
 
-        void UpdateWarningMessage()
-        {
+        void UpdateWarningMessage() {
             GetComponent<UserWarningGooglePlayStore>().UpdateWarningText();
+        }
+
+        public void OnInitializeFailed(InitializationFailureReason error, string message) {
+            throw new NotImplementedException();
         }
     }
 }

@@ -25,6 +25,10 @@ namespace TheDoor.Main {
             }
         }
 
+        public void AddNeedTime(int _value) {
+            NeedTime += _value;
+        }
+
 
         public EnemyAction(string _name, EnemyRole _doer, int _time, List<StatusEffect> effects, EnemyAction _previousAction)
             : base(_name, _doer, _time, effects) {

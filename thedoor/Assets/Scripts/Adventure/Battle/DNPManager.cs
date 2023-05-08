@@ -83,9 +83,7 @@ public class DNPManager : MonoBehaviour {
         DPNDic.Add(DPNType.Flee, FleeDPN);
     }
     public DamageNumber Spawn(DPNType _type, float _value, RectTransform _parentTrans, Vector2 _anchorPos) {
-        Debug.Log("_type=" + _type);
         if (!DPNDic.ContainsKey(_type) || DPNDic[_type] == null) return null;
-        Debug.Log("DPNDic[_type]=" + DPNDic[_type]);
         DamageNumber dn = DPNDic[_type].Spawn(Vector3.zero, _value);
 
         dn.SetAnchoredPosition(_parentTrans, _anchorPos);

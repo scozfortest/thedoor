@@ -46,14 +46,13 @@ namespace TheDoor.Main {
             if (_action == null) return;
             CurBattleState = BattleState.ActionPerform;
             CurPlayerAction = _action;
-            DoActions(0, 0);
+            DoActions(0);
         }
         static int BattlePassTime = 0;
 
 
-        static void DoActions(int _roundPassTime, int _eActionIndex) {
+        static void DoActions(int _roundPassTime) {
             //一輪行動是由至少一個玩家行動+0~任意數量個敵方行動組成，直到玩家行動完才會結束一輪行動
-
 
             //時間軸UI移除已經執行的的ActionToken
             TimelineBattleUI.Instance.RemoveDoneActionToken();
@@ -61,10 +60,13 @@ namespace TheDoor.Main {
             if (PRole.IsDead || ERole.IsDead)
                 OnActionFinish();
 
-            var eAction = ERole.Actions[_eActionIndex];
+            var eAction = ERole.GetCurAction();
             var eActionNeedTime = eAction.NeedTimeBeforeAction - BattlePassTime;
             var pActionNeedTime = CurPlayerAction.NeedTimeBeforeAction - _roundPassTime;
-
+            //Debug.LogError("eAction.NeedTimeBeforeAction=" + eAction.NeedTimeBeforeAction);
+            //Debug.LogError("pActionNeedTime=" + pActionNeedTime);
+            //Debug.LogError("eActionNeedTime=" + eActionNeedTime);
+            //Debug.LogError("BattlePassTime=" + BattlePassTime);
             //Debug.LogError("_roundPassTime=" + _roundPassTime);
             //Debug.LogError("BattlePassTime=" + BattlePassTime);
             //Debug.LogError("eActionNeedTime=" + eActionNeedTime);
@@ -74,8 +76,8 @@ namespace TheDoor.Main {
 
                 CurPlayerAction.DoAction();
                 CoroutineJob.Instance.StartNewAction(() => {
-                    DoActions(_roundPassTime, _eActionIndex);
-                }, 0.5f);
+                    DoActions(_roundPassTime);
+                }, 1f);
 
 
             } else if (eActionNeedTime <= 0) {//怪物行動
@@ -85,10 +87,11 @@ namespace TheDoor.Main {
                 TimelineBattleUI.Instance.SpawnNewAction(newEAction);
                 //怪物行動
                 eAction.DoAction();
-                _eActionIndex++;
+
+                ERole.AddActionIndex();
                 CoroutineJob.Instance.StartNewAction(() => {
-                    DoActions(_roundPassTime, _eActionIndex);
-                }, 0.5f);
+                    DoActions(_roundPassTime);
+                }, 1f);
 
 
             } else {
@@ -97,12 +100,11 @@ namespace TheDoor.Main {
                     OnActionFinish();
                 else {
                     //時間軸往前推進1格
+                    Debug.LogError("PassTime");
                     TimelineBattleUI.Instance.PassTime(1, () => {
                         _roundPassTime++;
                         BattlePassTime++;
-                        CoroutineJob.Instance.StartNewAction(() => {
-                            DoActions(_roundPassTime, _eActionIndex);
-                        }, 0);
+                        DoActions(_roundPassTime);
                     });
                 }
 

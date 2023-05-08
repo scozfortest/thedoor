@@ -101,5 +101,9 @@ namespace Samples.Purchasing.Core.BuyingConsumables
             GoldCountText.text = $"Your Gold: {m_GoldCount}";
             DiamondCountText.text = $"Your Diamonds: {m_DiamondCount}";
         }
+
+        public void OnInitializeFailed(InitializationFailureReason error, string message) {
+            throw new NotImplementedException();
+        }
     }
 }

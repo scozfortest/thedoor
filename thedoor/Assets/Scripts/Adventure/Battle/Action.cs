@@ -9,15 +9,7 @@ namespace TheDoor.Main {
         public string Name { get; private set; }
         public Role Doer;
         public int Time { get; protected set; }//該行動原本需消耗時間
-        public int NeedTime {//實際需求幾秒(考量狀態效果影響)
-            get {
-                int value = Time;
-                foreach (var effect in Doer.Effects.Values) {
-                    value = effect.TimeModification(value);
-                }
-                return value;
-            }
-        }
+        public int NeedTime { get; protected set; }
 
         /// <summary>
         /// 考慮行動順序後在時間軸上是第幾秒才會執行
@@ -32,9 +24,12 @@ namespace TheDoor.Main {
             Name = _name;
             Doer = _doer;
             Time = _time;
+            NeedTime = Time;
             Effects = _effects;
             Done = false;
         }
+
+
 
         /// <summary>
         /// 傷害目標
@@ -98,6 +93,7 @@ namespace TheDoor.Main {
                     continue;
                 }
 
+
                 //傷害目標
                 DoDmg(effect);
                 //精神傷害目標
@@ -109,21 +105,22 @@ namespace TheDoor.Main {
                 if (effect.MyTarget is PlayerRole)
                     RestoreSanP(effect);
 
-                //承受時間流逝傷害
-                int timeDmg = 0;
-                effect.Doer.AddTimePassDmg(ref timeDmg, Time);
-                if (timeDmg != 0) {
-                    effect.Doer.AddHP(-timeDmg);
-                }
+                ////承受時間流逝傷害
+                //int timeDmg = 0;
+                //effect.Doer.AddTimePassDmg(ref timeDmg, Time);
+                //if (timeDmg != 0) {
+                //    effect.Doer.AddHP(-timeDmg);
+                //}
 
-                //承受時間流逝神智傷害
-                int timeSanDmg = 0;
-                effect.Doer.AddTimePassSanDmg(ref timeSanDmg, Time);
-                if (timeSanDmg != 0) {
-                    if (effect.MyTarget is PlayerRole) {
-                        ((PlayerRole)effect.Doer).AddSanP(-timeSanDmg);
-                    }
-                }
+                ////承受時間流逝神智傷害
+                //int timeSanDmg = 0;
+                //effect.Doer.AddTimePassSanDmg(ref timeSanDmg, Time);
+                //if (timeSanDmg != 0) {
+                //    if (effect.MyTarget is PlayerRole) {
+                //        ((PlayerRole)effect.Doer).AddSanP(-timeSanDmg);
+                //    }
+                //}
+
                 //移除狀態效果
                 if (effect.RemoveStatusEffect() != null)
                     effect.MyTarget.RemoveEffects(effect.RemoveStatusEffect().ToArray());
@@ -163,10 +160,12 @@ namespace TheDoor.Main {
 
         protected virtual void OnDoActionDone() {
             Done = true;
+            List<EffectType> removeTypes = new List<EffectType>();
             foreach (var effect in Doer.Effects.Values) {
-                var removeEffects = effect.RemoveStatusEffectWhenActionDone();
-                Doer.RemoveEffects(removeEffects.ToArray());
+                if (effect.RemoveStatusEffectWhenActionDone() != null)
+                    removeTypes.AddRange(effect.RemoveStatusEffectWhenActionDone());
             }
+            Doer.RemoveEffects(removeTypes.ToArray());
         }
 
 

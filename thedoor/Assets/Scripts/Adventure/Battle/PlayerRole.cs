@@ -27,6 +27,8 @@ namespace TheDoor.Main {
         }
 
 
+
+
         public void AddSanP(int _value) {
             if (IsDead) return;
             CurSanP += _value;
@@ -38,6 +40,13 @@ namespace TheDoor.Main {
             if (IsDead) OnDeath();
             RoleStateUI.Instance.RefreshState();
         }
+        public override void GetAttacked(int _dmg) {
+            base.GetAttacked(_dmg);
+            CoroutineJob.Instance.StartNewAction(() => {
+                CameraManager.ShakeCam(CameraManager.CamNames.Adventure, 0.5f, 1, 0.2f);
+            }, 0.2f);
+        }
+
         /// <summary>
         /// 承受神智攻擊
         /// </summary>
@@ -53,6 +62,9 @@ namespace TheDoor.Main {
             if (_dmg > 0) _dmg = 0;
             AddSanP(_dmg);
             RemoveExpiredEffects();
+            CoroutineJob.Instance.StartNewAction(() => {
+                CameraManager.ShakeCam(CameraManager.CamNames.Adventure, 0.5f, 1, 0.2f);
+            }, 0.2f);
         }
         protected override void OnDeath() {
             base.OnDeath();

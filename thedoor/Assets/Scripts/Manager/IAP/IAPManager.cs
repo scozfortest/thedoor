@@ -811,5 +811,9 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
         //The CrossPlatform validator only supports the GooglePlayStore and Apple's App Stores.
         return IsGooglePlayStoreSelected || IsAppleAppStoreSelected;
     }
+
+    public void OnInitializeFailed(InitializationFailureReason error, string message) {
+        throw new NotImplementedException();
+    }
 }
 #endif

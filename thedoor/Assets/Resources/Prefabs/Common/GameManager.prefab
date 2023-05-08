@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 53817119149878424}
   - component: {fileID: 3615540332240101160}
-  - component: {fileID: 4413291597346170747}
   - component: {fileID: -3569206838611705893}
   m_Layer: 0
   m_Name: GameManager
@@ -57,18 +56,6 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   TargetFPS: 60
---- !u!114 &4413291597346170747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2101564055009624052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31e940ecf01a18e4da6ee99d2e6de41f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-3569206838611705893
 MonoBehaviour:
   m_ObjectHideFlags: 0

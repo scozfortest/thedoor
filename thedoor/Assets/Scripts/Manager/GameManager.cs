@@ -101,6 +101,7 @@ namespace Scoz.Func {
             Application.targetFrameRate = TargetFPS;
             //產生一個新玩家
             new GamePlayer();
+
             //建立FirebaseManager
             gameObject.AddComponent<FirebaseManager>();
             //建立CoroutineJob
@@ -117,6 +118,8 @@ namespace Scoz.Func {
             gameObject.AddComponent<GameStateManager>().Init();
             //建立LocoNotification
             gameObject.AddComponent<LocoNotification>().Init();
+            //建立CameraManager
+            gameObject.AddComponent<CameraManager>().Init();
             //Permission請求
 #if UNITY_ANDROID
             gameObject.AddComponent<AndroidPermission>().RequestLaunchPermissions();

@@ -46,9 +46,9 @@ namespace TheDoor.Main {
         }
 
         public void ShowOutlineMaterial(bool _show) {
-            for (int i = 0; i < HitGOs.Count; i++) {
-                HitGOs[i].material = (_show) ? OutlineMaterial : null;
-            }
+            //for (int i = 0; i < HitGOs.Count; i++) {
+            //    HitGOs[i].material = (_show) ? OutlineMaterial : null;
+            //}
         }
     }
 }

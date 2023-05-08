@@ -113,5 +113,9 @@ namespace Samples.Purchasing.Core.IntegratingSelfProvidedBackendReceiptValidatio
                 ProcessingPurchasesCountText.text += "Purchase Processing...\n";
             }
         }
+
+        public void OnInitializeFailed(InitializationFailureReason error, string message) {
+            throw new NotImplementedException();
+        }
     }
 }

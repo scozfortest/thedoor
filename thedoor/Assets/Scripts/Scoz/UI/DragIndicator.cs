@@ -11,7 +11,6 @@ namespace Scoz.Func {
         [SerializeField] float CurveHeight = 200; // 曲線的基本高度
         [SerializeField] float HeightVariation = 30; // 曲線高度的變化範圍
         [SerializeField] float Speed = 3; // 曲線變化的速度
-        [SerializeField] ScrollRect SupplyScrollView;//在拖曳時要關閉ScrollView的滾動功能
         [SerializeField] List<Image> TargetImgs;//目標
 
         Transform StartTrans;//起始目標Transfrom
@@ -31,7 +30,6 @@ namespace Scoz.Func {
             MyCanvas = GetComponentInParent<Canvas>();
         }
         public void StartDrag(Transform _startTrans, Action<string> _onTargetCB, Action _notOnTargetCB) {
-            SupplyScrollView.enabled = false;
             StartTrans = _startTrans;
             TargetNameCB = _onTargetCB;
             NotOnTargetCB = _notOnTargetCB;
@@ -40,7 +38,6 @@ namespace Scoz.Func {
             ShowNodes(true);
         }
         public void EndDrag() {
-            SupplyScrollView.enabled = true;
             IsDragging = false;
             CheckReleaseOnTarget();
             ShowNodes(false);

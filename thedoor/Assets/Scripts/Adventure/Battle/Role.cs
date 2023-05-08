@@ -59,7 +59,7 @@ namespace TheDoor.Main {
         /// <summary>
         /// 承受攻擊
         /// </summary>
-        public void GetAttacked(int _dmg) {
+        public virtual void GetAttacked(int _dmg) {
             if (_dmg == 0) return;
             if (IsDead) return;
 
@@ -88,6 +88,8 @@ namespace TheDoor.Main {
                 // 如果不存在，則添加新效果
                 Effects.Add(_effect.MyType, _effect);
             }
+            if (_effect.BeAppliedEffectRemove() != null)
+                RemoveEffects(_effect.BeAppliedEffectRemove().ToArray());
         }
         /// <summary>
         /// 移除狀態效果

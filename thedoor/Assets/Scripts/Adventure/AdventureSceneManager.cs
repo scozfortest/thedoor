@@ -6,9 +6,12 @@ using Scoz.Func;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using System;
 using UnityEngine.Purchasing.Security;
+using Cinemachine;
 
 namespace TheDoor.Main {
     public class AdventureSceneManager : MonoBehaviour {
+
+
         [SerializeField] AdventureManager AdvManager;
         [HeaderAttribute("==============Addressable Assets==============")]
         public Canvas HeightBaseCanvas;
@@ -18,13 +21,20 @@ namespace TheDoor.Main {
 
 
         [HeaderAttribute("==============設定==============")]
+        [SerializeField] Camera MainCam;
+        [SerializeField] CinemachineVirtualCamera MyCam;
+
+
         LoadingProgress MyLoadingProgress;//讀取進度，讀取完會跑FinishInitAdventure()
         List<AsyncOperationHandle> HandleList = new List<AsyncOperationHandle>();
+
 
         public static AdventureSceneManager Instance { get; private set; }
 
         void Start() {
             Instance = this;
+            CameraManager.SetCam(MainCam.GetComponent<CinemachineBrain>());
+            CameraManager.AddVirtualCam(CameraManager.CamNames.Adventure, MyCam);
             if (GameManager.IsInit) {
                 InitAdventure();
             } else {
