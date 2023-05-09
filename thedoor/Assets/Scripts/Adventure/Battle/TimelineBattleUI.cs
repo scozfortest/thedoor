@@ -105,6 +105,7 @@ namespace TheDoor.Main {
             PlayerActionToken = item;
         }
         public void RemovePlayerToken() {
+            if (PlayerActionToken == null) return;
             ItemList.Remove(PlayerActionToken);
             Destroy(PlayerActionToken.gameObject);
             PlayerActionToken = null;

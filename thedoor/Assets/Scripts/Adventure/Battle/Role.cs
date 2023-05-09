@@ -16,61 +16,43 @@ namespace TheDoor.Main {
         }
         public float HPRatio { get { return (float)CurHP / (float)MaxHP; } }
 
+        public int MaxSanP { get; protected set; }
+        private int curSanP;
+        public int CurSanP {
+            get { return curSanP; }
+            protected set { curSanP = Mathf.Clamp(value, 0, MaxSanP); }
+        }
+        public float SanPRatio { get { return (float)CurSanP / (float)MaxSanP; } }
+
 
         public Dictionary<EffectType, StatusEffect> Effects { get; protected set; } = new Dictionary<EffectType, StatusEffect>();
-        public virtual bool IsDead { get { return (CurHP <= 0); } }
+        public bool IsDead { get { return (CurHP <= 0 || CurSanP <= 0); } }
 
 
         public virtual void AddHP(int _value) {
             WriteLog.LogColor(Name + "HP增加:" + _value, WriteLog.LogType.Battle);
             if (IsDead) return;
-
             CurHP += _value;
-
             if (IsDead) OnDeath();
         }
 
+        public virtual void AddSanP(int _value) { }
+        /// <summary>
+        /// 承受神智攻擊
+        /// </summary>
+        public virtual void GetSanAttacked(int _dmg) { }
 
         protected virtual void OnDeath() {
             WriteLog.LogColor(Name + "死亡", WriteLog.LogType.Battle);
         }
 
 
-        public void AddTimePassDmg(ref int _value, int _time) {
-            foreach (var effect in Effects.Values) {
-                _value += effect.TimeDmgTaken(_time);
-            }
-        }
-        public void AddTimePassSanDmg(ref int _value, int _time) {
-            foreach (var effect in Effects.Values) {
-                _value += effect.TimeSanDmgTaken(_time);
-            }
-        }
-        public void AddExtraDmg(ref int _value) {
-            foreach (var effect in Effects.Values) {
-                _value += effect.AttackExtraDamageDealt();
-            }
-        }
-        public void AddExtraSanDmg(ref int _value) {
-            foreach (var effect in Effects.Values) {
-                _value += effect.AttackExtraSanDamageDealt();
-            }
-        }
         /// <summary>
         /// 承受攻擊
         /// </summary>
         public virtual void GetAttacked(int _dmg) {
-            if (_dmg == 0) return;
             if (IsDead) return;
-
-            //執行效果
-            foreach (var effect in Effects.Values) {
-                _dmg -= effect.BeAtteckedExtraDmgTaken();
-                _dmg += effect.BeAttackDamageReduction(_dmg);
-            }
-            if (_dmg > 0) _dmg = 0;
-            AddHP(_dmg);
-            RemoveExpiredEffects();
+            AddHP(-_dmg);
         }
 
 
@@ -88,8 +70,7 @@ namespace TheDoor.Main {
                 // 如果不存在，則添加新效果
                 Effects.Add(_effect.MyType, _effect);
             }
-            if (_effect.BeAppliedEffectRemove() != null)
-                RemoveEffects(_effect.BeAppliedEffectRemove().ToArray());
+            _effect.BeAppliedEffectTrigger();
         }
         /// <summary>
         /// 移除狀態效果
@@ -109,7 +90,15 @@ namespace TheDoor.Main {
                 Effects.Remove(key);
             }
         }
-
+        public void DoTimePass(int _time) {
+            List<StatusEffect> effects = new List<StatusEffect>(Effects.Values);
+            foreach (var effect in effects) {
+                if (effect == null) continue;
+                effect.TimePassDmgTaken(_time);
+                effect.TimePassSanDmgTaken(_time);
+                effect.TimePassStackChange(_time);
+            }
+        }
 
 
 
@@ -133,7 +122,14 @@ namespace TheDoor.Main {
                 instance.CurHP = _curHP;
                 return this;
             }
-
+            public Builder<T> SetCurSanP(int _curSanP) {
+                instance.CurSanP = _curSanP;
+                return this;
+            }
+            public Builder<T> SetMaxSanP(int _maxSanP) {
+                instance.MaxSanP = _maxSanP;
+                return this;
+            }
 
 
             public T Build() {

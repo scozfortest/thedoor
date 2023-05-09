@@ -20,7 +20,6 @@ namespace TheDoor.Main {
         }
         public int SupplyID { get; private set; }
         public Target MyTarget { get; private set; }
-        public float Probability { get; private set; }
         public List<TargetEffectData> MyEffects = new List<TargetEffectData>();
 
         static Dictionary<int, List<SupplyEffectData>> SupplyEffectDataDic = new Dictionary<int, List<SupplyEffectData>>();
@@ -31,8 +30,8 @@ namespace TheDoor.Main {
         protected override void GetDataFromJson(JsonData _item, string _dataName) {
             DataName = _dataName;
             JsonData item = _item;
-            EffectType tmpTEffectType = EffectType.HP;
-            List<float> tmpTEffectValues = new List<float>();
+            EffectType tmpTEffectType = EffectType.Attack;
+            int tmpTypeValue = 0;
             MyEffects.Clear();
             foreach (string key in item.Keys) {
                 switch (key) {
@@ -45,17 +44,14 @@ namespace TheDoor.Main {
                     case "Target":
                         MyTarget = MyEnum.ParseEnum<Target>(item[key].ToString());
                         break;
-                    case "Probability":
-                        Probability = float.Parse(item[key].ToString());
-                        break;
                     default:
                         try {
                             if (key.Contains("EffectType")) {
                                 tmpTEffectType = MyEnum.ParseEnum<EffectType>(item[key].ToString());
                             } else if (key.Contains("EffectValue")) {
-                                tmpTEffectValues.Add(int.Parse(item[key].ToString()));
+                                tmpTypeValue = int.Parse(item[key].ToString());
                             } else if (key.Contains("EffectProb")) {
-                                TargetEffectData tmpTEffectData = new TargetEffectData(MyTarget, tmpTEffectType, float.Parse(item[key].ToString()), tmpTEffectValues.ToArray());
+                                TargetEffectData tmpTEffectData = new TargetEffectData(MyTarget, tmpTEffectType, float.Parse(item[key].ToString()), tmpTypeValue);
                                 MyEffects.Add(tmpTEffectData);
                             }
                         } catch (Exception _e) {

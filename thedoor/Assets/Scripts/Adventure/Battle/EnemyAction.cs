@@ -30,8 +30,8 @@ namespace TheDoor.Main {
         }
 
 
-        public EnemyAction(string _name, EnemyRole _doer, int _time, List<StatusEffect> effects, EnemyAction _previousAction)
-            : base(_name, _doer, _time, effects) {
+        public EnemyAction(string _name, EnemyRole _doer, int _time, List<StatusEffect> effects, AttackPart _attackPart, EnemyAction _previousAction)
+            : base(_name, _doer, _time, effects, _attackPart) {
             PreviousAction = _previousAction;
         }
 

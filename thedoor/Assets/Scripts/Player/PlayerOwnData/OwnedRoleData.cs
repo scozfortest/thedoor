@@ -11,7 +11,7 @@ namespace TheDoor.Main {
         [ScozSerializable] public int CurHP { get; private set; }
         [ScozSerializable] public int CurSanP { get; private set; }
         [ScozSerializable] public List<string> Talents { get; private set; } = new List<string>();
-        [ScozSerializable] public Dictionary<EffectType, List<float>> Effects { get; private set; } = new Dictionary<EffectType, List<float>>();
+        [ScozSerializable] public Dictionary<EffectType, int> Effects { get; private set; } = new Dictionary<EffectType, int>();
 
         public OwnedAdventureData MyAdventure {
             get {
@@ -40,9 +40,8 @@ namespace TheDoor.Main {
             if (effectDic != null) {
                 foreach (var key in effectDic.Keys) {
                     if (MyEnum.TryParseEnum(key, out EffectType _type)) {
-                        List<object> valueObjs = effectDic[key] as List<object>;
-                        List<float> values = valueObjs.ToFloatList();
-                        Effects.Add(_type, values);
+                        int typeValue = Convert.ToInt32(effectDic[key]);
+                        Effects.Add(_type, typeValue);
                     }
                 }
             }
@@ -66,7 +65,7 @@ namespace TheDoor.Main {
             if (Effects == null || Effects.Count == 0) return null;
             List<TargetEffectData> effects = new List<TargetEffectData>();
             foreach (var effectType in Effects.Keys) {
-                var effectData = new TargetEffectData(Target.Myself, effectType, 1, Effects[effectType].ToArray());
+                var effectData = new TargetEffectData(Target.Myself, effectType, 1, Effects[effectType]);
                 effects.Add(effectData);
             }
             return effects;

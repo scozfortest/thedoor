@@ -11,6 +11,9 @@ namespace TheDoor.Main {
         Normal,
         Boss,
     }
+    /// <summary>
+    /// 怪物有三個部位可以攻擊 玩家只會被攻擊Body
+    /// </summary>
     public enum AttackPart {
         Head,
         Body,
@@ -111,11 +114,11 @@ namespace TheDoor.Main {
                     if (targetEffectDatas == null || targetEffectDatas.Count == 0) continue;
                     foreach (var effectData in targetEffectDatas) {
                         Role target = (effectData.MyTarget == Target.Myself) ? _doer : _target;
-                        var effect = EffectFactory.Create(effectData.Probability, effectData.EffectType, (int)effectData.GetValue(0), _doer, target);
+                        var effect = EffectFactory.Create(effectData.Probability, effectData.EffectType, (int)effectData.Value, _doer, target, AttackPart.Body);
                         if (effect != null)
                             statusEffects.Add(effect);
                     }
-                    action = new EnemyAction(mActionData.Name, doer, mActionData.Time, statusEffects, _previousAction);
+                    action = new EnemyAction(mActionData.Name, doer, mActionData.Time, statusEffects, AttackPart.Body, _previousAction);
                     break;
                 }
                 if (action != null) break;

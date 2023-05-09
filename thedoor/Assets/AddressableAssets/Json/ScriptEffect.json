@@ -1,4 +1,4 @@
 {"ScriptEffect":[
-	{	"ID":"1",	"EffectType1":"SanP",	"EffectValue1":"-10"},
-	{	"ID":"2",	"EffectType1":"HP",	"EffectValue1":"-10"}
+	{	"ID":"1",	"EffectType1":"Attack",	"EffectValue1":"10"},
+	{	"ID":"2",	"EffectType1":"SanAttack",	"EffectValue1":"10"}
 ]}

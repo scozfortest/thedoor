@@ -171,5 +171,33 @@ namespace Scoz.Func {
         public static Vector2 QuadraticBezierCurve(Vector2 _startPos, Vector2 _ctrlPos, Vector2 _endPos, float _t) {
             return Mathf.Pow(1 - _t, 2) * _startPos + 2 * (1 - _t) * _t * _ctrlPos + Mathf.Pow(_t, 2) * _endPos;
         }
+
+        /// <summary>
+        /// 輸入一個非負整數 n，它將計算 n 的階乘 (n!)，也就是 1 * 2 * 3 * ... * n 的值。如果 n 是 0，則返回 1（根據階乘的定義，0 的階乘是 1）
+        /// </summary>
+        public static int Factorial(int _n) {
+            if (_n < 0) {
+                WriteLog.LogError("階層不可傳入<0的值: " + _n);
+                return 0;
+            } else if (_n == 0) return 1;
+
+            int result = 1;
+            for (int i = 1; i <= _n; i++) {
+                result *= i;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 等差數列求和
+        /// </summary>
+        public static int SumOfArithmeticSeries(int _n, int _m) {
+            int sum = 0;
+            for (int i = 0; i < _m; i++) {
+                sum += _n;
+                _n--;
+            }
+            return sum;
+        }
     }
 }

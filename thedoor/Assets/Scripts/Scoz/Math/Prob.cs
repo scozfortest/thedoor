@@ -8,6 +8,7 @@ namespace Scoz.Func {
     public class Prob {
         public static bool GetResult(float _probability) {
             int randomNum = Random.Range(0, 100);
+            _probability = Mathf.Clamp(_probability, 0, 1);
             if (randomNum < Mathf.RoundToInt(_probability * 100))
                 return true;
             else

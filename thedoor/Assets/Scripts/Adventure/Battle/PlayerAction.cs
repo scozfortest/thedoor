@@ -4,45 +4,23 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace TheDoor.Main {
     public class PlayerAction : RoleAction {
-        public AttackPart MyAttackPart { get; private set; }
+
         /// <summary>
         /// 考慮狀態效果後 需要幾秒執行此行動
         /// </summary>
         public override int NeedTimeBeforeAction {
             get {
                 int value = NeedTime;
-                Debug.LogError("value=" + value);
                 foreach (var effect in Doer.Effects.Values) {
-                    value += effect.TimeModification();
+                    value += effect.NeedTimeModification();
                 }
-                Debug.LogError("value=" + value);
                 return value;
             }
         }
 
         public PlayerAction(string _name, PlayerRole _doer, int _time, List<StatusEffect> effects, AttackPart _attackPart)
-                    : base(_name, _doer, _time, effects) {
+            : base(_name, _doer, _time, effects, _attackPart) {
+        }
 
-            MyAttackPart = _attackPart;
-        }
-        protected override void DoDmg(StatusEffect _effect) {
-            int dmg = _effect.Dmg();
-            if (dmg != 0) {
-                _effect.Doer.AddExtraDmg(ref dmg);
-                if (_effect.MyTarget is EnemyRole) {
-                    var eRole = ((EnemyRole)_effect.MyTarget);
-                    var partTurple = eRole.MyData.GetAttackPartTuple(MyAttackPart);
-                    WriteLog.LogColorFormat("攻擊{0} 傷害: {1} 命中: {2}", WriteLog.LogType.Battle, MyAttackPart.ToString(), partTurple.Item1, partTurple.Item2);
-                    if (!Prob.GetResult(partTurple.Item2)) {//部位攻擊未命中
-                        //如果沒成功會跳Miss
-                        DNPManager.Instance.Spawn(DNPManager.DPNType.Miss, 0, BattleUI.GetTargetRectTrans(eRole), Vector2.zero);
-                        WriteLog.LogColorFormat("攻擊{0}未命中", WriteLog.LogType.Battle, MyAttackPart.ToString());
-                        return;
-                    }
-                    dmg = (int)(dmg * partTurple.Item1);
-                }
-                _effect.MyTarget.GetAttacked(dmg);
-            }
-        }
     }
 }

@@ -68,9 +68,6 @@ namespace TheDoor.Main {
             //Debug.LogError("eActionNeedTime=" + eActionNeedTime);
             //Debug.LogError("BattlePassTime=" + BattlePassTime);
             //Debug.LogError("_roundPassTime=" + _roundPassTime);
-            //Debug.LogError("BattlePassTime=" + BattlePassTime);
-            //Debug.LogError("eActionNeedTime=" + eActionNeedTime);
-            //Debug.LogError("pActionNeedTime=" + pActionNeedTime);
 
             if (!CurPlayerAction.Done && pActionNeedTime <= 0) {//玩家行動
 
@@ -100,10 +97,11 @@ namespace TheDoor.Main {
                     OnActionFinish();
                 else {
                     //時間軸往前推進1格
-                    Debug.LogError("PassTime");
                     TimelineBattleUI.Instance.PassTime(1, () => {
                         _roundPassTime++;
                         BattlePassTime++;
+                        ERole.DoTimePass(1);
+                        PRole.DoTimePass(1);
                         DoActions(_roundPassTime);
                     });
                 }

@@ -92,13 +92,12 @@ namespace TheDoor.Main {
             var supplyEffectDatas = GetSupplyEffects();
             var statusEffects = new List<StatusEffect>();
             foreach (var supplyEffectData in supplyEffectDatas) {
-                if (!Prob.GetResult(supplyEffectData.Probability)) continue;
                 Role doer = _doer;
                 Role target = (supplyEffectData.MyTarget == Target.Myself) ? _doer : _target;
                 var targetEffectDatas = supplyEffectData.MyEffects;
                 if (targetEffectDatas == null || targetEffectDatas.Count == 0) continue;
                 foreach (var effectData in targetEffectDatas) {
-                    var effect = EffectFactory.Create(effectData.Probability, effectData.EffectType, (int)effectData.GetValue(0), _doer, target);
+                    var effect = EffectFactory.Create(effectData.Probability, effectData.EffectType, (int)effectData.Value, _doer, target, _attackPart);
                     if (effect != null)
                         statusEffects.Add(effect);
                 }

@@ -53,16 +53,7 @@ namespace TheDoor.Main {
         public override void ApplyEffect(StatusEffect _effect) {
             base.ApplyEffect(_effect);
 
-            //如果是暈眩要改變第一個行動需求的時間 並 將更新時間軸UI
-            GetCurAction().AddNeedTime(_effect.Stack);
-            if (_effect.MyType == EffectType.Dizzy) {
-                TimelineBattleUI.Instance.PassTime(-_effect.Stack, () => {
-                });
-            }
 
-            if (MyEnum.TryParseEnum(_effect.MyType.ToString(), out DNPManager.DPNType _type)) {
-                DNPManager.Instance.Spawn(_type, _effect.Stack, BattleUI.GetTargetRectTrans(this), Vector2.zero);
-            }
         }
 
 
@@ -75,6 +66,8 @@ namespace TheDoor.Main {
                 WriteLog.LogColor("產生怪物:" + _data.Name, WriteLog.LogType.Battle);
                 instance.MyData = _data;
                 instance.CurActionIndex = 0;
+                instance.MaxSanP = 1;
+                instance.CurSanP = 1;
                 instance.ScheduleNewActions();
                 return this;
             }
