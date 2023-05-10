@@ -44,7 +44,6 @@ namespace TheDoor.Main {
             MyRestUI.Init();
             MyBattleUI.Init();
             MyGameOverUI.Init();
-            AdventureManager.GoNextDoor();
         }
 
         public void SwitchUI(AdventureUIs _ui, Action _cb = null) {

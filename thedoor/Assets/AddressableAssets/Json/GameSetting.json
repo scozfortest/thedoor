@@ -25,9 +25,14 @@
 	{	"ID":"VibrationOnVibrationMilliSecs",	"Value":"500"},
 	{	"ID":"Adventure_DoorCount",	"Value":"14"},
 	{	"ID":"Adventure_DoorVisibility",	"Value":"2"},
-	{	"ID":"Adventure_DoorTypeWeight",	"Value":"{\"Encounter\":0, \"Monster\":2, \"Rest\":0}"},
+	{	"ID":"Adventure_DoorTypeWeight",	"Value":"{\"Encounter\":3, \"Monster\":2, \"Rest\":1}"},
 	{	"ID":"Adventure_ScriptWeight",	"Value":"{\"Main\":0, \"Side\":1}"},
 	{	"ID":"Role_DefaultSupplyCount",	"Value":"3"},
 	{	"ID":"Role_InheritSupplyCount",	"Value":"1"},
-	{	"ID":"Monster_ScheduleActionCount",	"Value":"10"}
+	{	"ID":"Monster_ScheduleActionCount",	"Value":"10"},
+	{	"ID":"Rest_RestoreHP",	"Value":"0.2"},
+	{	"ID":"Rest_RestoreSanP",	"Value":"0.2"},
+	{	"ID":"Rest_FindSupplyCount",	"Value":"3"},
+	{	"ID":"Rest_FindSupplyRankWeight",	"Value":"{\"1\":14, \"2\":0, \"3\":0}"},
+	{	"ID":"Rest_ChoiceCount",	"Value":"1"}
 ]}

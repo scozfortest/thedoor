@@ -45,6 +45,17 @@ namespace TheDoor.Main {
         public Role Doer { get; private set; }//執行者
         public Role MyTarget { get; private set; }//目標
         public float Probability { get; private set; }//成功機率，失敗會跳Miss
+        public string Name {
+            get {
+                return StringData.GetString_static("EffectType" + "_" + MyType.ToString(), "Name");
+            }
+        }
+        public string Description {
+            get {
+                return StringData.GetString_static("EffectType" + "_" + MyType.ToString(), "Description");
+            }
+        }
+
         public bool IsBuff {
             get {
                 switch (MyType) {

@@ -4,10 +4,12 @@ using UnityEngine;
 using Scoz.Func;
 using UnityEngine.UI;
 using System;
+using TMPro;
 
 namespace TheDoor.Main {
     public class EffectPrefab : MonoBehaviour, IItem {
         [SerializeField] Image Icon;
+        [SerializeField] TextMeshProUGUI StackText;
 
 
         StatusEffect MyData;
@@ -19,10 +21,17 @@ namespace TheDoor.Main {
             Refresh();
         }
         public void Refresh() {
+            StackText.text = MyData.Stack.ToString();
+            gameObject.SetActive(false);
             AssetGet.GetSpriteFromAtlas("EffectIcon", MyData.MyType.ToString(), sprite => {
+                gameObject.SetActive(true);
                 Icon.sprite = sprite;
             });
         }
-
+        public void OnClick() {
+            //轉換為螢幕座標
+            Vector2 screenPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.GetComponent<RectTransform>().position);
+            TipUI.Instance.Show(MyData.Name, MyData.Description, screenPosition, Vector2.up * 270);
+        }
     }
 }

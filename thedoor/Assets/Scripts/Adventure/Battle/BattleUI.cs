@@ -20,6 +20,7 @@ namespace TheDoor.Main {
         [SerializeField] Animator WinAni;
         [SerializeField] Animator LoseAni;
 
+
         public static BattleUI Instance { get; private set; }
 
         public override void Init() {
@@ -41,6 +42,7 @@ namespace TheDoor.Main {
             RoleStateUI.Instance.ShowUI(BattleManager.PRole);
             MyEnemyUI.SetRole(BattleManager.ERole);
             MyEnemyUI.RefreshUI();
+
             RefreshSupplyUI();
         }
         public void RefreshSupplyUI() {
@@ -56,9 +58,6 @@ namespace TheDoor.Main {
             MyEnemyUI.ShowOutlineMaterial(false);
         }
 
-        public void GoNextDoor() {
-            AdventureManager.GoNextDoor();
-        }
         public void Win() {
             WriteLog.LogColor("玩家勝利", WriteLog.LogType.Battle);
             WinAni.gameObject.SetActive(true);

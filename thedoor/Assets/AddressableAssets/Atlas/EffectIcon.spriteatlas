@@ -74,9 +74,41 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: 1c0661f9826d3fd43b075822ccc4fb19, type: 3}
+  - {fileID: 21300000, guid: 3e0b1300425124e40a3aec3b12e07c92, type: 3}
+  - {fileID: 21300000, guid: 3c8b083056cc56f42b3b5dc2bb16276f, type: 3}
+  - {fileID: 21300000, guid: 50de06f13d950054288cb157e4561806, type: 3}
+  - {fileID: 21300000, guid: 722989122dd5b114f9215a65c78b4585, type: 3}
+  - {fileID: 21300000, guid: 6f817de3cf2101448826a247227739fa, type: 3}
+  - {fileID: 21300000, guid: 4eb2a3d41d3cabe4e97b1b699f471656, type: 3}
+  - {fileID: 21300000, guid: d47477a5777e6b5408d09d54c48f6bd2, type: 3}
+  - {fileID: 21300000, guid: ecd00fc514d2f4547bb584303d11c851, type: 3}
+  - {fileID: 21300000, guid: e8c7d2361931420499048a558248321f, type: 3}
+  - {fileID: 21300000, guid: b1a7fda61db901b45a168222e87c26ee, type: 3}
+  - {fileID: 21300000, guid: 8aab08588d7be604ab199aef95645e37, type: 3}
+  - {fileID: 21300000, guid: ee32f139eb3d79145abf5cbe748ea199, type: 3}
+  - {fileID: 21300000, guid: 11686e4945a2e59459db39621364196e, type: 3}
+  - {fileID: 21300000, guid: 18e6f96924b7be1489b95a377034e742, type: 3}
+  - {fileID: 21300000, guid: 3939f0e9f831db943b461aa73e4788a3, type: 3}
+  - {fileID: 21300000, guid: ca24942eaf6dd4d4d9deb30f1368af3c, type: 3}
+  - {fileID: 21300000, guid: a170088f465bbb54ca9d945d47edbb6f, type: 3}
   m_PackedSpriteNamesToIndex:
-  - Bleed
+  - Ethereal
+  - Bleeding
+  - Horror
+  - Blindness
+  - Thorns
+  - Burst
+  - Strong
+  - Dizzy
+  - Poison
+  - Evade
+  - Fear
+  - Faith
+  - Weak
+  - Focus
+  - Fortitude
+  - Protection
+  - Insanity
   m_RenderDataMap: {}
   m_Tag: EffectIcon
   m_IsVariant: 0

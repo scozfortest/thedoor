@@ -74,6 +74,7 @@ namespace TheDoor.Main {
             PopupUI.FinishSceneTransitionProgress("AdventureUILoaded");
             AdventureUI.Instance.MyDoorNodeUI = DoorNodeUI.Instance;
             AdventureUI.Instance.SwitchUI(AdventureUIs.Default);
+            AdventureManager.GoNextDoor();
 
 #if GOOGLE_ADS
             // 初始化Google Ads

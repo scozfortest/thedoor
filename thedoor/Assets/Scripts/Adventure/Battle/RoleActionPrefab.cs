@@ -22,6 +22,10 @@ namespace TheDoor.Main {
                 Icon.sprite = sprite;
             });
         }
-
+        public void OnClick() {
+            //轉換為螢幕座標
+            Vector2 screenPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.GetComponent<RectTransform>().position);
+            TipUI.Instance.Show(MyData.Name, "", screenPosition, new Vector2(80, 100));
+        }
     }
 }

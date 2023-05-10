@@ -15,6 +15,7 @@ namespace TheDoor.Main {
         [SerializeField] Image HP;
         [SerializeField] List<Image> HitGOs;//頭、身、四肢
         [SerializeField] Material OutlineMaterial;
+        [SerializeField] AttackPartPrefab[] MyAttackParts;
         public RectTransform DNPTrans;//跳血位置
 
         public static EnemyUI Instance { get; private set; }
@@ -35,6 +36,7 @@ namespace TheDoor.Main {
                 EnemyImg.sprite = sprite;
             });
 
+            foreach (var attackPartPrefab in MyAttackParts) attackPartPrefab.RefreshUI();
 
             for (int i = 0; i < HitGOs.Count; i++) {
                 HitGOs[i].gameObject.SetActive(ERole.MyData.GetAttackPartTuple((AttackPart)i) != null);

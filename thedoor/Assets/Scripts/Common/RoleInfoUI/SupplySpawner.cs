@@ -7,7 +7,7 @@ using System;
 using System.Linq;
 
 namespace TheDoor.Main {
-    public class SupplySpawner : ItemSpawner_Remote<SupplyPrefab> {
+    public class SupplySpawner : ItemSpawner_Remote<ActionSupplyPrefab> {
         public override void Init() {
             base.Init();
         }

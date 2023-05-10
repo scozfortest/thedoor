@@ -35,8 +35,16 @@ namespace TheDoor.Main {
             CurHP += _value;
             if (IsDead) OnDeath();
         }
+        public virtual void AddHPRatio(float _ratio) {
+            int value = Mathf.RoundToInt(_ratio * (float)MaxHP);
+            AddHP(value);
+        }
 
         public virtual void AddSanP(int _value) { }
+        public virtual void AddSanPRatio(float _ratio) {
+            int value = Mathf.RoundToInt(_ratio * (float)MaxSanP);
+            AddSanP(value);
+        }
         /// <summary>
         /// 承受神智攻擊
         /// </summary>

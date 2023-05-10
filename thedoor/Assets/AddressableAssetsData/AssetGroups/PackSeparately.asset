@@ -21,14 +21,6 @@ MonoBehaviour:
     m_Address: Assets/AddressableAssets/Image/Door/door1.png
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: f20160820d5867d44a46cef2b35acf45
-    m_Address: Assets/AddressableAssets/Image/Plot/clock.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: d16bee928d3527641ad892d0c5c23618
-    m_Address: Assets/AddressableAssets/Image/Plot/witch_1.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: fc5ec118ed74b24438841c25193d8cab
     m_Address: Assets/AddressableAssets/Image/LobbyBG/lobbybg_role1.png
     m_ReadOnly: 0

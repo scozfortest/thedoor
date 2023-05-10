@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Scoz.Func;
 using System.Linq;
 using UnityEngine.UI;
 using System;
 
-namespace TheDoor.Main {
+namespace Scoz.Func {
 
     public static class ContentSizeFitterExtension {
         /// <summary>

@@ -66,7 +66,7 @@ namespace TheDoor.Main {
 
             //設定道具資料
             int defaultSupplyCount = GameSettingData.GetInt(GameSetting.Role_DefaultSupplyCount);
-            var defaultSuppies = SupplyData.GetRndDatas(defaultSupplyCount);
+            var defaultSuppies = SupplyData.GetRndDatas(defaultSupplyCount, 1);
             var exclusiveSupplies = new List<SupplyData>();
             var inheritSupplies = new List<SupplyData>();
             foreach (var id in roleData.Supplies) {
@@ -107,7 +107,6 @@ namespace TheDoor.Main {
             }
 
             GamePlayer.Instance.SetOwnedDatas<OwnedSupplyData>(ColEnum.Supply, supplyListDic);
-
 
 
 
@@ -187,5 +186,7 @@ namespace TheDoor.Main {
             GamePlayer.Instance.SaveToLoco_SupplyData();
             GamePlayer.Instance.SaveToLoco_AdventureData();
         }
+
+
     }
 }

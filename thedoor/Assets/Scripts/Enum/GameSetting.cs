@@ -31,4 +31,9 @@ public enum GameSetting
 	Role_DefaultSupplyCount,
 	Role_InheritSupplyCount,
 	Monster_ScheduleActionCount,
+	Rest_RestoreHP,
+	Rest_RestoreSanP,
+	Rest_FindSupplyCount,
+	Rest_FindSupplyRankWeight,
+	Rest_ChoiceCount,
 }

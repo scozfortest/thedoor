@@ -32,6 +32,7 @@ namespace TheDoor.Main {
             PlayTransition();
         }
         static void PlayTransition() {
+            DoorNodeUI.Instance?.ShowUI(GamePlayer.Instance.Data.CurRole.MyAdventure);
             AssetGet.GetImg("Door", "door1", sprite => {
                 var transitionUI = TransitionDoorUI.Instance;
                 transitionUI?.CallTransition(sprite, "測試文字", 2, () => {

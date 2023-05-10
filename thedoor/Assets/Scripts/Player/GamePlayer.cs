@@ -87,6 +87,7 @@ namespace TheDoor.Main {
         /// 傳入資料類型與資料，設定玩家擁有的資料(多筆資料)
         /// </summary>
         public void SetOwnedDatas<T>(ColEnum _colName, List<Dictionary<string, object>> _datas) where T : OwnedData {
+            if (_datas == null) return;
             //清空資料
             if (!OwnedDatas.ContainsKey(_colName) || OwnedDatas[_colName] == null)
                 OwnedDatas[_colName] = new Dictionary<string, object>();
@@ -94,8 +95,32 @@ namespace TheDoor.Main {
                 OwnedDatas[_colName].Clear();
 
 
-            if (_datas == null)
-                return;
+
+            try {
+                //設定資料
+                for (int i = 0; i < _datas.Count; i++) {
+                    var data = _datas[i];
+                    string uid = data["UID"].ToString();
+                    T ownedData = (T)Activator.CreateInstance(typeof(T), data);
+                    if (!OwnedDatas[_colName].Contains(uid)) {
+                        //WriteLog.LogErrorFormat("新增{0}資料UID:{1} ID:{2}", _colName, uid, data["ID"]);
+                        OwnedDatas[_colName].Add(uid, ownedData);
+                    } else
+                        WriteLog.LogErrorFormat("{0}資料有重複的UID:" + uid);
+                }
+            } catch (Exception _e) {
+                WriteLog.LogError("SetOwnedDatas錯誤: " + _e);
+            }
+        }
+
+        /// <summary>
+        /// 傳入資料類型與資料，新增玩家擁有的資料(多筆資料)
+        /// </summary>
+        public void AddOwnedDatas<T>(ColEnum _colName, List<Dictionary<string, object>> _datas) where T : OwnedData {
+            if (_datas == null) return;
+            if (!OwnedDatas.ContainsKey(_colName) || OwnedDatas[_colName] == null)
+                OwnedDatas[_colName] = new Dictionary<string, object>();
+
             try {
                 //設定資料
                 for (int i = 0; i < _datas.Count; i++) {

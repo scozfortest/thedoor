@@ -119,12 +119,23 @@ namespace TheDoor.Main {
         public static SupplyData GetData(int _id) {
             return GameDictionary.GetJsonData<SupplyData>("Supply", _id);
         }
-        public static List<SupplyData> GetRndDatas(int _count) {
+        public static List<SupplyData> GetRndDatas(int _count, int _rank) {
             var supplyDic = GameDictionary.GetIntKeyJsonDic<SupplyData>("Supply");
-            var supplyDatas = supplyDic.Values.ToList().FindAll(a => a.Rank == 1);
+            var supplyDatas = supplyDic.Values.ToList().FindAll(a => a.Rank == _rank);
             return Prob.GetRandomTFromTList(supplyDatas, _count);
         }
 
+        public static Dictionary<string, object> GetJsonDataDic(SupplyData _data) {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("UID", GamePlayer.Instance.GetNextUID("Supply"));
+            dic.Add("OwnerUID", GamePlayer.Instance.Data.UID);
+            dic.Add("CreateTime", GameManager.Instance.NowTime);
+
+            dic.Add("ID", _data.ID);
+            dic.Add("Usage", _data.Usage);
+            dic.Add("OwnRoleUID", GamePlayer.Instance.Data.CurRoleUID);
+            return dic;
+        }
 
 
     }
