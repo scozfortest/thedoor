@@ -14,7 +14,7 @@ namespace TheDoor.Main {
         public static string DataName { get; set; }
         public new string ID { get; set; }
         public ScriptType MyScriptType { get; private set; }
-        public List<RequireData> Requires { get; private set; }
+        public List<ScriptRequireData> Requires { get; private set; }
 
         public static Dictionary<ScriptType, List<ScriptTitleData>> ScriptTypeDic = new Dictionary<ScriptType, List<ScriptTitleData>>();
         public static void ClearStaticDic() {
@@ -39,9 +39,9 @@ namespace TheDoor.Main {
                                 tmpRequireTypeStr = item[key].ToString();
                             } else if (key.Contains("RequireValue")) {
                                 if (!string.IsNullOrEmpty(tmpRequireTypeStr)) {
-                                    var requireType = MyEnum.ParseEnum<RequireType>(tmpRequireTypeStr);
-                                    var requireData = new RequireData(requireType, item[key].ToString());
-                                    if (Requires == null) Requires = new List<RequireData>();
+                                    var requireType = MyEnum.ParseEnum<ScriptRequireType>(tmpRequireTypeStr);
+                                    var requireData = new ScriptRequireData(requireType, item[key].ToString());
+                                    if (Requires == null) Requires = new List<ScriptRequireData>();
                                     Requires.Add(requireData);
                                 }
                             }

@@ -9,7 +9,7 @@ namespace Scoz.Func {
         /// 藉由路徑來產生特效物件(實際上還是取得物件，只是路徑是在AddressableAssets/Particle底下
         /// </summary>
         public static void SpawnParticleObjByPath(string _path, Vector3 _pos, Vector3 _dir, Transform _parent, Action<GameObject> _cb = null) {
-            AddressablesLoader.GetPrefab(_path, (obj, handle) => {
+            AddressablesLoader.GetParticle(_path, (obj, handle) => {
                 GameObject go = SpawnGameObj(obj, _pos, _dir, _parent);
                 _cb?.Invoke(go);
                 Addressables.Release(handle);
@@ -19,7 +19,7 @@ namespace Scoz.Func {
         /// 藉由路徑來產生特效物件(實際上還是取得物件，只是路徑是在AddressableAssets/Particle底下
         /// </summary>
         public static void SpawnParticleObjByPath(string _path, Transform _parent, Action<GameObject> _cb = null) {
-            AddressablesLoader.GetPrefab(_path, (obj, handle) => {
+            AddressablesLoader.GetParticle(_path, (obj, handle) => {
                 GameObject go = SpawnGameObj(obj, obj.transform.localPosition, obj.transform.localRotation.eulerAngles, _parent);
                 _cb?.Invoke(go);
                 Addressables.Release(handle);

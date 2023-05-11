@@ -31,7 +31,7 @@ namespace TheDoor.Main {
                 return TalentData.GetData(TalentStr);
             }
         }
-        public RequireData Require { get; private set; }
+        public ScriptRequireData Require { get; private set; }
         public ItemType MyItemType { get; } = ItemType.Role;
 
         public List<int> Supplies = new List<int>();
@@ -70,8 +70,8 @@ namespace TheDoor.Main {
                         break;
                     case "RequireValue":
                         if (!string.IsNullOrEmpty(tmpRequireStr)) {
-                            RequireType requireType = MyEnum.ParseEnum<RequireType>(tmpRequireStr);
-                            Require = new RequireData(requireType, item[key].ToString());
+                            ScriptRequireType requireType = MyEnum.ParseEnum<ScriptRequireType>(tmpRequireStr);
+                            Require = new ScriptRequireData(requireType, item[key].ToString());
                         }
                         break;
                     case "Melees":

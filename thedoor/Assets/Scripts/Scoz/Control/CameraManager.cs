@@ -5,11 +5,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 namespace Scoz.Func {
 
+
     public class CameraManager : MonoBehaviour {
 
         [SerializeField] float CamShakeFrequencyGain = 1f;
-
-        static CameraManager Instance;
+        public static CameraManager Instance;
 
         public enum CamNames {
             Adventure,

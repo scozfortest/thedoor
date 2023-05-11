@@ -1,20 +1,20 @@
 {"Script":[
-	{	"ID":"1",	"Title":"witch",	"NextIDs":"1a/1b/1c",	"RefImg":"0_1",	"Requirement1":"Supply",	"RequireValue1":"1"},
+	{	"ID":"1",	"Title":"witch",	"NextIDs":"1a/1b/1c",	"RefImg":"0_1"},
 	{	"ID":"1a",	"NextIDs":"1a_1"},
-	{	"ID":"1b",	"NextIDs":"1b_1",	"Requirement1":"Supply",	"RequireValue1":"1"},
+	{	"ID":"1b",	"NextIDs":"1b_1",	"Requirement1":"NeedSupplyTags",	"RequireValue1":"Lighting"},
 	{	"ID":"1c"},
 	{	"ID":"1a_1",	"NextIDs":"1a_1a/1a_1b"},
 	{	"ID":"1a_1a",	"NextIDs":"1a_1a_1"},
 	{	"ID":"1a_1b",	"NextIDs":"1a_1a_2"},
-	{	"ID":"1a_1a_1",	"End":"Battle",	"EndValue":"1001",	"RefImg":"0_2"},
-	{	"ID":"1a_1a_2",	"End":"Battle",	"EndValue":"1001",	"RefImg":"0_2"},
-	{	"ID":"1b_1",	"End":"Battle",	"EndValue":"1001",	"RefImg":"0_2"},
+	{	"ID":"1a_1a_1",	"End":"Battle",	"EndValue":"1001",	"RefImg":"0_2",	"CamShake":"1",	"RewardType1":"Supply",	"RewardValue1":"-1",	"Target1":"Myself",	"EffectType1":"SanAttack",	"EffectValue1":"-10",	"EffectProb1":"1"},
+	{	"ID":"1a_1a_2",	"End":"Battle",	"EndValue":"1001",	"RefImg":"0_2",	"CamShake":"1",	"RewardType1":"Supply",	"RewardValue1":"-1",	"Target1":"Myself",	"EffectType1":"SanAttack",	"EffectValue1":"-5",	"EffectProb1":"1"},
+	{	"ID":"1b_1",	"End":"Battle",	"EndValue":"1001",	"RefImg":"0_2",	"CamShake":"1",	"RewardType1":"Supply",	"RewardValue1":"-1"},
 	{	"ID":"11",	"Title":"bloodline",	"NextIDs":"11a/",	"RefImg":"1"},
 	{	"ID":"11a",	"NextIDs":"11a_1"},
 	{	"ID":"11a_1",	"NextIDs":"11a_1a/11a_1b/11a_1c"},
 	{	"ID":"11a_1a",	"NextIDs":"11a_1a_1"},
-	{	"ID":"11a_1b",	"NextIDs":"11a_1b_1",	"Requirement1":"UseSupplyTag",	"RequireValue1":"Sharp"},
+	{	"ID":"11a_1b",	"NextIDs":"11a_1b_1",	"Requirement1":"NeedSupplyTags",	"RequireValue1":"Sharp"},
 	{	"ID":"11a_1c"},
-	{	"ID":"11a_1a_1",	"EffectIDs":"1"},
-	{	"ID":"11a_1b_1",	"EffectIDs":"2",	"ItemType1":"Supply",	"ItemValue1":"11"}
+	{	"ID":"11a_1a_1"},
+	{	"ID":"11a_1b_1",	"GainType1":"Supply",	"GainValue1":"11",	"RewardType1":"Supply",	"RewardValue1":"11"}
 ]}

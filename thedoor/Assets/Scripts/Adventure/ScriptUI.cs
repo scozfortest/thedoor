@@ -13,7 +13,7 @@ namespace TheDoor.Main {
     public class ScriptUI : BaseUI {
         [SerializeField] Image Img;
         [SerializeField] TextMeshProUGUI Content;
-        [SerializeField] GameObject[] OptionGOs;
+        [SerializeField] Button[] OptionBtns;
         [SerializeField] TextMeshProUGUI[] Options;
 
 
@@ -36,6 +36,24 @@ namespace TheDoor.Main {
             ShowOptions();
             ShowImg();
         }
+        /// <summary>
+        /// 每段劇情要執行的東西放這裡
+        /// </summary>
+        void DoScriptThings() {
+            RefreshUI();
+            if (CurScriptData.CamShake != 0) CameraManager.ShakeCam(CameraManager.CamNames.Adventure, 0.5f, 0.2f, CurScriptData.CamShake);
+            if (!string.IsNullOrEmpty(CurScriptData.RefSound)) AudioPlayer.PlayAudioByPath(MyAudioType.Sound, CurScriptData.RefSound);
+            if (!string.IsNullOrEmpty(CurScriptData.RefVoice)) AudioPlayer.PlayAudioByPath(MyAudioType.Voice, CurScriptData.RefVoice);
+            if (!string.IsNullOrEmpty(CurScriptData.RefBGM)) AudioPlayer.PlayAudioByPath(MyAudioType.Music, CurScriptData.RefBGM);
+            if (CurScriptData.CamEffects != null) {
+                foreach (var particlePath in CurScriptData.CamEffects) {
+                    GameObjSpawner.SpawnParticleObjByPath(particlePath, transform);
+                }
+            }
+
+
+
+        }
 
         void ShowImg() {
             if (!string.IsNullOrEmpty(CurScriptData.RefImg)) {
@@ -57,19 +75,27 @@ namespace TheDoor.Main {
         /// 顯示選項
         /// </summary>
         void ShowOptions() {
-            if (CurScriptData == null || !CurScriptData.IsOption) {
-                for (int i = 0; i < OptionGOs.Length; i++) {
-                    OptionGOs[i].SetActive(false);
+            if (CurScriptData == null || !CurScriptData.HaveOptions) {
+                for (int i = 0; i < OptionBtns.Length; i++) {
+                    OptionBtns[i].gameObject.SetActive(false);
                 }
                 return;
             }
-            for (int i = 0; i < OptionGOs.Length; i++) {
+            for (int i = 0; i < OptionBtns.Length; i++) {
                 if (i >= CurScriptData.NextIDs.Count) {
-                    OptionGOs[i].SetActive(false);
+                    OptionBtns[i].gameObject.SetActive(false);
                     continue;
                 }
-                OptionGOs[i].SetActive(true);
+                OptionBtns[i].gameObject.SetActive(true);
                 Options[i].text = CurScriptData.NextScript(i).Content;
+
+                //沒達成條件的選項要標示為灰色
+                bool meetRequire = CurScriptData.NextScript(i).MeetAllRequirements();
+                OptionBtns[i].interactable = meetRequire;
+                if (meetRequire)
+                    Options[i].color = Color.white;
+                else
+                    Options[i].color = Color.gray;
             }
         }
 
@@ -77,13 +103,13 @@ namespace TheDoor.Main {
             if (EndTrigger()) {
                 return;
             }
-            if (CurScriptData.IsOption) return;
+            if (CurScriptData.HaveOptions) return;
             CurScriptData = CurScriptData.NextScript();
             if (CurScriptData == null) {//空資料就是前往下一道門
                 NextDoor();
                 return;
             }
-            RefreshUI();
+            DoScriptThings();
         }
 
         public void Option(int _index) {
@@ -99,7 +125,7 @@ namespace TheDoor.Main {
                 NextDoor();
                 return;
             }
-            RefreshUI();
+            DoScriptThings();
         }
         bool EndTrigger() {
             if (CurScriptData == null) {//空資料就是前往下一道門

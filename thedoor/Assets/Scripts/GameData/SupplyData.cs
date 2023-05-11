@@ -126,7 +126,16 @@ namespace TheDoor.Main {
         }
         public bool BelongToTag(string _tag) {
             if (Tags == null) return false;
+            if (string.IsNullOrEmpty(_tag)) return true;
             return Tags.Contains(_tag);
+        }
+        public bool BelongToTags(HashSet<string> _tags) {
+            if (Tags == null) return false;
+            if (_tags == null) return true;
+            foreach (var tag in _tags) {
+                if (!Tags.Contains(tag)) return false;
+            }
+            return true;
         }
 
         public static SupplyData GetData(int _id) {

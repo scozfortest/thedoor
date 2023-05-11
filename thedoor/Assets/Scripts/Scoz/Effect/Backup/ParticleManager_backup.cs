@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Scoz.Func
 {
     [RequireComponent(typeof(ParticleSystem))]
-    public class ParticleManager : MonoBehaviour
+    public class ParticleManager_backup : MonoBehaviour
     {
         [HideInInspector]
         public ParticleSystem MyParticle;

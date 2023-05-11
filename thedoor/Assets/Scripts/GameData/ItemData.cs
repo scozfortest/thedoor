@@ -17,7 +17,7 @@ namespace TheDoor.Main {
     }
     //非獨立資料類道具，記錄在PlayerData-Item裡的道具都屬於非獨立資料類道具
     public enum NotUniqueItemTypes {
-        Supply,
+
     }
     public class ItemData {
         public ItemType Type { get; private set; }
