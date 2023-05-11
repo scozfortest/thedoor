@@ -19,6 +19,19 @@ namespace TheDoor.Main {
                 return StringData.GetString_static(DataName + "_" + ID, "Description");
             }
         }
+
+        public string EffectDescription {
+            get {
+                string description = "";
+                var effects = GetSupplyEffects();
+                if (effects == null) return description;
+                foreach (var e in effects) {
+                    description += e.Description;
+                }
+                return description;
+            }
+        }
+
         public ItemType MyItemType { get; } = ItemType.Supply;
         public string Ref { get; set; }
         public bool Lock { get; private set; }

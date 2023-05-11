@@ -33,9 +33,10 @@ namespace TheDoor.Main {
         }
         static void PlayTransition() {
             DoorNodeUI.Instance?.ShowUI(GamePlayer.Instance.Data.CurRole.MyAdventure);
-            AssetGet.GetImg("Door", "door1", sprite => {
+            var doorTypeData = DoorStyleData.GetRndDatas();
+            AssetGet.GetImg("Door", doorTypeData.Ref, sprite => {
                 var transitionUI = TransitionDoorUI.Instance;
-                transitionUI?.CallTransition(sprite, "測試文字", 2, () => {
+                transitionUI?.CallTransition(sprite, doorTypeData.Description, 2, () => {
                     OpeTheDoor();
                 });
             });

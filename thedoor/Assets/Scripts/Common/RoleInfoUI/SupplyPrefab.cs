@@ -11,6 +11,7 @@ namespace TheDoor.Main {
     public class SupplyPrefab : MonoBehaviour, IItem {
         [SerializeField] protected Image Icon;
         [SerializeField] protected Image CardBG;
+        [SerializeField] protected TextMeshProUGUI Name;
         [SerializeField] protected TextMeshProUGUI Description;
         [SerializeField] protected TextMeshProUGUI Usage;
         [SerializeField] protected TextMeshProUGUI Time;
@@ -22,7 +23,8 @@ namespace TheDoor.Main {
 
 
         public virtual void Refresh() {
-            Description.text = MySupplyData.Description;
+            Name.text = MySupplyData.Name;
+            Description.text = MySupplyData.EffectDescription;
             Usage.text = MySupplyData.Usage.ToString();
             Time.text = MySupplyData.Time.ToString();
             AssetGet.GetSpriteFromAtlas(SupplyData.DataName + "Icon", MySupplyData.Ref, sprite => {

@@ -198,10 +198,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 1605919924099620382}
   CardBG: {fileID: 1641718208364771201}
+  Name: {fileID: 2533276205386038762}
   Description: {fileID: 1253614744409848277}
   Usage: {fileID: 7063817268451246677}
   Time: {fileID: 4477150318760241417}
   OutlineMaterial: {fileID: 2100000, guid: 44b5d09435211854e845fb4bd12ed2be, type: 2}
+--- !u!114 &2533276205386038762 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8967955590442584901, guid: 075ee9d094a74a74c8164625d32696ab, type: 3}
+  m_PrefabInstance: {fileID: 6871531306890884783}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4477150318760241417 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7025225295570395046, guid: 075ee9d094a74a74c8164625d32696ab, type: 3}

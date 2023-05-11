@@ -81,7 +81,8 @@ namespace Scoz.Func {
             MyJsonData.SetData_Remote<ScriptEffectData>(ScriptEffectData.DataName, SetDic);
             ItemGroupData.DataName = "ItemGroup";
             MyJsonData.SetData_Remote<ItemGroupData>(ItemGroupData.DataName, SetDic);
-
+            DoorStyleData.DataName = "DoorStyle";
+            MyJsonData.SetData_Remote<DoorStyleData>(DoorStyleData.DataName, SetDic);
 
 
             //設定X秒會顯示尚未載入的JsonData

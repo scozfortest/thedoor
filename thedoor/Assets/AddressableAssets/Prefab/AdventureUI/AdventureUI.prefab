@@ -368,6 +368,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5046459504593844111}
     m_Modifications:
+    - target: {fileID: 120460453643259797, guid: 6e9e25d2cf54da0428ffd76e6d5d1e75, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 120460453643259797, guid: 6e9e25d2cf54da0428ffd76e6d5d1e75, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 120460453643259797, guid: 6e9e25d2cf54da0428ffd76e6d5d1e75, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4054513409123222010, guid: 6e9e25d2cf54da0428ffd76e6d5d1e75, type: 3}
       propertyPath: m_Name
       value: RestUI
@@ -375,6 +387,18 @@ PrefabInstance:
     - target: {fileID: 4054513409123222010, guid: 6e9e25d2cf54da0428ffd76e6d5d1e75, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4151172366554106799, guid: 6e9e25d2cf54da0428ffd76e6d5d1e75, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4151172366554106799, guid: 6e9e25d2cf54da0428ffd76e6d5d1e75, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4151172366554106799, guid: 6e9e25d2cf54da0428ffd76e6d5d1e75, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7784443270535313053, guid: 6e9e25d2cf54da0428ffd76e6d5d1e75, type: 3}
       propertyPath: m_Pivot.x
@@ -618,9 +642,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5046459504593844111}
     m_Modifications:
+    - target: {fileID: 668877719702087132, guid: e682bed64816b4e429641a3ab92418e9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -375
+      objectReference: {fileID: 0}
     - target: {fileID: 969513625689868072, guid: e682bed64816b4e429641a3ab92418e9, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3220458908307728506, guid: e682bed64816b4e429641a3ab92418e9, type: 3}
+      propertyPath: m_text
+      value: "\u9580\u7684\u63CF\u8FF0\u6587\u5B57"
       objectReference: {fileID: 0}
     - target: {fileID: 3505427070000974449, guid: e682bed64816b4e429641a3ab92418e9, type: 3}
       propertyPath: m_Pivot.x
@@ -717,6 +749,26 @@ PrefabInstance:
     - target: {fileID: 3900716153804406171, guid: e682bed64816b4e429641a3ab92418e9, type: 3}
       propertyPath: Event.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: TheDoor.Main.TransitionDoorUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4109868977094190499, guid: e682bed64816b4e429641a3ab92418e9, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1337
+      objectReference: {fileID: 0}
+    - target: {fileID: 4109868977094190499, guid: e682bed64816b4e429641a3ab92418e9, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 573
+      objectReference: {fileID: 0}
+    - target: {fileID: 4109868977094190499, guid: e682bed64816b4e429641a3ab92418e9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4109868977094190499, guid: e682bed64816b4e429641a3ab92418e9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4109868977094190499, guid: e682bed64816b4e429641a3ab92418e9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6961866608990193296, guid: e682bed64816b4e429641a3ab92418e9, type: 3}
       propertyPath: m_Name
