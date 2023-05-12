@@ -35,7 +35,6 @@ namespace TheDoor.Main {
             else
                 NameText.text = _title;
             SpawnItems(_datas, _replacedItems);
-
             SetActive(true);
             MyPlayAudio.PlayByName("reward");
         }

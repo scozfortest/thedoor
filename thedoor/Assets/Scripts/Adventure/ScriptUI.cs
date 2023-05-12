@@ -19,6 +19,7 @@ namespace TheDoor.Main {
 
         ScriptData CurScriptData;
         public static ScriptUI Instance { get; private set; }
+        List<ItemData> RewardItems;
 
 
         public override void Init() {
@@ -39,20 +40,87 @@ namespace TheDoor.Main {
         /// <summary>
         /// 每段劇情要執行的東西放這裡
         /// </summary>
-        void DoScriptThings() {
-            RefreshUI();
-            if (CurScriptData.CamShake != 0) CameraManager.ShakeCam(CameraManager.CamNames.Adventure, 0.5f, 0.2f, CurScriptData.CamShake);
-            if (!string.IsNullOrEmpty(CurScriptData.RefSound)) AudioPlayer.PlayAudioByPath(MyAudioType.Sound, CurScriptData.RefSound);
-            if (!string.IsNullOrEmpty(CurScriptData.RefVoice)) AudioPlayer.PlayAudioByPath(MyAudioType.Voice, CurScriptData.RefVoice);
-            if (!string.IsNullOrEmpty(CurScriptData.RefBGM)) AudioPlayer.PlayAudioByPath(MyAudioType.Music, CurScriptData.RefBGM);
-            if (CurScriptData.CamEffects != null) {
-                foreach (var particlePath in CurScriptData.CamEffects) {
-                    GameObjSpawner.SpawnParticleObjByPath(particlePath, transform);
+        void DoScriptThings(ScriptData _data) {
+            DoRequireThings(_data);
+            DoGainThings(_data);
+            DoRewardThings(_data);
+            DoEffectThings(_data);
+            if (_data.CamShake != 0) CameraManager.ShakeCam(CameraManager.CamNames.Adventure, 0.2f, 1, _data.CamShake);
+            if (!string.IsNullOrEmpty(_data.RefSound)) AudioPlayer.PlayAudioByPath(MyAudioType.Sound, _data.RefSound);
+            if (!string.IsNullOrEmpty(_data.RefVoice)) AudioPlayer.PlayAudioByPath(MyAudioType.Voice, _data.RefVoice);
+            if (!string.IsNullOrEmpty(_data.RefBGM)) AudioPlayer.PlayAudioByPath(MyAudioType.Music, _data.RefBGM);
+            if (_data.CamEffects != null) {
+                foreach (var particlePath in _data.CamEffects) {
+                    GameObjSpawner.SpawnParticleObjByPath(particlePath, AdventureUI.Instance?.transform);
                 }
             }
 
+        }
+        void DoEffectThings(ScriptData _data) {
+            var statusEffects = _data.GetAction(AdventureManager.PRole);
+            if (statusEffects != null)
+                StatusEffect.DoScriptEffectsToPlayerRole(AdventureManager.PRole, statusEffects);
+        }
+
+        /// <summary>
+        /// 執行獲得物品
+        /// </summary>
+        void DoGainThings(ScriptData _data) {
+            if (_data.GainItems == null || _data.GainItems.Count == 0) return;
+            GamePlayer.Instance.GainItems(_data.GainItems);
+            PopupUI.ShowGainItemListUI(StringData.GetUIString("GainItem"), _data.GainItems, null);
+        }
+
+        /// <summary>
+        /// 執行戰鬥勝利獲得物品
+        /// </summary>
+        void DoRewardThings(ScriptData _data) {
+            if (_data.RewardItems == null || _data.RewardItems.Count == 0) return;
+            RewardItems = _data.RewardItems;
+        }
 
 
+        /// <summary>
+        /// 執行需求物品
+        /// </summary>
+        void DoRequireThings(ScriptData _data) {
+            if (_data.Requires == null || _data.Requires.Count == 0) return;
+            var ownedSupplyDatas = GamePlayer.Instance.GetOwnedDatas<OwnedSupplyData>(ColEnum.Supply);
+            HashSet<int> ids = null;
+            HashSet<string> tags = null;
+            foreach (var require in _data.Requires) {
+                switch (require.MyType) {
+                    case ScriptRequireType.UseSupplies:
+                    case ScriptRequireType.ConsumeSupplies:
+                        ids = TextManager.GetIntHashSetFromSplitStr(require.Value, ',');
+                        if (ids != null) {
+                            foreach (var id in ids) {
+                                var ownedData = ownedSupplyDatas.Find(a => a.ID == id);
+                                if (ownedData == null) continue;
+                                if (require.MyType == ScriptRequireType.UseSupplies)
+                                    ownedData.AddUsage(1);
+                                else if (require.MyType == ScriptRequireType.ConsumeSupplies)
+                                    ownedData.AddUsage(ownedData.Usage);
+                            }
+                        }
+                        break;
+                    case ScriptRequireType.UseSupplyTags:
+                    case ScriptRequireType.ConsumeSupplyTags:
+                        tags = TextManager.GetHashSetFromSplitStr(require.Value, ',');
+                        if (tags != null) {
+                            foreach (var ownedData in ownedSupplyDatas) {
+                                var supplyData = SupplyData.GetData(ownedData.ID);
+                                if (supplyData == null) continue;
+                                if (!supplyData.BelongToTags(tags)) continue;
+                                if (require.MyType == ScriptRequireType.UseSupplies)
+                                    ownedData.AddUsage(1);
+                                else if (require.MyType == ScriptRequireType.ConsumeSupplies)
+                                    ownedData.AddUsage(ownedData.Usage);
+                            }
+                        }
+                        break;
+                }
+            }
         }
 
         void ShowImg() {
@@ -109,23 +177,27 @@ namespace TheDoor.Main {
                 NextDoor();
                 return;
             }
-            DoScriptThings();
+            DoScriptThings(CurScriptData);
+            RefreshUI();
         }
 
         public void Option(int _index) {
-            if (EndTrigger()) {
+            DoScriptThings(CurScriptData.NextScript(_index));//先執行點選了該選項需要執行的事情
+            if (EndTrigger()) {//執行結束觸發的事情
                 return;
             }
             CurScriptData = CurScriptData.NextScript(_index);
             if (EndTrigger()) {
                 return;
             }
+
             CurScriptData = CurScriptData.NextScript(0);
             if (CurScriptData == null) {
                 NextDoor();
                 return;
             }
-            DoScriptThings();
+            DoScriptThings(CurScriptData);
+            RefreshUI();
         }
         bool EndTrigger() {
             if (CurScriptData == null) {//空資料就是前往下一道門
@@ -135,7 +207,7 @@ namespace TheDoor.Main {
             if (string.IsNullOrEmpty(CurScriptData.EndType)) return false;
             switch (CurScriptData.EndType) {
                 case "Battle":
-                    AdventureManager.CallBattle(int.Parse(CurScriptData.EndValue));
+                    AdventureManager.CallBattle(int.Parse(CurScriptData.EndValue), RewardItems);
                     AdventureUI.Instance?.SwitchUI(AdventureUIs.Battle);
                     return true;
                 case "NextDoor":

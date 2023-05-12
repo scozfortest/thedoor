@@ -42,5 +42,9 @@ namespace TheDoor.Main {
             Type = _type;
             Value = _value;
         }
+
+        public void GetItemData() {
+
+        }
     }
 }

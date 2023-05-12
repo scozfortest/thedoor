@@ -187,6 +187,7 @@
 	{	"ID":"UI_GainExclusiveSupply",	"TW_TW":"獲得腳色專屬道具",	"CH_CH":"獲得腳色專屬道具",	"EN_EN":"獲得腳色專屬道具",	"JP_JP":"獲得腳色專屬道具"},
 	{	"ID":"UI_GainDefaultSupply",	"TW_TW":"獲得隨機道具",	"CH_CH":"獲得隨機道具",	"EN_EN":"獲得隨機道具",	"JP_JP":"獲得隨機道具"},
 	{	"ID":"UI_GainInheritSupply",	"TW_TW":"獲得繼承道具",	"CH_CH":"獲得繼承道具",	"EN_EN":"獲得繼承道具",	"JP_JP":"獲得繼承道具"},
+	{	"ID":"UI_GainItem",	"TW_TW":"獲得物品",	"CH_CH":"獲得物品",	"EN_EN":"獲得物品",	"JP_JP":"獲得物品"},
 	{	"ID":"UI_AttackPart_Dmg",	"TW_TW":"傷害: {0}",	"CH_CH":"傷害: {0}",	"EN_EN":"傷害: {0}",	"JP_JP":"傷害: {0}"},
 	{	"ID":"UI_AttackPart_Prob",	"TW_TW":"命中: {0}",	"CH_CH":"命中: {0}",	"EN_EN":"命中: {0}",	"JP_JP":"命中: {0}"},
 	{	"ID":"UI_AttackHead",	"TW_TW":"攻擊頭部",	"CH_CH":"攻擊頭部",	"EN_EN":"攻擊頭部",	"JP_JP":"攻擊頭部"},

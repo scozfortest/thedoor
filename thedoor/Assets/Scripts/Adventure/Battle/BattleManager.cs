@@ -16,6 +16,7 @@ namespace TheDoor.Main {
         public static EnemyRole ERole { get; private set; }
         public static BattleManager Instance { get; private set; }
         public static BattleState CurBattleState { get; private set; }
+        public static List<ItemData> RewardItems { get; private set; }
 
         static PlayerAction CurPlayerAction;//玩家要執行的行動
 
@@ -25,8 +26,8 @@ namespace TheDoor.Main {
         public void Init() {
             Instance = this;
         }
-        public static void ResetBattle(PlayerRole _pRole, int _monsterID) {
-
+        public static void ResetBattle(PlayerRole _pRole, int _monsterID, List<ItemData> _rewardDatas) {
+            RewardItems = _rewardDatas;
             PRole = _pRole;
             SetEnemyRole(_monsterID);
             TimelineBattleUI.Instance.ResetBattleUI(ERole.Actions);
@@ -57,8 +58,11 @@ namespace TheDoor.Main {
             //時間軸UI移除已經執行的的ActionToken
             TimelineBattleUI.Instance.RemoveDoneActionToken();
 
-            if (PRole.IsDead || ERole.IsDead)
+            if (PRole.IsDead || ERole.IsDead) {
                 OnActionFinish();
+                return;
+            }
+
 
             var eAction = ERole.GetCurAction();
             var eActionNeedTime = eAction.NeedTimeBeforeAction - BattlePassTime;
@@ -108,9 +112,6 @@ namespace TheDoor.Main {
 
             }
 
-
-
-
         }
 
 
@@ -121,10 +122,25 @@ namespace TheDoor.Main {
                 CurBattleState = BattleState.End;
                 if (PRole.IsDead)
                     BattleUI.Instance.Lose();
-                else if (ERole.IsDead)
-                    BattleUI.Instance.Win();
+                else if (ERole.IsDead) {
+                    GetReward(() => {
+                        BattleUI.Instance.Win();
+                    });
+                }
                 WriteLog.LogColor("戰鬥結束", WriteLog.LogType.Battle);
             }
+        }
+
+        /// <summary>
+        /// 勝利才有的獎勵
+        /// </summary>
+        static void GetReward(Action _ac) {
+            if (RewardItems == null || RewardItems.Count == 0) return;
+            GamePlayer.Instance.GainItems(RewardItems);
+            PopupUI.ShowGainItemListUI(StringData.GetUIString("GainItem"), RewardItems, null, () => {
+                RewardItems.Clear();
+                _ac?.Invoke();
+            });
         }
     }
 }

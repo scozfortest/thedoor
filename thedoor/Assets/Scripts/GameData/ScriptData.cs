@@ -92,7 +92,12 @@ namespace TheDoor.Main {
                     case "RefVoice":
                         RefVoice = item[key].ToString();
                         break;
-
+                    case "CamEffects":
+                        CamEffects = TextManager.GetHashSetFromSplitStr(item[key].ToString(), ',');
+                        break;
+                    case "CamShake":
+                        CamShake = float.Parse(item[key].ToString());
+                        break;
                     default:
                         try {
                             if (key.Contains("Requirement")) { //選擇此選項需求的條件
@@ -174,6 +179,17 @@ namespace TheDoor.Main {
                 }
             }
             return true;
+        }
+
+        public List<StatusEffect> GetAction(PlayerRole _pRole) {
+            if (MyEffects == null || MyEffects.Count == 0) return null;
+            var statusEffects = new List<StatusEffect>();
+            foreach (var targetEffectData in MyEffects) {
+                var effect = EffectFactory.Create(targetEffectData.Probability, targetEffectData.EffectType, (int)targetEffectData.Value, _pRole, _pRole, AttackPart.Body);
+                if (effect != null)
+                    statusEffects.Add(effect);
+            }
+            return statusEffects;
         }
 
     }

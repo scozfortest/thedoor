@@ -56,14 +56,14 @@ namespace TheDoor.Main {
                     break;
                 case DoorType.Monster:
                 case DoorType.Boss:
-                    CallBattle(Convert.ToInt32(CurDoorData.Values["MonsterID"]));
+                    CallBattle(Convert.ToInt32(CurDoorData.Values["MonsterID"]), null);
                     break;
                 default:
                     break;
             }
         }
-        public static void CallBattle(int _monsterID) {
-            BattleManager.ResetBattle(PRole, _monsterID);
+        public static void CallBattle(int _monsterID, List<ItemData> _rewardItems) {
+            BattleManager.ResetBattle(PRole, _monsterID, _rewardItems);
             AdventureUI.Instance.SwitchUI(AdventureUIs.Battle);
         }
         public static void GameOver() {

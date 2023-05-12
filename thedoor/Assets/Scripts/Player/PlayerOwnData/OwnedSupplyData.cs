@@ -25,6 +25,7 @@ namespace TheDoor.Main {
         public void AddUsage(int _value) {
             if (Usage == -1) return;//無限次數的道具無法增減使用次數
             if (_value == 0) return;
+            WriteLog.LogColorFormat("{0} 剩餘次數改變 {1}->{2}", WriteLog.LogType.Player, SupplyData.GetData(ID).Name, Usage, Usage + _value);
             Usage += _value;
             if (Usage <= 0)
                 GamePlayer.Instance.RemoveOwnedData(ColEnum.Supply, UID);

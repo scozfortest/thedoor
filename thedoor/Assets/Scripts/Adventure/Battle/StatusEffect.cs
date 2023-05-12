@@ -154,6 +154,31 @@ namespace TheDoor.Main {
         #endregion
 
 
+        /// <summary>
+        /// 對玩家腳色賦予劇本效果
+        /// </summary>
+        public static void DoScriptEffectsToPlayerRole(PlayerRole _role, List<StatusEffect> _statusEffect) {
+            foreach (var effect in _statusEffect) {
+                switch (effect.MyType) {
+                    case EffectType.Attack:
+                        _role.AddHP(-effect.Stack);
+                        break;
+                    case EffectType.SanAttack:
+                        _role.AddSanP(-effect.Stack);
+                        break;
+                    case EffectType.RestoreHP:
+                        _role.AddHP(effect.Stack);
+                        break;
+                    case EffectType.RestoreSanP:
+                        _role.AddSanP(effect.Stack);
+                        break;
+                    default:
+                        WriteLog.LogError("DoScriptEffectsToPlayerRole賦予錯誤類型的效果給玩家腳色: " + effect.MyType);
+                        break;
+                }
+            }
+        }
+
 
         protected StatusEffect() {
         }

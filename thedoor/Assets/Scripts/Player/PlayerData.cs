@@ -20,6 +20,10 @@ namespace TheDoor.Main {
             OwnedCurrency.TryGetValue(_currency, out value);
             return value;
         }
+        public void AddCurrency(Currency _currency, long _value) {
+            WriteLog.LogColorFormat("{0}數量改變 {1}->{2}", WriteLog.LogType.Player, _currency, _value, OwnedCurrency[_currency] += _value + _value);
+            OwnedCurrency[_currency] += _value;
+        }
 
         public virtual void SetData(Dictionary<string, object> _data) {
             if (_data == null) {

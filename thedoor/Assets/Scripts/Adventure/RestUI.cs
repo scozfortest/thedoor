@@ -43,12 +43,7 @@ namespace TheDoor.Main {
         }
 
         void ConfirmSelecteSupply(List<SupplyData> _datas) {
-            List<Dictionary<string, object>> supplyListDic = new List<Dictionary<string, object>>();
-            for (int i = 0; i < _datas.Count; i++) {
-                var jsonDic = SupplyData.GetJsonDataDic(_datas[i]);
-                supplyListDic.Add(jsonDic);
-            }
-            GamePlayer.Instance.AddOwnedDatas<OwnedSupplyData>(ColEnum.Supply, supplyListDic);
+            GamePlayer.Instance.GainSupply(_datas);
             BattleUI.Instance.RefreshSupplyUI();
             AdventureManager.GoNextDoor();
         }

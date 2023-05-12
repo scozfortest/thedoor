@@ -35,6 +35,8 @@ namespace TheDoor.Main {
         }
         public override void GetAttacked(int _dmg) {
             base.GetAttacked(_dmg);
+            //特效
+            GameObjSpawner.SpawnParticleObjByPath("screenBlood", AdventureUI.Instance?.transform);
             //鏡頭演出
             CoroutineJob.Instance.StartNewAction(() => {
                 CameraManager.ShakeCam(CameraManager.CamNames.Adventure, 0.5f, 1, 0.2f);
@@ -50,7 +52,9 @@ namespace TheDoor.Main {
 
             AddSanP(-_dmg);
 
-            //鏡頭演出
+            //特效
+            GameObjSpawner.SpawnParticleObjByPath("screenBlood", AdventureUI.Instance?.transform);
+            //鏡頭演出            
             CoroutineJob.Instance.StartNewAction(() => {
                 CameraManager.ShakeCam(CameraManager.CamNames.Adventure, 0.5f, 1, 0.2f);
             }, 0.1f);
@@ -58,6 +62,7 @@ namespace TheDoor.Main {
         protected override void OnDeath() {
             base.OnDeath();
         }
+
         public override void ApplyEffect(StatusEffect _effect) {
             base.ApplyEffect(_effect);
 

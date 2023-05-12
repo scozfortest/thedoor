@@ -55,8 +55,7 @@ MonoBehaviour:
   - m_GUID: 62ed2072f26375940ba7d36674219a6f
     m_Address: Assets/AddressableAssets/Particle
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - Particle
+    m_SerializedLabels: []
   - m_GUID: 1c96eb20e1c47ce449e2319b3faadd73
     m_Address: Assets/AddressableAssets/Materials
     m_ReadOnly: 0

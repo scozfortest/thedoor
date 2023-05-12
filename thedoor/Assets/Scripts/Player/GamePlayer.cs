@@ -127,6 +127,7 @@ namespace TheDoor.Main {
                     var data = _datas[i];
                     string uid = data["UID"].ToString();
                     T ownedData = (T)Activator.CreateInstance(typeof(T), data);
+                    WriteLog.LogColorFormat("獲得{0}", WriteLog.LogType.Player, StringData.GetUIString(_colName.ToString()));
                     if (!OwnedDatas[_colName].Contains(uid)) {
                         //WriteLog.LogErrorFormat("新增{0}資料UID:{1} ID:{2}", _colName, uid, data["ID"]);
                         OwnedDatas[_colName].Add(uid, ownedData);

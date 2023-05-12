@@ -9,8 +9,8 @@ namespace TheDoor.Main {
     public enum ScriptRequireType {
         Gold,//需求消耗金幣
         Point,//需求消耗點數
-        NeedSupplies,//需求擁有以下道具
-        UseSupplies,//需求使用以下道具1次
+        NeedSupplies,//需求擁有以下全部道具
+        UseSupplies,//需求使用以下全部道具1次
         ConsumeSupplies,//需求消耗以下道具(以下道具都會消失)
         NeedSupplyTags,//需求擁有完全符合以下道具類型的道具
         UseSupplyTags,//需求使用完全符合以下道具類型的其中1個道具1次
@@ -19,7 +19,7 @@ namespace TheDoor.Main {
     public class ScriptRequireData {
 
         public ScriptRequireType MyType { get; private set; }
-        string Value;
+        public string Value { get; private set; }
 
         public ScriptRequireData(ScriptRequireType _type, string _value) {
             MyType = _type;

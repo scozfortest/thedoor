@@ -12,6 +12,60 @@ namespace TheDoor.Main {
     public partial class GamePlayer : MyPlayer {
 
 
+        public void GainItems(List<ItemData> _datas) {
+            Dictionary<Currency, long> gainCurrency = new Dictionary<Currency, long>();
+            List<SupplyData> supplies = new List<SupplyData>();
+
+            foreach (var data in _datas) {
+                switch (data.Type) {
+                    case ItemType.Gold:
+                    case ItemType.Point:
+                        if (MyEnum.TryParseEnum(data.Type.ToString(), out Currency _type)) {
+                            if (gainCurrency.ContainsKey(_type)) gainCurrency[_type] += data.Value;
+                            else gainCurrency.Add(_type, data.Value);
+                        }
+                        break;
+                    case ItemType.Supply:
+                        var supplyData = SupplyData.GetData((int)data.Value);
+                        supplies.Add(supplyData);
+                        break;
+                    default:
+                        WriteLog.Log("尚未實作獲得物品: " + data.Type);
+                        break;
+                }
+            }
+
+            //獲得資源
+            foreach (var key in gainCurrency.Keys) {
+                GainCurrency(key, gainCurrency[key]);
+            }
+
+            //獲得道具
+            GainSupply(supplies);
+
+
+        }
+
+        /// <summary>
+        /// 獲得資源
+        /// </summary>
+        public void GainCurrency(Currency _type, long _value) {
+            Data.AddCurrency(_type, _value);
+        }
+
+        /// <summary>
+        /// 獲得道具
+        /// </summary>
+        public void GainSupply(List<SupplyData> _datas) {
+
+            List<Dictionary<string, object>> supplyListDic = new List<Dictionary<string, object>>();
+            for (int i = 0; i < _datas.Count; i++) {
+                var jsonDic = SupplyData.GetJsonDataDic(_datas[i]);
+                supplyListDic.Add(jsonDic);
+            }
+            AddOwnedDatas<OwnedSupplyData>(ColEnum.Supply, supplyListDic);
+        }
+
         /// <summary>
         /// 商城購買，花費遊戲中貨幣的購買跑這裡，購買失敗_cb會回傳null
         /// </summary>

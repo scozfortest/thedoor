@@ -515,7 +515,6 @@ namespace Scoz.Func {
         public static void ShowGainItemListUI(string _title, List<ItemData> _itemDatas, List<ItemData> _replacedItems, Action _cb = null) {
             if (!Instance)
                 return;
-
             //判斷是否已經載入過此UI，若還沒載過就跳讀取中並開始載入
             if (Instance.MyGainItemListUI != null) {
                 Instance.MyGainItemListUI.ShowUI(_title, _itemDatas, _replacedItems, _cb);

@@ -7,12 +7,15 @@ namespace Scoz.Func {
     public static class WriteLog {
 
         public enum LogType {
+            Player,
             Adventure,
             Battle,
         }
         public static Dictionary<LogType, string> LocColorCodes = new Dictionary<LogType, string>() {
+            { LogType.Player,"db7777"},
             { LogType.Adventure,"db77c9"},
             { LogType.Battle,"dbdb77"},
+
         };
 
 
