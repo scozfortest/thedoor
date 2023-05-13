@@ -31,6 +31,7 @@ namespace TheDoor.Main {
                 return description;
             }
         }
+        public Target MyTarget { get; private set; }
 
         public ItemType MyItemType { get; } = ItemType.Supply;
         public string Ref { get; set; }
@@ -61,6 +62,9 @@ namespace TheDoor.Main {
                         break;
                     case "Tags":
                         Tags = TextManager.GetHashSetFromSplitStr(item[key].ToString(), ',');
+                        break;
+                    case "Target":
+                        MyTarget = MyEnum.ParseEnum<Target>(item[key].ToString());
                         break;
                     case "Lock":
                         Lock = bool.Parse(item[key].ToString());
@@ -106,7 +110,7 @@ namespace TheDoor.Main {
             var statusEffects = new List<StatusEffect>();
             foreach (var supplyEffectData in supplyEffectDatas) {
                 Role doer = _doer;
-                Role target = (supplyEffectData.MyTarget == Target.Myself) ? _doer : _target;
+                Role target = (supplyEffectData.MyTarget == Target.Myself) ? _doer : _target;//效果目標
                 var targetEffectDatas = supplyEffectData.MyEffects;
                 if (targetEffectDatas == null || targetEffectDatas.Count == 0) continue;
                 foreach (var effectData in targetEffectDatas) {
@@ -115,7 +119,8 @@ namespace TheDoor.Main {
                         statusEffects.Add(effect);
                 }
             }
-            return new PlayerAction(Name, _doer, Time, statusEffects, _attackPart);
+            Role actionTarget = (MyTarget == Target.Myself) ? _doer : _target;//行動目標
+            return new PlayerAction(Name, _doer, actionTarget, Time, statusEffects, _attackPart);
         }
         List<SupplyEffectData> GetSupplyEffects() {
             return SupplyEffectData.GetSupplyEffectDatas(ID);

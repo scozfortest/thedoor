@@ -53,7 +53,6 @@ namespace TheDoor.Main {
             //設定腳色資料
             var roleData = RoleData.GetRandAvailableData();
             Dictionary<string, object> roleDataDic = roleData.GetJsonDataDic();
-            Debug.LogError(roleDataDic["Talents"]);
             GamePlayer.Instance.SetOwnedDatas<OwnedRoleData>(ColEnum.Role, new List<Dictionary<string, object>>() { roleDataDic });
             //設定玩家資料
             GamePlayer.Instance.Data.SetCurRole_Loco(roleDataDic["UID"].ToString());

@@ -42,6 +42,9 @@ namespace TheDoor.Main {
         public override void RefreshUI() {
             base.RefreshUI();
             ShowContent();
+            AddressablesLoader.GetSprite(CurRolePlotData.Ref, (sprite, handle) => {
+                Img.sprite = sprite;
+            });
         }
 
 

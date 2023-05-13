@@ -118,7 +118,7 @@ namespace TheDoor.Main {
                         if (effect != null)
                             statusEffects.Add(effect);
                     }
-                    action = new EnemyAction(mActionData.Name, doer, mActionData.Time, statusEffects, AttackPart.Body, _previousAction);
+                    action = new EnemyAction(mActionData.Name, doer, _target, mActionData.Time, statusEffects, AttackPart.Body, _previousAction);
                     break;
                 }
                 if (action != null) break;

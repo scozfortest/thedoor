@@ -59,10 +59,41 @@ namespace TheDoor.Main {
             int value = 0;
             switch (MyTalentType) {
                 case TalentType.CombatSkill:
-                    value = Mathf.RoundToInt((float)_dmg * float.Parse(Values[0]));
+                    value += Mathf.RoundToInt((float)_dmg * float.Parse(Values[0]));
                     break;
             }
             return value;
         }
+
+        public int GetSearchExtraSupply() {
+            int value = 0;
+            switch (MyTalentType) {
+                case TalentType.Investigation:
+                    value += int.Parse(Values[0]);
+                    break;
+            }
+            return value;
+        }
+        public int GetRestExtraSanPRestore(PlayerRole _role) {
+            int value = 0;
+            switch (MyTalentType) {
+                case TalentType.Faith:
+                    value += int.Parse(Values[0]);
+                    break;
+            }
+            return value;
+        }
+        public int GetRestExtraHPRestore(PlayerRole _role) {
+            int value = 0;
+            switch (MyTalentType) {
+                case TalentType.EmergencyWoundCare:
+                    int loseHP = _role.MaxHP - _role.CurHP;
+                    value += Mathf.RoundToInt((float)loseHP * float.Parse(Values[0]));
+                    break;
+            }
+            return value;
+        }
+
+
     }
 }

@@ -26,14 +26,19 @@ namespace TheDoor.Main {
             AdventureManager.GoNextDoor();
         }
         public void Rest() {
-            float restoreHP = GameSettingData.GetFloat(GameSetting.Rest_RestoreHP);
-            float restoreSanP = GameSettingData.GetFloat(GameSetting.Rest_RestoreSanP);
-            AdventureManager.PRole.AddHPRatio(restoreHP);
-            AdventureManager.PRole.AddSanPRatio(restoreSanP);
+            float restoreHPRatio = GameSettingData.GetFloat(GameSetting.Rest_RestoreHP);
+            float restoreSanPRatio = GameSettingData.GetFloat(GameSetting.Rest_RestoreSanP);
+            int restoreHP = Mathf.RoundToInt(restoreHPRatio * AdventureManager.PRole.MaxHP);
+            int restoreSanP = Mathf.RoundToInt(restoreSanPRatio * AdventureManager.PRole.MaxSanP);
+            restoreHP += AdventureManager.PRole.GetRestExtraHPRestoreByTalent();
+            restoreSanP += AdventureManager.PRole.GetRestExtraSanPRestoreByTalent();
+            AdventureManager.PRole.AddHP(restoreHP);
+            AdventureManager.PRole.AddSanP(restoreSanP);
             AdventureManager.GoNextDoor();
         }
         public void Search() {
             int rest_FindSupplyCount = GameSettingData.GetInt(GameSetting.Rest_FindSupplyCount);
+            rest_FindSupplyCount += AdventureManager.PRole.GetSearchExtraSupplyByTalent();//腳色天賦加成
             int rest_ChoiceCount = GameSettingData.GetInt(GameSetting.Rest_ChoiceCount);
             var rest_FindSupplyRankWeight = GameSettingData.GetJsNode(GameSetting.Rest_FindSupplyRankWeight);
             int rndRank = int.Parse(Prob.GetRandomKeyFromJsNodeKeyWeight(rest_FindSupplyRankWeight));

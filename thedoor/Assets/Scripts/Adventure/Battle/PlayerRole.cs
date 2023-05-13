@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Scoz.Func;
 namespace TheDoor.Main {
-    public class PlayerRole : Role {
+    public partial class PlayerRole : Role {
         public OwnedRoleData MyOwnedRoleData;
         public RoleData MyData { get; private set; }
         public override string Name { get { return MyData.Name; } }
@@ -74,17 +74,6 @@ namespace TheDoor.Main {
             RoleStateUI.Instance.RefreshEffect();
         }
 
-        /// <summary>
-        /// 攻擊獲得天賦加成
-        /// </summary>
-        public int GetAttackExtraValueByTalent(int _dmg) {
-            int value = 0;
-            foreach (var id in MyOwnedRoleData.Talents) {
-                var talentData = TalentData.GetData(id);
-                value += talentData.GetAttackExtraValue(_dmg);
-            }
-            return value;
-        }
 
 
 
