@@ -20,6 +20,8 @@ namespace TheDoor.Main {
         }
         public override void Refresh() {
             base.Refresh();
+            Name.text = MySupplyData.Name;
+            Description.text = MySupplyData.Description;
             CardBG.material = (Selected) ? OutlineMaterial : null;
         }
         public void SetSelect(bool _select) {

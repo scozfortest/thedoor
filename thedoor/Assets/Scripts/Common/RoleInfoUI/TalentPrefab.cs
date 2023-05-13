@@ -9,6 +9,7 @@ using TMPro;
 namespace TheDoor.Main {
     public class TalentPrefab : MonoBehaviour, IItem {
         [SerializeField] Image Icon;
+        [SerializeField] TextMeshProUGUI Name;
         [SerializeField] TextMeshProUGUI Description;
 
         TalentData MyData;
@@ -20,6 +21,7 @@ namespace TheDoor.Main {
             Refresh();
         }
         public void Refresh() {
+            Name.text = MyData.Name;
             Description.text = MyData.Description;
             AssetGet.GetSpriteFromAtlas(TalentData.DataName + "Icon", MyData.Ref, sprite => {
                 Icon.sprite = sprite;

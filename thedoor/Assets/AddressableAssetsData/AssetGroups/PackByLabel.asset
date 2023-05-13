@@ -107,12 +107,28 @@ MonoBehaviour:
     m_Address: Assets/AddressableAssets/Prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: f0a465cc80ed8a547b8f40641f6bc481
-    m_Address: Assets/AddressableAssets/Image/Monster/monster1.png
+  - m_GUID: 502fbc353882c4543862b3a75388df51
+    m_Address: Assets/AddressableAssets/Image/Rest
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9d899d92860df95458d4c9414f716a3e
+    m_Address: Assets/AddressableAssets/Image/Plot
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: bf02d103f6a4e9d4e98cd135fdc0096d
     m_Address: Assets/AddressableAssets/Image/Monster
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6f38ca62a0ef05e40bff0dc37ee0ddc5
+    m_Address: Assets/AddressableAssets/Image/Role
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5a4cbf3443d530f4790f5c7ef2af10c1
+    m_Address: Assets/AddressableAssets/Image/Door
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 70535719f3f75634c824b4481d01a798
+    m_Address: Assets/AddressableAssets/Image/LobbyBG
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

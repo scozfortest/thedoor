@@ -25,18 +25,13 @@ namespace TheDoor.Main {
         public int Rank { get; private set; }
         public int HP { get; private set; }
         public int SanP { get; private set; }
-        string TalentStr;
-        TalentData MyTalentData {
-            get {
-                return TalentData.GetData(TalentStr);
-            }
-        }
+        public string TalentID { get; private set; }
         public ScriptRequireData Require { get; private set; }
         public ItemType MyItemType { get; } = ItemType.Role;
 
         public List<int> Supplies = new List<int>();
         public HashSet<string> ExclusiveScripts = new HashSet<string>();
-        public HashSet<int> Melees = new HashSet<int>();
+        public HashSet<int> Unarmeds = new HashSet<int>();
 
         protected override void GetDataFromJson(JsonData _item, string _dataName) {
             DataName = _dataName;
@@ -63,7 +58,7 @@ namespace TheDoor.Main {
                         SanP = int.Parse(item[key].ToString());
                         break;
                     case "Talent":
-                        TalentStr = item[key].ToString();
+                        TalentID = item[key].ToString();
                         break;
                     case "Requirement":
                         tmpRequireStr = item[key].ToString();
@@ -74,8 +69,8 @@ namespace TheDoor.Main {
                             Require = new ScriptRequireData(requireType, item[key].ToString());
                         }
                         break;
-                    case "Melees":
-                        Melees = TextManager.GetIntHashSetFromSplitStr(item[key].ToString(), ',');
+                    case "Unarmeds":
+                        Unarmeds = TextManager.GetIntHashSetFromSplitStr(item[key].ToString(), ',');
                         break;
                     case "Supplies":
                         Supplies = TextManager.StringSplitToIntList(item[key].ToString(), ',');
@@ -103,6 +98,20 @@ namespace TheDoor.Main {
             var roleDic = GameDictionary.GetIntKeyJsonDic<RoleData>("Role");
             var roleDats = roleDic.Values.ToList().FindAll(a => !a.Lock);
             return Prob.GetRandomTFromTList(roleDats);
+        }
+
+        public Dictionary<string, object> GetJsonDataDic() {
+            Dictionary<string, object> roleDataDic = new Dictionary<string, object>();
+            roleDataDic.Add("UID", GamePlayer.Instance.GetNextUID("Role"));
+            roleDataDic.Add("OwnerUID", GamePlayer.Instance.Data.UID);
+            roleDataDic.Add("CreateTime", GameManager.Instance.NowTime);
+
+            roleDataDic.Add("ID", ID);
+            roleDataDic.Add("CurHP", HP);
+            roleDataDic.Add("CurSanP", SanP);
+            if (!string.IsNullOrEmpty(TalentID))
+                roleDataDic.Add("Talents", new List<object> { TalentID });
+            return roleDataDic;
         }
 
     }

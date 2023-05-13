@@ -20,7 +20,6 @@ namespace TheDoor.Main {
             }
         }
         public string Ref { get; private set; }
-        public float Probability { get; private set; }
         public TalentType MyTalentType { get; private set; }
         public List<string> Values { get; private set; } = new List<string>();
 

@@ -134,7 +134,6 @@ MonoBehaviour:
     - Particle
     - MaJam
     - ScriptableObject
-    - Rolerole1.png
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: b52ca25ebe45b064584febea735e7172, type: 2}

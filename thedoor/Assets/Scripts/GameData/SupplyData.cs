@@ -129,6 +129,9 @@ namespace TheDoor.Main {
             if (string.IsNullOrEmpty(_tag)) return true;
             return Tags.Contains(_tag);
         }
+        /// <summary>
+        /// 完全符合才會返回true
+        /// </summary>
         public bool BelongToTags(HashSet<string> _tags) {
             if (Tags == null) return false;
             if (_tags == null) return true;
@@ -137,9 +140,29 @@ namespace TheDoor.Main {
             }
             return true;
         }
+        /// <summary>
+        /// 符合一項就會返回true
+        /// </summary>
+        public bool ContainTags(HashSet<string> _tags) {
+            if (Tags == null) return false;
+            if (_tags == null) return false;
+            foreach (var tag in _tags) {
+                if (Tags.Contains(tag)) return true;
+            }
+            return false;
+        }
 
         public static SupplyData GetData(int _id) {
             return GameDictionary.GetJsonData<SupplyData>("Supply", _id);
+        }
+        public static List<SupplyData> GetRoleUnarmedDatas(RoleData _roleData) {
+            List<SupplyData> datas = new List<SupplyData>();
+            foreach (var id in _roleData.Unarmeds) {
+                var data = GetData(id);
+                if (data == null) continue;
+                datas.Add(data);
+            }
+            return datas;
         }
         public static List<SupplyData> GetRndDatas(int _count, int _rank) {
             var supplyDic = GameDictionary.GetIntKeyJsonDic<SupplyData>("Supply");

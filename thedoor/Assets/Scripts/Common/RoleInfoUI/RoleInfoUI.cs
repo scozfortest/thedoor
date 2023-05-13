@@ -21,6 +21,7 @@ namespace TheDoor.Main {
         [SerializeField] GameObject GoAdventureBtn;
 
         PlayerRole PRole;
+        RoleData MyRoleData;
         OwnedRoleData OwnedRoleData;
         public static RoleInfoUI Instance { get; private set; }
 
@@ -35,6 +36,7 @@ namespace TheDoor.Main {
         }
         public void ShowUI(OwnedRoleData _ownedData, PlayerRole _pRole, bool _showGoAdventureBtn = false) {
             OwnedRoleData = _ownedData;
+            MyRoleData = RoleData.GetData(OwnedRoleData.ID);
             PRole = _pRole;
             GoAdventureBtn.SetActive(_showGoAdventureBtn);
             RefreshUI();
@@ -49,14 +51,14 @@ namespace TheDoor.Main {
             else HP.fillAmount = PRole.HPRatio;
             if (PRole == null) SanP.fillAmount = 1;
             else SanP.fillAmount = PRole.SanPRatio;
-            AssetGet.GetImg(RoleData.DataName, PRole.Ref, sprite => {
+            AssetGet.GetImg(RoleData.DataName, MyRoleData.Ref, sprite => {
                 RoleImg.sprite = sprite;
             });
         }
 
         public void RefreshSupply() {
             MySupplySpawner.LoadItemAsset(() => {
-                MySupplySpawner.SpawnItems(OwnedRoleData.GetSupplyDatas(true));
+                MySupplySpawner.SpawnItems(OwnedRoleData.GetSupplyDatas(null), ActionSupplyPrefab.ActionSupplyType.Info);
             });
         }
         public void RefreshTalent() {

@@ -75,8 +75,14 @@ SpriteAtlas:
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 9100f7d002398dd4a80e47a562fc639e, type: 3}
+  - {fileID: 21300000, guid: e87bd212e5093ce4397a7a2a324590d6, type: 3}
+  - {fileID: 21300000, guid: 7975ad958e07de54c852ad776d293a13, type: 3}
+  - {fileID: 21300000, guid: 4ec7bae7ea404f64cb1076b0273db7f7, type: 3}
   m_PackedSpriteNamesToIndex:
   - Investigation
+  - EmergencyWoundCare
+  - Faith
+  - CombatSkill
   m_RenderDataMap: {}
   m_Tag: TalentIcon
   m_IsVariant: 0

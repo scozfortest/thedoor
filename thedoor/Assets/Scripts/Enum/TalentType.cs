@@ -1,6 +1,7 @@
 public enum TalentType
 {
 	Investigation,
-	CombatInstinct,
-	HideAndSeek,
+	CombatSkill,
+	EmergencyWoundCare,
+	Faith,
 }

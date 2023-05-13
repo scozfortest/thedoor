@@ -30,10 +30,9 @@ namespace TheDoor.Main {
             CurSanP = _data.TryGetValue("CurSanP", out value) ? Convert.ToInt32(value) : default(int);
             //設定Talent清單
             Talents.Clear();
-            List<object> talentObjs = _data.TryGetValue("Talent", out value) ? value as List<object> : null;
+            List<object> talentObjs = _data.TryGetValue("Talents", out value) ? value as List<object> : null;
             if (talentObjs != null)
                 Talents = talentObjs.OfType<string>().ToList();
-
             //設定狀態清單
             Effects.Clear();
             Dictionary<string, object> effectDic = _data.TryGetValue("Effect", out value) ? DicExtension.ConvertToStringKeyDic(value) : null;
@@ -54,9 +53,8 @@ namespace TheDoor.Main {
             List<TalentData> talents = new List<TalentData>();
             for (int i = 0; i < Talents.Count; i++) {
                 var talentData = TalentData.GetData(Talents[i]);
-                if (talentData != null) {
-                    talents.Add(talentData);
-                }
+                if (talentData == null) continue;
+                talents.Add(talentData);
             }
             if (talents.Count == 0) return null;
             return talents;
@@ -71,30 +69,27 @@ namespace TheDoor.Main {
             return effects;
         }
 
-        public List<OwnedSupplyData> GetSupplyDatas(bool _getRoleMeleeData, params SupplyData.Timing[] _timings) {
+        public List<OwnedSupplyData> GetSupplyDatas(HashSet<string> _exclusiveTags, params SupplyData.Timing[] _timings) {
             List<OwnedSupplyData> supplyDatas = GamePlayer.Instance.GetOwnedDatas<OwnedSupplyData>(ColEnum.Supply);
-            if (_getRoleMeleeData)
-                supplyDatas.AddRange(GetMeleeSupplyDatas());
-            if (_timings == null || _timings.Length == 0) {
-                supplyDatas = supplyDatas.FindAll(a => a.OwnRoleUID == UID);
-            } else {
-                supplyDatas = supplyDatas.FindAll(a => {
-                    if (a.OwnRoleUID != UID)
-                        return false;
-                    var supplyData = SupplyData.GetData(a.ID);
-                    for (int i = 0; i < _timings.Length; i++) {
-                        if (supplyData.BelongToTiming(_timings[i]))
-                            return true;
-                    }
+            supplyDatas = supplyDatas.FindAll(a => {
+                if (a.OwnRoleUID != UID)
                     return false;
-                });
-            }
+                var supplyData = SupplyData.GetData(a.ID);
+                for (int i = 0; i < _timings.Length; i++) {
+                    if (!supplyData.BelongToTiming(_timings[i]))
+                        return false;
+                }
+                if (supplyData.ContainTags(_exclusiveTags))
+                    return false;
+                return true;
+            });
+
             return supplyDatas;
         }
-        List<OwnedSupplyData> GetMeleeSupplyDatas() {
+        List<OwnedSupplyData> GetUnarmedSupplyDatas() {
             List<OwnedSupplyData> supplyDatas = new List<OwnedSupplyData>();
             var roleData = RoleData.GetData(ID);
-            foreach (var id in roleData.Melees) {
+            foreach (var id in roleData.Unarmeds) {
                 var supplyData = SupplyData.GetData(id);
                 if (supplyData == null) continue;
                 Dictionary<string, object> supplyDataDic = new Dictionary<string, object>();

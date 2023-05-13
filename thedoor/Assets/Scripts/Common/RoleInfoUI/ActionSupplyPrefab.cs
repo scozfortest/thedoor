@@ -18,27 +18,37 @@ namespace TheDoor.Main {
             Dragging,
             End,
         }
+        ActionSupplyType MyActionSupplyType;
         DragState CurDragState = DragState.End;
         Vector2 StartPos;
+        public enum ActionSupplyType {
+            Usable,//可以使用的道具
+            Info,//僅供查看的道具
+        }
 
-        public void SetData(OwnedSupplyData _data) {
+        public void SetData(OwnedSupplyData _data, ActionSupplyType _actionSupplyType) {
             OwnedData = _data;
             CardBG.material = null;
+            MyActionSupplyType = _actionSupplyType;
             MySupplyData = SupplyData.GetData(_data.ID);
             Refresh();
         }
         public override void Refresh() {
             base.Refresh();
+            Name.text = MySupplyData.Name;
+            Description.text = MySupplyData.EffectDescription;
             Usage.text = OwnedData.Usage.ToString();
         }
 
         public void OnPointerDown(PointerEventData eventData) {
+            if (MyActionSupplyType != ActionSupplyType.Usable) return;
             if (BattleManager.CurBattleState != BattleState.PlayerTurn) return;//玩家操作階段才可以使用卡牌
             StartPos = eventData.position;
             CurDragState = DragState.Start;
             CurPAction = GetPlayerAction("Head");
         }
         private void Update() {
+            if (MyActionSupplyType != ActionSupplyType.Usable) return;
             if (CurDragState == DragState.Start) {
                 if (Mathf.Abs(((Vector2)Input.mousePosition - StartPos).y) > VerticalDistToDragCard) {
                     BattleUI.Instance.StartDrag(CurPAction, transform, UseSupplyToTarget);

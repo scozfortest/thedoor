@@ -52,14 +52,8 @@ namespace TheDoor.Main {
 
             //設定腳色資料
             var roleData = RoleData.GetRandAvailableData();
-            Dictionary<string, object> roleDataDic = new Dictionary<string, object>();
-            roleDataDic.Add("UID", GamePlayer.Instance.GetNextUID("Role"));
-            roleDataDic.Add("OwnerUID", GamePlayer.Instance.Data.UID);
-            roleDataDic.Add("CreateTime", GameManager.Instance.NowTime);
-
-            roleDataDic.Add("ID", roleData.ID);
-            roleDataDic.Add("CurHP", roleData.HP);
-            roleDataDic.Add("CurSanP", roleData.SanP);
+            Dictionary<string, object> roleDataDic = roleData.GetJsonDataDic();
+            Debug.LogError(roleDataDic["Talents"]);
             GamePlayer.Instance.SetOwnedDatas<OwnedRoleData>(ColEnum.Role, new List<Dictionary<string, object>>() { roleDataDic });
             //設定玩家資料
             GamePlayer.Instance.Data.SetCurRole_Loco(roleDataDic["UID"].ToString());
@@ -94,6 +88,8 @@ namespace TheDoor.Main {
             List<SupplyData> tmpSupplyDatas = new List<SupplyData>();
             tmpSupplyDatas.AddRange(defaultSuppies);
             tmpSupplyDatas.AddRange(exclusiveSupplies);
+            tmpSupplyDatas.AddRange(SupplyData.GetRoleUnarmedDatas(roleData));//獲得腳色肉搏道具
+
             foreach (var data in tmpSupplyDatas) {
                 Dictionary<string, object> supplyDataDic = new Dictionary<string, object>();
                 supplyDataDic.Add("UID", GamePlayer.Instance.GetNextUID("Supply"));
@@ -162,7 +158,7 @@ namespace TheDoor.Main {
             //移除冒險
             GamePlayer.Instance.RemoveOwnedData(ColEnum.Adventure, GamePlayer.Instance.Data.CurRole.MyAdventure.UID);
             //移除道具並取隨機道具作為繼承道具
-            var ownedSupplies = GamePlayer.Instance.Data.CurRole.GetSupplyDatas(false);
+            var ownedSupplies = GamePlayer.Instance.Data.CurRole.GetSupplyDatas(new HashSet<string> { "Unarmed" });
             //移除道具
             foreach (var data in ownedSupplies) {
                 GamePlayer.Instance.RemoveOwnedData(ColEnum.Supply, data.UID);

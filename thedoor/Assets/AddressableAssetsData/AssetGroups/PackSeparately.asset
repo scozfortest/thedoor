@@ -16,20 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 8eab9f5ad35901d439ff1a8e881c4ac0
-  m_SerializeEntries:
-  - m_GUID: 3fce0327f47b7744190c13171b56f78d
-    m_Address: Assets/AddressableAssets/Image/Door/door1.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: fc5ec118ed74b24438841c25193d8cab
-    m_Address: Assets/AddressableAssets/Image/LobbyBG/lobbybg_role1.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 530db35b5e2ff4d4f9464e9287132f73
-    m_Address: Assets/AddressableAssets/Image/Role/role1.png
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Rolerole1.png
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9bdcae1979219314780bb2d43aff9537, type: 2}
   m_SchemaSet:

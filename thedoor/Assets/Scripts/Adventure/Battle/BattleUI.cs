@@ -30,7 +30,7 @@ namespace TheDoor.Main {
             MyDragIndicator.Init();
             MyEnemyUI.Init();
             MySupplySpawner.LoadItemAsset(() => {
-                MySupplySpawner.SpawnItems(GamePlayer.Instance.Data.CurRole.GetSupplyDatas(true, SupplyData.Timing.Battle));
+                RefreshSupplyUI();
             });
             MyTimelineBattleUI.Init();
             MyTimelineBattleUI.LoadItemAsset();
@@ -46,7 +46,7 @@ namespace TheDoor.Main {
             RefreshSupplyUI();
         }
         public void RefreshSupplyUI() {
-            MySupplySpawner.SpawnItems(GamePlayer.Instance.Data.CurRole.GetSupplyDatas(true, SupplyData.Timing.Battle));
+            MySupplySpawner.SpawnItems(GamePlayer.Instance.Data.CurRole.GetSupplyDatas(null, SupplyData.Timing.Battle), ActionSupplyPrefab.ActionSupplyType.Usable);
         }
         public void StartDrag(PlayerAction _action, Transform _startTarget, Action<string> _cb) {
             MyDragIndicator.StartDrag(_startTarget, _cb, () => { TimelineBattleUI.Instance.RemovePlayerToken(); });
