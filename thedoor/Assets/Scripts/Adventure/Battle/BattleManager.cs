@@ -135,7 +135,10 @@ namespace TheDoor.Main {
         /// 勝利才有的獎勵
         /// </summary>
         static void GetReward(Action _ac) {
-            if (RewardItems == null || RewardItems.Count == 0) return;
+            if (RewardItems == null || RewardItems.Count == 0) {
+                _ac?.Invoke();
+                return;
+            }
             GamePlayer.Instance.GainItems(RewardItems);
             PopupUI.ShowGainItemListUI(StringData.GetUIString("GainItem"), RewardItems, null, () => {
                 RewardItems.Clear();

@@ -54,5 +54,15 @@ namespace TheDoor.Main {
         public static TalentData GetData(string _id) {
             return GameDictionary.GetJsonData<TalentData>("Talent", _id);
         }
+
+        public int GetAttackExtraValue(int _dmg) {
+            int value = 0;
+            switch (MyTalentType) {
+                case TalentType.CombatSkill:
+                    value = Mathf.RoundToInt((float)_dmg * float.Parse(Values[0]));
+                    break;
+            }
+            return value;
+        }
     }
 }

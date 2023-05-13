@@ -1,6 +1,6 @@
 {"Talent":[
 	{	"ID":"Investigation",	"Ref":"Investigation",	"Value1":"1"},
-	{	"ID":"CombatSkill",	"Ref":"CombatSkill",	"Value1":"1"},
+	{	"ID":"CombatSkill",	"Ref":"CombatSkill",	"Value1":"0.2"},
 	{	"ID":"EmergencyWoundCare",	"Ref":"EmergencyWoundCare",	"Value1":"0.3"},
 	{	"ID":"Faith",	"Ref":"Faith",	"Value1":"10"}
 ]}

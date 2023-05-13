@@ -272,12 +272,14 @@ namespace TheDoor.Main {
             int attackExtraValue = 0;
 
             foreach (var effect in Doer.Effects.Values) {
-                attackExtraValue += effect.GetAttackExtraValue(value);
+                attackExtraValue += effect.GetAttackExtraValue(Stack);
             }
             foreach (var effect in MyTarget.Effects.Values) {
-                attackExtraValue += effect.GetBeAttackedExtraValue(value);
+                attackExtraValue += effect.GetBeAttackedExtraValue(Stack);
                 effect.BeAttackedTrigger(Doer);
             }
+            if (Doer is PlayerRole)//玩家腳色天賦加成
+                attackExtraValue += ((PlayerRole)Doer).GetAttackExtraValueByTalent(Stack);
             //目標是敵方才考慮攻擊部位影響
             if (MyTarget is EnemyRole) {
                 var eRole = ((EnemyRole)MyTarget);
@@ -308,10 +310,10 @@ namespace TheDoor.Main {
             int attackExtraValue = 0;
 
             foreach (var effect in Doer.Effects.Values) {
-                attackExtraValue += effect.GetSanAttackExtraValue(value);
+                attackExtraValue += effect.GetSanAttackExtraValue(Stack);
             }
             foreach (var effect in MyTarget.Effects.Values) {
-                attackExtraValue += effect.GetBeSanAttackedExtraValue(value);
+                attackExtraValue += effect.GetBeSanAttackedExtraValue(Stack);
                 effect.BeSanAttackedTrigger(Doer);
             }
             //目標是敵方才考慮攻擊部位影響
