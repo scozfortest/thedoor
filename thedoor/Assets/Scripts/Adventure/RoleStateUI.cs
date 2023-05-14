@@ -16,6 +16,8 @@ namespace TheDoor.Main {
         [SerializeField] Image SanPImg;
         [SerializeField] EffectSpawner BuffSpawner;
         [SerializeField] EffectSpawner DebuffSpawner;
+        [SerializeField] TextMeshProUGUI HPText;
+        [SerializeField] TextMeshProUGUI SanPText;
         public RectTransform DNPTrans;//跳血位置
 
         PlayerRole MyRole;
@@ -43,6 +45,8 @@ namespace TheDoor.Main {
         }
 
         public void RefreshState() {
+            HPText.text = string.Format("{0} / {1}", MyRole.CurHP, MyRole.MaxHP);
+            SanPText.text = string.Format("{0} / {1}", MyRole.CurSanP, MyRole.MaxSanP);
             HPImg.fillAmount = MyRole.HPRatio;
             SanPImg.fillAmount = MyRole.SanPRatio;
         }

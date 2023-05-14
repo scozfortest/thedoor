@@ -64,6 +64,7 @@ namespace TheDoor.Main {
                 supplyListDic.Add(jsonDic);
             }
             AddOwnedDatas<OwnedSupplyData>(ColEnum.Supply, supplyListDic);
+            AdventureManager.PRole?.AddSupplyExtendAttribute();//獲得道具增加生命/新智最大值的時候也會同時增加目前值
         }
 
         /// <summary>

@@ -38,7 +38,6 @@ namespace TheDoor.Main {
             MonsterData mData = MonsterData.GetData(_monsterID);
             ERole = new EnemyRole.Builder()
                 .SetData(mData)
-                .SetMaxHP(mData.HP)
                 .SetCurHP(mData.HP)
                 .Build();
         }

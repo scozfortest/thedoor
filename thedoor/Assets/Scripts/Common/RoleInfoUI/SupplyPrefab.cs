@@ -23,7 +23,6 @@ namespace TheDoor.Main {
 
 
         public virtual void Refresh() {
-            Usage.text = MySupplyData.Usage.ToString();
             Time.text = MySupplyData.Time.ToString();
             AssetGet.GetSpriteFromAtlas(SupplyData.DataName + "Icon", MySupplyData.Ref, sprite => {
                 Icon.sprite = sprite;

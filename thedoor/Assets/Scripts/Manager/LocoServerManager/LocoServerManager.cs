@@ -59,7 +59,8 @@ namespace TheDoor.Main {
 
             //設定道具資料
             int defaultSupplyCount = GameSettingData.GetInt(GameSetting.Role_DefaultSupplyCount);
-            var defaultSuppies = SupplyData.GetRndDatas(defaultSupplyCount, 1);
+            int defaultSupplyRank = GameSettingData.GetInt(GameSetting.Role_DefaultSupplyRank);
+            var defaultSuppies = SupplyData.GetRndDatas(defaultSupplyCount, defaultSupplyRank, null);
             var exclusiveSupplies = new List<SupplyData>();
             var inheritSupplies = new List<SupplyData>();
             foreach (var id in roleData.Supplies) {
@@ -72,9 +73,12 @@ namespace TheDoor.Main {
             }
             GamePlayer.Instance.MyHistoryData.ClearInheritSupplies();
 
-            foreach (var supplyData in defaultSuppies) {
-                defaultItems.Add(new ItemData(ItemType.Supply, supplyData.ID));
+            if (defaultSuppies != null) {
+                foreach (var supplyData in defaultSuppies) {
+                    defaultItems.Add(new ItemData(ItemType.Supply, supplyData.ID));
+                }
             }
+
             foreach (var supplyData in exclusiveSupplies) {
                 exclusiveItems.Add(new ItemData(ItemType.Supply, supplyData.ID));
             }
@@ -85,7 +89,8 @@ namespace TheDoor.Main {
 
             List<Dictionary<string, object>> supplyListDic = new List<Dictionary<string, object>>();
             List<SupplyData> tmpSupplyDatas = new List<SupplyData>();
-            tmpSupplyDatas.AddRange(defaultSuppies);
+            if (defaultSuppies != null)
+                tmpSupplyDatas.AddRange(defaultSuppies);
             tmpSupplyDatas.AddRange(exclusiveSupplies);
             tmpSupplyDatas.AddRange(SupplyData.GetRoleUnarmedDatas(roleData));//獲得腳色肉搏道具
 
@@ -136,6 +141,9 @@ namespace TheDoor.Main {
 
             //建立冒險用腳色資料
             AdventureManager.CreatePlayerRole();
+            AdventureManager.PRole.AddSupplyExtendAttribute();//獲得道具增加生命/新智最大值的時候也會同時增加目前值
+            AdventureManager.PRole.UpdateToOwnedRoleData();//更新冒險用腳色資料到玩家擁有的腳色資料
+
 
             //存本地資料
             GamePlayer.Instance.SaveSettingToLoco();
@@ -149,6 +157,7 @@ namespace TheDoor.Main {
             CreateRoleUI.Instance.SetGainItemList(exclusiveItems, defaultItems, inheritItems);
 
         }
+
 
         /// <summary>
         /// 移除腳色

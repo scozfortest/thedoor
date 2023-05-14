@@ -42,7 +42,7 @@ namespace TheDoor.Main {
             int rest_ChoiceCount = GameSettingData.GetInt(GameSetting.Rest_ChoiceCount);
             var rest_FindSupplyRankWeight = GameSettingData.GetJsNode(GameSetting.Rest_FindSupplyRankWeight);
             int rndRank = int.Parse(Prob.GetRandomKeyFromJsNodeKeyWeight(rest_FindSupplyRankWeight));
-            var supplyDatas = SupplyData.GetRndDatas(rest_FindSupplyCount, rndRank);
+            var supplyDatas = SupplyData.GetRndDatas(rest_FindSupplyCount, rndRank, null);
             string title = string.Format(StringData.GetUIString("ChoiceUI_Title"), rest_ChoiceCount);
             SupplyChoiceUI.Instance.ShowUI(title, rest_ChoiceCount, supplyDatas, ConfirmSelecteSupply);
         }

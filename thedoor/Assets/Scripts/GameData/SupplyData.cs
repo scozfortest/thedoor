@@ -31,6 +31,7 @@ namespace TheDoor.Main {
                 return description;
             }
         }
+        public bool Exclusive { get; private set; }
         public Target MyTarget { get; private set; }
 
         public ItemType MyItemType { get; } = ItemType.Supply;
@@ -66,6 +67,9 @@ namespace TheDoor.Main {
                     case "Target":
                         MyTarget = MyEnum.ParseEnum<Target>(item[key].ToString());
                         break;
+                    case "Exclusive":
+                        Exclusive = bool.Parse(item[key].ToString());
+                        break;
                     case "Lock":
                         Lock = bool.Parse(item[key].ToString());
                         break;
@@ -92,6 +96,7 @@ namespace TheDoor.Main {
                         break;
                 }
             }
+            if (Usage == 0) Usage = -1;//沒有填使用次數就是無限次數
         }
         public void GetIconSprite(Action<Sprite> _ac) {
             if (string.IsNullOrEmpty(Ref)) {
@@ -169,9 +174,15 @@ namespace TheDoor.Main {
             }
             return datas;
         }
-        public static List<SupplyData> GetRndDatas(int _count, int _rank) {
+        public static List<SupplyData> GetRndDatas(int _count, int _rank, HashSet<string> _exclusiveTags) {
             var supplyDic = GameDictionary.GetIntKeyJsonDic<SupplyData>("Supply");
-            var supplyDatas = supplyDic.Values.ToList().FindAll(a => a.Rank == _rank);
+            var supplyDatas = supplyDic.Values.ToList().FindAll(a => {
+                if (a.Exclusive) return false;
+                if (a.Rank != _rank) return false;
+                if (_exclusiveTags != null && _exclusiveTags.Count != 0)
+                    if (a.ContainTags(_exclusiveTags)) return false;
+                return true;
+            });
             return Prob.GetRandomTFromTList(supplyDatas, _count);
         }
 

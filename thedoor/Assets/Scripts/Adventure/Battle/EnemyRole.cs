@@ -4,7 +4,29 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace TheDoor.Main {
     public class EnemyRole : Role {
+        public override int MaxHP {
+            get {
+                int value = BaseHP;
+                return value;
+            }
+        }
+        int curHP;
+        public override int CurHP {
+            get { return curHP; }
+            protected set { curHP = Mathf.Clamp(value, 0, MaxSanP); }
+        }
 
+        public override int MaxSanP {
+            get {
+                int value = BaseSanP;
+                return value;
+            }
+        }
+        int curSanP;
+        public override int CurSanP {
+            get { return curSanP; }
+            protected set { curSanP = Mathf.Clamp(value, 0, MaxSanP); }
+        }
         public MonsterData MyData { get; private set; }
         public override string Name { get { return MyData.Name; } }
         public override string Ref { get { return MyData.Ref; } }
@@ -66,9 +88,14 @@ namespace TheDoor.Main {
                 WriteLog.LogColor("產生怪物:" + _data.Name, WriteLog.LogType.Battle);
                 instance.MyData = _data;
                 instance.CurActionIndex = 0;
-                instance.MaxSanP = 1;
+                instance.BaseHP = _data.HP;
+                instance.BaseSanP = 1;
                 instance.CurSanP = 1;
                 instance.ScheduleNewActions();
+                return this;
+            }
+            public Builder SetCurHP(int _curHP) {
+                instance.CurHP = _curHP;
                 return this;
             }
         }

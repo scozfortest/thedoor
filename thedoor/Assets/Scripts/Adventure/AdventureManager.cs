@@ -13,17 +13,14 @@ namespace TheDoor.Main {
         public static PlayerRole PRole { get; private set; }
 
 
-
         public static void CreatePlayerRole() {
             //建立玩家冒險用腳色
             var ownedPlayerData = GamePlayer.Instance.Data.CurRole;
             var roleData = RoleData.GetData(ownedPlayerData.ID);
             PRole = new PlayerRole.Builder()
                 .SetData(GamePlayer.Instance.Data.CurRole, roleData)
-                .SetMaxSanP(roleData.SanP)
-                .SetCurSanP(ownedPlayerData.CurSanP)
-                .SetMaxHP(roleData.HP)
                 .SetCurHP(ownedPlayerData.CurHP)
+                .SetCurSanP(ownedPlayerData.CurSanP)
                 .Build();
         }
 

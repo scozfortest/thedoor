@@ -4,6 +4,43 @@ using UnityEngine;
 using Scoz.Func;
 namespace TheDoor.Main {
     public partial class PlayerRole {
+
+
+
+
+        /// <summary>
+        /// 生命獲得道具加成
+        /// </summary>
+        public int GetExtraHPBySupply() {
+            int value = 0;
+            foreach (var supply in MyOwnedRoleData.GetSupplyDatas(null)) {
+                var supplyData = SupplyData.GetData(supply.ID);
+                value += supplyData.ExtendHP;
+            }
+            return value;
+        }
+        /// <summary>
+        /// 神智獲得道具加成
+        /// </summary>
+        public int GetExtraSanPBySupply() {
+            int value = 0;
+            foreach (var supply in MyOwnedRoleData.GetSupplyDatas(null)) {
+                var supplyData = SupplyData.GetData(supply.ID);
+                value += supplyData.ExtendSanP;
+            }
+            return value;
+        }
+
+        /// <summary>
+        /// 獲得道具增加生命/新智最大值的時候也會同時增加目前值
+        /// </summary>
+        public void AddSupplyExtendAttribute() {
+            int value = GetExtraHPBySupply();
+            AddHP(value);
+            value = GetExtraSanPBySupply();
+            AddSanP(value);
+        }
+
         /// <summary>
         /// 攻擊獲得天賦加成
         /// </summary>

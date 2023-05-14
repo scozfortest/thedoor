@@ -18,7 +18,7 @@ namespace TheDoor.Main {
             base.SetData(_data);
             object value;
             OwnRoleUID = _data.TryGetValue("OwnRoleUID", out value) ? Convert.ToString(value) : default(string);
-            Usage = _data.TryGetValue("Usage", out value) ? Convert.ToInt32(value) : -1;//沒有使用次數資料預設是-1代表無限次數
+            Usage = _data.TryGetValue("Usage", out value) ? Convert.ToInt32(value) : 0;
             ID = _data.TryGetValue("ID", out value) ? Convert.ToInt32(value) : default(int);
         }
 

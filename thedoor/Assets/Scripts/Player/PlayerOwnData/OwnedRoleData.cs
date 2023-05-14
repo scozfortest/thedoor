@@ -46,7 +46,21 @@ namespace TheDoor.Main {
             }
 
         }
+        public void UpdateOwnedRoleData(PlayerRole _pRole) {
+            CurHP = _pRole.CurHP;
+            CurSanP = _pRole.CurSanP;
+            List<string> ids = new List<string>();
+            foreach (var data in _pRole.Talents) {
+                ids.Add(data.ID);
+            }
+            Talents = ids;
+            Effects.Clear();
+            foreach (var key in _pRole.Effects.Keys) {
+                if (_pRole.Effects[key].Stack <= 0) continue;
+                Effects.Add(key, _pRole.Effects[key].Stack);
+            }
 
+        }
 
         public List<TalentData> GetTalentDatas() {
             if (Talents == null || Talents.Count == 0) return null;

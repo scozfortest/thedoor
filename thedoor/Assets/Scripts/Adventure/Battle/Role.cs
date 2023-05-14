@@ -8,20 +8,14 @@ namespace TheDoor.Main {
     public abstract class Role {
         public virtual string Name { get; }
         public virtual string Ref { get; }
-        public int MaxHP { get; protected set; }
-        private int curHP;
-        public int CurHP {
-            get { return curHP; }
-            protected set { curHP = Mathf.Clamp(value, 0, MaxHP); }
-        }
+        public virtual int BaseHP { get; protected set; }
+        public virtual int MaxHP { get; }
+        public virtual int CurHP { get; protected set; }
         public float HPRatio { get { return (float)CurHP / (float)MaxHP; } }
 
-        public int MaxSanP { get; protected set; }
-        private int curSanP;
-        public int CurSanP {
-            get { return curSanP; }
-            protected set { curSanP = Mathf.Clamp(value, 0, MaxSanP); }
-        }
+        public virtual int BaseSanP { get; protected set; }
+        public virtual int MaxSanP { get; }
+        public virtual int CurSanP { get; protected set; }
         public float SanPRatio { get { return (float)CurSanP / (float)MaxSanP; } }
 
 
@@ -120,24 +114,6 @@ namespace TheDoor.Main {
                 instance = new T();
             }
 
-
-            public Builder<T> SetMaxHP(int _maxHP) {
-                instance.MaxHP = _maxHP;
-                return this;
-            }
-
-            public Builder<T> SetCurHP(int _curHP) {
-                instance.CurHP = _curHP;
-                return this;
-            }
-            public Builder<T> SetCurSanP(int _curSanP) {
-                instance.CurSanP = _curSanP;
-                return this;
-            }
-            public Builder<T> SetMaxSanP(int _maxSanP) {
-                instance.MaxSanP = _maxSanP;
-                return this;
-            }
 
 
             public T Build() {

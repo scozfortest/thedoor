@@ -19,6 +19,8 @@ namespace TheDoor.Main {
         [SerializeField] EffectSpawner MyEffectSpawner;
         [SerializeField] SupplySpawner MySupplySpawner;
         [SerializeField] GameObject GoAdventureBtn;
+        [SerializeField] TextMeshProUGUI HPText;
+        [SerializeField] TextMeshProUGUI SanPText;
 
         PlayerRole PRole;
         RoleData MyRoleData;
@@ -51,6 +53,14 @@ namespace TheDoor.Main {
             else HP.fillAmount = PRole.HPRatio;
             if (PRole == null) SanP.fillAmount = 1;
             else SanP.fillAmount = PRole.SanPRatio;
+            if (PRole != null) {
+                HPText.text = string.Format("{0} / {1}", PRole.CurHP, PRole.MaxHP);
+                SanPText.text = string.Format("{0} / {1}", PRole.CurSanP, PRole.MaxSanP);
+            } else {
+                HPText.text = string.Format("{0} / {1}", MyRoleData.HP, MyRoleData.HP);
+                SanPText.text = string.Format("{0} / {1}", MyRoleData.SanP, MyRoleData.SanP);
+            }
+
             AssetGet.GetImg(RoleData.DataName, MyRoleData.Ref, sprite => {
                 RoleImg.sprite = sprite;
             });
@@ -62,9 +72,8 @@ namespace TheDoor.Main {
             });
         }
         public void RefreshTalent() {
-            List<TalentData> talentDatas = OwnedRoleData.GetTalentDatas();
             MyTalentSpawner.LoadItemAsset(() => {
-                MyTalentSpawner.SpawnItems(talentDatas);
+                MyTalentSpawner.SpawnItems(PRole.Talents);
             });
         }
         public void RefreshEffect() {

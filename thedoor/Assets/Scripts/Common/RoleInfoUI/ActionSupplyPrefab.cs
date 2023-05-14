@@ -37,7 +37,8 @@ namespace TheDoor.Main {
             base.Refresh();
             Name.text = MySupplyData.Name;
             Description.text = MySupplyData.EffectDescription;
-            Usage.text = OwnedData.Usage.ToString();
+            if (MySupplyData.Usage != -1) Usage.text = OwnedData.Usage.ToString();
+            else Usage.text = StringData.GetUIString("InfiniteUsage");
         }
 
         public void OnPointerDown(PointerEventData eventData) {

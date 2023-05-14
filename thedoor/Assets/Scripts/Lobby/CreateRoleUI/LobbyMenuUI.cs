@@ -57,7 +57,7 @@ namespace TheDoor.Main {
         }
 
         public void RoleInfo() {
-            PopupUI.ShowRoleInfoUI(GamePlayer.Instance.Data.CurRole, null);
+            PopupUI.ShowRoleInfoUI(GamePlayer.Instance.Data.CurRole, AdventureManager.PRole);
         }
         /// <summary>
         /// 創腳
