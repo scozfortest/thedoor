@@ -21,6 +21,7 @@ namespace TheDoor.Main {
         public override void Refresh() {
             base.Refresh();
             Name.text = MySupplyData.Name;
+            Usage.gameObject.SetActive(!MySupplyData.BelongTiming(SupplyData.Timing.None));
             Usage.text = MySupplyData.Usage.ToString();
             Description.text = MySupplyData.Description;
             CardBG.material = (Selected) ? OutlineMaterial : null;

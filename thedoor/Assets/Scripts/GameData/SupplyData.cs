@@ -45,6 +45,7 @@ namespace TheDoor.Main {
         HashSet<string> Tags;//道具分類
         HashSet<Timing> Timings;//使用時機
         public enum Timing {
+            None,
             Battle,
             Rest,
         }
@@ -95,6 +96,8 @@ namespace TheDoor.Main {
                         WriteLog.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));
                         break;
                 }
+                if (Timings == null || Timings.Count == 0)
+                    Timings = new HashSet<Timing>() { Timing.None };
             }
             if (Usage == 0) Usage = -1;//沒有填使用次數就是無限次數
         }
@@ -130,9 +133,26 @@ namespace TheDoor.Main {
         List<SupplyEffectData> GetSupplyEffects() {
             return SupplyEffectData.GetSupplyEffectDatas(ID);
         }
-        public bool BelongToTiming(Timing _timing) {
+        /// <summary>
+        /// 其中一項符合就算符合
+        /// </summary>
+        public bool ContainTiming(params Timing[] _timings) {
             if (Timings == null) return false;
-            return Timings.Contains(_timing);
+            foreach (var t in _timings) {
+                if (Timings.Contains(t)) return true;
+            }
+            return false;
+        }
+        /// <summary>
+        /// 全部符合才算符合
+        /// </summary>
+        public bool BelongTiming(params Timing[] _timings) {
+            if (Timings == null) return false;
+            foreach (var t in _timings) {
+                if (Timings.Contains(t)) continue;
+                return false;
+            }
+            return true;
         }
         public bool BelongToTag(string _tag) {
             if (Tags == null) return false;

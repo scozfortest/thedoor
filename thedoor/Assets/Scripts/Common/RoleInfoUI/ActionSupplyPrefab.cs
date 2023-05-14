@@ -37,6 +37,7 @@ namespace TheDoor.Main {
             base.Refresh();
             Name.text = MySupplyData.Name;
             Description.text = MySupplyData.EffectDescription;
+            Usage.gameObject.SetActive(!MySupplyData.BelongTiming(SupplyData.Timing.None));
             if (MySupplyData.Usage != -1) Usage.text = OwnedData.Usage.ToString();
             else Usage.text = StringData.GetUIString("InfiniteUsage");
         }

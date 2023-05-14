@@ -13,7 +13,7 @@ namespace TheDoor.Main {
         int curHP;
         public override int CurHP {
             get { return curHP; }
-            protected set { curHP = Mathf.Clamp(value, 0, MaxSanP); }
+            protected set { curHP = Mathf.Clamp(value, 0, MaxHP); }
         }
 
         public override int MaxSanP {
@@ -89,13 +89,12 @@ namespace TheDoor.Main {
                 instance.MyData = _data;
                 instance.CurActionIndex = 0;
                 instance.BaseHP = _data.HP;
+                Debug.LogError("_data.H=" + _data.HP);
+                instance.CurHP = _data.HP;
+                Debug.LogError(instance.CurHP);
                 instance.BaseSanP = 1;
                 instance.CurSanP = 1;
                 instance.ScheduleNewActions();
-                return this;
-            }
-            public Builder SetCurHP(int _curHP) {
-                instance.CurHP = _curHP;
                 return this;
             }
         }

@@ -34,11 +34,17 @@ namespace TheDoor.Main {
         /// <summary>
         /// 獲得道具增加生命/新智最大值的時候也會同時增加目前值
         /// </summary>
-        public void AddSupplyExtendAttribute() {
-            int value = GetExtraHPBySupply();
-            AddHP(value);
-            value = GetExtraSanPBySupply();
-            AddSanP(value);
+        public void AddSupplyExtendAttribute(List<SupplyData> _datas) {
+            int addHP = 0;
+            int addSanP = 0;
+            foreach (var supplyData in _datas) {
+                addHP += supplyData.ExtendHP;
+                addSanP += supplyData.ExtendSanP;
+            }
+            if (addHP > 0)
+                AddHP(addHP);
+            if (addSanP > 0)
+                AddSanP(addSanP);
         }
 
         /// <summary>
