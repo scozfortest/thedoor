@@ -84,6 +84,7 @@ public class DNPManager : MonoBehaviour {
     }
     public DamageNumber Spawn(DPNType _type, float _value, RectTransform _parentTrans, Vector2 _anchorPos) {
         if (!DPNDic.ContainsKey(_type) || DPNDic[_type] == null) return null;
+        if (_parentTrans == null) return null;
         DamageNumber dn = DPNDic[_type].Spawn(Vector3.zero, _value);
 
         dn.SetAnchoredPosition(_parentTrans, _anchorPos);

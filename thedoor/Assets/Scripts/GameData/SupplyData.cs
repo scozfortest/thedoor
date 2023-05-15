@@ -42,6 +42,7 @@ namespace TheDoor.Main {
         public int ExtendSanP { get; private set; }
         public int Usage { get; private set; }
         public int Time { get; private set; }
+        public HashSet<string> GainEffectTypes;
         HashSet<string> Tags;//道具分類
         HashSet<Timing> Timings;//使用時機
         public enum Timing {
@@ -91,6 +92,9 @@ namespace TheDoor.Main {
                         break;
                     case "Time":
                         Time = int.Parse(item[key].ToString());
+                        break;
+                    case "GainEffectTypes":
+                        GainEffectTypes = TextManager.GetHashSetFromSplitStr(item[key].ToString(), ',');
                         break;
                     default:
                         WriteLog.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));
@@ -217,6 +221,8 @@ namespace TheDoor.Main {
             dic.Add("OwnRoleUID", GamePlayer.Instance.Data.CurRoleUID);
             return dic;
         }
+
+
 
 
     }

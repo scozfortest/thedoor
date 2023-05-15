@@ -1,6 +1,3 @@
 {"Role":[
-	{	"ID":"1",	"Rank":"1",	"Ref":"role1",	"HP":"80",	"SanP":"60",	"Unarmeds":"10001,10002",	"Talent":"Investigation",	"Supplies":"11001"},
-	{	"ID":"2",	"Rank":"1",	"Ref":"role2",	"HP":"90",	"SanP":"50",	"Unarmeds":"10001,10002",	"Talent":"CombatSkill",	"Supplies":"11002"},
-	{	"ID":"3",	"Rank":"1",	"Ref":"role3",	"HP":"70",	"SanP":"80",	"Unarmeds":"10001,10002",	"Talent":"EmergencyWoundCare",	"Supplies":"11003"},
 	{	"ID":"4",	"Rank":"1",	"Ref":"role4",	"HP":"50",	"SanP":"90",	"Unarmeds":"10001,10002",	"Talent":"Faith",	"Supplies":"11004"}
 ]}

@@ -56,6 +56,9 @@ namespace TheDoor.Main {
             }
         }
 
+        /// <summary>
+        /// 是否為Buff
+        /// </summary>
         public bool IsBuff {
             get {
                 switch (MyType) {
@@ -90,7 +93,45 @@ namespace TheDoor.Main {
                         return true;
                 }
             }
-        }//是否為Buff
+        }
+        /// <summary>
+        /// 是否會在戰鬥後移除
+        /// </summary>
+        public bool RemoveAffertBattle {
+            get {
+                switch (MyType) {
+                    case EffectType.RestoreHP:
+                    case EffectType.RestoreSanP:
+                    case EffectType.Evade:
+                    case EffectType.Burst:
+                    case EffectType.Horror:
+                    case EffectType.Protection:
+                    case EffectType.Fortitude:
+                    case EffectType.Thorns:
+                    case EffectType.Ethereal:
+                    case EffectType.Focus:
+                    case EffectType.Flee:
+                    case EffectType.Attack:
+                    case EffectType.SanAttack:
+                    case EffectType.Dizzy:
+                    case EffectType.Bleeding:
+                    case EffectType.Insanity:
+                    case EffectType.Weak:
+                    case EffectType.Blindness:
+                        return true;
+                    case EffectType.Poison:
+                    case EffectType.Fear:
+                    case EffectType.Antidote:
+                    case EffectType.Recovery:
+                    case EffectType.Strong:
+                    case EffectType.Faith:
+                        return false;
+                    default:
+                        WriteLog.LogError("尚未定義RemoveAffertBattle的狀態類型");
+                        return true;
+                }
+            }
+        }
         public AttackPart MyAttackPart { get; protected set; }//攻擊部位
 
 

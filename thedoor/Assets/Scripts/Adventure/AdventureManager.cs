@@ -22,9 +22,14 @@ namespace TheDoor.Main {
                 .SetCurHP(ownedPlayerData.CurHP)
                 .SetCurSanP(ownedPlayerData.CurSanP)
                 .Build();
+
+            var supplyDatas = PRole.GetSupplyDatas();
+            PRole.AddSupplyExtendAttribute(supplyDatas);//獲得道具增加生命/新智最大值的時候也會同時增加目前值
+            PRole.GainSupplyEffects(supplyDatas);//獲得道具狀態
         }
 
         public static void GoNextDoor() {
+            PRole.DoTimePass(1);//執行時間流逝效果
             CurAdventureData.NextDoor();
             PlayTransition();
         }

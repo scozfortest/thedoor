@@ -170,6 +170,8 @@ MonoBehaviour:
   Usage: {fileID: 337064930151116293}
   Time: {fileID: 6379576314647774553}
   OutlineMaterial: {fileID: 2100000, guid: 8feb7729408e44c4b92464953a0ba8b7, type: 2}
+  BattleBG: {fileID: 21300000, guid: 052eb4ae52c3eed42885d158b97cc376, type: 3}
+  OtherBG: {fileID: 21300000, guid: 65277371cdc06bc4aa9f7041e081e0b0, type: 3}
   VerticalDistToDragCard: 50
 --- !u!114 &8134513630692946510 stripped
 MonoBehaviour:

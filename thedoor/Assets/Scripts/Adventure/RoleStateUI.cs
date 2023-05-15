@@ -27,7 +27,9 @@ namespace TheDoor.Main {
             base.Init();
             Instance = this;
             BuffSpawner.Init();
+            BuffSpawner.LoadItemAsset();
             DebuffSpawner.Init();
+            DebuffSpawner.LoadItemAsset();
         }
         public void ShowUI(PlayerRole _role) {
             MyRole = _role;
@@ -59,11 +61,11 @@ namespace TheDoor.Main {
             }
             var buffs = effectDatas.FindAll(a => a.IsBuff);
             BuffSpawner.LoadItemAsset(() => {
-                BuffSpawner.SpawnItems(buffs);
+                BuffSpawner.SpawnItems(buffs, Camera.main, Vector2.up * 270);
             });
             var debuffs = effectDatas.FindAll(a => !a.IsBuff);
             DebuffSpawner.LoadItemAsset(() => {
-                DebuffSpawner.SpawnItems(debuffs);
+                DebuffSpawner.SpawnItems(debuffs, Camera.main, Vector2.up * 270);
             });
         }
 

@@ -105,9 +105,28 @@ namespace TheDoor.Main {
                 DNPManager.Instance.Spawn(_type, _effect.Stack, BattleUI.GetTargetRectTrans(this), Vector2.zero);
             }
             //刷新UI
-            RoleStateUI.Instance.RefreshEffect();
+            RoleStateUI.Instance?.RefreshEffect();
+        }
+        /// <summary>
+        /// 戰鬥後移除狀態
+        /// </summary>
+        public void RemoveAffertBattle() {
+            foreach (var effect in Effects.Values) {
+                if (!effect.RemoveAffertBattle) continue;
+                Effects.Remove(effect.MyType);
+            }
         }
 
+        public List<SupplyData> GetSupplyDatas() {
+            List<SupplyData> supplys = new List<SupplyData>();
+            var ownedSupplyDatas = MyOwnedRoleData.GetSupplyDatas(null);
+            foreach (var ownedData in ownedSupplyDatas) {
+                SupplyData data = SupplyData.GetData(ownedData.ID);
+                if (data == null) continue;
+                supplys.Add(data);
+            }
+            return supplys;
+        }
 
 
 

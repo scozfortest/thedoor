@@ -87,15 +87,15 @@ namespace TheDoor.Main {
         /// 取得擁有道具清單
         /// </summary>
         /// <param name="_exclusiveTags">排除的tags 其中一項符合就排除</param>
-        /// <param name="_timings">包含的Timings全部符合才算符合</param>
+        /// <param name="_containTimings">包含的Timings全部符合才算符合</param>
         /// <returns></returns>
-        public List<OwnedSupplyData> GetSupplyDatas(HashSet<string> _exclusiveTags, params SupplyData.Timing[] _timings) {
+        public List<OwnedSupplyData> GetSupplyDatas(HashSet<string> _exclusiveTags, params SupplyData.Timing[] _containTimings) {
             List<OwnedSupplyData> supplyDatas = GamePlayer.Instance.GetOwnedDatas<OwnedSupplyData>(ColEnum.Supply);
             supplyDatas = supplyDatas.FindAll(a => {
                 if (a.OwnRoleUID != UID)
                     return false;
                 var supplyData = SupplyData.GetData(a.ID);
-                if (!supplyData.BelongTiming(_timings))
+                if (!supplyData.BelongTiming(_containTimings))
                     return false;
                 if (supplyData.ContainTags(_exclusiveTags))
                     return false;

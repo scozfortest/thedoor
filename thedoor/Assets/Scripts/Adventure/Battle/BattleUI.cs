@@ -53,6 +53,7 @@ namespace TheDoor.Main {
             MyEnemyUI.ShowOutlineMaterial(true);
             TimelineBattleUI.Instance.ShowPlayerToken(_action);
         }
+
         public void EndDrag() {
             MyDragIndicator.EndDrag();
             MyEnemyUI.ShowOutlineMaterial(false);
@@ -78,6 +79,7 @@ namespace TheDoor.Main {
         }
 
         public static RectTransform GetTargetRectTrans(Role _role) {
+            if (RoleStateUI.Instance == null || EnemyUI.Instance == null) return null;
             RectTransform targetRectTrans = null;
             if (_role is PlayerRole)
                 targetRectTrans = RoleStateUI.Instance.DNPTrans;

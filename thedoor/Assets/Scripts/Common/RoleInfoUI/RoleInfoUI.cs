@@ -80,9 +80,9 @@ namespace TheDoor.Main {
 
             MyEffectSpawner.LoadItemAsset(() => {
                 if (PRole == null)
-                    MyEffectSpawner.SpawnItems(null);
+                    MyEffectSpawner.SpawnItems(null, PopupUI.Instance.MyCam, Vector2.left * 270);
                 else
-                    MyEffectSpawner.SpawnItems(PRole.Effects.Values.ToList());
+                    MyEffectSpawner.SpawnItems(PRole.Effects.Values.ToList(), PopupUI.Instance.MyCam, Vector2.left * 270);
             });
 
         }

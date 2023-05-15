@@ -589,6 +589,8 @@ MonoBehaviour:
   Usage: {fileID: 4421177144826819834}
   Time: {fileID: 7025225295570395046}
   OutlineMaterial: {fileID: 2100000, guid: 8feb7729408e44c4b92464953a0ba8b7, type: 2}
+  BattleBG: {fileID: 21300000, guid: 052eb4ae52c3eed42885d158b97cc376, type: 3}
+  OtherBG: {fileID: 21300000, guid: 65277371cdc06bc4aa9f7041e081e0b0, type: 3}
 --- !u!1 &5301892701211033896
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,7 +650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5943396, g: 0.46818262, b: 0.46818262, a: 1}
+  m_Color: {r: 0.7264151, g: 0.6375105, b: 0.39404595, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

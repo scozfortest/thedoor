@@ -141,8 +141,7 @@ namespace TheDoor.Main {
 
             //建立冒險用腳色資料
             AdventureManager.CreatePlayerRole();
-            AdventureManager.PRole.AddSupplyExtendAttribute(tmpSupplyDatas);//獲得道具增加生命/新智最大值的時候也會同時增加目前值
-            AdventureManager.PRole.UpdateToOwnedRoleData();//更新冒險用腳色資料到玩家擁有的腳色資料
+            AdventureManager.PRole.UpdateToOwnedRoleData();//更新冒險用腳色資料到玩家擁有的腳色資料(CreateRole時會根據裝備獲得一些狀態或加成 所以要同步資料)
 
 
             //存本地資料

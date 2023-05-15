@@ -38,13 +38,10 @@ namespace Scoz.Func {
             ContentGO.SetActive(!string.IsNullOrEmpty(_content));
             ContentText.text = _content;
 
-
             //螢幕座標轉Canvas座標
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.GetComponent<RectTransform>(), _screenPos, null, out Vector2 localPos);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.GetComponent<RectTransform>(), _screenPos, PopupUI.Instance.MyCam, out Vector2 localPos);
 
-
-
-            transform.localPosition = localPos + _offset;
+            transform.GetComponent<RectTransform>().anchoredPosition = localPos + _offset;
             ContentSizeFitters.Update();
             SetActive(true);
             IsShowing = true;

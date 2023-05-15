@@ -9,6 +9,39 @@ namespace TheDoor.Main {
 
 
         /// <summary>
+        /// 獲得時道具附加狀態
+        /// </summary>
+        public void GainSupplyEffects(List<SupplyData> _datas) {
+            foreach (var supplyData in _datas) {
+                if (supplyData.GainEffectTypes == null) continue;
+                foreach (var str in supplyData.GainEffectTypes) {
+                    if (!MyEnum.TryParseEnum(str, out EffectType _effectType)) continue;
+                    StatusEffect se = EffectFactory.Create(1, _effectType, 1, this, this, AttackPart.Body);
+                    ApplyEffect(se);
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// 獲得道具增加生命/新智最大值的時候也會同時增加目前值
+        /// </summary>
+        public void AddSupplyExtendAttribute(List<SupplyData> _datas) {
+            int addHP = 0;
+            int addSanP = 0;
+            foreach (var supplyData in _datas) {
+                addHP += supplyData.ExtendHP;
+                addSanP += supplyData.ExtendSanP;
+            }
+            if (addHP > 0)
+                AddHP(addHP);
+            if (addSanP > 0)
+                AddSanP(addSanP);
+        }
+
+
+
+        /// <summary>
         /// 生命獲得道具加成
         /// </summary>
         public int GetExtraHPBySupply() {
@@ -29,22 +62,6 @@ namespace TheDoor.Main {
                 value += supplyData.ExtendSanP;
             }
             return value;
-        }
-
-        /// <summary>
-        /// 獲得道具增加生命/新智最大值的時候也會同時增加目前值
-        /// </summary>
-        public void AddSupplyExtendAttribute(List<SupplyData> _datas) {
-            int addHP = 0;
-            int addSanP = 0;
-            foreach (var supplyData in _datas) {
-                addHP += supplyData.ExtendHP;
-                addSanP += supplyData.ExtendSanP;
-            }
-            if (addHP > 0)
-                AddHP(addHP);
-            if (addSanP > 0)
-                AddSanP(addSanP);
         }
 
         /// <summary>

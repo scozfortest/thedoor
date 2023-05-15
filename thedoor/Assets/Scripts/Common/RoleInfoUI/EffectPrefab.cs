@@ -13,11 +13,15 @@ namespace TheDoor.Main {
 
 
         StatusEffect MyData;
+        Camera Cam;
+        Vector2 TipOffset;
 
         public bool IsActive { get; set; }
 
-        public void SetData(StatusEffect _data) {
+        public void SetData(StatusEffect _data, Camera _cam, Vector2 _tipOffset) {
+            Cam = _cam;
             MyData = _data;
+            TipOffset = _tipOffset;
             Refresh();
         }
         public void Refresh() {
@@ -29,9 +33,9 @@ namespace TheDoor.Main {
             });
         }
         public void OnClick() {
-            //轉換為螢幕座標
-            Vector2 screenPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.GetComponent<RectTransform>().position);
-            TipUI.Instance.Show(MyData.Name, MyData.Description, screenPosition, Vector2.up * 270);
+            //顯示Tip
+            Vector2 screenPosition = RectTransformUtility.WorldToScreenPoint(Cam, transform.GetComponent<RectTransform>().position);
+            TipUI.Instance.Show(MyData.Name, MyData.Description, screenPosition, TipOffset);
         }
     }
 }

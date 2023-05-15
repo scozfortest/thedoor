@@ -12,7 +12,7 @@ namespace TheDoor.Main {
             base.Init();
         }
 
-        public void SpawnItems(List<StatusEffect> _effects) {
+        public void SpawnItems(List<StatusEffect> _effects, Camera _cam, Vector2 _tipOffset) {
             if (!LoadItemFinished) {
                 WriteLog.LogError("EffectPrefab尚未載入完成");
                 return;
@@ -21,12 +21,12 @@ namespace TheDoor.Main {
             if (_effects != null && _effects.Count > 0) {
                 for (int i = 0; i < _effects.Count; i++) {
                     if (i < ItemList.Count) {
-                        ItemList[i].SetData(_effects[i]);
+                        ItemList[i].SetData(_effects[i], _cam, _tipOffset);
                         ItemList[i].IsActive = true;
                         ItemList[i].gameObject.SetActive(true);
                     } else {
                         var item = Spawn();
-                        item.SetData(_effects[i]);
+                        item.SetData(_effects[i], _cam, _tipOffset);
                     }
                     ItemList[i].transform.SetParent(ParentTrans);
                 }

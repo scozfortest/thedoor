@@ -7,5 +7,5 @@
 	{	"ID":"11001",	"Rank":"1",	"Ref":"supply11001",	"Exclusive":"True",	"Tags":"Heavy,Blunt,Melee",	"Target":"Enemy",	"ExtendHP":"10",	"Timing":"Battle",	"Usage":"3",	"Time":"1"},
 	{	"ID":"11002",	"Rank":"3",	"Ref":"supply11002",	"Exclusive":"True",	"Tags":"Firearm",	"Target":"Enemy",	"Timing":"Battle",	"Usage":"2",	"Time":"2"},
 	{	"ID":"11003",	"Rank":"2",	"Ref":"supply11003",	"Exclusive":"True",	"Tags":"Sharp,Melee",	"Target":"Enemy",	"Timing":"Battle",	"Usage":"5",	"Time":"2"},
-	{	"ID":"11004",	"Rank":"3",	"Ref":"supply11004",	"Exclusive":"True",	"Tags":"Jewelry,Religious",	"ExtendSanP":"10",	"GainEffectTypes":"Fortitude"}
+	{	"ID":"11004",	"Rank":"3",	"Ref":"supply11004",	"Exclusive":"True",	"Tags":"Jewelry,Religious",	"GainEffectTypes":"Faith"}
 ]}

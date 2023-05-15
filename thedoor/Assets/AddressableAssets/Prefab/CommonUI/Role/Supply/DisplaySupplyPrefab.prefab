@@ -131,18 +131,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5301892701211033902, guid: 075ee9d094a74a74c8164625d32696ab, type: 3}
-      propertyPath: m_Color.b
-      value: 0.46666667
-      objectReference: {fileID: 0}
-    - target: {fileID: 5301892701211033902, guid: 075ee9d094a74a74c8164625d32696ab, type: 3}
-      propertyPath: m_Color.g
-      value: 0.5921554
-      objectReference: {fileID: 0}
-    - target: {fileID: 5301892701211033902, guid: 075ee9d094a74a74c8164625d32696ab, type: 3}
-      propertyPath: m_Color.r
-      value: 0.59607846
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4890529630825439919, guid: 075ee9d094a74a74c8164625d32696ab, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 075ee9d094a74a74c8164625d32696ab, type: 3}
@@ -203,6 +191,8 @@ MonoBehaviour:
   Usage: {fileID: 7063817268451246677}
   Time: {fileID: 4477150318760241417}
   OutlineMaterial: {fileID: 2100000, guid: 44b5d09435211854e845fb4bd12ed2be, type: 2}
+  BattleBG: {fileID: 21300000, guid: 052eb4ae52c3eed42885d158b97cc376, type: 3}
+  OtherBG: {fileID: 21300000, guid: 65277371cdc06bc4aa9f7041e081e0b0, type: 3}
 --- !u!114 &2533276205386038762 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8967955590442584901, guid: 075ee9d094a74a74c8164625d32696ab, type: 3}

@@ -117,18 +117,21 @@ namespace TheDoor.Main {
         static void OnActionFinish() {
             CurBattleState = BattleState.PlayerTurn;
             if (PRole.IsDead || ERole.IsDead) {
-                CurBattleState = BattleState.End;
-                if (PRole.IsDead)
-                    BattleUI.Instance.Lose();
-                else if (ERole.IsDead) {
-                    GetReward(() => {
-                        BattleUI.Instance.Win();
-                    });
-                }
-                WriteLog.LogColor("戰鬥結束", WriteLog.LogType.Battle);
+                OnBattleEnd();
             }
         }
-
+        static void OnBattleEnd() {
+            PRole.RemoveAffertBattle();//移除戰鬥類型狀態
+            CurBattleState = BattleState.End;
+            if (PRole.IsDead)
+                BattleUI.Instance.Lose();
+            else if (ERole.IsDead) {
+                GetReward(() => {
+                    BattleUI.Instance.Win();
+                });
+            }
+            WriteLog.LogColor("戰鬥結束", WriteLog.LogType.Battle);
+        }
         /// <summary>
         /// 勝利才有的獎勵
         /// </summary>
