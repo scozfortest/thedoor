@@ -62,7 +62,7 @@ namespace TheDoor.Main {
             return GameDictionary.GetJsonData<ScriptTitleData>(DataName, _id);
         }
         public static ScriptTitleData GetRndDataByType(ScriptType _type) {
-            return Prob.GetRandomTFromTList(ScriptTypeDic[_type]);
+            return Prob.GetRandomTsFromTList(ScriptTypeDic[_type]);
         }
     }
 }

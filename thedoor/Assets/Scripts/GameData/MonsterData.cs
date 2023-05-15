@@ -136,7 +136,7 @@ namespace TheDoor.Main {
         }
 
         public static MonsterData GetRndMonsterData(MonsterType _type) {
-            return Prob.GetRandomTFromTList(MonsterTypeDic[_type]);
+            return Prob.GetRandomTsFromTList(MonsterTypeDic[_type]);
         }
         public static void GetSprite(int _id, Action<Sprite> _ac) {
 

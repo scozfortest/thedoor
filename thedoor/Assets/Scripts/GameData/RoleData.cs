@@ -97,7 +97,7 @@ namespace TheDoor.Main {
         public static RoleData GetRandAvailableData() {
             var roleDic = GameDictionary.GetIntKeyJsonDic<RoleData>("Role");
             var roleDats = roleDic.Values.ToList().FindAll(a => !a.Lock);
-            return Prob.GetRandomTFromTList(roleDats);
+            return Prob.GetRandomTsFromTList(roleDats);
         }
 
         public Dictionary<string, object> GetJsonDataDic() {

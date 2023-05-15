@@ -7,6 +7,9 @@ using System;
 using System.Linq;
 
 namespace TheDoor.Main {
+
+
+
     public class ScriptData : MyJsonData {
         public new string ID { get; private set; }
         public static string DataName { get; set; }
@@ -38,6 +41,7 @@ namespace TheDoor.Main {
         public List<TargetEffectData> MyEffects = new List<TargetEffectData>();//觸發腳色效果清單
 
 
+
         /// <summary>
         /// 取得所有選項
         /// </summary>
@@ -54,7 +58,7 @@ namespace TheDoor.Main {
             DataName = _dataName;
             JsonData item = _item;
             string tmpRequireTypeStr = "";
-            ItemType tmpItemType = ItemType.Gold;
+            GainItemType gainItemType = GainItemType.Gold;
             ItemData tmpItemData = null;
             Target tmpTarget = Target.Enemy;
             EffectType tmpTEffectType = EffectType.Attack;
@@ -110,17 +114,17 @@ namespace TheDoor.Main {
                                     Requires.Add(requireData);
                                 }
                             } else if (key.Contains("GainType")) { //立刻獲得物品清單
-                                tmpItemType = MyEnum.ParseEnum<ItemType>(item[key].ToString());
+                                gainItemType = MyEnum.ParseEnum<GainItemType>(item[key].ToString());
                                 tmpItemData = null;
                             } else if (key.Contains("GainValue")) {
-                                tmpItemData = new ItemData(tmpItemType, long.Parse(item[key].ToString()));
+                                tmpItemData = ItemData.GetItemData(gainItemType, item[key].ToString());
                                 if (GainItems == null) GainItems = new List<ItemData>();
                                 GainItems.Add(tmpItemData);
                             } else if (key.Contains("RewardType")) { //戰鬥獲勝獎勵物品清單
-                                tmpItemType = MyEnum.ParseEnum<ItemType>(item[key].ToString());
+                                gainItemType = MyEnum.ParseEnum<GainItemType>(item[key].ToString());
                                 tmpItemData = null;
                             } else if (key.Contains("RewardValue")) {
-                                tmpItemData = new ItemData(tmpItemType, long.Parse(item[key].ToString()));
+                                tmpItemData = ItemData.GetItemData(gainItemType, item[key].ToString());
                                 if (RewardItems == null) RewardItems = new List<ItemData>();
                                 RewardItems.Add(tmpItemData);
                             } else if (key.Contains("Target")) {//觸發腳色效果清單

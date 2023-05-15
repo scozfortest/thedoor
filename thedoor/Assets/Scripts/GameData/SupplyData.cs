@@ -198,6 +198,17 @@ namespace TheDoor.Main {
             }
             return datas;
         }
+        public static SupplyData GetRndData(int _rank, HashSet<string> _exclusiveTags) {
+            var supplyDic = GameDictionary.GetIntKeyJsonDic<SupplyData>("Supply");
+            var supplyDatas = supplyDic.Values.ToList().FindAll(a => {
+                if (a.Exclusive) return false;
+                if (a.Rank != _rank) return false;
+                if (_exclusiveTags != null && _exclusiveTags.Count != 0)
+                    if (a.ContainTags(_exclusiveTags)) return false;
+                return true;
+            });
+            return Prob.GetRandomTFromTList(supplyDatas);
+        }
         public static List<SupplyData> GetRndDatas(int _count, int _rank, HashSet<string> _exclusiveTags) {
             var supplyDic = GameDictionary.GetIntKeyJsonDic<SupplyData>("Supply");
             var supplyDatas = supplyDic.Values.ToList().FindAll(a => {
@@ -207,7 +218,7 @@ namespace TheDoor.Main {
                     if (a.ContainTags(_exclusiveTags)) return false;
                 return true;
             });
-            return Prob.GetRandomTFromTList(supplyDatas, _count);
+            return Prob.GetRandomTsFromTList(supplyDatas, _count);
         }
 
         public static Dictionary<string, object> GetJsonDataDic(SupplyData _data) {

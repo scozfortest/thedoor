@@ -124,7 +124,13 @@ namespace Scoz.Func {
             int rand = Random.Range(0, _list.Count);
             return _list[rand];
         }
-        public static List<T> GetRandomTFromTList<T>(List<T> _list, int _count) {
+        public static T GetRandomTsFromTList<T>(List<T> _list) {
+            if (_list == null || _list.Count == 0)
+                return default(T);
+            int rand = Random.Range(0, _list.Count);
+            return _list[rand];
+        }
+        public static List<T> GetRandomTsFromTList<T>(List<T> _list, int _count) {
             if (_list == null || _list.Count == 0 || _count <= 0)
                 return null;
             List<T> list = new List<T>();

@@ -54,7 +54,7 @@ namespace TheDoor.Main {
                 doorStyleDatas = doorTypeDic.Values.ToList();
             else
                 doorStyleDatas = doorTypeDic.Values.ToList().FindAll(a => a.Tags.Contains(_tag));
-            return Prob.GetRandomTFromTList(doorStyleDatas);
+            return Prob.GetRandomTsFromTList(doorStyleDatas);
         }
 
 
