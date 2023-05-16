@@ -4,7 +4,7 @@
 	{	"ID":"81",	"SupplyID":"8",	"Target":"Enemy",	"EffectType1":"Attack",	"EffectValue1":"40",	"EffectProb1":"1",	"EffectType2":"Bleeding",	"EffectValue2":"3",	"EffectProb2":"1"},
 	{	"ID":"91",	"SupplyID":"9",	"Target":"Enemy",	"EffectType1":"Attack",	"EffectValue1":"15",	"EffectProb1":"0.6",	"EffectType2":"Attack",	"EffectValue2":"15",	"EffectProb2":"0.6",	"EffectType3":"Attack",	"EffectValue3":"15",	"EffectProb3":"0.6",	"EffectType4":"Attack",	"EffectValue4":"15",	"EffectProb4":"0.6",	"EffectType5":"Attack",	"EffectValue5":"15",	"EffectProb5":"0.6",	"EffectType6":"Attack",	"EffectValue6":"15",	"EffectProb6":"0.6",	"EffectType7":"Attack",	"EffectValue7":"15",	"EffectProb7":"0.6"},
 	{	"ID":"121",	"SupplyID":"12",	"Target":"Enemy",	"EffectType1":"Attack",	"EffectValue1":"60",	"EffectProb1":"0.8"},
-	{	"ID":"131",	"SupplyID":"13",	"Target":"Enemy",	"EffectType1":"Attack",	"EffectValue1":"60",	"EffectProb1":"1",	"EffectType2":"Dizzy",	"EffectValue2":"1",	"EffectProb2":"0.5"},
+	{	"ID":"131",	"SupplyID":"13",	"Target":"Enemy",	"EffectType1":"Attack",	"EffectValue1":"80",	"EffectProb1":"1",	"EffectType2":"Dizzy",	"EffectValue2":"1",	"EffectProb2":"0.5"},
 	{	"ID":"50011",	"SupplyID":"5001",	"Target":"Enemy",	"EffectType1":"Attack",	"EffectValue1":"30",	"EffectProb1":"1",	"EffectType2":"Bleeding",	"EffectValue2":"3",	"EffectProb2":"1"},
 	{	"ID":"100011",	"SupplyID":"10001",	"Target":"Enemy",	"EffectType1":"Attack",	"EffectValue1":"16",	"EffectProb1":"1",	"EffectType2":"Dizzy",	"EffectValue2":"1",	"EffectProb2":"0.5"},
 	{	"ID":"100021",	"SupplyID":"10002",	"Target":"Enemy",	"EffectType1":"Attack",	"EffectValue1":"10",	"EffectProb1":"1"},
