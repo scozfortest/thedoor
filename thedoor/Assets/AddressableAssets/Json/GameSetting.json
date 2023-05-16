@@ -31,8 +31,8 @@
 	{	"ID":"Role_DefaultSupplyRank",	"Value":"1"},
 	{	"ID":"Role_InheritSupplyCount",	"Value":"1"},
 	{	"ID":"Monster_ScheduleActionCount",	"Value":"10"},
-	{	"ID":"Rest_RestoreHP",	"Value":"0.2"},
-	{	"ID":"Rest_RestoreSanP",	"Value":"0.2"},
+	{	"ID":"Rest_RestoreHP",	"Value":"0.25"},
+	{	"ID":"Rest_RestoreSanP",	"Value":"0.25"},
 	{	"ID":"Rest_FindSupplyCount",	"Value":"3"},
 	{	"ID":"Rest_FindSupplyRankWeight",	"Value":"{\"1\":14, \"2\":0, \"3\":0}"},
 	{	"ID":"Rest_ChoiceCount",	"Value":"1"}

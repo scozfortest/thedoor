@@ -10,6 +10,9 @@ namespace TheDoor.Main {
         public static string DataName { get; set; }
         public string Description {
             get {
+                string s = StringData.GetString_static(DataName + "_" + ID, "Description");
+                if (!string.IsNullOrEmpty(s)) return s;
+                s =
                 return StringData.GetString_static(DataName + "_" + ID, "Description");
             }
         }
@@ -71,6 +74,13 @@ namespace TheDoor.Main {
         public static List<SupplyEffectData> GetSupplyEffectDatas(int _id) {
             if (SupplyEffectDataDic.ContainsKey(_id)) return SupplyEffectDataDic[_id];
             return null;
+        }
+        public string GetEffectStr() {
+            string s = "";
+            foreach (var e in MyEffects) {
+
+            }
+            return s;
         }
     }
 }
