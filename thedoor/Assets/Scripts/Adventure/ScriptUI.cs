@@ -43,6 +43,7 @@ namespace TheDoor.Main {
         void DoScriptThings(ScriptData _data) {
             DoRequireThings(_data);
             DoGainThings(_data);
+            DoTriggerThings(_data);
             DoRewardThings(_data);
             DoEffectThings(_data);
             if (_data.CamShake != 0) CameraManager.ShakeCam(CameraManager.CamNames.Adventure, 0.2f, 1, _data.CamShake);
@@ -79,7 +80,24 @@ namespace TheDoor.Main {
             RewardItems = _data.RewardItems;
         }
 
-
+        /// <summary>
+        /// 執行觸發效果
+        /// </summary>
+        void DoTriggerThings(ScriptData _data) {
+            switch (_data.MyTriggerType) {
+                case ScriptData.TriggerType.None:
+                    break;
+                case ScriptData.TriggerType.GainTalent:
+                    TalentData talentData = null;
+                    if (_data.TriggerValue != "Rnd") talentData = TalentData.GetData(_data.TriggerValue);
+                    else talentData = TalentData.GetRndTalent(AdventureManager.PRole.Talents.Select(a => a.MyTalentType).ToHashSet());
+                    if (talentData != null) AdventureManager.PRole.GainTalent(talentData);
+                    break;
+                default:
+                    WriteLog.LogError("尚未實作的ScriptData.TriggerType: " + _data.MyTriggerType);
+                    break;
+            }
+        }
         /// <summary>
         /// 執行需求物品
         /// </summary>

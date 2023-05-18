@@ -33,6 +33,8 @@ namespace TheDoor.Main {
         public string RefBGM { get; private set; }
         public string RefVoice { get; private set; }
         public bool HaveOptions { get; private set; }
+        public TriggerType MyTriggerType { get; private set; } = TriggerType.None;
+        public string TriggerValue { get; private set; }
         public HashSet<string> CamEffects { get; private set; }
         public float CamShake { get; private set; }
         public List<ScriptRequireData> Requires { get; private set; }//選擇此選項需求的條件
@@ -40,7 +42,10 @@ namespace TheDoor.Main {
         public List<ItemData> RewardItems { get; private set; }//戰鬥獲勝獎勵物品清單
         public List<TargetEffectData> MyEffects = new List<TargetEffectData>();//觸發腳色效果清單
 
-
+        public enum TriggerType {
+            None,
+            GainTalent,
+        }
 
         /// <summary>
         /// 取得所有選項
@@ -101,6 +106,12 @@ namespace TheDoor.Main {
                         break;
                     case "CamShake":
                         CamShake = float.Parse(item[key].ToString());
+                        break;
+                    case "TriggerType":
+                        MyTriggerType = MyEnum.ParseEnum<TriggerType>(item[key].ToString());
+                        break;
+                    case "TriggerValue":
+                        TriggerValue = item[key].ToString();
                         break;
                     default:
                         try {

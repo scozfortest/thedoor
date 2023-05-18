@@ -8,14 +8,7 @@ using LitJson;
 namespace TheDoor.Main {
     public class SupplyEffectData : MyJsonData {
         public static string DataName { get; set; }
-        public string Description {
-            get {
-                string s = StringData.GetString_static(DataName + "_" + ID, "Description");
-                if (!string.IsNullOrEmpty(s)) return s;
-                s =
-                return StringData.GetString_static(DataName + "_" + ID, "Description");
-            }
-        }
+        public string Description { get { return StringData.GetString_static(DataName + "_" + ID, "Description"); } }
         public int SupplyID { get; private set; }
         public Target MyTarget { get; private set; }
         public List<TargetEffectData> MyEffects = new List<TargetEffectData>();

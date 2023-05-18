@@ -12,8 +12,8 @@
 	{	"ID":"11",	"Title":"bloodline",	"NextIDs":"11a/",	"RefImg":"1"},
 	{	"ID":"11a",	"NextIDs":"11a_1"},
 	{	"ID":"11a_1",	"NextIDs":"11a_1a/11a_1b/11a_1c"},
-	{	"ID":"11a_1a",	"NextIDs":"11a_1a_1"},
-	{	"ID":"11a_1b",	"NextIDs":"11a_1b_1",	"Requirement1":"NeedSupplyTags",	"RequireValue1":"Sharp"},
+	{	"ID":"11a_1a",	"NextIDs":"11a_1a_1",	"TriggerType":"GainTalent",	"TriggerValue":"Rnd",	"EffectType1":"SanAttack",	"EffectValue1":"50",	"EffectProb1":"1"},
+	{	"ID":"11a_1b",	"NextIDs":"11a_1b_1",	"GainType1":"Supply",	"GainValue1":"5001",	"EffectType1":"Attack",	"EffectValue1":"5",	"EffectProb1":"1"},
 	{	"ID":"11a_1c"},
 	{	"ID":"11a_1a_1"},
 	{	"ID":"11a_1b_1",	"GainType1":"Supply",	"GainValue1":"11",	"RewardType1":"Supply",	"RewardValue1":"11"}

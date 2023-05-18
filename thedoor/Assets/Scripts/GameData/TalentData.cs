@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Scoz.Func;
 using LitJson;
+using System.Linq;
 
 namespace TheDoor.Main {
     public class TalentData : MyJsonData {
@@ -54,6 +55,12 @@ namespace TheDoor.Main {
         public static TalentData GetData(string _id) {
             return GameDictionary.GetJsonData<TalentData>("Talent", _id);
         }
+        public static TalentData GetRndTalent(HashSet<TalentType> _exclusiveTypes = null) {
+            List<TalentData> datas = GameDictionary.GetStrKeyJsonDic<TalentData>("Talent").Values.ToList();
+            if (_exclusiveTypes != null && _exclusiveTypes.Count > 0)
+                datas.RemoveAll(a => _exclusiveTypes.Contains(a.MyTalentType));
+            return Prob.GetRandomTFromTList(datas);
+        }
 
         public int GetAttackExtraValue(int _dmg) {
             int value = 0;
@@ -93,6 +100,7 @@ namespace TheDoor.Main {
             }
             return value;
         }
+
 
 
     }

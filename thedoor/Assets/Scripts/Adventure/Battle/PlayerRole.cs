@@ -128,6 +128,15 @@ namespace TheDoor.Main {
             return supplys;
         }
 
+        /// <summary>
+        /// 獲得新天賦
+        /// </summary>
+        public void GainTalent(TalentData _data) {
+            if (Talents.Exists(a => a.MyTalentType == _data.MyTalentType)) return;
+            Talents.Add(_data);
+            WriteLog.LogColorFormat("獲得天賦{0}", WriteLog.LogType.Battle, _data.Name);
+        }
+
 
 
         public class Builder : Builder<PlayerRole> {
