@@ -52,5 +52,13 @@ namespace Scoz.Func {
                 Destroy(ItemList[i].gameObject);
             ItemList.Clear();
         }
+        public void RemoveNullItems() {
+            for (int i = ItemList.Count - 1; i >= 0; i--) {
+                if (ItemList[i] == null) {
+                    Destroy(ItemList[i].gameObject);
+                    ItemList.RemoveAt(i);
+                }
+            }
+        }
     }
 }

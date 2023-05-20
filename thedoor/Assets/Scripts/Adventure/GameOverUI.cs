@@ -35,7 +35,8 @@ namespace TheDoor.Main {
         }
 
         public void CallTransition(Sprite _sprite, string _description, float _waitMinSec, Action _ac, params string[] _addLoadingProgress) {
-
+            SetActive(true);
+            DoorNodeUI.Instance?.SetActive(false);
             FinishAC = _ac;
             WaitMinSec = _waitMinSec;
             TransitionAni.SetTrigger("Play");

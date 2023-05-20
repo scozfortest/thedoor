@@ -36,7 +36,10 @@ namespace TheDoor.Main {
             RefreshUI();
             SetActive(true);
         }
-
+        public void ResetEffectSpawners() {
+            BuffSpawner.ClearItems();
+            DebuffSpawner.ClearItems();
+        }
         public override void RefreshUI() {
             base.RefreshUI();
             AssetGet.GetImg(RoleData.DataName, MyRole.MyData.Ref, sprite => {

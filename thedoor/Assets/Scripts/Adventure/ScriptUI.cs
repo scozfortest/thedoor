@@ -41,11 +41,13 @@ namespace TheDoor.Main {
         /// 每段劇情要執行的東西放這裡
         /// </summary>
         void DoScriptThings(ScriptData _data) {
+            DoEffectThings(_data);
+            if (AdventureManager.PRole.IsDead) return;//DoEffectThings腳色死亡的話 就不用執行後續
             DoRequireThings(_data);
             DoGainThings(_data);
             DoTriggerThings(_data);
             DoRewardThings(_data);
-            DoEffectThings(_data);
+
             if (_data.CamShake != 0) CameraManager.ShakeCam(CameraManager.CamNames.Adventure, 0.2f, 1, _data.CamShake);
             if (!string.IsNullOrEmpty(_data.RefSound)) AudioPlayer.PlayAudioByPath(MyAudioType.Sound, _data.RefSound);
             if (!string.IsNullOrEmpty(_data.RefVoice)) AudioPlayer.PlayAudioByPath(MyAudioType.Voice, _data.RefVoice);

@@ -65,9 +65,9 @@ namespace TheDoor.Main {
             WinAni.SetTrigger("Play");
         }
         public void Lose() {
-            WriteLog.LogColor("玩家戰敗", WriteLog.LogType.Battle);
-            LoseAni.gameObject.SetActive(true);
-            LoseAni.SetTrigger("Play");
+            //WriteLog.LogColor("玩家戰敗", WriteLog.LogType.Battle);
+            //LoseAni.gameObject.SetActive(true);
+            //LoseAni.SetTrigger("Play");
         }
         public void OnWinLoseAniEnd() {
             LoseAni.gameObject.SetActive(false);

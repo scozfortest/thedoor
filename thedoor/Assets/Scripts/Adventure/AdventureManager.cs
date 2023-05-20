@@ -69,8 +69,10 @@ namespace TheDoor.Main {
             AdventureUI.Instance.SwitchUI(AdventureUIs.Battle);
         }
         public static void GameOver() {
-            LocoServerManager.RemoveCurUseRole();
-            PopupUI.CallSceneTransition(MyScene.LobbyScene);
+            GameOverUI.Instance.CallTransition(null, StringData.GetUIString("GameOver"), 0, () => {
+                LocoServerManager.RemoveCurUseRole();
+                PopupUI.CallSceneTransition(MyScene.LobbyScene);
+            });
         }
 
 

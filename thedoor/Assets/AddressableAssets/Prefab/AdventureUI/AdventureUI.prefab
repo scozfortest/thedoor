@@ -898,7 +898,15 @@ PrefabInstance:
     - target: {fileID: 8041214245433636654, guid: bdc7b38aa2cc7db4ab12915304d47f6b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1622149847094966484}
+      objectReference: {fileID: 697510892645773129}
+    - target: {fileID: 8041214245433636654, guid: bdc7b38aa2cc7db4ab12915304d47f6b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 8041214245433636654, guid: bdc7b38aa2cc7db4ab12915304d47f6b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TheDoor.Main.GameOverUI, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdc7b38aa2cc7db4ab12915304d47f6b, type: 3}
 --- !u!114 &697510892645773129 stripped

@@ -95,6 +95,7 @@ namespace TheDoor.Main {
         }
         protected override void OnDeath() {
             base.OnDeath();
+            AdventureManager.GameOver();
         }
 
         public override void ApplyEffect(StatusEffect _effect) {

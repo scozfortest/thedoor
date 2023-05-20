@@ -121,6 +121,7 @@ namespace TheDoor.Main {
             }
         }
         static void OnBattleEnd() {
+            WriteLog.LogColor("戰鬥結束", WriteLog.LogType.Battle);
             PRole.RemoveAffertBattle();//移除戰鬥類型狀態
             CurBattleState = BattleState.End;
             if (PRole.IsDead)
@@ -130,7 +131,6 @@ namespace TheDoor.Main {
                     BattleUI.Instance.Win();
                 });
             }
-            WriteLog.LogColor("戰鬥結束", WriteLog.LogType.Battle);
         }
         /// <summary>
         /// 勝利才有的獎勵

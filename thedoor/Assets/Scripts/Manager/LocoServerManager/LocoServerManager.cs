@@ -179,7 +179,8 @@ namespace TheDoor.Main {
             GamePlayer.Instance.RemoveOwnedData(ColEnum.Role, GamePlayer.Instance.Data.CurRoleUID);
             GamePlayer.Instance.Data.SetCurRole_Loco("");
 
-
+            //更新腳色UI
+            RoleStateUI.Instance.ResetEffectSpawners();
 
             //存本地資料
             GamePlayer.Instance.SaveSettingToLoco();
