@@ -45,6 +45,7 @@ namespace TheDoor.Main {
         public enum TriggerType {
             None,
             GainTalent,
+            FirstStrike,
         }
 
         /// <summary>

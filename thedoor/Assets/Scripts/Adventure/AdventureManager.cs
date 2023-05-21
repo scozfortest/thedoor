@@ -45,6 +45,7 @@ namespace TheDoor.Main {
         }
 
         static void OpeTheDoor() {
+            TriggerRoleStatusEffect();
             var adventureUI = AdventureUI.Instance;
             WriteLog.LogColor(CurDoorType + "事件", WriteLog.LogType.Adventure);
             switch (CurDoorType) {
@@ -58,14 +59,24 @@ namespace TheDoor.Main {
                     break;
                 case DoorType.Monster:
                 case DoorType.Boss:
-                    CallBattle(Convert.ToInt32(CurDoorData.Values["MonsterID"]), null);
+                    CallBattle(Convert.ToInt32(CurDoorData.Values["MonsterID"]), null, 0);
                     break;
                 default:
                     break;
             }
         }
-        public static void CallBattle(int _monsterID, List<ItemData> _rewardItems) {
-            BattleManager.ResetBattle(PRole, _monsterID, _rewardItems);
+
+        /// <summary>
+        /// 腳色開門觸發效果
+        /// </summary>
+        static void TriggerRoleStatusEffect() {
+            if (PRole == null) return;
+            foreach (var effect in PRole.Effects.Values) {
+                effect.OpenTheDoorTrigger();
+            }
+        }
+        public static void CallBattle(int _monsterID, List<ItemData> _rewardItems, int _firstStrikeValue) {
+            BattleManager.ResetBattle(PRole, _monsterID, _rewardItems, _firstStrikeValue);
             AdventureUI.Instance.SwitchUI(AdventureUIs.Battle);
         }
         public static void GameOver() {

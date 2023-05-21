@@ -13,10 +13,15 @@ namespace TheDoor.Main {
         /// </summary>
         public void GainSupplyEffects(List<SupplyData> _datas) {
             foreach (var supplyData in _datas) {
-                if (supplyData.GainEffectTypes == null) continue;
-                foreach (var str in supplyData.GainEffectTypes) {
-                    if (!MyEnum.TryParseEnum(str, out EffectType _effectType)) continue;
-                    StatusEffect se = EffectFactory.Create(1, _effectType, 1, this, this, AttackPart.Body);
+                if (supplyData.GainEffectTypes != null) {
+                    foreach (var str in supplyData.GainEffectTypes) {
+                        if (!MyEnum.TryParseEnum(str, out EffectType _effectType)) continue;
+                        StatusEffect se = EffectFactory.Create(1, _effectType, 1, this, this, AttackPart.Body);
+                        ApplyEffect(se);
+                    }
+                }
+                if (supplyData.GainNotBattleEffect != null) {
+                    StatusEffect se = EffectFactory.Create(1, supplyData.GainNotBattleEffect.EffectType, supplyData.GainNotBattleEffect.Value, this, this, AttackPart.Body);
                     ApplyEffect(se);
                 }
             }

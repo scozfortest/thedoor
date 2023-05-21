@@ -16,5 +16,16 @@
 	{	"ID":"11a_1b",	"NextIDs":"11a_1b_1",	"GainType1":"Supply",	"GainValue1":"5001",	"EffectType1":"Attack",	"EffectValue1":"5",	"EffectProb1":"1"},
 	{	"ID":"11a_1c"},
 	{	"ID":"11a_1a_1"},
-	{	"ID":"11a_1b_1",	"GainType1":"Supply",	"GainValue1":"11",	"RewardType1":"Supply",	"RewardValue1":"11"}
+	{	"ID":"11a_1b_1",	"GainType1":"Supply",	"GainValue1":"11",	"RewardType1":"Supply",	"RewardValue1":"11"},
+	{	"ID":"21",	"Title":"BeastSeveredToe",	"NextIDs":"21a/21b/21c",	"RefImg":"2"},
+	{	"ID":"21a",	"NextIDs":"21a_1"},
+	{	"ID":"21b",	"End":"Battle",	"EndValue":"1002",	"TriggerType":"FirstStrike",	"TriggerValue":"1"},
+	{	"ID":"21c",	"NextIDs":"21a_2"},
+	{	"ID":"21a_1",	"NextIDs":"21a_1a/21a_1b/21a_1c"},
+	{	"ID":"21a_2",	"End":"Battle",	"EndValue":"1002",	"TriggerType":"FirstStrike",	"TriggerValue":"-1"},
+	{	"ID":"21a_1a",	"NextIDs":"21a_1a_1",	"Requirement1":"NeedSupplyTags",	"RequireValue1":"Food"},
+	{	"ID":"21a_1b",	"NextIDs":"21a_1b_1"},
+	{	"ID":"21a_1c",	"End":"Battle",	"EndValue":"1002",	"GainType1":"Supply",	"GainValue1":"5002"},
+	{	"ID":"21a_1a_1",	"Requirement1":"UseSupplyTags",	"RequireValue1":"Food"},
+	{	"ID":"21a_1b_1",	"GainType1":"Supply",	"GainValue1":"5003"}
 ]}

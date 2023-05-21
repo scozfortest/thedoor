@@ -29,6 +29,8 @@ namespace TheDoor.Main {
         Ethereal,//靈體化
         Blindness,//失明
         Focus,//專注
+
+        BeastSeveredToe,//野獸的斷趾 每經過兩個房間回復x點生命
     }
     public abstract class StatusEffect {
         public EffectType MyType { get; protected set; }
@@ -41,6 +43,7 @@ namespace TheDoor.Main {
                 stack = value;
             }
         }
+        public int Value { get; protected set; }//特殊用參數
         public bool IsExpired { get { return Stack <= 0; } }
         public Role Doer { get; private set; }//執行者
         public Role MyTarget { get; private set; }//目標
@@ -77,6 +80,7 @@ namespace TheDoor.Main {
                     case EffectType.Ethereal:
                     case EffectType.Focus:
                     case EffectType.Flee:
+                    case EffectType.BeastSeveredToe:
                         return true;
                     case EffectType.Attack:
                     case EffectType.SanAttack:
@@ -118,6 +122,7 @@ namespace TheDoor.Main {
                     case EffectType.Insanity:
                     case EffectType.Weak:
                     case EffectType.Blindness:
+                    case EffectType.BeastSeveredToe:
                         return true;
                     case EffectType.Poison:
                     case EffectType.Fear:
@@ -191,6 +196,11 @@ namespace TheDoor.Main {
         public virtual void TimePassStackChange(int _time) { }//經過時間層數變化
         public virtual int TimePassDmgTaken(int _time) { return 0; }//經過時間受到傷害
         public virtual int TimePassSanDmgTaken(int _time) { return 0; }//經過時間受到神智傷害
+
+        #endregion
+
+        #region 開門時觸發
+        public virtual void OpenTheDoorTrigger() { }//打開門觸發
 
         #endregion
 
@@ -285,6 +295,7 @@ namespace TheDoor.Main {
         { EffectType.Ethereal, (_prob,stack, doer, target,_attackPart) => new EtherealEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).SetAttackPart(_attackPart).Build() },
         { EffectType.Blindness, (_prob,stack, doer, target,_attackPart) => new BlindnessEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).SetAttackPart(_attackPart).Build() },
         { EffectType.Focus, (_prob,stack, doer, target,_attackPart) => new FocusEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).SetAttackPart(_attackPart).Build() },
+        { EffectType.BeastSeveredToe, (_prob,stack, doer, target,_attackPart) => new BeastSeveredToeEffect.Builder().SetProb(_prob).SetStack(stack).SetDoer(doer).SetTarget(target).SetAttackPart(_attackPart).Build() },
         // 有新增狀態效果要往下加
     };
 
@@ -895,6 +906,29 @@ namespace TheDoor.Main {
             if (!base.ApplyEffect()) return false;
             MyTarget.ApplyEffect(this);
             return true;
+        }
+    }
+
+
+    /// <summary>
+    /// 專注
+    /// 攻擊命中率上升20%，隨時間減少層數
+    /// </summary>
+    public class BeastSeveredToeEffect : StatusEffect {
+        public class Builder : Builder<BeastSeveredToeEffect> { }
+        public BeastSeveredToeEffect() {
+            MyType = EffectType.BeastSeveredToe;
+            Value = 0;
+        }
+
+        public override void OpenTheDoorTrigger() {
+            base.OpenTheDoorTrigger();
+            Value++;
+            if (Value >= 2) {
+                Doer.AddHP(Stack);
+                Value = 0;
+            }
+
         }
     }
 

@@ -35,6 +35,12 @@ namespace TheDoor.Main {
 
         public int CurActionIndex { get; private set; }
 
+        public EnemyAction GetNewAction() {
+            var action = MyData.GetAction(this, BattleManager.PRole, GetLastAction());
+            if (action == null) return null;
+            return action;
+        }
+
         public EnemyAction AddNewAction() {
             var action = MyData.GetAction(this, BattleManager.PRole, GetLastAction());
             if (action == null) return null;

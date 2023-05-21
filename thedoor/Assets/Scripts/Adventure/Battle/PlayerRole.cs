@@ -100,7 +100,6 @@ namespace TheDoor.Main {
 
         public override void ApplyEffect(StatusEffect _effect) {
             base.ApplyEffect(_effect);
-
             //跳文字
             if (MyEnum.TryParseEnum(_effect.MyType.ToString(), out DNPManager.DPNType _type)) {
                 DNPManager.Instance.Spawn(_type, _effect.Stack, BattleUI.GetTargetRectTrans(this), Vector2.zero);

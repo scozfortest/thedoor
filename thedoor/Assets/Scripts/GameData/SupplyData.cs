@@ -42,9 +42,11 @@ namespace TheDoor.Main {
         public int ExtendSanP { get; private set; }
         public int Usage { get; private set; }
         public int Time { get; private set; }
-        public HashSet<string> GainEffectTypes;
+        public HashSet<string> GainEffectTypes { get; private set; }
+        public TargetEffectData GainNotBattleEffect { get; private set; }//觸發非戰鬥效果
         HashSet<string> Tags;//道具分類
         HashSet<Timing> Timings;//使用時機
+
         public enum Timing {
             None,
             Battle,
@@ -55,6 +57,7 @@ namespace TheDoor.Main {
         protected override void GetDataFromJson(JsonData _item, string _dataName) {
             DataName = _dataName;
             JsonData item = _item;
+            EffectType tmpTEffectType = EffectType.Attack;
             foreach (string key in item.Keys) {
                 switch (key) {
                     case "ID":
@@ -95,6 +98,12 @@ namespace TheDoor.Main {
                         break;
                     case "GainEffectTypes":
                         GainEffectTypes = TextManager.GetHashSetFromSplitStr(item[key].ToString(), ',');
+                        break;
+                    case "GainNotBattleEffect":
+                        tmpTEffectType = MyEnum.ParseEnum<EffectType>(item[key].ToString());
+                        break;
+                    case "NotBattleEffectValue":
+                        GainNotBattleEffect = new TargetEffectData(Target.Myself, tmpTEffectType, 1, int.Parse(item[key].ToString()));
                         break;
                     default:
                         WriteLog.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));

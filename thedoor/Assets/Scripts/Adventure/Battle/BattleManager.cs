@@ -19,20 +19,22 @@ namespace TheDoor.Main {
         public static List<ItemData> RewardItems { get; private set; }
 
         static PlayerAction CurPlayerAction;//玩家要執行的行動
-
+        static int FirstStrikeValue = 0;
 
 
 
         public void Init() {
             Instance = this;
         }
-        public static void ResetBattle(PlayerRole _pRole, int _monsterID, List<ItemData> _rewardDatas) {
+        public static void ResetBattle(PlayerRole _pRole, int _monsterID, List<ItemData> _rewardDatas, int _firstStrikeValue) {
             RewardItems = _rewardDatas;
             PRole = _pRole;
+            FirstStrikeValue = _firstStrikeValue;
             SetEnemyRole(_monsterID);
             TimelineBattleUI.Instance.ResetBattleUI(ERole.Actions);
             CurBattleState = BattleState.PlayerTurn;
             BattlePassTime = 0;
+            EnemyFirstStrike();
         }
         static void SetEnemyRole(int _monsterID) {
             MonsterData mData = MonsterData.GetData(_monsterID);
@@ -41,8 +43,26 @@ namespace TheDoor.Main {
                 .Build();
         }
 
+        public static void EnemyFirstStrike() {
+            if (FirstStrikeValue >= 0) {
+                CurBattleState = BattleState.PlayerTurn;
+                return;
+            }
+            CurBattleState = BattleState.ActionPerform;
+            CoroutineJob.Instance.StartNewAction(() => {
+                var eAction = ERole.GetNewAction();
+                eAction.DoAction();
+                FirstStrikeValue++;
+                EnemyFirstStrike();
+            }, 1);
+        }
         public static void PlayerDoAction(PlayerAction _action) {
-            if (_action == null) return;
+            if (_action == null || CurBattleState != BattleState.PlayerTurn) return;
+            if (FirstStrikeValue > 0) {//玩家先攻
+                _action.DoAction();
+                FirstStrikeValue--;
+                return;
+            }
             CurBattleState = BattleState.ActionPerform;
             CurPlayerAction = _action;
             DoActions(0);

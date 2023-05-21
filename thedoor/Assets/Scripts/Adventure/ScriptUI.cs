@@ -95,6 +95,9 @@ namespace TheDoor.Main {
                     else talentData = TalentData.GetRndTalent(AdventureManager.PRole.Talents.Select(a => a.MyTalentType).ToHashSet());
                     if (talentData != null) AdventureManager.PRole.GainTalent(talentData);
                     break;
+                case ScriptData.TriggerType.FirstStrike:
+                    //不用處理 直接在進Battle時取先攻資料來初始化戰鬥
+                    break;
                 default:
                     WriteLog.LogError("尚未實作的ScriptData.TriggerType: " + _data.MyTriggerType);
                     break;
@@ -227,7 +230,13 @@ namespace TheDoor.Main {
             if (string.IsNullOrEmpty(CurScriptData.EndType)) return false;
             switch (CurScriptData.EndType) {
                 case "Battle":
-                    AdventureManager.CallBattle(int.Parse(CurScriptData.EndValue), RewardItems);
+                    int firstStrike = 0;
+                    try {
+                        firstStrike = (CurScriptData.MyTriggerType == ScriptData.TriggerType.FirstStrike) ? int.Parse(CurScriptData.TriggerValue) : 0;
+                    } catch (Exception _e) {
+                        WriteLog.LogError("Script表的TriggerValue有錯 ID: " + CurScriptData.ID);
+                    }
+                    AdventureManager.CallBattle(int.Parse(CurScriptData.EndValue), RewardItems, firstStrike);
                     AdventureUI.Instance?.SwitchUI(AdventureUIs.Battle);
                     return true;
                 case "NextDoor":
