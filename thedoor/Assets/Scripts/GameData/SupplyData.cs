@@ -42,8 +42,8 @@ namespace TheDoor.Main {
         public int ExtendSanP { get; private set; }
         public int Usage { get; private set; }
         public int Time { get; private set; }
-        public HashSet<string> GainEffectTypes { get; private set; }
-        public TargetEffectData GainNotBattleEffect { get; private set; }//觸發非戰鬥效果
+        public List<TargetEffectData> MyEffects = new List<TargetEffectData>();//使用道具時觸發效果清單
+        public TargetEffectData PassiveEffect { get; private set; }//持有道具時給予的效果
         HashSet<string> Tags;//道具分類
         HashSet<Timing> Timings;//使用時機
 
@@ -58,6 +58,7 @@ namespace TheDoor.Main {
             DataName = _dataName;
             JsonData item = _item;
             EffectType tmpTEffectType = EffectType.Attack;
+            int tmpTypeValue = 0;
             foreach (string key in item.Keys) {
                 switch (key) {
                     case "ID":
@@ -96,17 +97,24 @@ namespace TheDoor.Main {
                     case "Time":
                         Time = int.Parse(item[key].ToString());
                         break;
-                    case "GainEffectTypes":
-                        GainEffectTypes = TextManager.GetHashSetFromSplitStr(item[key].ToString(), ',');
-                        break;
-                    case "GainNotBattleEffect":
+                    case "PassiveEffect":
                         tmpTEffectType = MyEnum.ParseEnum<EffectType>(item[key].ToString());
                         break;
-                    case "NotBattleEffectValue":
-                        GainNotBattleEffect = new TargetEffectData(Target.Myself, tmpTEffectType, 1, int.Parse(item[key].ToString()));
+                    case "PassiveEffectValue":
+                        PassiveEffect = new TargetEffectData(Target.Myself, tmpTEffectType, 1, int.Parse(item[key].ToString()));
                         break;
                     default:
-                        WriteLog.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));
+                        try {
+                            if (key.Contains("EffectType")) {
+                                tmpTEffectType = MyEnum.ParseEnum<EffectType>(item[key].ToString());
+                            } else if (key.Contains("EffectValue")) {
+                                tmpTypeValue = int.Parse(item[key].ToString());
+                                TargetEffectData tmpTEffectData = new TargetEffectData(Target.Myself, tmpTEffectType, 1, tmpTypeValue);
+                                MyEffects.Add(tmpTEffectData);
+                            }
+                        } catch (Exception _e) {
+                            WriteLog.LogErrorFormat(DataName + "表格格式錯誤 ID:" + ID + "    Log: " + _e);
+                        }
                         break;
                 }
                 if (Timings == null || Timings.Count == 0)

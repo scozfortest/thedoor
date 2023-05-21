@@ -65,7 +65,7 @@ namespace TheDoor.Main {
             }
             AddOwnedDatas<OwnedSupplyData>(ColEnum.Supply, supplyListDic);
             AdventureManager.PRole?.AddSupplyExtendAttribute(_datas);//獲得道具增加生命/新智最大值的時候也會同時增加目前值
-            AdventureManager.PRole?.GainSupplyEffects(_datas);//獲得道具狀態
+            AdventureManager.PRole?.GainSupplyPassiveEffects(_datas);//獲得道具狀態
         }
 
         /// <summary>

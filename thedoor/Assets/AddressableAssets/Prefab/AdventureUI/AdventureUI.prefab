@@ -368,37 +368,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5046459504593844111}
     m_Modifications:
-    - target: {fileID: 120460453643259797, guid: 6e9e25d2cf54da0428ffd76e6d5d1e75, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 120460453643259797, guid: 6e9e25d2cf54da0428ffd76e6d5d1e75, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 120460453643259797, guid: 6e9e25d2cf54da0428ffd76e6d5d1e75, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4054513409123222010, guid: 6e9e25d2cf54da0428ffd76e6d5d1e75, type: 3}
       propertyPath: m_Name
       value: RestUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 4054513409123222010, guid: 6e9e25d2cf54da0428ffd76e6d5d1e75, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4151172366554106799, guid: 6e9e25d2cf54da0428ffd76e6d5d1e75, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4151172366554106799, guid: 6e9e25d2cf54da0428ffd76e6d5d1e75, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4151172366554106799, guid: 6e9e25d2cf54da0428ffd76e6d5d1e75, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7784443270535313053, guid: 6e9e25d2cf54da0428ffd76e6d5d1e75, type: 3}
       propertyPath: m_Pivot.x
@@ -483,18 +455,6 @@ PrefabInstance:
     - target: {fileID: 7784443270535313053, guid: 6e9e25d2cf54da0428ffd76e6d5d1e75, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9099176375846145879, guid: 6e9e25d2cf54da0428ffd76e6d5d1e75, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9099176375846145879, guid: 6e9e25d2cf54da0428ffd76e6d5d1e75, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoNextDoor
-      objectReference: {fileID: 0}
-    - target: {fileID: 9099176375846145879, guid: 6e9e25d2cf54da0428ffd76e6d5d1e75, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TheDoor.Main.RestUI, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e9e25d2cf54da0428ffd76e6d5d1e75, type: 3}

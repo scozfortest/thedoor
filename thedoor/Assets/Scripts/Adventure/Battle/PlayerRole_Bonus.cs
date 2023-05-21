@@ -11,19 +11,11 @@ namespace TheDoor.Main {
         /// <summary>
         /// 獲得時道具附加狀態
         /// </summary>
-        public void GainSupplyEffects(List<SupplyData> _datas) {
+        public void GainSupplyPassiveEffects(List<SupplyData> _datas) {
             foreach (var supplyData in _datas) {
-                if (supplyData.GainEffectTypes != null) {
-                    foreach (var str in supplyData.GainEffectTypes) {
-                        if (!MyEnum.TryParseEnum(str, out EffectType _effectType)) continue;
-                        StatusEffect se = EffectFactory.Create(1, _effectType, 1, this, this, AttackPart.Body);
-                        ApplyEffect(se);
-                    }
-                }
-                if (supplyData.GainNotBattleEffect != null) {
-                    StatusEffect se = EffectFactory.Create(1, supplyData.GainNotBattleEffect.EffectType, supplyData.GainNotBattleEffect.Value, this, this, AttackPart.Body);
-                    ApplyEffect(se);
-                }
+                if (supplyData.PassiveEffect == null || StatusEffect.OnlyInBattle(supplyData.PassiveEffect.EffectType)) continue;
+                StatusEffect se = EffectFactory.Create(1, supplyData.PassiveEffect.EffectType, supplyData.PassiveEffect.Value, this, this, AttackPart.Body);
+                ApplyEffect(se);
             }
         }
 

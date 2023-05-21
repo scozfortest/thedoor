@@ -112,7 +112,7 @@ namespace TheDoor.Main {
         /// </summary>
         public void RemoveAffertBattle() {
             foreach (var effect in Effects.Values) {
-                if (!effect.RemoveAffertBattle) continue;
+                if (!StatusEffect.OnlyInBattle(effect.MyType)) continue;
                 Effects.Remove(effect.MyType);
             }
         }

@@ -13,9 +13,17 @@ namespace TheDoor.Main {
 
     public class RestUI : BaseUI {
 
+        [SerializeField] SupplySpawner MySupplySpawner;
+
+        public override void Init() {
+            base.Init();
+            MySupplySpawner.Init();
+            MySupplySpawner.LoadItemAsset(null);
+        }
 
         public void ShowUI() {
             RefreshUI();
+            MySupplySpawner.SpawnItems(GamePlayer.Instance.Data.CurRole.GetSupplyDatas(null, SupplyData.Timing.Rest), ActionSupplyPrefab.ActionSupplyType.Usable);
             SetActive(true);
         }
 

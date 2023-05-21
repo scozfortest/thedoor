@@ -99,42 +99,40 @@ namespace TheDoor.Main {
             }
         }
         /// <summary>
-        /// 是否會在戰鬥後移除
+        /// 是否為戰鬥限定狀態(戰鬥限定狀態會在戰鬥後被移除 且 無法在非戰鬥中獲得)
         /// </summary>
-        public bool RemoveAffertBattle {
-            get {
-                switch (MyType) {
-                    case EffectType.RestoreHP:
-                    case EffectType.RestoreSanP:
-                    case EffectType.Evade:
-                    case EffectType.Burst:
-                    case EffectType.Horror:
-                    case EffectType.Protection:
-                    case EffectType.Fortitude:
-                    case EffectType.Thorns:
-                    case EffectType.Ethereal:
-                    case EffectType.Focus:
-                    case EffectType.Flee:
-                    case EffectType.Attack:
-                    case EffectType.SanAttack:
-                    case EffectType.Dizzy:
-                    case EffectType.Bleeding:
-                    case EffectType.Insanity:
-                    case EffectType.Weak:
-                    case EffectType.Blindness:
-                    case EffectType.BeastSeveredToe:
-                        return true;
-                    case EffectType.Poison:
-                    case EffectType.Fear:
-                    case EffectType.Antidote:
-                    case EffectType.Recovery:
-                    case EffectType.Strong:
-                    case EffectType.Faith:
-                        return false;
-                    default:
-                        WriteLog.LogError("尚未定義RemoveAffertBattle的狀態類型");
-                        return true;
-                }
+        public static bool OnlyInBattle(EffectType _type) {
+            switch (_type) {
+                case EffectType.RestoreHP:
+                case EffectType.RestoreSanP:
+                case EffectType.Evade:
+                case EffectType.Burst:
+                case EffectType.Horror:
+                case EffectType.Protection:
+                case EffectType.Fortitude:
+                case EffectType.Thorns:
+                case EffectType.Ethereal:
+                case EffectType.Focus:
+                case EffectType.Flee:
+                case EffectType.Attack:
+                case EffectType.SanAttack:
+                case EffectType.Dizzy:
+                case EffectType.Bleeding:
+                case EffectType.Insanity:
+                case EffectType.Weak:
+                case EffectType.Blindness:
+                    return true;
+                case EffectType.Poison:
+                case EffectType.Fear:
+                case EffectType.Antidote:
+                case EffectType.Recovery:
+                case EffectType.Strong:
+                case EffectType.Faith:
+                case EffectType.BeastSeveredToe:
+                    return false;
+                default:
+                    WriteLog.LogError("尚未定義OnlyInBattle的狀態類型");
+                    return true;
             }
         }
         public AttackPart MyAttackPart { get; protected set; }//攻擊部位
