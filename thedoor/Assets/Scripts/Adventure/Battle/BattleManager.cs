@@ -19,7 +19,7 @@ namespace TheDoor.Main {
         public static List<ItemData> RewardItems { get; private set; }
 
         static PlayerAction CurPlayerAction;//玩家要執行的行動
-        static int FirstStrikeValue = 0;
+        public static int FirstStrikeValue { get; private set; } = 0;//>0代表玩家先攻 <0代表敵方先攻
 
 
 
@@ -27,6 +27,7 @@ namespace TheDoor.Main {
             Instance = this;
         }
         public static void ResetBattle(PlayerRole _pRole, int _monsterID, List<ItemData> _rewardDatas, int _firstStrikeValue) {
+            AdventureManager.MyState = AdvState.Battle;
             RewardItems = _rewardDatas;
             PRole = _pRole;
             FirstStrikeValue = _firstStrikeValue;
@@ -53,6 +54,10 @@ namespace TheDoor.Main {
                 var eAction = ERole.GetNewAction();
                 eAction.DoAction();
                 FirstStrikeValue++;
+                if (PRole.IsDead || ERole.IsDead) {
+                    OnBattleEnd();
+                    return;
+                }
                 EnemyFirstStrike();
             }, 1);
         }
@@ -61,6 +66,8 @@ namespace TheDoor.Main {
             if (FirstStrikeValue > 0) {//玩家先攻
                 _action.DoAction();
                 FirstStrikeValue--;
+                if (PRole.IsDead || ERole.IsDead)
+                    OnBattleEnd();
                 return;
             }
             CurBattleState = BattleState.ActionPerform;

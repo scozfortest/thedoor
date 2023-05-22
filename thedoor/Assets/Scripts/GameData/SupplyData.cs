@@ -32,7 +32,7 @@ namespace TheDoor.Main {
             }
         }
         public bool Exclusive { get; private set; }
-        public Target MyTarget { get; private set; }
+        public Target MyTarget { get; private set; } = Target.None;
 
         public ItemType MyItemType { get; } = ItemType.Supply;
         public string Ref { get; set; }
@@ -134,6 +134,9 @@ namespace TheDoor.Main {
                 }
             });
         }
+        /// <summary>
+        /// 產生行動
+        /// </summary>
         public PlayerAction GetAction(PlayerRole _doer, Role _target, AttackPart _attackPart) {
             var supplyEffectDatas = GetSupplyEffects();
             var statusEffects = new List<StatusEffect>();

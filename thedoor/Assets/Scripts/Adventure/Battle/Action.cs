@@ -38,7 +38,6 @@ namespace TheDoor.Main {
         /// 執行行動
         /// </summary>
         public virtual void DoAction() {
-
             WriteLog.LogColor(Doer.Name + "行動:" + Name, WriteLog.LogType.Battle);
 
             float hitProb = 1;
@@ -67,8 +66,6 @@ namespace TheDoor.Main {
                 return;
             }
 
-
-
             //執行效果
             foreach (var effect in Effects) {
                 // 如果執行者或目標已經死亡就不執行效果
@@ -80,7 +77,6 @@ namespace TheDoor.Main {
                     DNPManager.Instance.Spawn(DNPManager.DPNType.Fail, 0, BattleUI.GetTargetRectTrans(effect.MyTarget), Vector2.zero);
                     continue;
                 }
-
 
 
                 //攻擊目標

@@ -22,6 +22,7 @@ namespace TheDoor.Main {
         [SerializeField] RestUI MyRestUI;
         [SerializeField] BattleUI MyBattleUI;
         [SerializeField] GameOverUI MyGameOverUI;
+        [SerializeField] DragIndicator MyDragIndicator;
 
         //進遊戲不先初始化，等到要用時才初始化的UI放這裡
         //[SerializeField] AssetReference BattleUIAsset;
@@ -44,6 +45,7 @@ namespace TheDoor.Main {
             MyRestUI.Init();
             MyBattleUI.Init();
             MyGameOverUI.Init();
+            MyDragIndicator.Init();
         }
 
         public void SwitchUI(AdventureUIs _ui, Action _cb = null) {
@@ -101,6 +103,16 @@ namespace TheDoor.Main {
 
                     break;
             }
+        }
+
+        public void StartDrag(PlayerAction _action, Transform _startTarget, Action<string> _cb) {
+            MyDragIndicator.StartDrag(_startTarget, _cb, () => { TimelineBattleUI.Instance.RemovePlayerToken(); });
+            if (AdventureManager.MyState == AdvState.Battle && BattleManager.FirstStrikeValue == 0)
+                TimelineBattleUI.Instance.ShowPlayerToken(_action);
+        }
+
+        public void EndDrag() {
+            MyDragIndicator.EndDrag();
         }
 
         void LoadAssets(AdventureUIs _ui, Action _cb) {

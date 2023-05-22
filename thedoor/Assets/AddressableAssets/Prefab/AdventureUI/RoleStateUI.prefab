@@ -1227,7 +1227,7 @@ GameObject:
   - component: {fileID: 5587027628111505771}
   - component: {fileID: 2744215829486464882}
   m_Layer: 5
-  m_Name: roleIcon
+  m_Name: Myself
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

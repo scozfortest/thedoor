@@ -28,6 +28,7 @@ namespace TheDoor.Main {
         }
 
         public void LoadScript(string _title) {
+            AdventureManager.MyState = AdvState.Script;
             CurScriptData = ScriptData.GetScriptByTitle(_title);
             RefreshUI();
         }

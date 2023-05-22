@@ -2,6 +2,7 @@ using System;
 
 namespace TheDoor.Main {
     public enum Target {
+        None,
         Myself,
         Enemy,
     }

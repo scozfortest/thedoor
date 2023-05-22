@@ -4,13 +4,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace TheDoor.Main {
+    public enum AdvState {
+        Battle,
+        Rest,
+        Script,
+    }
     public class AdventureManager {
 
         [SerializeField] BattleManager BattleManager;
         public static OwnedAdventureData CurAdventureData { get { return GamePlayer.Instance.Data.CurAdventure; } }
         public static DoorData CurDoorData { get { return GamePlayer.Instance.Data.CurAdventure.CurDoor; } }
         public static DoorType CurDoorType { get { return CurDoorData.DoorType; } }
+        public static AdvState MyState { get; set; }
         public static PlayerRole PRole { get; private set; }
+
 
 
         public static void CreatePlayerRole() {

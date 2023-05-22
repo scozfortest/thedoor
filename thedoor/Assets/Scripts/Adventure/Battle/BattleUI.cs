@@ -15,7 +15,6 @@ namespace TheDoor.Main {
 
         [SerializeField] EnemyUI MyEnemyUI;
         [SerializeField] SupplySpawner MySupplySpawner;
-        [SerializeField] DragIndicator MyDragIndicator;
         [SerializeField] TimelineBattleUI MyTimelineBattleUI;
         [SerializeField] Animator WinAni;
         [SerializeField] Animator LoseAni;
@@ -27,7 +26,6 @@ namespace TheDoor.Main {
             base.Init();
             Instance = this;
             MySupplySpawner.Init();
-            MyDragIndicator.Init();
             MyEnemyUI.Init();
             MySupplySpawner.LoadItemAsset(() => {
                 RefreshSupplyUI();
@@ -48,16 +46,7 @@ namespace TheDoor.Main {
         public void RefreshSupplyUI() {
             MySupplySpawner.SpawnItems(GamePlayer.Instance.Data.CurRole.GetSupplyDatas(null, SupplyData.Timing.Battle), ActionSupplyPrefab.ActionSupplyType.Usable);
         }
-        public void StartDrag(PlayerAction _action, Transform _startTarget, Action<string> _cb) {
-            MyDragIndicator.StartDrag(_startTarget, _cb, () => { TimelineBattleUI.Instance.RemovePlayerToken(); });
-            MyEnemyUI.ShowOutlineMaterial(true);
-            TimelineBattleUI.Instance.ShowPlayerToken(_action);
-        }
 
-        public void EndDrag() {
-            MyDragIndicator.EndDrag();
-            MyEnemyUI.ShowOutlineMaterial(false);
-        }
 
         public void Win() {
             WriteLog.LogColor("玩家勝利", WriteLog.LogType.Battle);

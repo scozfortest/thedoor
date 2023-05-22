@@ -15,20 +15,24 @@ namespace TheDoor.Main {
 
         [SerializeField] SupplySpawner MySupplySpawner;
 
+        public static RestUI Instance { get; private set; }
+
         public override void Init() {
             base.Init();
+            Instance = this;
             MySupplySpawner.Init();
             MySupplySpawner.LoadItemAsset(null);
         }
 
         public void ShowUI() {
+            AdventureManager.MyState = AdvState.Rest;
             RefreshUI();
-            MySupplySpawner.SpawnItems(GamePlayer.Instance.Data.CurRole.GetSupplyDatas(null, SupplyData.Timing.Rest), ActionSupplyPrefab.ActionSupplyType.Usable);
             SetActive(true);
         }
 
         public override void RefreshUI() {
             base.RefreshUI();
+            MySupplySpawner.SpawnItems(GamePlayer.Instance.Data.CurRole.GetSupplyDatas(null, SupplyData.Timing.Rest), ActionSupplyPrefab.ActionSupplyType.Usable);
         }
         public void GoNextDoor() {
             AdventureManager.GoNextDoor();
