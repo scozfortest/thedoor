@@ -644,6 +644,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SettingBtn
       objectReference: {fileID: 0}
+    - target: {fileID: 5965650645568308415, guid: cfca5f431b5bf364c8fbe10e59d8baf7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfca5f431b5bf364c8fbe10e59d8baf7, type: 3}
 --- !u!224 &1802274877494447158 stripped

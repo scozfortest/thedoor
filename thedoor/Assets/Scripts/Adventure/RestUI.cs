@@ -14,6 +14,7 @@ namespace TheDoor.Main {
     public class RestUI : BaseUI {
 
         [SerializeField] SupplySpawner MySupplySpawner;
+        [SerializeField] Image RestImg;
 
         public static RestUI Instance { get; private set; }
 
@@ -26,6 +27,10 @@ namespace TheDoor.Main {
 
         public void ShowUI() {
             AdventureManager.MyState = AdvState.Rest;
+            AssetGet.GetImg("Rest", RestData.GetRndData().Ref, sprite => {
+                RestImg.sprite = sprite;
+                RestImg.SetNativeSize();
+            });
             RefreshUI();
             SetActive(true);
         }
