@@ -1,5 +1,6 @@
 {"ScriptTitle":[
 	{	"ID":"witch",	"ScriptType":"Main"},
 	{	"ID":"bloodline",	"ScriptType":"Main"},
-	{	"ID":"BeastSeveredToe",	"ScriptType":"Side"}
+	{	"ID":"BeastSeveredToe",	"ScriptType":"Main"},
+	{	"ID":"ImaginaryFriend",	"ScriptType":"Side"}
 ]}

@@ -135,6 +135,8 @@ namespace Scoz.Func {
             //建立Popup_Local
             if (SceneManager.GetActiveScene().name == MyScene.StartScene.ToString())
                 PopupUI_Local.CreateNewInstance();
+            //建立影片播放器
+            MyVideoPlayer.CreateNewVideoPlayer();
             //建立Debugger
 #if !Release
             Debugger.CreateNewInstance();

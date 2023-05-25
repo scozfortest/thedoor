@@ -1,8 +1,22 @@
 {"Monster":[
-	{	"ID":"1",	"Rank":"1",	"Ref":"monster1",	"MonsterType":"Boss",	"HP":"100",	"HeadDmg":"1.8",	"HeadProb":"0.4",	"BodyDmg":"0.2",	"BodyProb":"1",	"LimbsDmg":"0.7",	"LimbsProb":"0.8"},
-	{	"ID":"1001",	"Rank":"1",	"Ref":"monster1",	"HP":"50",	"Weakness":"Sharp",	"HeadDmg":"1",	"HeadProb":"0.6",	"BodyDmg":"0.8",	"BodyProb":"0.9",	"LimbsDmg":"0.6",	"LimbsProb":"1"},
-	{	"ID":"1002",	"Rank":"1",	"Ref":"monster1",	"HP":"60",	"Weakness":"Heavy",	"HeadDmg":"1.1",	"HeadProb":"0.5",	"BodyDmg":"0.8",	"BodyProb":"0.8",	"LimbsDmg":"0.7",	"LimbsProb":"1"},
-	{	"ID":"1003",	"Rank":"1",	"Ref":"monster1",	"HP":"50",	"HeadDmg":"1",	"HeadProb":"0.7",	"BodyDmg":"0.8",	"BodyProb":"0.8",	"LimbsDmg":"0.6",	"LimbsProb":"1"},
-	{	"ID":"1004",	"Rank":"1",	"Ref":"monster1",	"HP":"50",	"HeadDmg":"1",	"HeadProb":"0.5",	"BodyDmg":"0.9",	"BodyProb":"0.9",	"LimbsDmg":"0.6",	"LimbsProb":"1"},
-	{	"ID":"1005",	"Rank":"1",	"Ref":"monster1",	"HP":"40",	"BodyDmg":"1",	"BodyProb":"0.6"}
+	{	"ID":"1",	"Rank":"1",	"Ref":"M2",	"MonsterType":"Boss",	"HP":"100",	"Weakness":"Heavy",	"HeadDmg":"1.5",	"HeadProb":"0.6",	"BodyDmg":"0.8",	"BodyProb":"1",	"LimbsDmg":"0.5",	"LimbsProb":"0.8"},
+	{	"ID":"2",	"Rank":"1",	"Ref":"M3",	"MonsterType":"Boss",	"HP":"100",	"Weakness":"Heavy",	"HeadDmg":"1.2",	"HeadProb":"0.6",	"BodyDmg":"0.8",	"BodyProb":"1",	"LimbsDmg":"0.7",	"LimbsProb":"0.9"},
+	{	"ID":"3",	"Rank":"1",	"Ref":"M9",	"MonsterType":"Boss",	"HP":"100",	"Weakness":"Sharp",	"HeadDmg":"1.3",	"HeadProb":"0.6",	"BodyDmg":"0.9",	"BodyProb":"0.9",	"LimbsDmg":"0.8",	"LimbsProb":"0.9"},
+	{	"ID":"4",	"Rank":"1",	"Ref":"M13",	"MonsterType":"Boss",	"HP":"100",	"Weakness":"Sharp",	"HeadDmg":"1.3",	"HeadProb":"0.6",	"BodyDmg":"0.9",	"BodyProb":"0.9",	"LimbsDmg":"0.8",	"LimbsProb":"0.9"},
+	{	"ID":"1001",	"Rank":"1",	"Ref":"2",	"MonsterType":"Boss",	"HP":"70",	"Weakness":"Sharp",	"HeadDmg":"1.5",	"HeadProb":"0.6",	"BodyDmg":"0.9",	"BodyProb":"0.8",	"LimbsDmg":"0.8",	"LimbsProb":"0.6"},
+	{	"ID":"1002",	"Rank":"1",	"Ref":"6_M1",	"MonsterType":"Boss",	"HP":"60",	"Weakness":"Heavy",	"HeadDmg":"1.5",	"HeadProb":"0.5",	"BodyDmg":"1",	"BodyProb":"0.7",	"LimbsDmg":"1",	"LimbsProb":"0.5"},
+	{	"ID":"1003",	"Rank":"1",	"Ref":"7_M1",	"MonsterType":"Boss",	"HP":"50",	"HeadDmg":"1.3",	"HeadProb":"0.7",	"BodyDmg":"0.9",	"BodyProb":"0.8",	"LimbsDmg":"0.8",	"LimbsProb":"0.9"},
+	{	"ID":"1004",	"Rank":"1",	"Ref":"8_M1",	"MonsterType":"Boss",	"HP":"40",	"HeadDmg":"1.5",	"HeadProb":"0.7",	"BodyDmg":"1",	"BodyProb":"0.9",	"LimbsDmg":"0.9",	"LimbsProb":"0.7"},
+	{	"ID":"1005",	"Rank":"1",	"Ref":"9_M1",	"MonsterType":"Boss",	"HP":"50",	"HeadDmg":"1.5",	"HeadProb":"0.7",	"BodyDmg":"1",	"BodyProb":"0.9",	"LimbsDmg":"0.9",	"LimbsProb":"0.7"},
+	{	"ID":"1006",	"Rank":"1",	"Ref":"9_M2",	"MonsterType":"Boss",	"HP":"40",	"Weakness":"Sharp",	"HeadDmg":"1.2",	"HeadProb":"0.5",	"BodyDmg":"1",	"BodyProb":"0.7",	"LimbsDmg":"1",	"LimbsProb":"0.6"},
+	{	"ID":"5001",	"Rank":"1",	"Ref":"M5",	"MonsterType":"Normal",	"HP":"60",	"Weakness":"Heavy",	"HeadDmg":"0.9",	"HeadProb":"0.7",	"BodyDmg":"0.8",	"BodyProb":"1",	"LimbsDmg":"0.7",	"LimbsProb":"0.8"},
+	{	"ID":"5002",	"Rank":"1",	"Ref":"M6",	"MonsterType":"Normal",	"HP":"70",	"HeadDmg":"1.4",	"HeadProb":"0.6",	"BodyDmg":"0.9",	"BodyProb":"0.8",	"LimbsDmg":"0.8",	"LimbsProb":"0.7"},
+	{	"ID":"5003",	"Rank":"1",	"Ref":"M7",	"MonsterType":"Normal",	"HP":"40",	"HeadDmg":"1",	"HeadProb":"0.6",	"BodyDmg":"0.9",	"BodyProb":"0.8",	"LimbsDmg":"0.8",	"LimbsProb":"0.7"},
+	{	"ID":"5004",	"Rank":"1",	"Ref":"M8",	"MonsterType":"Normal",	"HP":"40",	"HeadDmg":"1.5",	"HeadProb":"0.7",	"BodyDmg":"1",	"BodyProb":"0.9",	"LimbsDmg":"0.9",	"LimbsProb":"0.7"},
+	{	"ID":"5005",	"Rank":"1",	"Ref":"M11",	"MonsterType":"Normal",	"HP":"60",	"Weakness":"Heavy",	"HeadDmg":"1.5",	"HeadProb":"0.8",	"BodyDmg":"0.9",	"BodyProb":"0.8",	"LimbsDmg":"0.8",	"LimbsProb":"0.9"},
+	{	"ID":"5006",	"Rank":"1",	"Ref":"M12",	"MonsterType":"Normal",	"HP":"50",	"Weakness":"Sharp",	"HeadDmg":"1.5",	"HeadProb":"0.6",	"BodyDmg":"0.9",	"BodyProb":"0.8",	"LimbsDmg":"0.8",	"LimbsProb":"0.7"},
+	{	"ID":"5007",	"Rank":"1",	"Ref":"M14",	"MonsterType":"Normal",	"HP":"50",	"Weakness":"Sharp",	"HeadDmg":"1.5",	"HeadProb":"0.6",	"BodyDmg":"0.9",	"BodyProb":"0.9",	"LimbsDmg":"0.8",	"LimbsProb":"0.8"},
+	{	"ID":"5008",	"Rank":"1",	"Ref":"M15",	"MonsterType":"Normal",	"HP":"50",	"Weakness":"Heavy",	"HeadDmg":"1.5",	"HeadProb":"0.6",	"BodyDmg":"0.9",	"BodyProb":"0.9",	"LimbsDmg":"0.8",	"LimbsProb":"0.8"},
+	{	"ID":"5009",	"Rank":"1",	"Ref":"M16",	"MonsterType":"Normal",	"HP":"40",	"Weakness":"Sharp",	"HeadDmg":"1.5",	"HeadProb":"0.6",	"BodyDmg":"0.9",	"BodyProb":"0.9",	"LimbsDmg":"0.8",	"LimbsProb":"0.8"},
+	{	"ID":"5010",	"Rank":"1",	"Ref":"M17",	"MonsterType":"Normal",	"HP":"60",	"Weakness":"Sharp",	"HeadDmg":"1",	"HeadProb":"0.6",	"BodyDmg":"0.9",	"BodyProb":"0.9",	"LimbsDmg":"0.8",	"LimbsProb":"0.8"}
 ]}

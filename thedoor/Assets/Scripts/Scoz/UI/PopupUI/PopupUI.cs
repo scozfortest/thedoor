@@ -55,6 +55,8 @@ namespace Scoz.Func {
             GameManager.Instance.AddCamStack(GetComponent<Camera>());//將自己的camera加入到目前場景上的MainCameraStack中
         }
 
+
+
         [HeaderAttribute("==============道具選擇彈窗==============")]
         [SerializeField] SupplyChoiceUI MySupplyChoiceUI;
         void InitSupplyChoiceUI() {

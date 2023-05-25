@@ -15,6 +15,14 @@ namespace TheDoor.Main {
         NeedSupplyTags,//需求擁有完全符合以下道具類型的道具
         UseSupplyTags,//需求使用完全符合以下道具類型的其中1個道具1次
         ConsumeSupplyTags,//需求耗盡完全符合以下道具類型的其中一個道具
+        HPGreaterThan,//生命大於
+        HPLessThan, //生命小於
+        HPRatioGreaterThan,//生命大於百分比
+        HPRatioLessThan,//生命小於百分比
+        SanPGreaterThan,//心智大於
+        SanPLessThan,//心智小於
+        SanPRatioGreaterThan,//心智大於百分比
+        SanPRatioLessThan,//心智小於百分比
     }
     public class ScriptRequireData {
 
@@ -25,9 +33,9 @@ namespace TheDoor.Main {
             MyType = _type;
             Value = _value;
         }
-        public bool MeetRequire() {
-            var ownedSupplyDatas = GamePlayer.Instance.GetOwnedDatas<OwnedSupplyData>(ColEnum.Supply);
-
+        public bool MeetRequire(PlayerRole _pRole) {
+            if (_pRole == null) return false;
+            var supplies = _pRole.GetSupplyDatas();
             switch (MyType) {
                 case ScriptRequireType.Gold:
                 case ScriptRequireType.Point:
@@ -40,7 +48,7 @@ namespace TheDoor.Main {
                     HashSet<int> ids = new HashSet<int>();
                     ids = TextManager.GetIntHashSetFromSplitStr(Value, ',');
                     if (ids.Count == 0) return true;
-                    foreach (var supply in ownedSupplyDatas) {
+                    foreach (var supply in supplies) {
                         if (ids.Contains(supply.ID))
                             ids.Remove(supply.ID);
                         if (ids.Count == 0) return true;
@@ -52,12 +60,27 @@ namespace TheDoor.Main {
                     HashSet<string> tags = new HashSet<string>();
                     tags = TextManager.StringSplitToStrHashSet(Value, ',');
                     if (tags.Count == 0) return true;
-                    foreach (var supply in ownedSupplyDatas) {
-                        var supplyData = SupplyData.GetData(supply.ID);
-                        if (supplyData == null) continue;
-                        if (supplyData.BelongToTags(tags)) return true;
+                    foreach (var supply in supplies) {
+                        if (supply == null) continue;
+                        if (supply.BelongToTags(tags)) return true;
                     }
                     return false;
+                case ScriptRequireType.HPGreaterThan:
+                    return _pRole.CurHP > int.Parse(Value);
+                case ScriptRequireType.HPLessThan:
+                    return _pRole.CurHP < int.Parse(Value);
+                case ScriptRequireType.HPRatioGreaterThan:
+                    return _pRole.HPRatio > float.Parse(Value);
+                case ScriptRequireType.HPRatioLessThan:
+                    return _pRole.HPRatio < float.Parse(Value);
+                case ScriptRequireType.SanPGreaterThan:
+                    return _pRole.CurSanP > int.Parse(Value);
+                case ScriptRequireType.SanPLessThan:
+                    return _pRole.CurSanP < int.Parse(Value);
+                case ScriptRequireType.SanPRatioGreaterThan:
+                    return _pRole.SanPRatio > float.Parse(Value);
+                case ScriptRequireType.SanPRatioLessThan:
+                    return _pRole.SanPRatio < float.Parse(Value);
                 default:
                     WriteLog.LogError("尚未定義的ScriptRequireType :" + MyType);
                     return true;
@@ -101,6 +124,15 @@ namespace TheDoor.Main {
                     }
                     str = string.Format(typeStr, content);
                     str = string.Format(StringData.GetUIString("ScriptRequireStr_Parentheses"), str);
+                    return str;
+                case ScriptRequireType.HPGreaterThan:
+                case ScriptRequireType.HPLessThan:
+                case ScriptRequireType.HPRatioGreaterThan:
+                case ScriptRequireType.HPRatioLessThan:
+                case ScriptRequireType.SanPGreaterThan:
+                case ScriptRequireType.SanPLessThan:
+                case ScriptRequireType.SanPRatioGreaterThan:
+                case ScriptRequireType.SanPRatioLessThan:
                     return str;
                 default:
                     WriteLog.LogError("尚未定義的ScriptRequireType :" + MyType);

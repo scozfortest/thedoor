@@ -10,7 +10,6 @@ namespace Scoz.Func {
     public partial class Debugger : MonoBehaviour {
         public static bool IsInit;
         public static Debugger Instance;
-        [SerializeField] GameObject TestPanelGo = null;
         [SerializeField] Text EnvVersion;
         public Text TotalMemoryText = null;
         public Text Text_FPS;
@@ -73,12 +72,6 @@ namespace Scoz.Func {
             return Instance;
         }
 
-        /// <summary>
-        /// 除錯顯示控制
-        /// </summary>
-        public void ShowDebugPanel(bool _show) {
-            TestPanelGo.SetActive(_show);
-        }
         /// <summary>
         /// 是否限制FPS
         /// </summary>

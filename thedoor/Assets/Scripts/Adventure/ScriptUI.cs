@@ -191,12 +191,28 @@ namespace TheDoor.Main {
             }
         }
 
+        /// <summary>
+        /// Next按鈕按下觸發
+        /// </summary>
         public void Next() {
             if (EndTrigger()) {
                 return;
             }
-            if (CurScriptData.HaveOptions) return;
-            CurScriptData = CurScriptData.NextScript();
+            if (CurScriptData.HaveOptions) return;//如果有選項不會觸發此function才對
+            if (!CurScriptData.ConditionalNext) CurScriptData = CurScriptData.NextScript();
+            else {
+                for (int i = 0; i < CurScriptData.NextIDs.Count; i++) {
+                    if (i == CurScriptData.NextIDs.Count - 1) {//最後一個就不考慮條件有沒有符合了 因為一定要跳下一句
+                        CurScriptData = CurScriptData.NextScript(i);
+                        break;
+                    }
+                    if (CurScriptData.NextScript(i).MeetAllRequirements()) {
+                        CurScriptData = CurScriptData.NextScript(i);
+                        break;
+                    }
+                }
+            }
+
             if (CurScriptData == null) {//空資料就是前往下一道門
                 NextDoor();
                 return;
@@ -205,17 +221,33 @@ namespace TheDoor.Main {
             RefreshUI();
         }
 
+        /// <summary>
+        /// 點了選項觸發
+        /// </summary>
         public void Option(int _index) {
             DoScriptThings(CurScriptData.NextScript(_index));//先執行點選了該選項需要執行的事情
             if (EndTrigger()) {//執行結束觸發的事情
                 return;
             }
-            CurScriptData = CurScriptData.NextScript(_index);
+            CurScriptData = CurScriptData.NextScript(_index);//跳至點了選項的ScriptData
             if (EndTrigger()) {
                 return;
             }
+            //跳至選項的下一個ScriptData
+            if (!CurScriptData.ConditionalNext) CurScriptData = CurScriptData.NextScript();
+            else {
+                for (int i = 0; i < CurScriptData.NextIDs.Count; i++) {
+                    if (i == CurScriptData.NextIDs.Count - 1) {//最後一個就不考慮條件有沒有符合了 因為一定要跳下一句
+                        CurScriptData = CurScriptData.NextScript(i);
+                        break;
+                    }
+                    if (CurScriptData.NextScript(i).MeetAllRequirements()) {
+                        CurScriptData = CurScriptData.NextScript(i);
+                        break;
+                    }
+                }
+            }
 
-            CurScriptData = CurScriptData.NextScript(0);
             if (CurScriptData == null) {
                 NextDoor();
                 return;

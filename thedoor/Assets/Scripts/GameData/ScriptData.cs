@@ -33,6 +33,7 @@ namespace TheDoor.Main {
         public string RefBGM { get; private set; }
         public string RefVoice { get; private set; }
         public bool HaveOptions { get; private set; }
+        public bool ConditionalNext { get; private set; }
         public TriggerType MyTriggerType { get; private set; } = TriggerType.None;
         public string TriggerValue { get; private set; }
         public HashSet<string> CamEffects { get; private set; }
@@ -80,9 +81,18 @@ namespace TheDoor.Main {
                         TitleScriptDic.Add(Title, this);
                         break;
                     case "NextIDs":
-                        NextIDs = item[key].ToString().Split('/').ToList();
-                        HaveOptions = NextIDs.Count > 1;
-                        NextIDs.RemoveAll(a => string.IsNullOrEmpty(a));
+                        string nextIDStr = item[key].ToString();
+                        if (nextIDStr.Contains('/')) {
+                            NextIDs = nextIDStr.Split('/').ToList();
+                            NextIDs.RemoveAll(a => string.IsNullOrEmpty(a));
+                            HaveOptions = NextIDs.Count > 1;
+                        } else if (nextIDStr.Contains('?')) {
+                            NextIDs = nextIDStr.Split('?').ToList();
+                            NextIDs.RemoveAll(a => string.IsNullOrEmpty(a));
+                            ConditionalNext = NextIDs.Count > 1;
+                        } else {
+                            NextIDs = new List<string>() { nextIDStr };
+                        }
                         break;
                     case "End":
                         EndType = item[key].ToString();
@@ -191,7 +201,7 @@ namespace TheDoor.Main {
         public bool MeetAllRequirements() {
             if (Requires != null) {
                 foreach (var require in Requires) {
-                    if (!require.MeetRequire()) return false;
+                    if (!require.MeetRequire(AdventureManager.PRole)) return false;
                 }
             }
             return true;
