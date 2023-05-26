@@ -61,8 +61,10 @@ namespace TheDoor.Main {
                 SanPText.text = string.Format("{0} / {1}", MyRoleData.SanP, MyRoleData.SanP);
             }
 
+            RoleImg.gameObject.SetActive(false);
             AssetGet.GetImg(RoleData.DataName, MyRoleData.Ref, sprite => {
                 RoleImg.sprite = sprite;
+                RoleImg.gameObject.SetActive(true);
             });
         }
 
