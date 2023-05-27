@@ -18,8 +18,8 @@ namespace TheDoor.Main {
             }
         }
 
-        public PlayerAction(string _name, PlayerRole _doer, Role _target, int _time, List<StatusEffect> effects, AttackPart _attackPart)
-            : base(_name, _doer, _target, _time, effects, _attackPart) {
+        public PlayerAction(string _name, HashSet<string> _particles, PlayerRole _doer, Role _target, int _time, List<StatusEffect> effects, AttackPart _attackPart)
+            : base(_name, _particles, _doer, _target, _time, effects, _attackPart) {
         }
 
     }

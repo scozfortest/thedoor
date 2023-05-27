@@ -58,7 +58,7 @@ namespace TheDoor.Main {
             switch (CurDoorType) {
                 case DoorType.Encounter:
                     var scriptUI = ScriptUI.Instance;
-                    scriptUI.LoadScript(CurDoorData.Values["ScriptTitleID"].ToString());
+                    scriptUI.LoadScript(CurDoorData.Values["ScriptTitleID"].ToString(), true);
                     adventureUI.SwitchUI(AdventureUIs.Script);
                     break;
                 case DoorType.Rest:

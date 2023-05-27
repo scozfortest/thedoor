@@ -1,6 +1,10 @@
 {"ScriptTitle":[
-	{	"ID":"witch",	"ScriptType":"Main"},
-	{	"ID":"bloodline",	"ScriptType":"Main"},
-	{	"ID":"BeastSeveredToe",	"ScriptType":"Main"},
-	{	"ID":"ImaginaryFriend",	"ScriptType":"Side"}
+	{	"ID":"苦痛崇拜-女祭司"},
+	{	"ID":"血脈"},
+	{	"ID":"野獸斷趾"},
+	{	"ID":"醒神泉"},
+	{	"ID":"幻想朋友"},
+	{	"ID":"群鳥的願望"},
+	{	"ID":"新生之光"},
+	{	"ID":"隔間的抉擇",	"ScriptType":"Side"}
 ]}

@@ -23,6 +23,7 @@ namespace TheDoor.Main {
         SanPLessThan,//心智小於
         SanPRatioGreaterThan,//心智大於百分比
         SanPRatioLessThan,//心智小於百分比
+        TmpValuesIs,//該腳本的暫時參數為
     }
     public class ScriptRequireData {
 
@@ -33,7 +34,7 @@ namespace TheDoor.Main {
             MyType = _type;
             Value = _value;
         }
-        public bool MeetRequire(PlayerRole _pRole) {
+        public bool MeetRequire(PlayerRole _pRole, Dictionary<string, int> _tmpValueDic) {
             if (_pRole == null) return false;
             var supplies = _pRole.GetSupplyDatas();
             switch (MyType) {
@@ -81,10 +82,27 @@ namespace TheDoor.Main {
                     return _pRole.SanPRatio > float.Parse(Value);
                 case ScriptRequireType.SanPRatioLessThan:
                     return _pRole.SanPRatio < float.Parse(Value);
+                case ScriptRequireType.TmpValuesIs:
+                    return TmpValueIs(Value, _tmpValueDic);
                 default:
                     WriteLog.LogError("尚未定義的ScriptRequireType :" + MyType);
                     return true;
             }
+        }
+        bool TmpValueIs(string _valueStr, Dictionary<string, int> _tmpValueDic) {
+            if (string.IsNullOrEmpty(_valueStr)) return false;
+            try {
+                string[] conditions = _valueStr.Split('&');
+                foreach (var condition in conditions) {
+                    string[] values = condition.Split(',');
+                    if (!_tmpValueDic.ContainsKey(values[0])) return false;
+                    if (!TextManager.GetOperatorResult(_tmpValueDic[values[0]], values[1], float.Parse(values[2]))) return false;
+                }
+            } catch (Exception _e) {
+                WriteLog.LogError(_e);
+                return false;
+            }
+            return true;
         }
 
         public string GetRequireStr() {
@@ -133,6 +151,7 @@ namespace TheDoor.Main {
                 case ScriptRequireType.SanPLessThan:
                 case ScriptRequireType.SanPRatioGreaterThan:
                 case ScriptRequireType.SanPRatioLessThan:
+                case ScriptRequireType.TmpValuesIs:
                     return str;
                 default:
                     WriteLog.LogError("尚未定義的ScriptRequireType :" + MyType);

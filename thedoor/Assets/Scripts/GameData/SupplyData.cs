@@ -152,7 +152,7 @@ namespace TheDoor.Main {
                 }
             }
             Role actionTarget = (MyTarget == Target.Myself) ? _doer : _target;//行動目標
-            return new PlayerAction(Name, _doer, actionTarget, Time, statusEffects, _attackPart);
+            return new PlayerAction(Name, null, _doer, actionTarget, Time, statusEffects, _attackPart);
         }
         List<SupplyEffectData> GetSupplyEffects() {
             return SupplyEffectData.GetSupplyEffectDatas(ID);

@@ -18,7 +18,7 @@ namespace TheDoor.Main {
         public string Content {
             get {
                 string str = StringData.GetString_static(DataName + "_" + ID, "Content");
-                if (Requires != null) {
+                if (!HideRequireStr && Requires != null) {
                     foreach (var require in Requires) {
                         str += require.GetRequireStr();
                     }
@@ -34,6 +34,8 @@ namespace TheDoor.Main {
         public string RefVoice { get; private set; }
         public bool HaveOptions { get; private set; }
         public bool ConditionalNext { get; private set; }
+        public bool HideRequireStr { get; private set; }
+        public bool HideOption { get; private set; }
         public TriggerType MyTriggerType { get; private set; } = TriggerType.None;
         public string TriggerValue { get; private set; }
         public HashSet<string> CamEffects { get; private set; }
@@ -47,6 +49,8 @@ namespace TheDoor.Main {
             None,
             GainTalent,
             FirstStrike,
+            SetTmpValues,
+            AddTmpValues,
         }
 
         /// <summary>
@@ -117,6 +121,12 @@ namespace TheDoor.Main {
                         break;
                     case "CamShake":
                         CamShake = float.Parse(item[key].ToString());
+                        break;
+                    case "HideRequireStr":
+                        HideRequireStr = bool.Parse(item[key].ToString());
+                        break;
+                    case "HideOption":
+                        HideOption = bool.Parse(item[key].ToString());
                         break;
                     case "TriggerType":
                         MyTriggerType = MyEnum.ParseEnum<TriggerType>(item[key].ToString());
@@ -198,14 +208,7 @@ namespace TheDoor.Main {
             return TitleScriptDic[_title];
         }
 
-        public bool MeetAllRequirements() {
-            if (Requires != null) {
-                foreach (var require in Requires) {
-                    if (!require.MeetRequire(AdventureManager.PRole)) return false;
-                }
-            }
-            return true;
-        }
+
 
         public List<StatusEffect> GetAction(PlayerRole _pRole) {
             if (MyEffects == null || MyEffects.Count == 0) return null;

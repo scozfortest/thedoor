@@ -13,6 +13,7 @@ namespace TheDoor.Main {
                 return StringData.GetString_static(DataName + "_" + ID, "Name");
             }
         }
+        public HashSet<string> Particles;
         public static string DataName { get; set; }
         public int MonsterID { get; private set; }
         public float Probability { get; private set; }
@@ -39,6 +40,9 @@ namespace TheDoor.Main {
                         break;
                     case "MonsterID":
                         MonsterID = int.Parse(item[key].ToString());
+                        break;
+                    case "Particles":
+                        Particles = TextManager.GetHashSetFromSplitStr(item[key].ToString(), ',');
                         break;
                     case "Probability":
                         Probability = float.Parse(item[key].ToString());

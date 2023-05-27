@@ -292,5 +292,27 @@ namespace Scoz.Func {
             }
             return false;
         }
+
+        public static bool GetOperatorResult(float _value1, string _operator, float _value2) {
+            bool result = false;
+            switch (_operator) {
+                case ">":
+                    return _value1 > _value2;
+                case ">=":
+                    return _value1 >= _value2;
+                case "<":
+                    return _value1 < _value2;
+                case "<=":
+                    return _value1 <= _value2;
+                case "==":
+                    return _value1 == _value2;
+                case "!=":
+                    return _value1 != _value2;
+                default:
+                    WriteLog.LogError("錯誤的運算子: " + _operator);
+                    break;
+            }
+            return result;
+        }
     }
 }

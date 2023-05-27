@@ -17,21 +17,26 @@ namespace TheDoor.Main {
         [SerializeField] TextMeshProUGUI[] Options;
 
 
+
+
         ScriptData CurScriptData;
         public static ScriptUI Instance { get; private set; }
         List<ItemData> RewardItems;
-
+        Dictionary<string, int> TmpValueDic = new Dictionary<string, int>();
 
         public override void Init() {
             base.Init();
             Instance = this;
         }
 
-        public void LoadScript(string _title) {
+        public void LoadScript(string _title, bool _resetTmpValues) {
             AdventureManager.MyState = AdvState.Script;
             CurScriptData = ScriptData.GetScriptByTitle(_title);
+            if (_resetTmpValues) TmpValueDic.Clear();
+            DoScriptThings(CurScriptData);
             RefreshUI();
         }
+
         public override void RefreshUI() {
             base.RefreshUI();
             ShowContent();
@@ -98,6 +103,12 @@ namespace TheDoor.Main {
                     break;
                 case ScriptData.TriggerType.FirstStrike:
                     //不用處理 直接在進Battle時取先攻資料來初始化戰鬥
+                    break;
+                case ScriptData.TriggerType.SetTmpValues:
+                    SetTmpValueIs(_data.TriggerValue);
+                    break;
+                case ScriptData.TriggerType.AddTmpValues:
+                    AddTmpValueIs(_data.TriggerValue);
                     break;
                 default:
                     WriteLog.LogError("尚未實作的ScriptData.TriggerType: " + _data.MyTriggerType);
@@ -182,12 +193,16 @@ namespace TheDoor.Main {
                 Options[i].text = CurScriptData.NextScript(i).Content;
 
                 //沒達成條件的選項要標示為灰色
-                bool meetRequire = CurScriptData.NextScript(i).MeetAllRequirements();
+                bool meetRequire = MeetAllRequirements(CurScriptData.NextScript(i));
+                OptionBtns[i].gameObject.SetActive(true);
                 OptionBtns[i].interactable = meetRequire;
                 if (meetRequire)
                     Options[i].color = Color.white;
-                else
-                    Options[i].color = Color.gray;
+                else {
+                    if (CurScriptData.NextScript(i).HideOption) OptionBtns[i].gameObject.SetActive(false);
+                    else Options[i].color = Color.gray;
+                }
+
             }
         }
 
@@ -206,7 +221,7 @@ namespace TheDoor.Main {
                         CurScriptData = CurScriptData.NextScript(i);
                         break;
                     }
-                    if (CurScriptData.NextScript(i).MeetAllRequirements()) {
+                    if (MeetAllRequirements(CurScriptData.NextScript(i))) {
                         CurScriptData = CurScriptData.NextScript(i);
                         break;
                     }
@@ -241,7 +256,7 @@ namespace TheDoor.Main {
                         CurScriptData = CurScriptData.NextScript(i);
                         break;
                     }
-                    if (CurScriptData.NextScript(i).MeetAllRequirements()) {
+                    if (MeetAllRequirements(CurScriptData.NextScript(i))) {
                         CurScriptData = CurScriptData.NextScript(i);
                         break;
                     }
@@ -276,9 +291,9 @@ namespace TheDoor.Main {
                     AdventureUI.Instance?.SwitchUI(AdventureUIs.Battle);
                     return true;
                 case "NextScript":
-                    if (!string.IsNullOrEmpty(CurScriptData.EndValue)) LoadScript(CurScriptData.EndValue);
+                    if (!string.IsNullOrEmpty(CurScriptData.EndValue)) LoadScript(CurScriptData.EndValue, false);
                     else {
-                        LoadScript(ScriptTitleData.GetRndDataByType(ScriptType.Side).ID);
+                        LoadScript(ScriptTitleData.GetRndDataByType(ScriptType.Side).ID, false);
                     }
                     return true;
                 default:
@@ -290,6 +305,43 @@ namespace TheDoor.Main {
             AdventureManager.GoNextDoor();
         }
 
+
+        void SetTmpValueIs(string _valueStr) {
+            WriteLog.LogColor("SetTmpValueIs: " + _valueStr, WriteLog.LogType.Adventure);
+            if (string.IsNullOrEmpty(_valueStr)) return;
+            try {
+                string[] conditions = _valueStr.Split('&');
+                foreach (var condition in conditions) {
+                    string[] values = condition.Split(',');
+                    TmpValueDic[values[0]] = int.Parse(values[1]);
+                }
+            } catch (Exception _e) {
+                WriteLog.LogError(_e);
+            }
+        }
+        void AddTmpValueIs(string _valueStr) {
+            WriteLog.LogColor("AddTmpValues: " + _valueStr, WriteLog.LogType.Adventure);
+            if (string.IsNullOrEmpty(_valueStr)) return;
+            try {
+                string[] conditions = _valueStr.Split('&');
+                foreach (var condition in conditions) {
+                    string[] values = condition.Split(',');
+                    if (TmpValueDic.ContainsKey(values[0])) TmpValueDic[values[0]] += int.Parse(values[1]);
+                }
+            } catch (Exception _e) {
+                WriteLog.LogError(_e);
+            }
+        }
+
+        public bool MeetAllRequirements(ScriptData _data) {
+            if (_data == null) return false;
+            if (_data.Requires != null) {
+                foreach (var require in _data.Requires) {
+                    if (!require.MeetRequire(AdventureManager.PRole, TmpValueDic)) return false;
+                }
+            }
+            return true;
+        }
 
     }
 }

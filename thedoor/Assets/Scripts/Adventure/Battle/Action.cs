@@ -19,11 +19,12 @@ namespace TheDoor.Main {
         public virtual int NeedTimeBeforeAction { get { return NeedTime; } }
 
         public bool Done { get; protected set; }
-
+        public HashSet<string> Particles;
         public List<StatusEffect> Effects { get; private set; }
 
-        public RoleAction(string _name, Role _doer, Role _target, int _time, List<StatusEffect> _effects, AttackPart _attackPart) {
+        public RoleAction(string _name, HashSet<string> _particles, Role _doer, Role _target, int _time, List<StatusEffect> _effects, AttackPart _attackPart) {
             Name = _name;
+            Particles = _particles;
             Target = _target;
             Doer = _doer;
             Time = _time;
@@ -81,6 +82,11 @@ namespace TheDoor.Main {
 
                 //攻擊目標
                 effect.AttackDealDmg();
+                if (Particles != null) {
+                    foreach (var particleStr in Particles) {
+                        GameObjSpawner.SpawnParticleObjByPath(particleStr, AdventureUI.Instance?.transform);
+                    }
+                }
                 //精神傷害目標
                 effect.AttackDealSanDmg();
                 //恢復目標生命
