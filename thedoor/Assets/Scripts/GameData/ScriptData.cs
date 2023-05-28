@@ -18,11 +18,6 @@ namespace TheDoor.Main {
         public string Content {
             get {
                 string str = StringData.GetString_static(DataName + "_" + ID, "Content");
-                if (!HideRequireStr && Requires != null) {
-                    foreach (var require in Requires) {
-                        str += require.GetRequireStr();
-                    }
-                }
                 return str;
             }
         }
@@ -34,7 +29,6 @@ namespace TheDoor.Main {
         public string RefVoice { get; private set; }
         public bool HaveOptions { get; private set; }
         public bool ConditionalNext { get; private set; }
-        public bool HideRequireStr { get; private set; }
         public bool HideOption { get; private set; }
         public TriggerType MyTriggerType { get; private set; } = TriggerType.None;
         public string TriggerValue { get; private set; }
@@ -121,9 +115,6 @@ namespace TheDoor.Main {
                         break;
                     case "CamShake":
                         CamShake = float.Parse(item[key].ToString());
-                        break;
-                    case "HideRequireStr":
-                        HideRequireStr = bool.Parse(item[key].ToString());
                         break;
                     case "HideOption":
                         HideOption = bool.Parse(item[key].ToString());

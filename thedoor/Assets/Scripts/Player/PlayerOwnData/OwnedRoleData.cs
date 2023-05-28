@@ -97,7 +97,7 @@ namespace TheDoor.Main {
                 var supplyData = SupplyData.GetData(a.ID);
                 if (!supplyData.BelongTiming(_containTimings))
                     return false;
-                if (supplyData.ContainTags(_exclusiveTags))
+                if (_exclusiveTags != null && supplyData.ContainTags(_exclusiveTags))
                     return false;
                 return true;
             });

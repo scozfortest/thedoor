@@ -147,15 +147,17 @@ namespace TheDoor.Main {
                     case ScriptRequireType.ConsumeSupplyTags:
                         tags = TextManager.GetHashSetFromSplitStr(require.Value, ',');
                         if (tags != null) {
-                            foreach (var ownedData in ownedSupplyDatas) {
-                                var supplyData = SupplyData.GetData(ownedData.ID);
-                                if (supplyData == null) continue;
-                                if (!supplyData.BelongToTags(tags)) continue;
-                                if (require.MyType == ScriptRequireType.UseSupplies)
-                                    ownedData.AddUsage(1);
-                                else if (require.MyType == ScriptRequireType.ConsumeSupplies)
-                                    ownedData.AddUsage(ownedData.Usage);
-                            }
+                            var meetRequireDatas = ownedSupplyDatas.FindAll(a => {
+                                var supplyData = SupplyData.GetData(a.ID);
+                                if (supplyData == null) return false;
+                                if (!supplyData.BelongToTags(tags)) return false;
+                                return true;
+                            });
+                            var rndData = Prob.GetRandomTFromTList(meetRequireDatas);
+                            if (require.MyType == ScriptRequireType.UseSupplies)
+                                rndData.AddUsage(1);
+                            else if (require.MyType == ScriptRequireType.ConsumeSupplies)
+                                rndData.AddUsage(rndData.Usage);
                         }
                         break;
                 }
@@ -288,7 +290,7 @@ namespace TheDoor.Main {
                     } catch (Exception _e) {
                         WriteLog.LogError("Script表的TriggerValue有錯 ID: " + CurScriptData.ID);
                     }
-                    AdventureManager.CallBattle(int.Parse(CurScriptData.EndValue), RewardItems, firstStrike, CurScriptData.NextScript().ID);
+                    AdventureManager.CallBattle(int.Parse(CurScriptData.EndValue), RewardItems, firstStrike, CurScriptData.NextScript()?.ID);
                     return true;
                 case "NextDoor":
 

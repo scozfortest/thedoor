@@ -190,6 +190,7 @@ namespace TheDoor.Main {
             if (Tags == null) return false;
             if (_tags == null) return true;
             foreach (var tag in _tags) {
+                if (tag == "Any") continue;
                 if (!Tags.Contains(tag)) return false;
             }
             return true;
@@ -198,8 +199,10 @@ namespace TheDoor.Main {
         /// 符合一項就會返回true
         /// </summary>
         public bool ContainTags(HashSet<string> _tags) {
+            if (_tags == null) return true;
+            if (_tags.Contains("Any")) return true;
             if (Tags == null) return false;
-            if (_tags == null) return false;
+
             foreach (var tag in _tags) {
                 if (Tags.Contains(tag)) return true;
             }
