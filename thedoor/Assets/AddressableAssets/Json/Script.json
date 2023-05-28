@@ -61,7 +61,7 @@
 	{	"ID":"8a",	"NextIDs":"8a_1",	"HideRequireStr":"True",	"HideOption":"True",	"Requirement1":"TmpValuesIs",	"RequireValue1":"Door1,==,0"},
 	{	"ID":"8b",	"NextIDs":"8b_1",	"HideRequireStr":"True",	"HideOption":"True"},
 	{	"ID":"8c",	"NextIDs":"8c_1",	"HideRequireStr":"True",	"HideOption":"True",	"Requirement1":"TmpValuesIs",	"RequireValue1":"Door3,==,0"},
-	{	"ID":"8a_1",	"NextIDs":"8d",	"TriggerType":"SetTmpValues",	"TriggerValue":"Door1,1"},
+	{	"ID":"8a_1",	"NextIDs":"8d",	"End":"Battle",	"EndValue":"1003",	"TriggerType":"SetTmpValues",	"TriggerValue":"Door1,1"},
 	{	"ID":"8b_1"},
 	{	"ID":"8c_1",	"NextIDs":"8d",	"TriggerType":"SetTmpValues",	"TriggerValue":"Door3,1",	"EffectType1":"SanAttack",	"EffectValue1":"10",	"EffectProb1":"1"},
 	{	"ID":"8d",	"NextIDs":"8a/8b/8c"},

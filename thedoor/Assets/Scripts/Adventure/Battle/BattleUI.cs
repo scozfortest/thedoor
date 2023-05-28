@@ -21,6 +21,7 @@ namespace TheDoor.Main {
 
 
         public static BattleUI Instance { get; private set; }
+        Action BattleEndAC;
 
         public override void Init() {
             base.Init();
@@ -48,23 +49,22 @@ namespace TheDoor.Main {
         }
 
 
-        public void Win() {
+        public void Win(Action _ac) {
             WriteLog.LogColor("玩家勝利", WriteLog.LogType.Battle);
             WinAni.gameObject.SetActive(true);
             WinAni.SetTrigger("Play");
+            BattleEndAC = _ac;
         }
-        public void Lose() {
+        public void Lose(Action _ac) {
             //WriteLog.LogColor("玩家戰敗", WriteLog.LogType.Battle);
             //LoseAni.gameObject.SetActive(true);
             //LoseAni.SetTrigger("Play");
+            BattleEndAC = _ac;
         }
         public void OnWinLoseAniEnd() {
             LoseAni.gameObject.SetActive(false);
             WinAni.gameObject.SetActive(false);
-            if (!AdventureManager.PRole.IsDead)
-                AdventureManager.GoNextDoor();
-            else
-                AdventureManager.GameOver();
+            BattleEndAC?.Invoke();
         }
 
         public static RectTransform GetTargetRectTrans(Role _role) {

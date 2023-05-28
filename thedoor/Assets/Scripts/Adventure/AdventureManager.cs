@@ -66,7 +66,7 @@ namespace TheDoor.Main {
                     break;
                 case DoorType.Monster:
                 case DoorType.Boss:
-                    CallBattle(Convert.ToInt32(CurDoorData.Values["MonsterID"]), null, 0);
+                    CallBattle(Convert.ToInt32(CurDoorData.Values["MonsterID"]), null, 0, null);
                     break;
                 default:
                     break;
@@ -82,9 +82,12 @@ namespace TheDoor.Main {
                 effect.OpenTheDoorTrigger();
             }
         }
-        public static void CallBattle(int _monsterID, List<ItemData> _rewardItems, int _firstStrikeValue) {
-            BattleManager.ResetBattle(PRole, _monsterID, _rewardItems, _firstStrikeValue);
-            AdventureUI.Instance.SwitchUI(AdventureUIs.Battle);
+        /// <summary>
+        /// 呼叫戰鬥傳入怪物ID,戰後後獎勵,先攻次數,戰鬥完回來的scriptID(填入""或null代表戰鬥完就開下一道門)
+        /// </summary>
+        public static void CallBattle(int _monsterID, List<ItemData> _rewardItems, int _firstStrikeValue, string _nextScriptID) {
+            BattleManager.ResetBattle(PRole, _monsterID, _rewardItems, _firstStrikeValue, _nextScriptID);
+            AdventureUI.Instance?.SwitchUI(AdventureUIs.Battle);
         }
         public static void GameOver() {
             GameOverUI.Instance.CallTransition(null, StringData.GetUIString("GameOver"), 0, () => {

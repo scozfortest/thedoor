@@ -20,17 +20,18 @@ namespace TheDoor.Main {
 
         static PlayerAction CurPlayerAction;//玩家要執行的行動
         public static int FirstStrikeValue { get; private set; } = 0;//>0代表玩家先攻 <0代表敵方先攻
-
+        public static string NextScriptID { get; private set; }//戰鬥結束後呼叫的ScriptID
 
 
         public void Init() {
             Instance = this;
         }
-        public static void ResetBattle(PlayerRole _pRole, int _monsterID, List<ItemData> _rewardDatas, int _firstStrikeValue) {
+        public static void ResetBattle(PlayerRole _pRole, int _monsterID, List<ItemData> _rewardDatas, int _firstStrikeValue, string _nextScriptID) {
             AdventureManager.MyState = AdvState.Battle;
             RewardItems = _rewardDatas;
             PRole = _pRole;
             FirstStrikeValue = _firstStrikeValue;
+            NextScriptID = _nextScriptID;
             SetEnemyRole(_monsterID);
             TimelineBattleUI.Instance.ResetBattleUI(ERole.Actions);
             CurBattleState = BattleState.PlayerTurn;
@@ -152,12 +153,25 @@ namespace TheDoor.Main {
             PRole.RemoveAffertBattle();//移除戰鬥類型狀態
             CurBattleState = BattleState.End;
             if (PRole.IsDead)
-                BattleUI.Instance.Lose();
+                BattleUI.Instance.Lose(EndBattle);
             else if (ERole.IsDead) {
-                GetReward(() => {
-                    BattleUI.Instance.Win();
+                BattleUI.Instance.Win(() => {
+                    GetReward(() => {
+                        EndBattle();
+                    });
                 });
             }
+        }
+        static void EndBattle() {
+            if (!AdventureManager.PRole.IsDead) {
+                if (string.IsNullOrEmpty(NextScriptID)) AdventureManager.GoNextDoor();
+                else {
+                    var scriptData = ScriptData.GetData(NextScriptID);
+                    var scriptUI = ScriptUI.Instance;
+                    scriptUI.LoadScript(scriptData, false);
+                    AdventureUI.Instance?.SwitchUI(AdventureUIs.Script);
+                }
+            } else AdventureManager.GameOver();
         }
         /// <summary>
         /// 勝利才有的獎勵

@@ -30,8 +30,12 @@ namespace TheDoor.Main {
         }
 
         public void LoadScript(string _title, bool _resetTmpValues) {
-            AdventureManager.MyState = AdvState.Script;
             CurScriptData = ScriptData.GetScriptByTitle(_title);
+            LoadScript(ScriptData.GetScriptByTitle(_title), _resetTmpValues);
+        }
+        public void LoadScript(ScriptData _data, bool _resetTmpValues) {
+            AdventureManager.MyState = AdvState.Script;
+            CurScriptData = _data;
             if (_resetTmpValues) TmpValueDic.Clear();
             DoScriptThings(CurScriptData);
             RefreshUI();
@@ -284,11 +288,10 @@ namespace TheDoor.Main {
                     } catch (Exception _e) {
                         WriteLog.LogError("Script表的TriggerValue有錯 ID: " + CurScriptData.ID);
                     }
-                    AdventureManager.CallBattle(int.Parse(CurScriptData.EndValue), RewardItems, firstStrike);
-                    AdventureUI.Instance?.SwitchUI(AdventureUIs.Battle);
+                    AdventureManager.CallBattle(int.Parse(CurScriptData.EndValue), RewardItems, firstStrike, CurScriptData.NextScript().ID);
                     return true;
                 case "NextDoor":
-                    AdventureUI.Instance?.SwitchUI(AdventureUIs.Battle);
+
                     return true;
                 case "NextScript":
                     if (!string.IsNullOrEmpty(CurScriptData.EndValue)) LoadScript(CurScriptData.EndValue, false);
