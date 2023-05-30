@@ -46,6 +46,9 @@ namespace Scoz.Func {
         public void OnModifySanP(int _value) {
             AdventureManager.PRole.AddSanP(_value);
         }
+        public void ClearLocoData() {
+            PlayerPrefs.DeleteAll();
+        }
 
     }
 }

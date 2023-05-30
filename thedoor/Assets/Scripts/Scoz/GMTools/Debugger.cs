@@ -105,9 +105,5 @@ namespace Scoz.Func {
                 InfoRefreshTimer.RunTimer();
         }
 
-        public void ClearLocoData() {
-            PlayerPrefs.DeleteAll();
-        }
-
     }
 }
