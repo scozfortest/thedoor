@@ -38,7 +38,7 @@ namespace Scoz.Func
                 }
                 else
                 {
-                    DebugLogger.LogWarning("¤£¦s¦bªº­µÀÉ:" + _name);
+                    WriteLog.LogWarning("ä¸å­˜åœ¨çš„éŸ³æª”:" + _name);
                     return;
                 }
             });

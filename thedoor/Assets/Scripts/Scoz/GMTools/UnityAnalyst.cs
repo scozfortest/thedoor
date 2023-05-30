@@ -5,60 +5,52 @@ using UnityEngine.Analytics;
 using Scoz.Func;
 
 
-public class UnityAnalyst : MonoBehaviour
-{
+public class UnityAnalyst : MonoBehaviour {
     public static bool CnaSendAnalysis = false;
     public static bool ShowLog = false;
-    public static void SendEnterGame()
-    {
+    public static void SendEnterGame() {
         if (ShowLog)
             WriteLog.Log("Analysis-SendEnterGame");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("EnterGame");
     }
-    public static void SendStartGame()
-    {
+    public static void SendStartGame() {
         if (ShowLog)
             WriteLog.Log("Analysis-SendStartGame");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("StartGame");
     }
-    public static void SendStartChallenge()
-    {
+    public static void SendStartChallenge() {
         if (ShowLog)
             WriteLog.Log("Analysis-SendStartChallenge");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("SendStartChallenge");
     }
-    public static void SendLeaveRoom()
-    {
+    public static void SendLeaveRoom() {
         if (ShowLog)
             WriteLog.Log("Analysis-SendLeaveRoom");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("LeaveRoom");
     }
-    public static void SendDisconnected()
-    {
+    public static void SendDisconnected() {
         if (ShowLog)
             WriteLog.Log("Analysis-Disconnected");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("Disconnected");
     }
-    public static void SendWatchTutorial()
-    {
+    public static void SendWatchTutorial() {
         if (ShowLog)
             WriteLog.Log("Analysis-SendWatchTutorial");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("WatchTutorial");
     }
-    public static void SendChangeLanguage(Language _language)
-    {
+    public static void SendChangeLanguage(Language _language) {
         if (ShowLog)
             WriteLog.Log("Analysis-SendChangeLanguage");
         if (!CnaSendAnalysis)
@@ -68,8 +60,7 @@ public class UnityAnalyst : MonoBehaviour
             { "language", _language.ToString() }
         });
     }
-    public static void SendPlayerLogin(string _name)
-    {
+    public static void SendPlayerLogin(string _name) {
         if (ShowLog)
             WriteLog.Log("Analysis-SendPlayerLogin");
         if (!CnaSendAnalysis)
@@ -79,16 +70,14 @@ public class UnityAnalyst : MonoBehaviour
             { "name", _name }
         });
     }
-    public static void SendClickFullScreen()
-    {
+    public static void SendClickFullScreen() {
         if (ShowLog)
             WriteLog.Log("Analysis-SendClickFullScreen");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("ClickFullScreen");
     }
-    public static void SendMatchResult(int _level, int _kill, int _star, int _survivalTime)
-    {
+    public static void SendMatchResult(int _level, int _kill, int _star, int _survivalTime) {
         if (ShowLog)
             WriteLog.Log("Analysis-SendMatchResult");
         if (!CnaSendAnalysis)
@@ -101,8 +90,7 @@ public class UnityAnalyst : MonoBehaviour
             { "survivalTime(s)", _survivalTime }
         });
     }
-    public static void SendPurchaseRevive(string _buyer, int _kreds)
-    {
+    public static void SendPurchaseRevive(string _buyer, int _kreds) {
         if (ShowLog)
             WriteLog.Log("Analysis-SendPurchaseRevive");
         if (!CnaSendAnalysis)
@@ -113,8 +101,7 @@ public class UnityAnalyst : MonoBehaviour
             { "cost", _kreds }
         });
     }
-    public static void SendPurchasePremium(string _buyer, int _kreds)
-    {
+    public static void SendPurchasePremium(string _buyer, int _kreds) {
         if (ShowLog)
             WriteLog.Log("Analysis-SendPurchasePremium");
         if (!CnaSendAnalysis)
@@ -125,8 +112,7 @@ public class UnityAnalyst : MonoBehaviour
             { "cost", _kreds }
         });
     }
-    public static void SendPurchaseStarItem(string _buyer, int _itemID, int _stars)
-    {
+    public static void SendPurchaseStarItem(string _buyer, int _itemID, int _stars) {
         if (ShowLog)
             WriteLog.Log("Analysis-SendPurchaseStarItem");
         if (!CnaSendAnalysis)
@@ -138,8 +124,7 @@ public class UnityAnalyst : MonoBehaviour
             { "cost", _stars }
         });
     }
-    public static void SendPurchaseKredItem(string _buyer, int _itemID, int _kreds)
-    {
+    public static void SendPurchaseKredItem(string _buyer, int _itemID, int _kreds) {
         if (ShowLog)
             WriteLog.Log("Analysis-SendPurchaseKredItem");
         if (!CnaSendAnalysis)
@@ -151,8 +136,7 @@ public class UnityAnalyst : MonoBehaviour
             { "cost", _kreds }
         });
     }
-    public static void SendPurchaseStarClamor(string _buyer, int _clamorID, int _stars)
-    {
+    public static void SendPurchaseStarClamor(string _buyer, int _clamorID, int _stars) {
         if (ShowLog)
             WriteLog.Log("Analysis-SendPurchaseStarClamor");
         if (!CnaSendAnalysis)
@@ -164,8 +148,7 @@ public class UnityAnalyst : MonoBehaviour
             { "cost", _stars }
         });
     }
-    public static void SendPurchaseKredClamor(string _buyer, int _clamorID, int _kreds)
-    {
+    public static void SendPurchaseKredClamor(string _buyer, int _clamorID, int _kreds) {
         if (ShowLog)
             WriteLog.Log("Analysis-SendPurchaseKredClamor");
         if (!CnaSendAnalysis)
@@ -177,8 +160,7 @@ public class UnityAnalyst : MonoBehaviour
             { "cost", _kreds }
         });
     }
-    public static void SendRegion(string _region, int _ping)
-    {
+    public static void SendRegion(string _region, int _ping) {
         if (ShowLog)
             WriteLog.Log("Analysis-SendRegion");
         if (!CnaSendAnalysis)
@@ -192,7 +174,7 @@ public class UnityAnalyst : MonoBehaviour
     /*做不到，因為網頁可以按X關閉網頁，所以不可能知道玩家玩多久
     public static void SendPlayInfo(double _playTime, int _playTimes, int _kill, int _die, int _gainStar, int _saveClamorTimes)
     {
-        DebugLogger.Log("Analysis-SendPlayInfo");
+        WriteLog.Log("Analysis-SendPlayInfo");
         if (!CnaSendAnalysis)
             return;
         Analytics.CustomEvent("PlayInfo", new Dictionary<string, object>

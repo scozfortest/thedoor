@@ -341,7 +341,7 @@ public class GoogleAdsManager : MonoSingletonA<GoogleAdsManager> {
             StartIoAdsManager.Inst.ShowStartIoAd((isWatchAdSucces, adsResultMessage) => {
                 // 看廣告成功
                 if (isWatchAdSucces) {
-                    DebugLogger.Log($"[StartIoAdsManager] 看StartIoAds影片成功");
+                    WriteLog.Log($"[StartIoAdsManager] 看StartIoAds影片成功");
                     OnShowGoogleAds?.Invoke(true, AdsResultMessage.StartIoAdsWatchSuccess);
                     ActionAfterUserWatchAdSuccess();
                     OnShowGoogleAds = null;

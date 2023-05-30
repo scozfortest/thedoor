@@ -15,10 +15,11 @@ Obj/
 Logs/
 UnityGenerated/
 Assets/AssetStoreTools*
-PCBuild/
-AndroidBuild/
-WebBuild/
 ServerData/
+Build_Standalone/
+Build_Andoird/
+Build_WebGL/
+Build_IOS/
 
 
 

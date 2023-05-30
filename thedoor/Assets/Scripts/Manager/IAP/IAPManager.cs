@@ -125,7 +125,7 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
     //    }
     //    catch (Exception exception) {
     //        // An error occurred during initialization.
-    //        DebugLogger.LogError("InitUnityGameServicesSuccess Fail!!!");
+    //        WriteLog.LogError("InitUnityGameServicesSuccess Fail!!!");
     //    }
     //}
 
@@ -202,27 +202,27 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
                             string intro_json = (introductory_info_dict == null || !introductory_info_dict.ContainsKey(item.definition.storeSpecificId)) ? null : introductory_info_dict[item.definition.storeSpecificId];
                             SubscriptionManager p = new SubscriptionManager(item, intro_json);
                             SubscriptionInfo info = p.getSubscriptionInfo();
-                            DebugLogger.Log("product id is: " + info.getProductId());
-                            DebugLogger.Log("purchase date is: " + info.getPurchaseDate());
-                            DebugLogger.Log("subscription next billing date is: " + info.getExpireDate());
-                            DebugLogger.Log("is subscribed? " + info.isSubscribed().ToString());
-                            DebugLogger.Log("is expired? " + info.isExpired().ToString());
-                            DebugLogger.Log("is cancelled? " + info.isCancelled());
-                            DebugLogger.Log("product is in free trial peroid? " + info.isFreeTrial());
-                            DebugLogger.Log("product is auto renewing? " + info.isAutoRenewing());
-                            DebugLogger.Log("subscription remaining valid time until next billing date is: " + info.getRemainingTime());
-                            DebugLogger.Log("is this product in introductory price period? " + info.isIntroductoryPricePeriod());
-                            DebugLogger.Log("the product introductory localized price is: " + info.getIntroductoryPrice());
-                            DebugLogger.Log("the product introductory price period is: " + info.getIntroductoryPricePeriod());
-                            DebugLogger.Log("the number of product introductory price period cycles is: " + info.getIntroductoryPricePeriodCycles());
+                            WriteLog.Log("product id is: " + info.getProductId());
+                            WriteLog.Log("purchase date is: " + info.getPurchaseDate());
+                            WriteLog.Log("subscription next billing date is: " + info.getExpireDate());
+                            WriteLog.Log("is subscribed? " + info.isSubscribed().ToString());
+                            WriteLog.Log("is expired? " + info.isExpired().ToString());
+                            WriteLog.Log("is cancelled? " + info.isCancelled());
+                            WriteLog.Log("product is in free trial peroid? " + info.isFreeTrial());
+                            WriteLog.Log("product is auto renewing? " + info.isAutoRenewing());
+                            WriteLog.Log("subscription remaining valid time until next billing date is: " + info.getRemainingTime());
+                            WriteLog.Log("is this product in introductory price period? " + info.isIntroductoryPricePeriod());
+                            WriteLog.Log("the product introductory localized price is: " + info.getIntroductoryPrice());
+                            WriteLog.Log("the product introductory price period is: " + info.getIntroductoryPricePeriod());
+                            WriteLog.Log("the number of product introductory price period cycles is: " + info.getIntroductoryPricePeriodCycles());
                         } else {
-                            DebugLogger.Log("This product is not available for SubscriptionManager class, only products that are purchase by 1.19+ SDK can use this class.");
+                            WriteLog.Log("This product is not available for SubscriptionManager class, only products that are purchase by 1.19+ SDK can use this class.");
                         }
                     } else {
-                        DebugLogger.Log("the product is not a subscription product");
+                        WriteLog.Log("the product is not a subscription product");
                     }
                 } else {
-                    DebugLogger.Log("the product should have a valid receipt");
+                    WriteLog.Log("the product should have a valid receipt");
                 }
 #endif
             }
@@ -287,7 +287,7 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
     /// </summary>
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs e) {
         //if (!e.purchasedProduct.hasReceipt) {
-        //    DebugLogger.Log("沒有請求");
+        //    WriteLog.Log("沒有請求");
         //    return PurchaseProcessingResult.Complete;
         //}
         WriteLog.Log("請求 = " + e.purchasedProduct.hasReceipt);
@@ -313,48 +313,48 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
             try
             {
                 var result = Validator.Validate(e.purchasedProduct.receipt);
-                DebugLogger.Log("Receipt is valid. Contents:");
+                WriteLog.Log("Receipt is valid. Contents:");
                 foreach (IPurchaseReceipt productReceipt in result)
                 {
-                    DebugLogger.Log($"productID={productReceipt.productID}");
-                    DebugLogger.Log($"purchaseDate_Short={productReceipt.purchaseDate.ToShortDateString()}");
-                    DebugLogger.Log($"transactionID={productReceipt.transactionID}");
+                    WriteLog.Log($"productID={productReceipt.productID}");
+                    WriteLog.Log($"purchaseDate_Short={productReceipt.purchaseDate.ToShortDateString()}");
+                    WriteLog.Log($"transactionID={productReceipt.transactionID}");
 
                     string receipt = "";                                             
                     if (productReceipt is GooglePlayReceipt google)
                     {
-                        DebugLogger.Log($"purchaseState={google.purchaseState.ToString()}");
-                        DebugLogger.Log($"purchaseToken={google.purchaseToken}");
+                        WriteLog.Log($"purchaseState={google.purchaseState.ToString()}");
+                        WriteLog.Log($"purchaseToken={google.purchaseToken}");
                         receipt = e.purchasedProduct.receipt;
-                        DebugLogger.Log($"receipt={receipt}");
+                        WriteLog.Log($"receipt={receipt}");
                     }
 
                     if (productReceipt is AppleInAppPurchaseReceipt apple)
                     {
-                        DebugLogger.Log($"originalTransactionIdentifier={apple.originalTransactionIdentifier}");
-                        DebugLogger.Log($"subscriptionExpirationDate_Short={apple.subscriptionExpirationDate.ToShortDateString()}");
-                        DebugLogger.Log($"cancellationDate_Short={apple.cancellationDate.ToShortDateString()}");
-                        DebugLogger.Log($"quantity={apple.quantity.ToString()}");
+                        WriteLog.Log($"originalTransactionIdentifier={apple.originalTransactionIdentifier}");
+                        WriteLog.Log($"subscriptionExpirationDate_Short={apple.subscriptionExpirationDate.ToShortDateString()}");
+                        WriteLog.Log($"cancellationDate_Short={apple.cancellationDate.ToShortDateString()}");
+                        WriteLog.Log($"quantity={apple.quantity.ToString()}");
                         
                         AppleReceipt appleReceipt = JsonUtility.FromJson<AppleReceipt>(e.purchasedProduct.receipt);
                         receipt = appleReceipt.Payload;
-                        DebugLogger.Log($"Payload={receipt}");
+                        WriteLog.Log($"Payload={receipt}");
                     }
 
                     // For improved security, consider comparing the signed
                     // IPurchaseReceipt.productId, IPurchaseReceipt.transactionID, and other data
                     // embedded in the signed receipt objects to the data which the game is using
                     // to make this purchase.
-                    DebugLogger.Log("開始驗證訂單 發送物品");
+                    WriteLog.Log("開始驗證訂單 發送物品");
                     OnPurchaseItemSuccess?.Invoke(productReceipt.productID, ShopUID, productReceipt, receipt, ConfirmPendingPurchase);
-                    //DebugLogger.Log("Purchase Success!");
-                    //DebugLogger.Log("LastTransationID=" + LastTransationID);
+                    //WriteLog.Log("Purchase Success!");
+                    //WriteLog.Log("LastTransationID=" + LastTransationID);
                     OnPurchaseItemSuccess = null;
                 }
             }
             catch (IAPSecurityException ex)
             {
-                DebugLogger.LogError("Invalid receipt, not unlocking content. " + ex);
+                WriteLog.LogError("Invalid receipt, not unlocking content. " + ex);
                 OnPurchaseItemFail?.Invoke(ShopUID);
                 OnPurchaseItemFail = null;
                 return PurchaseProcessingResult.Complete;
@@ -365,10 +365,10 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
         {
             if (OnPurchaseItemSuccess != null)
             {
-                DebugLogger.Log("訂單完成???");
+                WriteLog.Log("訂單完成???");
                 OnPurchaseItemSuccess(e.purchasedProduct.definition.id, ShopUID, null, string.Empty, null);
-                DebugLogger.Log("Purchase Success!");
-                DebugLogger.Log("LastTransationID=" + LastTransationID);
+                WriteLog.Log("Purchase Success!");
+                WriteLog.Log("LastTransationID=" + LastTransationID);
                 OnPurchaseItemSuccess = null;
             }
         }
@@ -448,7 +448,7 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
         GamePlayer.Instance.MyHistoryData.SetBougthShopUID(ShopUID);
         return PurchaseProcessingResult.Pending;
 #else
-        DebugLogger.Log("IAP Complete Add m_PendingProductsList");
+        WriteLog.Log("IAP Complete Add m_PendingProductsList");
         return PurchaseProcessingResult.Complete;
 #endif
     }
@@ -498,7 +498,7 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
             //                AppsFlyerManager.Inst.PurchaseIAP(purchaseData.MyItemData.Type.ToString(), id, purchaseData.Price.ToString(), purchaseData.MyItemData.Value.ToString(), currency, product.transactionID);
             //            } 
             //            else {
-            //                DebugLogger.LogWarning($"[ConfirmPendingPurchase] purchaseData=Null id={id}");
+            //                WriteLog.LogWarning($"[ConfirmPendingPurchase] purchaseData=Null id={id}");
             //            }           
             //#endif
         }
@@ -610,7 +610,7 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
         // On iOS and tvOS we can intercept promotional purchases that come directly from the App Store.
         // On other platforms this will have no effect; OnPromotionalPurchase will never be called.
         builder.Configure<IAppleConfiguration>().SetApplePromotionalPurchaseInterceptorCallback(OnPromotionalPurchase);
-        DebugLogger.Log("Setting Apple promotional purchase interceptor callback");
+        WriteLog.Log("Setting Apple promotional purchase interceptor callback");
 #endif
 
 #if RECEIPT_VALIDATION
@@ -623,7 +623,7 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
             appIdentifier = Application.bundleIdentifier;
 #endif
             Validator = new CrossPlatformValidator(GooglePlayTangle.Data(), AppleTangle.Data(), appIdentifier);
-            DebugLogger.LogWarning($"[IAP Initialize] Validator={Validator}");
+            WriteLog.LogWarning($"[IAP Initialize] Validator={Validator}");
         }
 #endif
 
@@ -659,7 +659,7 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
 
 #if INTERCEPT_PROMOTIONAL_PURCHASES
     private void OnPromotionalPurchase(Product item) {
-        DebugLogger.Log("Attempted promotional purchase: " + item.definition.id);
+        WriteLog.Log("Attempted promotional purchase: " + item.definition.id);
 
         // Promotional purchase has been detected. Handle this event by, e.g. presenting a parental gate.
         // Here, for demonstration purposes only, we will wait five seconds before continuing the purchase.
@@ -668,9 +668,9 @@ public class IAPManager : MonoSingletonA<IAPManager>, IIAPManager {
 
     private IEnumerator ContinuePromotionalPurchases()
     {
-        DebugLogger.Log("Continuing promotional purchases in 5 seconds");
+        WriteLog.Log("Continuing promotional purchases in 5 seconds");
         yield return new WaitForSeconds(5);
-        DebugLogger.Log("Continuing promotional purchases now");
+        WriteLog.Log("Continuing promotional purchases now");
         AppleExtensions.ContinuePromotionalPurchases (); // iOS and tvOS only; does nothing on Mac
     }
 #endif

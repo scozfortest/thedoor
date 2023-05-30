@@ -160,9 +160,9 @@ namespace TheDoor.Main {
                 PopupUI.HideLoading();
             }
 #else
-                    FirebaseManager.Purchase(purchaseData.UID, null, obj => {
-                        _cb?.Invoke(obj);
-                    });
+            FirebaseManager.Purchase(purchaseData.UID, null, obj => {
+                _cb?.Invoke(obj);
+            });
 #endif
         }
 
@@ -302,7 +302,7 @@ namespace TheDoor.Main {
                         });
                     }
                 }
-                DebugLogger.Log($"isWatchSuccess={isWatchSuccess}, Watch Ad Success or Fail Result={result.ToString()}");
+                WriteLog.Log($"isWatchSuccess={isWatchSuccess}, Watch Ad Success or Fail Result={result.ToString()}");
             });
 #endif
 

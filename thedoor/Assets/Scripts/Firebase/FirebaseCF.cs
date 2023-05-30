@@ -488,13 +488,13 @@ namespace TheDoor.Main {
             function.CallAsync(null).ContinueWithOnMainThread(task => {
                 try {
                     if (task.IsFaulted) {
-                        DebugLogger.LogError("Error:" + task.Exception.ToString());
+                        WriteLog.LogError("Error:" + task.Exception.ToString());
                         return;
                     } else {
                         Debug.LogError("成功");
                     }
                 } catch (Exception _e) {
-                    DebugLogger.LogError(_e);
+                    WriteLog.LogError(_e);
                 }
             });
         }

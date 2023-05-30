@@ -163,7 +163,7 @@ namespace TheDoor.Main {
                         } catch (Exception _e) {
                             WriteLog.LogErrorFormat(DataName + "表格格式錯誤 ID:" + ID + "    Log: " + _e);
                         }
-                        //DebugLogger.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));
+                        //WriteLog.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));
                         break;
                 }
             }

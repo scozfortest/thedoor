@@ -35,7 +35,7 @@ namespace TheDoor.Main {
                 _cb?.Invoke(LocalSpriteDic[_path]);
             } else {
                 if (IOManager.CheckFileExist(_path)) {
-                    //DebugLogger.Log("取本機圖片:" + _path);
+                    //WriteLog.Log("取本機圖片:" + _path);
                     Sprite s = IOManager.LoadSprite(_path);
                     _cb?.Invoke(s);
                     return;

@@ -16,7 +16,7 @@ namespace Scoz.Func {
                         _cb?.Invoke(handle.Result);
                         break;
                     default:
-                        // DebugLogger.LogError("讀取資源失敗:" + _path);
+                        // WriteLog.LogError("讀取資源失敗:" + _path);
                         break;
                 }
             };
@@ -90,7 +90,7 @@ namespace Scoz.Func {
                         Addressables.Release(handle);
                         break;
                     default:
-                        //DebugLogger.LogError("讀取資源失敗:" + _path);
+                        //WriteLog.LogError("讀取資源失敗:" + _path);
                         break;
                 }
                 //Addressables.Release(handle);
@@ -113,7 +113,7 @@ namespace Scoz.Func {
                             }
                             break;
                         default:
-                            // DebugLogger.LogError("讀取資源失敗:" + _path);
+                            // WriteLog.LogError("讀取資源失敗:" + _path);
                             break;
                     }
                     //Addressables.Release(handle);
@@ -136,10 +136,10 @@ namespace Scoz.Func {
                     switch (handle.Status) {
                         case AsyncOperationStatus.Succeeded:
                             _cb?.Invoke(handle.Result);
-                            //DebugLogger.Log("讀取Atlas成功:"+_path);
+                            //WriteLog.Log("讀取Atlas成功:"+_path);
                             break;
                         default:
-                            // DebugLogger.LogError("讀取資源失敗:" + _path);
+                            // WriteLog.LogError("讀取資源失敗:" + _path);
                             break;
                     }
                     //Addressables.Release(handle);
@@ -158,7 +158,7 @@ namespace Scoz.Func {
                         _cb?.Invoke(handle.Result, handle);
                         break;
                     default:
-                        // DebugLogger.LogError("讀取資源失敗:" + _path);
+                        // WriteLog.LogError("讀取資源失敗:" + _path);
                         break;
                 }
             };
@@ -175,7 +175,7 @@ namespace Scoz.Func {
                         _cb?.Invoke(handle.Result, handle);
                         break;
                     default:
-                        // DebugLogger.LogError("讀取資源失敗:" + _path);
+                        // WriteLog.LogError("讀取資源失敗:" + _path);
                         break;
                 }
             };
@@ -193,7 +193,7 @@ namespace Scoz.Func {
                         _cb?.Invoke(handle.Result, handle);
                         break;
                     default:
-                        // DebugLogger.LogError("讀取資源失敗:" + _path);
+                        // WriteLog.LogError("讀取資源失敗:" + _path);
                         break;
                 }
             };
@@ -297,7 +297,7 @@ namespace Scoz.Func {
                         _cb?.Invoke(handle.Result);
                         break;
                     default:
-                        // DebugLogger.LogError("讀取資源失敗:" + _path);
+                        // WriteLog.LogError("讀取資源失敗:" + _path);
                         break;
                 }
                 //Addressables.Release(handle);
@@ -319,7 +319,7 @@ namespace Scoz.Func {
                         _cb?.Invoke(handle.Result);
                         break;
                     default:
-                        // DebugLogger.LogError("讀取資源失敗:" + _path);
+                        // WriteLog.LogError("讀取資源失敗:" + _path);
                         break;
                 }
                 //Addressables.Release(handle);

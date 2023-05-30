@@ -18,7 +18,7 @@ namespace Scoz.Func {
 
         public static PopupUI_Local CreateNewInstance() {
             if (Instance != null) {
-                //DebugLogger.Log("GameDictionary之前已經被建立了");
+                //WriteLog.Log("GameDictionary之前已經被建立了");
             } else {
                 GameObject prefab = Resources.Load<GameObject>("Prefabs/Common/PopupUI_Local");
                 GameObject go = Instantiate(prefab);

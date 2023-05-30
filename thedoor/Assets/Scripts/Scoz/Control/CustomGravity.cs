@@ -14,7 +14,7 @@ namespace Scoz.Func {
             GravityScale = 1.0f;
             for (int i = 0; i < _scales.Length; i++)
                 GravityScale += _scales[i];
-            //DebugLogger.LogError("GravityScale=" + GravityScale);
+            //WriteLog.LogError("GravityScale=" + GravityScale);
         }
 
         void OnEnable() {

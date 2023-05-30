@@ -61,7 +61,7 @@ namespace TheDoor.Main {
             }
             /*
             for (int i = 0; i < items.Count; i++) {
-                DebugLogger.LogError(items[i].Type + " : " + items[i].Value);
+                WriteLog.LogError(items[i].Type + " : " + items[i].Value);
             }
             */
             return items;

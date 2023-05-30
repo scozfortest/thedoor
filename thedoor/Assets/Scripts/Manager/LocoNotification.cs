@@ -65,7 +65,7 @@ namespace TheDoor.Main {
             DateTime time = _callTime.AddHours(GameManager.Instance.LocoHourOffsetToServer).AddSeconds(60);//晚60秒，因為玩家在線收到來電要移除推播，晚點收到推播才來得及移除
             TimeSpan offsetFromNow = (time - DateTime.Now);
             time = DateTime.Now.AddSeconds(offsetFromNow.TotalSeconds);
-            //DebugLogger.LogError("腳色ID=" + roleData.ID + "的推播 時間: " + time);
+            //WriteLog.LogError("腳色ID=" + roleData.ID + "的推播 時間: " + time);
             string title = "title";
             string content = "content";
 
@@ -129,7 +129,7 @@ namespace TheDoor.Main {
                 if (GameManager.Instance.NowTime > _callTimes[i]) continue;
                 RoleData roleData = RoleData.GetData(_roleIDs[i]);
                 DateTime time = _callTimes[i].AddHours(GameManager.Instance.LocoHourOffsetToServer).AddSeconds(60);//晚60秒，因為玩家在線收到來電要移除推播，晚點收到推播才來得及移除
-                //DebugLogger.Log("腳色ID=" + roleData.ID + "的推播 時間: " + time);
+                //WriteLog.Log("腳色ID=" + roleData.ID + "的推播 時間: " + time);
                 string title = roleData.NotificationTitle;
                 string content = roleData.NotificationContent;
                 SendNotification_IOS(categoryID, title, content, time);

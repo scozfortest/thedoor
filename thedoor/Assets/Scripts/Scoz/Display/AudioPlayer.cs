@@ -32,7 +32,7 @@ namespace Scoz.Func {
 
         public static AudioPlayer CreateNewAudioPlayer() {
             if (Instance != null) {
-                //DebugLogger.Log("AudioPlayer之前已經被建立了");
+                //WriteLog.Log("AudioPlayer之前已經被建立了");
             } else {
                 GameObject prefab = Resources.Load<GameObject>("Prefabs/Common/AudioPlayer");
                 GameObject go = Instantiate(prefab);
@@ -440,7 +440,7 @@ namespace Scoz.Func {
             }
             else
             {
-                DebugLogger.LogWarning("不存在的音檔:" + string.Format("{0}/{1}", _type, _name));
+                WriteLog.LogWarning("不存在的音檔:" + string.Format("{0}/{1}", _type, _name));
             }
         }
         public void PlaySoundByString(string _name)

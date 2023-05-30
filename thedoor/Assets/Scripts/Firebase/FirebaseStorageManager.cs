@@ -13,7 +13,7 @@ namespace TheDoor.Main {
 
 
         public static void UploadFile(byte[] _bytes, string _cloudPath) {
-            //DebugLogger.Log(_cloudPath);
+            //WriteLog.Log(_cloudPath);
             StorageReference storageRef = FirebaseStorage.DefaultInstance.RootReference;
             // Create a reference to the file you want to upload
             StorageReference cloudRef = storageRef.Child(_cloudPath);
@@ -29,8 +29,8 @@ namespace TheDoor.Main {
                         // Metadata contains file metadata such as size, content-type, and download URL.
                         //StorageMetadata metadata = task.Result;
                         //string md5Hash = metadata.Md5Hash;
-                        //DebugLogger.Log("Finished uploading:" + _cloudPath);
-                        //DebugLogger.Log("md5 hash = " + md5Hash);
+                        //WriteLog.Log("Finished uploading:" + _cloudPath);
+                        //WriteLog.Log("md5 hash = " + md5Hash);
                     }
                 });
         }

@@ -96,7 +96,7 @@ public class AppsFlyerManager : MonoSingletonA<AppsFlyerManager> {
 
 #elif UNITY_ANDROID
         public void OnTokenReceived(object sender, TokenReceivedEventArgs token) {
-            DebugLogger.Log("Received Registration Token: " + token.Token);
+            WriteLog.Log("Received Registration Token: " + token.Token);
             AppsFlyer.updateServerUninstallToken(token.Token);
         }
 #endif
@@ -111,9 +111,9 @@ public class AppsFlyerManager : MonoSingletonA<AppsFlyerManager> {
     /// <param name="eventValue"></param>
     public void SendEvent(string eventName, Dictionary<string, string> eventValue) {
 #if !UNITY_EDITOR
-        DebugLogger.Log($"AppsFlyer SendEvent eventName={eventName}");
+        WriteLog.Log($"AppsFlyer SendEvent eventName={eventName}");
         foreach (var pair in eventValue) {
-            DebugLogger.Log($"eventValue key={pair.Key}, value={pair.Value}");
+            WriteLog.Log($"eventValue key={pair.Key}, value={pair.Value}");
         }
         AppsFlyer.sendEvent(eventName, eventValue);
 #endif
@@ -138,7 +138,7 @@ public class AppsFlyerManager : MonoSingletonA<AppsFlyerManager> {
             {AFInAppEvents.CURRENCY, currency},
             {AFInAppEvents.RECEIPT_ID, transactionID}
         });
-        DebugLogger.Log($"[AppsFlyer][PurchaseIAP] purchaseType={purchaseType}, productID={productID}, price={price}, quantity={quantity}, currency={currency}, transactionID={transactionID}");
+        WriteLog.Log($"[AppsFlyer][PurchaseIAP] purchaseType={purchaseType}, productID={productID}, price={price}, quantity={quantity}, currency={currency}, transactionID={transactionID}");
 #endif
     }
 
@@ -161,7 +161,7 @@ public class AppsFlyerManager : MonoSingletonA<AppsFlyerManager> {
             {AFInAppEvents.PARAM_4, language}
         });
 
-        DebugLogger.Log($"[AppsFlyer][CompleteRegistration] uid={uid}, authType={authType}, language={language}");
+        WriteLog.Log($"[AppsFlyer][CompleteRegistration] uid={uid}, authType={authType}, language={language}");
 #endif
     }
     #endregion
@@ -176,7 +176,7 @@ public class AppsFlyerManager : MonoSingletonA<AppsFlyerManager> {
             {AFInAppEvents.PARAM_1, uid}            
         });
 
-        DebugLogger.Log($"[AppsFlyer][Login] uid={uid}");
+        WriteLog.Log($"[AppsFlyer][Login] uid={uid}");
 #endif
     }
 
@@ -187,13 +187,13 @@ public class AppsFlyerManager : MonoSingletonA<AppsFlyerManager> {
     /// <param name="fromType">廣告點擊的進入點</param>
     public void WatchAdClick(string uid, string fromType) {
 #if !UNITY_EDITOR
-        DebugLogger.Log($"[AppsFlyerManager] Send Event WatchAdClick Done uid={uid} fromType={fromType}");
+        WriteLog.Log($"[AppsFlyerManager] Send Event WatchAdClick Done uid={uid} fromType={fromType}");
         AppsFlyer.sendEvent(AFInAppEvents.AD_CLICK, new Dictionary<string, string>(){
             {AFInAppEvents.PARAM_1, uid},
             {AFInAppEvents.PARAM_2, fromType}
         });
 
-        DebugLogger.Log($"[AppsFlyer][WatchAdClick] uid={uid}, fromType={fromType}");
+        WriteLog.Log($"[AppsFlyer][WatchAdClick] uid={uid}, fromType={fromType}");
 #endif
     }
 
@@ -208,7 +208,7 @@ public class AppsFlyerManager : MonoSingletonA<AppsFlyerManager> {
             {AFInAppEvents.PARAM_2, fromType}
         });
 
-        DebugLogger.Log($"[AppsFlyer][WatchAdDone] uid={uid}");
+        WriteLog.Log($"[AppsFlyer][WatchAdDone] uid={uid}");
 #endif
     }
 
@@ -223,7 +223,7 @@ public class AppsFlyerManager : MonoSingletonA<AppsFlyerManager> {
             {AFInAppEvents.PARAM_2, fromType},
         });
 
-        DebugLogger.Log($"[AppsFlyer][WatchAdShowFail] uid={uid}");
+        WriteLog.Log($"[AppsFlyer][WatchAdShowFail] uid={uid}");
 #endif
     }
 
@@ -234,7 +234,7 @@ public class AppsFlyerManager : MonoSingletonA<AppsFlyerManager> {
     public void SetCustomerUserId(string uid) {
 #if !UNITY_EDITOR
         AppsFlyer.setCustomerUserId(uid);
-        DebugLogger.Log($"[AppsFlyer][SetCustomerUserId] uid={uid}");
+        WriteLog.Log($"[AppsFlyer][SetCustomerUserId] uid={uid}");
 #endif
     }
 

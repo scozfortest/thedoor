@@ -40,7 +40,7 @@ namespace TheDoor.Main {
         ///  傳入觸發時機 若有符合條件的事件就觸發事件
         /// </summary>
         public static void TriggerEventCheck(TriggerEventData.TriggerTiming _timing) {
-            //DebugLogger.LogError("TriggerEventCheck: " + _timing);
+            //WriteLog.LogError("TriggerEventCheck: " + _timing);
             DoEvent(0, _timing);
         }
         /// <summary>

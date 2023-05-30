@@ -52,7 +52,7 @@ namespace Scoz.Func {
             if (Progress.ContainsKey(_loadingKey))
                 Progress[_loadingKey] = true;
             else {
-                //DebugLogger.LogWarning("嘗試完成不存在的LoadingKey:" + _loadingKey);
+                //WriteLog.LogWarning("嘗試完成不存在的LoadingKey:" + _loadingKey);
             }
             if (CheckIfProgressIsFinished()) {
                 IsFinished = true;

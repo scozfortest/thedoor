@@ -17,15 +17,18 @@ namespace Scoz.Func {
 #endif
 
         public static void Vibrate() {
+#if UNITY_IPHONE || UNITY_ANDROID
             if (isAndroid())
                 vibrator.Call("vibrate");
             else
                 Handheld.Vibrate();
+#endif
         }
 
         static FeedbackGenerator NotificationGenerator;
         static FeedbackGenerator SelectGenerator;
         public static void Vibrate(long milliseconds) {
+#if UNITY_IPHONE || UNITY_ANDROID
             if (!GamePlayer.Instance.Vibration) return;//關閉震動就return
             if (isAndroid())
                 vibrator.Call("vibrate", milliseconds);
@@ -44,14 +47,16 @@ namespace Scoz.Func {
                     Handheld.Vibrate();
                 }
             }
-
+#endif
         }
 
         public static void Vibrate(long[] pattern, int repeat) {
+#if UNITY_IPHONE || UNITY_ANDROID
             if (isAndroid())
                 vibrator.Call("vibrate", pattern, repeat);
             else
                 Handheld.Vibrate();
+#endif
         }
 
         public static bool HasVibrator() {

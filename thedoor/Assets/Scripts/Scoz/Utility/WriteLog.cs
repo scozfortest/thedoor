@@ -85,6 +85,13 @@ namespace Scoz.Func {
 		//LogManager.Inst.AddLog(logMsg.ToString(), "", LogType.Error);
 		UnityEngine.Debug.LogError (logMsg);
 	}
+		[Conditional("DEBUG_LOG")]
+        public static void LogColor(string format, LogType _type) {
+            UnityEngine.Debug.Log(TextManager.GetColorText(format, LocColorCodes[_type]));
+        }
+        public static void LogColorFormat(string format, LogType _type, params object[] args) {
+            UnityEngine.Debug.LogFormat(TextManager.GetColorText(format, LocColorCodes[_type]), args);
+        }
 
 	[Conditional("DEBUG_LOG")]
     public static void LogError(object logMsg, UnityEngine.Object context)

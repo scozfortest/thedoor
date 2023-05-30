@@ -27,7 +27,7 @@ namespace Scoz.Func {
 
         public static MyVideoPlayer CreateNewVideoPlayer() {
             if (Instance != null) {
-                //DebugLogger.Log("VideoPlayer之前已經被建立了");
+                //WriteLog.Log("VideoPlayer之前已經被建立了");
             } else {
                 GameObject prefab = Resources.Load<GameObject>("Prefabs/Common/MyVideoPlayer");
                 GameObject go = Instantiate(prefab);
@@ -71,8 +71,8 @@ namespace Scoz.Func {
         public void PlayVideo(VideoClip _vp, bool _showSkip) {
             gameObject.SetActive(true);
             if (SkipBtn != null) SkipBtn.gameObject.SetActive(_showSkip);
-            //DebugLogger.Log("Width=" + _vp.width);
-            //DebugLogger.Log("Height=" + _vp.height);
+            //WriteLog.Log("Width=" + _vp.width);
+            //WriteLog.Log("Height=" + _vp.height);
             IsPlayingVideo = true;
             TheVideoPlayer.source = VideoSource.VideoClip;
             TheVideoPlayer.clip = _vp;
@@ -89,8 +89,8 @@ namespace Scoz.Func {
         public void PlayVideo(string path, bool _showSkip, int width = 1920, int height = 1080) {
             gameObject.SetActive(true);
             if (SkipBtn != null) SkipBtn.gameObject.SetActive(_showSkip);
-            //DebugLogger.Log("Width=" + _vp.width);
-            //DebugLogger.Log("Height=" + _vp.height);
+            //WriteLog.Log("Width=" + _vp.width);
+            //WriteLog.Log("Height=" + _vp.height);
             IsPlayingVideo = true;
             TheVideoPlayer.source = VideoSource.Url;
             TheVideoPlayer.url = Application.streamingAssetsPath + path;
