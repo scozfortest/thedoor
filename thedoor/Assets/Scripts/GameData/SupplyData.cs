@@ -44,7 +44,7 @@ namespace TheDoor.Main {
         public int Time { get; private set; }
         public List<TargetEffectData> MyEffects = new List<TargetEffectData>();//使用道具時觸發效果清單
         public TargetEffectData PassiveEffect { get; private set; }//持有道具時給予的效果
-        HashSet<string> Tags;//道具分類
+        HashSet<string> Tags = new HashSet<string>();//道具分類
         HashSet<Timing> Timings;//使用時機
 
         public enum Timing {
@@ -187,6 +187,7 @@ namespace TheDoor.Main {
         /// 完全符合才會返回true
         /// </summary>
         public bool BelongToTags(HashSet<string> _tags) {
+            if (Tags.Contains("Unarmed")) return false;//身體部位道具(EX. 徒手搏擊) 這不算是道具
             if (Tags == null) return false;
             if (_tags == null) return true;
             foreach (var tag in _tags) {
@@ -199,6 +200,7 @@ namespace TheDoor.Main {
         /// 符合一項就會返回true
         /// </summary>
         public bool ContainTags(HashSet<string> _tags) {
+            if (Tags.Contains("Unarmed")) return false;//身體部位道具(EX. 徒手搏擊) 這不算是道具
             if (_tags == null) return true;
             if (_tags.Contains("Any")) return true;
             if (Tags == null) return false;

@@ -64,6 +64,7 @@ namespace TheDoor.Main {
                 WriteLog.LogColor(Name + "失敗", WriteLog.LogType.Battle);
                 //如果沒成功會跳Miss或Fail
                 DNPManager.Instance.Spawn(DNPManager.DPNType.Fail, 0, BattleUI.GetTargetRectTrans(Target), Vector2.zero);
+                OnDoActionDone();
                 return;
             }
 

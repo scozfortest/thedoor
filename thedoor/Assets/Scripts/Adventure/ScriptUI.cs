@@ -139,7 +139,7 @@ namespace TheDoor.Main {
                                 if (require.MyType == ScriptRequireType.UseSupplies)
                                     ownedData.AddUsage(1);
                                 else if (require.MyType == ScriptRequireType.ConsumeSupplies)
-                                    ownedData.AddUsage(ownedData.Usage);
+                                    ownedData.Consume();
                             }
                         }
                         break;
@@ -150,14 +150,14 @@ namespace TheDoor.Main {
                             var meetRequireDatas = ownedSupplyDatas.FindAll(a => {
                                 var supplyData = SupplyData.GetData(a.ID);
                                 if (supplyData == null) return false;
-                                if (!supplyData.BelongToTags(tags)) return false;
+                                if (!supplyData.ContainTags(tags)) return false;
                                 return true;
                             });
                             var rndData = Prob.GetRandomTFromTList(meetRequireDatas);
-                            if (require.MyType == ScriptRequireType.UseSupplies)
-                                rndData.AddUsage(1);
-                            else if (require.MyType == ScriptRequireType.ConsumeSupplies)
-                                rndData.AddUsage(rndData.Usage);
+                            if (require.MyType == ScriptRequireType.UseSupplyTags)
+                                rndData.AddUsage(-1);
+                            else if (require.MyType == ScriptRequireType.ConsumeSupplyTags)
+                                rndData.Consume();
                         }
                         break;
                 }

@@ -75,7 +75,7 @@
 	{	"ID":"9a_1b",	"NextIDs":"9a_1b_1",	"Requirement1":"ConsumeSupplyTags",	"RequireValue1":"Any"},
 	{	"ID":"9a_1c",	"NextIDs":"9a_1c_1",	"Requirement1":"ConsumeSupplyTags",	"RequireValue1":"Sharp"},
 	{	"ID":"9a_1a_1",	"End":"Battle",	"EndValue":"1004"},
-	{	"ID":"9a_1b_1",	"End":"Battle",	"EndValue":"1004",	"Requirement1":"ConsumeSupplyTags",	"RequireValue1":"Any"},
+	{	"ID":"9a_1b_1",	"End":"Battle",	"EndValue":"1004"},
 	{	"ID":"9a_1c_1"},
 	{	"ID":"10",	"RefImg":"9"},
 	{	"ID":"10a",	"NextIDs":"10a_1"},

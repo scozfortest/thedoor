@@ -120,7 +120,6 @@ namespace TheDoor.Main {
         public List<SupplyData> GetSupplyDatas() {
             List<SupplyData> supplys = new List<SupplyData>();
             var ownedSupplyDatas = MyOwnedRoleData.GetSupplyDatas(null);
-            Debug.LogError(ownedSupplyDatas.Count);
             foreach (var ownedData in ownedSupplyDatas) {
                 SupplyData data = SupplyData.GetData(ownedData.ID);
                 if (data == null) continue;

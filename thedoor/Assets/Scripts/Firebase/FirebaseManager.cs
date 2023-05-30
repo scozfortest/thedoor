@@ -141,7 +141,11 @@ namespace TheDoor.Main {
 #if UNITY_EDITOR || UNITY_STANDALONE
             FirebaseFirestore.DefaultInstance.Settings.PersistenceEnabled = false;
 #endif
+#if UNITY_IPHONE
             InitFacebook();//初始化Facebook
+#elif UNITY_ANDROID
+            InitFacebook();//初始化Facebook
+#endif
 
         }
 

@@ -65,6 +65,7 @@ namespace TheDoor.Main {
         public static void PlayerDoAction(PlayerAction _action) {
             if (_action == null || CurBattleState != BattleState.PlayerTurn) return;
             if (FirstStrikeValue > 0) {//玩家先攻
+                Debug.LogError("玩家先攻");
                 _action.DoAction();
                 FirstStrikeValue--;
                 if (PRole.IsDead || ERole.IsDead)
@@ -100,7 +101,6 @@ namespace TheDoor.Main {
             //Debug.LogError("_roundPassTime=" + _roundPassTime);
 
             if (!CurPlayerAction.Done && pActionNeedTime <= 0) {//玩家行動
-
                 CurPlayerAction.DoAction();
                 CoroutineJob.Instance.StartNewAction(() => {
                     DoActions(_roundPassTime);

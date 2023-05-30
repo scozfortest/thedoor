@@ -1,11 +1,11 @@
 {"ScriptTitle":[
-	{	"ID":"苦痛崇拜-女祭司"},
-	{	"ID":"血脈"},
-	{	"ID":"野獸斷趾"},
-	{	"ID":"醒神泉"},
-	{	"ID":"幻想朋友"},
-	{	"ID":"群鳥的願望"},
-	{	"ID":"新生之光"},
-	{	"ID":"隔間的抉擇"},
+	{	"ID":"苦痛崇拜-女祭司",	"ScriptType":"Side"},
+	{	"ID":"血脈",	"ScriptType":"Side"},
+	{	"ID":"野獸斷趾",	"ScriptType":"Side"},
+	{	"ID":"醒神泉",	"ScriptType":"Side"},
+	{	"ID":"幻想朋友",	"ScriptType":"Side"},
+	{	"ID":"群鳥的願望",	"ScriptType":"Side"},
+	{	"ID":"新生之光",	"ScriptType":"Side"},
+	{	"ID":"隔間的抉擇",	"ScriptType":"Side"},
 	{	"ID":"無眼老婦人",	"ScriptType":"Side"}
 ]}
